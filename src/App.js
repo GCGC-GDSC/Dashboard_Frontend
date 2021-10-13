@@ -1,27 +1,22 @@
-// import logo from './logo.svg';
-import react , {useEffect} from 'react'
-import './App.css';
-// import axios from 'axios'
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { render } from "@testing-library/react";
+import Home from "./Pages/Home";
+import Admin from "./Pages/Admin";
+import NavBar from "./Components/NavBar";
 
-function App() {
-  useEffect(()=>{
-    fetch('http://localhost:8000/api/student/UnderGraduates/', {
-      mode: 'cors',
-      headers: {
-        'Access-Control-Allow-Origin':'*'
-      }
-    })
-      .then(response => response.json())
-      .then(data => 
-        console.log(data))
-  },[])
-
+const App = () => {
   return (
-    <div className="App">
-        welcome
+    <div className="app">
+      <Router>
+        <NavBar />
+        <Switch>
+          <Route path="/" component={Home} exact></Route>
+          <Route path="/admin" component={Admin}></Route>
+        </Switch>
+      </Router>
     </div>
   );
-
-}
-
+};
 export default App;
