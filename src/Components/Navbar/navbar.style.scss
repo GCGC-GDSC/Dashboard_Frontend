@@ -1,0 +1,37 @@
+.navbar{
+    width: 100vw;
+    height:4rem;
+    background-color: rgb(199, 25, 25);
+    padding:.5em;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &_links{
+        margin-right:2rem;
+        
+    }
+    &-link{
+        padding:.3em;
+        color: white;
+        text-decoration: none;
+        font-size: 2rem;
+    }
+    &_menu{
+        font-size: 2rem;
+        color:white;
+        display:none    ;
+    }
+    &_logo{
+        padding: 1em;
+        margin-right: 1rem;
+    }
+}
+
+@media screen and (min-width: 700px) {
+//    .navbar_icon{
+//        display:none !important;
+//    }
+   .navbar_menu{
+    display:none;
+}
+  }

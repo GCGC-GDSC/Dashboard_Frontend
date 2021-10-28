@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { render } from "@testing-library/react";
 import Home from "./Pages/Home";
 import Admin from "./Pages/Admin";
-import NavBar from "./Components/NavBar";
+import NavBar from "./Components/Navbar/NavBar";
 
 const App = () => {
   return (
@@ -12,8 +12,8 @@ const App = () => {
       <Router>
         <NavBar />
         <Switch>
-          <Route path="/" component={Home} exact></Route>
-          <Route path="/admin" component={Admin}></Route>
+          <Route exact path="/" component={Home}/>
+          <Route path="/admin" component={Admin}/>
         </Switch>
       </Router>
     </div>
