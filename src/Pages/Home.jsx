@@ -1,10 +1,13 @@
 import React from 'react'
+import DoughnutChart from "../Components/Doughnut/DoughnutChart"
+import HorizontalBarChart from '../Components/HorizontalBar/HorizontalBar'
+import PieChart from "../Components/PieChart/PieChart"
 
 function Home() {
     return (
-        <div>
-            This is the Home Component
-        </div>
+        <div style={{position: "relative", height:"40vh", width:"80vh"}}>     <DoughnutChart/> 
+        <HorizontalBarChart/>
+        <PieChart/></div>
     )
 }
 
