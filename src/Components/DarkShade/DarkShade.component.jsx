@@ -1,5 +1,5 @@
 import React from 'react'
-import './DarkShade.style.scss'
+// import './DarkShade.style.scss'
 function DarkShade() {
     return (
         <div className='darkshade'>

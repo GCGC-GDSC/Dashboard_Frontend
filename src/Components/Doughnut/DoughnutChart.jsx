@@ -1,12 +1,13 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
+
 const data = {
   labels: ['Hydrabad', 'Vizag', 'Banglore'],
   datasets: [
     {
       label: '# of Votes',
-      data: [12, 19, 3],
+      data: [10, 34, 32],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -28,7 +29,7 @@ const data = {
   ],
 };
 
-const DoughnutChart = () => (
+const DoughnutChart = (vizag,hyd,blr) => (
   <>
     <div className='header'>
       <h1 className='title'>Gitam Placement Information</h1>
