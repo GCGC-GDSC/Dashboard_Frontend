@@ -3,10 +3,11 @@ import DoughnutChart from "../../Components/Doughnut/DoughnutChart"
 import Fetcher from '../../Components/Fetcher/Fetcher'
 import HorizontalBarChart from '../../Components/HorizontalBar/HorizontalBar'
 import PieChart from "../../Components/PieChart/PieChart"
+import VerticalBar from '../../Components/VerticalBar/VerticalBarChart'
 import "./Home.scss"
 function Home() {
-    return (
-        <div style={{position: "relative", height:"40vh", width:"80vh"}}>     
+    return ( 
+        <>  
         <section className='hero_section'>
             <div className ="hero_section_outer">
                 <div className = 'hero_section_inner'>
@@ -18,10 +19,14 @@ function Home() {
                 </div>
             </div>
         </section>
+        <div style={{position: "relative", height:"40vh", width:"80vh",marginLeft:"30%"}} >
         <Fetcher/>
-        <DoughnutChart/> 
-        <HorizontalBarChart/>
-        <PieChart/></div>
+        {/* <DoughnutChart/>  */}
+        {/* <HorizontalBarChart/> */}
+        {/* <VerticalBar/> */}
+        <PieChart/>
+        </div>
+        </>
     )
 }
 

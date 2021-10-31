@@ -2,11 +2,11 @@ import React from 'react';
 import { Pie } from 'react-chartjs-2';
 
 const data = {
-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  labels: ['totalStudents', 'Higher Studies and Pay CRT', 'total_not_intrested_in_placments', 'total_backlogs', 'total_students_eligible', 'total_offers','total_multiple_offers','total_placed','total_yet_to_place'],
   datasets: [
     {
       label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
+      data: [100,20,3,10,87,30,20,10,77],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -31,15 +31,7 @@ const data = {
 const PieChart = () => (
   <>
     <div className='header'>
-      <h1 className='title'>Pie Chart</h1>
-      <div className='links'>
-        <a
-          className='btn btn-gh'
-          href='https://github.com/reactchartjs/react-chartjs-2/blob/master/example/src/charts/Pie.js'
-        >
-          Github Source
-        </a>
-      </div>
+      <h1 className='title'>Institute Population</h1>
     </div>
     <Pie data={data} />
   </>
