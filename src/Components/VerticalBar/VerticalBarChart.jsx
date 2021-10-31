@@ -1,17 +1,16 @@
 import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 
 
+const VerticalBar = ({git,gim,gst}) => {
 
-const DoughnutChart = ({vizag,hyd,blr}) => {
-  // console.log(vizag,"😀",hyd," ",blr);
   const data = {
-    labels: ['Vizag','Hydrabad', 'Banglore'],
+    labels: ['GIT', 'GIM', 'GST'],
     datasets: [
       {
         label: '# of Votes',
-        data: [vizag, hyd, blr],
+        data: [git,gim,gst],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -28,18 +27,30 @@ const DoughnutChart = ({vizag,hyd,blr}) => {
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)',
         ],
-        borderWidth: 2,
+        borderWidth: 1,
       },
     ],
   };
-  return(
-  <>
+  
+  const options = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+  };
+
+
+  return(<>
     <div className='header'>
-      <h1 className='title'>All 3 Campuses Student Total Strength</h1>
+      <h1 className='title'>Individual Institute Population</h1>
     </div>
-    <Doughnut data={data} options={{onClick:function (evt,item) {(item[0].index===0)?alert("red light"):alert("blue light")},rotation:Math.PI*0.5}}/>
-  </>
-  )
+    <Bar data={data} options={options} />
+  </>)
 }
 
-export default DoughnutChart;
+export default VerticalBar;
