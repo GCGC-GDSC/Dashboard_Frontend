@@ -16,7 +16,7 @@ const getStudents = () => {
 }
 
     useEffect(() => {   
-        getStudents()
+        // getStudents()
     }, [])
     return (
         <div>
