@@ -5,7 +5,7 @@ import './navbar.style.scss'
 function NavBar() {
     const selected ={
         fontWeight:'bold',
-        borderBottom:'4px solid white',
+        textDecoration:'underline'
     }
     // menu-bar open
     const openMenu = ()=>{
@@ -39,14 +39,21 @@ function NavBar() {
             <i className="fas fa-bars"></i>
         </div>
         <div className='navbar_icon'>
-            <h2>GITAM Logo</h2>
+            {/* <h2>GITAM Logo</h2> */}
+            {/* src='../../assets/GITAM-logo1.png' */}
+            <a href='https://www.gitam.edu/gitam-at-glance'>
+                <img src='https://www.gitam.edu/assets/images/GITAM-logo.png' width="200"></img>
+                </a>
         </div>  
         <div className='navbar_links'>
-            <NavLink className='navbar-link' activeStyle={selected}  to = '/'>
+            <NavLink className='navbar-link' activeStyle={selected}  exact to = '/'>
                 Home
             </NavLink>
             <NavLink className='navbar-link' activeStyle={selected}  to = '/admin'>
                 Admin
+            </NavLink>
+            <NavLink className='navbar-link' activeStyle={selected}  to = '/login'>
+                Login
             </NavLink>
         </div>
 

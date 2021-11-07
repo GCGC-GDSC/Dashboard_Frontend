@@ -1,64 +1,19 @@
-.sign-in
-{
-    display:flex;
-    flex-direction: column;
-    background-color:rgba(228, 138, 138, 0.623);
-    border-radius: 30px;
-    margin: 2rem auto;
-    padding:3rem;
-
-    width:50%;
-    color: black;
-    margin: 3rem auto;
-    background-color: rgba(255, 255, 255, 0.438);
-    border: 1px solid rgba(255,255,255,0.1);
+.sign-inUsingGoogle{
+    width: 60%;
+    margin: 1rem auto;
+    min-width: 30%;
+    outline: none;
+    border: none;
+    padding: 0.3em;
+    background-color: white;
     border-radius: 15px;
-    padding: 2.4rem;
-    backdrop-filter: blur(10px);
-    .title
-    {
-        margin: 10px 0;
-    }
-
-    .buttons
-    {
-        button{
-            color:white;
-            padding: 0.3em;
-            border-radius: 5px;
-            min-width: 30%;
-            margin: 1rem;
-            &:first-child{
-                font-size: 1.2rem;
-                background-color:black;
-                box-shadow: 0 2px 12px 0 rgba(31, 58, 18, 0.37);
-
-            }
-            outline: none;
-            border: none;
-        }
-    }
-        .sign-inUsingGoogle{
-            width: 60%;
-            margin: 1rem auto;
-            min-width: 30%;
-            outline: none;
-            border: none;
-            padding: 0.3em;
         img{
+            border-radius: 10px;
             width: 1.4rem;
+            padding:.3em;
         }
-            background:white;
-                box-shadow: 0 2px 12px 0 rgba(31, 58, 18, 0.37);
         
     }
-}
-.error-message
-{
-    font-size: .8rem;
-    color: tomato;
-}
-
 @media only screen and (max-width: 800px)
 {
     .sign-in{

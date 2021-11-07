@@ -1,21 +1,24 @@
 .navbar{
     width: 100%;
     height:4rem;
-    background-color: rgb(199, 25, 25);
+    background-color: rgb(255, 255, 255);
     padding:.5em;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    // z-index: 9999;
+    border-bottom: 3px solid rgb(180, 10, 10);
+    margin-bottom: 2rem;;
     &_links{
+        display: flex;
         margin-right:2rem;
-        
+        align-items: center;
     }
     &-link{
         padding:.3em;
-        color: white;
+        color: rgb(168, 15, 15);
         text-decoration: none;
-        font-size: 2rem;
+        align-self: center;
+        font-size: 1.6rem;
     }
     &_menu{
         font-size: 2rem;
@@ -24,7 +27,7 @@
     }
     &_logo{
         padding: 1em;
-        margin-right: 1rem;
+        margin-left: 1rem;
     }
 }
 

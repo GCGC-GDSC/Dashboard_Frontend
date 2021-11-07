@@ -1,0 +1,16 @@
+.login{
+    display:flex;
+    background:rgba(236, 34, 34, 0.651);
+    width: 80%;
+    margin:auto;
+    margin-top:2rem;
+    border-radius: 15px;
+    padding: 1em;
+    flex-direction: column;
+    &-container{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
+}
