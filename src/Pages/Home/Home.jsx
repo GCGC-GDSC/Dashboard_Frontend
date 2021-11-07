@@ -5,10 +5,12 @@ import HorizontalBarChart from '../../Components/HorizontalBar/HorizontalBar'
 import PieChart from "../../Components/PieChart/PieChart"
 import VerticalBar from '../../Components/VerticalBar/VerticalBarChart'
 import "./Home.scss"
+import ParticleBackground from '../../ParticleBackground'
 function Home() {
     return ( 
         <>  
         <section className='hero_section'>
+            {/* <ParticleBackground/> */}
             <div className ="hero_section_outer">
                 <div className = 'hero_section_inner'>
                     <h1>
