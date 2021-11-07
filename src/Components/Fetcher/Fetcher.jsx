@@ -23,7 +23,6 @@ const getStudents = () => {
         res => 
         {
             let store = res.data.result;
-            // console.log(store);
             var ans  =0 
             
 
@@ -98,7 +97,7 @@ const getStudents = () => {
 
     return (
         <div>
-            
+            {/* {console.log(Vstudents,Hstudents,Bstudents)} */}
         <DoughnutChart vizag={Vstudents} hyd={Hstudents} blr={Bstudents} />
         <VerticalBar git={git} gim={gim} gst={gst}/>
         

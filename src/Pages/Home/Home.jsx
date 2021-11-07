@@ -2,6 +2,7 @@ import React from 'react'
 import DoughnutChart from "../../Components/Doughnut/DoughnutChart"
 import Fetcher from '../../Components/Fetcher/Fetcher'
 import HorizontalBarChart from '../../Components/HorizontalBar/HorizontalBar'
+import ParticlesComponent from '../../Components/Particles/ParticlesComponent'
 import PieChart from "../../Components/PieChart/PieChart"
 import VerticalBar from '../../Components/VerticalBar/VerticalBarChart'
 import "./Home.scss"
@@ -13,11 +14,7 @@ function Home() {
             {/* <ParticleBackground/> */}
             <div className ="hero_section_outer">
                 <div className = 'hero_section_inner'>
-                    <h1>
-                        GITAM CAREER GUIDANCE CENTRE
-                            (GCGC)
-                        CAREER FULFILLMENT STATISTICS  2021
-                    </h1>
+                        <ParticlesComponent/>
                 </div>
             </div>
         </section>
@@ -26,7 +23,7 @@ function Home() {
         {/* <DoughnutChart/>  */}
         {/* <HorizontalBarChart/> */}
         {/* <VerticalBar/> */}
-        <PieChart/>
+        {/* <PieChart/> */}
         </div>
         </>
     )

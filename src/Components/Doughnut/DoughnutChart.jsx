@@ -1,9 +1,6 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-
-
-
 const DoughnutChart = ({vizag,hyd,blr}) => {
   // console.log(vizag,"😀",hyd," ",blr);
   const data = {
@@ -11,7 +8,7 @@ const DoughnutChart = ({vizag,hyd,blr}) => {
     datasets: [
       {
         label: '# of Votes',
-        data: [vizag, hyd, blr],
+        data: [vizag,hyd,blr],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',

@@ -4,22 +4,23 @@
   width:100vw;
   height:80vh;
   margin-top:-1.3rem;
-  color: white;
+  color: rgb(13, 243, 101);
   text-align:center;
   h1{
     align-items: center;
   }
   &_outer{
-    background-color: rgb(245, 48, 48);
+    // background-color: rgb(245, 48, 48);
     height:70vh;
     padding:1em;
     border-radius: 15px;;
     margin: auto;}
 
   &_inner{
-    background-color: red;
+    // background-color: red;
+    z-index:-1;
     border-radius: 15px;;
-    height:60vh;
+    height:100px;
   }
   
 }
