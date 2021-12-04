@@ -1,26 +1,30 @@
-.hero_section
-{
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+
+.hero_section {
   display: flex;
-  width:100vw;
-  height:80vh;
-  margin-top:-1.3rem;
-  color: rgb(13, 243, 101);
-  text-align:center;
-  h1{
+  width: 100vw;
+  height: 80vh;
+  margin-top: -1.3rem;
+  color: #000000;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: x-large;
+  opacity: 0.9;
+  h1 {
     align-items: center;
   }
-  &_outer{
+  &_outer {
     // background-color: rgb(245, 48, 48);
-    height:70vh;
-    padding:1em;
-    border-radius: 15px;;
-    margin: auto;}
-
-  &_inner{
-    // background-color: red;
-    z-index:-1;
-    border-radius: 15px;;
-    height:100px;
+    height: 70vh;
+    padding: 1em;
+    border-radius: 15px;
+    margin: auto;
   }
-  
+
+  &_inner {
+    // background-color: red;
+    z-index: -1;
+    border-radius: 15px;
+    height: 100px;
+  }
 }
