@@ -98,9 +98,13 @@ const getStudents = () => {
     return (
         <div>
             {/* {console.log(Vstudents,Hstudents,Bstudents)} */}
-        <DoughnutChart vizag={Vstudents} hyd={Hstudents} blr={Bstudents} />
-        <VerticalBar git={git} gim={gim} gst={gst}/>
-        
+        <div className = 'Chart_holder'>
+            <DoughnutChart vizag={Vstudents} hyd={Hstudents} blr={Bstudents} style = { {"boxShadow" : "0 3px 10px black;"}} />
+        </div>
+        <div className = 'Chart_holder'>
+ 
+            <VerticalBar git={git} gim={gim} gst={gst}/> 
+        </div>
         </div>
     )
 }

@@ -1,9 +1,11 @@
 #tsparticles {
  background-color: red;
+ 
     .tsparticles-canvas-el{
-    width: 90% !important;
+    width: 100% !important;
+    margin:auto !important;
     height: 50% !important;
     position:absolute !important;
-    top:20% !important;  
+    top:8vh !important;  
 }
 }

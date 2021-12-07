@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "aos": "^2.3.4",
     "axios": "^0.23.0",
     "chart.js": "^3.5.1",
     "cors": "^2.8.5",
