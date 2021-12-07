@@ -3,8 +3,24 @@ import { Bar } from 'react-chartjs-2';
 
 
 
-const VerticalBar = ({git,gim,gst}) => {
+const VerticalBar = ({campus}) => {
+  console.log(campus)
+  var git = 100
+  var gim = 100
+  var gst = 190
 
+  for(let inst in campus) {
+    console.log(inst)
+    const [ug,pg] = [...campus[inst]]
+    if(inst =='GIT')
+      git =ug[0].total_students + pg[0].total_students
+    if(inst =='GIM')
+      gim =ug[0].total_students + pg[0].total_students
+    if(inst =='GST')
+      gst =ug[0].total_students + pg[0].total_students
+  }
+  console.log(git,gim,gst)
+  // lablesList = campus keys extract
   const data = {
     labels: ['GIT', 'GIM', 'GST'],
     datasets: [

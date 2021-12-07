@@ -1,8 +1,7 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-const DoughnutChart = ({vizag,hyd,blr}) => {
-  // console.log(vizag,"😀",hyd," ",blr);
+const DoughnutChart = ({vizag,hyd,blr,setCampusId}) => {
   const data = {
     labels: ['Vizag','Hydrabad', 'Banglore'],
     datasets: [
@@ -34,7 +33,11 @@ const DoughnutChart = ({vizag,hyd,blr}) => {
     <div className='header'>
       <h1 className='title'>All 3 Campuses Student Total Strength</h1>
     </div>
-    <Doughnut data={data} options={{onClick:function (evt,item) {(item[0].index===0)?alert("red light"):alert("blue light")},rotation:Math.PI*0.5}}/>
+    <Doughnut data={data} 
+    options={{onClick:function (evt,item) {
+        console.log(item[0].index)
+        setCampusId(item[0].index)
+    },rotation:Math.PI*0.5}}/>
   </>
   )
 }
