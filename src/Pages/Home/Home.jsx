@@ -22,7 +22,7 @@ function Home() {
             <div className ="hero_section_outer">
                 <div className = 'hero_section_inner'>
                     
-                       <div data-aos="zoom-out-left"> <HeroText/></div>
+                       <div data-aos="zoom-out-left"> <HeroText year={2022}/></div>
                         <ParticlesComponent/>
 
                 </div>
@@ -30,12 +30,6 @@ function Home() {
         </section>
         <div style={{position: "relative", height:"40vh", width:"80vh",marginLeft:"30%"}} >
         <Fetcher/>
-        {/* <DoughnutChart/>  */}
-        {/* <HorizontalBarChart/> */}
-        {/* <VerticalBar/> */}
-        <div className ="Chart_holder">
-            <PieChart/>
-        </div>
         <Footer/>
         </div>
         

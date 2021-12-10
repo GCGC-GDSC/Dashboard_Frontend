@@ -49,9 +49,9 @@ function NavBar() {
             <NavLink className='navbar-link' activeStyle={selected}  exact to = '/'>
                 Home
             </NavLink>
-            <NavLink className='navbar-link' activeStyle={selected}  to = '/admin'>
+            {/* <NavLink className='navbar-link' activeStyle={selected}  to = '/admin'>
                 Admin
-            </NavLink>
+            </NavLink> */}
             <NavLink className='navbar-link' activeStyle={selected}  to = '/login'>
                 Login
             </NavLink>
