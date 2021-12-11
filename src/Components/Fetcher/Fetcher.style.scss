@@ -1,0 +1,16 @@
+.fetcher {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width:100%;
+    align-items: center;
+    &_charts_div{
+        flex: 0.7;
+        width:400px;
+    }
+    &_content_div{
+        flex:0.3;
+        width:300px;
+    }
+}

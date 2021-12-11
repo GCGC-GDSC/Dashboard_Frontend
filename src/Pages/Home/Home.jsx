@@ -21,17 +21,16 @@ function Home() {
         <section className='hero_section'>
             <div className ="hero_section_outer">
                 <div className = 'hero_section_inner'>
-                    
                        <div data-aos="zoom-out-left"> <HeroText year={2022}/></div>
                         <ParticlesComponent/>
 
                 </div>
             </div>
         </section>
-        <div style={{position: "relative", height:"40vh", width:"80vh",marginLeft:"30%"}} >
-        <Fetcher/>
-        <Footer/>
-        </div>
+        <main className='main_section'>
+            <Fetcher/>
+        </main>
+            <Footer/>
         
         </>
     )

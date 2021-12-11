@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { unstable_batchedUpdates } from "react-dom";
 import Axios from "axios";
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import DoughnutChart from "../Doughnut/DoughnutChart";
 import VerticalBar from "../VerticalBar/VerticalBarChart";
 import HorizontalBarChart from "../HorizontalBar/HorizontalBar";
 import result from "./localDB";
 import PieChart from "../PieChart/PieChart";
-
+import './Fetcher.style.scss'
 function Fetcher() {
   const [totalResult, setTotalResult] = useState({});
   const [campusId, setCampusId] = useState(0);
@@ -406,35 +408,47 @@ function Fetcher() {
   };
 
   return (
-    <div>
-      <div className="Chart_holder">
-        <DoughnutChart
-          style={{ boxShadow: "0 3px 10px black;" }}
-          campusId={campusId}
-          data={dataDoughnut}
-          options={optionsDoughnut}
-        />
-      </div>
+    <div className="fetcher">
+      <Carousel
+      className="fetcher_charts_div"
+      useKeyboardArrows={true}
+      >         
+        <div className="Chart_holder">
+          <DoughnutChart
+            style={{ boxShadow: "0 3px 10px black;" }}
+            campusId={campusId}
+            data={dataDoughnut}
+            options={optionsDoughnut}
+          />
+          <p className="legend">Campus-wise Division</p>
+        </div>
 
-      <div className="Chart_holder">
-        {campusId == 0 ? (
-          <VerticalBar campus={totalResult["vskp"]} options={options} />
-        ) : null}
-        {campusId == 1 ? (
-          <VerticalBar campus={totalResult["hyd"]} options={options} />
-        ) : null}
-        {campusId == 2 ? (
-          <VerticalBar campus={totalResult["blr"]} options={options} />
-        ) : null}
-      </div>
-      <div className="Chart_holder">
-        <HorizontalBarChart data={data} />
-      </div>
-      <div className="Chart_holder">
-        <PieChart data={dataPie} type={type}/>
-        <button onClick={dataUG}>UG</button>
-        <button onClick={dataPG}>PG</button>
-        <button onClick={dataUGPG}>UG+PG</button>
+        <div className="Chart_holder">
+          {campusId == 0 ? (
+            <VerticalBar campus={totalResult["vskp"]} options={options} />
+          ) : null}
+          {campusId == 1 ? (
+            <VerticalBar campus={totalResult["hyd"]} options={options} />
+          ) : null}
+          {campusId == 2 ? (
+            <VerticalBar campus={totalResult["blr"]} options={options} />
+          ) : null}
+          <p className="legend">Campus-wise Division</p>
+        </div>
+        <div className="Chart_holder">
+          <HorizontalBarChart data={data} />
+        </div>
+        <div className="Chart_holder">
+          <PieChart data={dataPie} type={type}/>
+          <button onClick={dataUG}>UG</button>
+          <button onClick={dataPG}>PG</button>
+          <button onClick={dataUGPG}>UG+PG</button>
+        </div>
+      </Carousel>
+      <div  className="fetcher_content_div">
+            <p>
+            Gandhi Institute of Technology and Management, formerly GITAM University and GITAM College of Engineering is a private deemed university located in Visakhapatnam, Hyderabad and Bengaluru in India. It was founded in 1980 by Dr. M.V.V.S. Murthi.
+            </p>
       </div>
     </div>
   );

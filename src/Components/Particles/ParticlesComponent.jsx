@@ -16,7 +16,8 @@ const ParticlesComponent = () => {
       params={{
         "particles": {
           "number": {
-            "value": 80,
+            "value":window.innerWidth/20,
+            "limit":window.outerWidth/20 + window.outerWidth/50,
             "density": {
               "enable": true,
               "value_area": 800
