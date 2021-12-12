@@ -577,3 +577,4 @@
         ]
       }
     }
+export default result
