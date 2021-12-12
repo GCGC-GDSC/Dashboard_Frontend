@@ -4,29 +4,24 @@ import { Bar } from 'react-chartjs-2';
 
 
 const VerticalBar = ({campus,options}) => {
-  console.log(campus)
-  var git = 100
-  var gim = 100
-  var gst = 190
-
-  for(let inst in campus) {
-    console.log(inst)
-    const [ug,pg] = [...campus[inst]]
-    if(inst =='GIT')
-      git =ug[0].total_students + pg[0].total_students
-    if(inst =='GIM')
-      gim =ug[0].total_students + pg[0].total_students
-    if(inst =='GST')
-      gst =ug[0].total_students + pg[0].total_students
+  console.log('########',campus,campus[Object.keys(campus)[0]][0].under_campus_name)
+  const getInstData = ()=>{
+    const arr = []
+    for(let inst in campus)
+    {
+      const [ug,pg] = [...campus[inst]]
+      const val = ug.total_students + pg.total_students
+      arr.push(val)
+    }
+    return arr
   }
-  console.log(git,gim,gst)
-  // lablesList = campus keys extract
+  const campusNameDir = {'blr':'Bengaluru','vskp':'Visakhapatnam','hyd':'Hyderabad'}
   const data = {
-    labels: ['GIT', 'GIM', 'GST'],
+    labels: Object.keys(campus),
     datasets: [
       {
         label: 'Number of Students',
-        data: [git,gim,gst],
+        data: getInstData(),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -42,25 +37,10 @@ const VerticalBar = ({campus,options}) => {
     ],
   };
   
-  // const options = {
-  //   onClick:function (evt,item) {
-  //     console.log(item[0].index)
-  // },
-  //   scales: {
-  //     yAxes: [
-  //       {
-  //         ticks: {
-  //           beginAtZero: true,
-  //         },
-  //       },
-  //     ],
-  //   },
-  // };
-
-
   return(<>
     <div className='header'>
-      <h1 className='title'>Individual Institute Population</h1>
+      <h1 className='title'>Individual Institute Population </h1>
+      <h2> {campusNameDir[campus[Object.keys(campus)[0]][0].under_campus_name]} </h2>
     </div>
     <Bar data={data} options={options} />
   </>)
