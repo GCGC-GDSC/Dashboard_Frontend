@@ -167,11 +167,13 @@ function Fetcher() {
     labels: ["UnderGraduate", "PostGraduate"],
     datasets: [
       {
-        label: ["UG", "PG"],
+        label: [''],
         data: [populationUG, populationPG],
         backgroundColor: [
           "rgba(75, 192, 192, 0.2)",
           "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 0, 0, 0.8)",
+          "rgba(255, 0, 0, 0.6)",
         ],
         borderColor: ["rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)"],
         borderWidth: 1,
@@ -413,7 +415,7 @@ function Fetcher() {
       className="fetcher_charts_div"
       useKeyboardArrows={true}
       >         
-        <div className="Chart_holder">
+        <div className="Chart_holder" style={{width:"500px"}}>
           <DoughnutChart
             style={{ boxShadow: "0 3px 10px black;" }}
             campusId={campusId}
@@ -423,7 +425,7 @@ function Fetcher() {
           <p className="legend">Campus-wise Division</p>
         </div>
 
-        <div className="Chart_holder">
+        <div className="Chart_holder" style={{width:"700px"}}>
           {campusId == 0 ? (
             <VerticalBar campus={totalResult["vskp"]} options={options} />
           ) : null}
@@ -435,10 +437,10 @@ function Fetcher() {
           ) : null}
           <p className="legend">Campus-wise Division</p>
         </div>
-        <div className="Chart_holder">
+        <div className="Chart_holder" style={{width:"700px"}}>
           <HorizontalBarChart data={data} />
         </div>
-        <div className="Chart_holder">
+        <div className="Chart_holder" style={{width:"500px"}}>
           <PieChart data={dataPie} type={type}/>
           <button onClick={dataUG}>UG</button>
           <button onClick={dataPG}>PG</button>
