@@ -1,3 +1,8 @@
+// 
+// // TO DO !!
+// WHILE SETTING UP BREADCRUMPS TO GO BACKWARDD IN THE SLIDER, WHEN ON CLICK ON THE PREV TAG, MAKE A FUCNTION 
+// WHICH LOCKS THE NEXT DISPLAYING CHART SETuNLOCK<>(FALSE)
+// ------------------------------------
 import React, { useEffect, useState, useRef } from "react";
 import { unstable_batchedUpdates } from "react-dom";
 import Axios from "axios";
@@ -8,10 +13,13 @@ import VerticalBar from "../VerticalBar/VerticalBarChart";
 import HorizontalBarChart from "../HorizontalBar/HorizontalBar";
 import result from "./localDB";
 import PieChart from "../PieChart/PieChart";
-import Button from "../Buttons/Button"
 import './Fetcher.style.scss'
+
 function Fetcher() {
   const [totalResult, setTotalResult] = useState({});
+  const [unlockVertChart,setUnlockVC] = useState(false)
+  const [unlockHoriChart,setUnlockHC] = useState(false)
+  const [slideNo,setSlideNo] = useState(0)
   const [campusId, setCampusId] = useState(0);
   const [instId, setInstId] = useState(0); //this is for institutions like GIT,GST under specific campuses
   const [Hstudents, setHStudents] = useState([]);
@@ -30,28 +38,26 @@ function Fetcher() {
     ],
   });
   const { vskp, blr, hyd } = result;
-
+//  this function iterates over all the campuses and gets the total number of students in total (city wise)
   const getLocalStudents = () => {
     var vskpTotal = 0;
     for (let inst in vskp) {
       let institute = vskp[inst];
       vskpTotal +=
-        institute[0][0]["total_students"] + institute[1][0]["total_students"];
+        institute[0].total_students + institute[1].total_students;
     }
     var blrTotal = 0;
     for (let inst in blr) {
       let institute = blr[inst];
-      console.log(institute);
       blrTotal +=
-        institute[0][0]["total_students"] + institute[1][0]["total_students"];
+        institute[0].total_students + institute[1].total_students;
     }
     var hydTotal = 0;
     for (let inst in hyd) {
       let institute = hyd[inst];
       hydTotal +=
-        institute[0][0]["total_students"] + institute[1][0]["total_students"];
+        institute[0].total_students + institute[1].total_students;
     }
-    console.log(hydTotal, vskpTotal, blrTotal);
     unstable_batchedUpdates(() => {
       setTotalResult(result);
       setBStudents(blrTotal);
@@ -69,8 +75,12 @@ function Fetcher() {
   //options
   const optionsDoughnut = {
     onClick: function (evt, item) {
-      console.log(item[0].index);
-      setCampusId(item[0].index);
+      console.log('@@@',item[0].index)
+      unstable_batchedUpdates(()=>{
+        setSlideNo(prev=>prev+1)
+        setCampusId(item[0].index);
+        setUnlockVC(true)
+      })
     },
     rotation: Math.PI * 0.5,
   };
@@ -98,10 +108,13 @@ function Fetcher() {
   };
 
   // VertticalBar chart options
-  const options = {
+  const optionsVert = {
     onClick: function (evt, item) {
-      console.log(item[0].index);
-      setInstId(item[0].index);
+      unstable_batchedUpdates(()=>{
+        setSlideNo(prev=>prev+1)
+        setInstId(item[0].index);
+        setUnlockHC(true)
+      })
     },
     scales: {
       yAxes: [
@@ -117,58 +130,21 @@ function Fetcher() {
   //populating PG and UG variables
   let populationPG = 0;
   let populationUG = 0;
-  if (campusId === 0 && instId === 0) {
-    //vskp,git
-    populationUG = vskp["GIT"][0][0].total_final_years;
-    populationPG = vskp["GIT"][1][0].total_final_years;
-  }
-  if (campusId === 0 && instId === 1) {
-    //vskp,gim
-    populationUG = vskp["GIM"][0][0].total_final_years;
-    populationPG = vskp["GIM"][1][0].total_final_years;
-  }
-  if (campusId === 0 && instId === 2) {
-    //vskp,gst
-    populationUG = vskp["GST"][0][0].total_final_years;
-    populationPG = vskp["GST"][1][0].total_final_years;
-  }
-  if (campusId === 1 && instId === 0) {
-    //hyd,git
-    populationUG = hyd["GIT"][0][0].total_final_years;
-    populationPG = hyd["GIT"][1][0].total_final_years;
-  }
-  if (campusId === 1 && instId === 1) {
-    //hyd,gim
-    populationUG = hyd["GIM"][0][0].total_final_years;
-    populationPG = hyd["GIM"][1][0].total_final_years;
-  }
-  if (campusId === 1 && instId === 2) {
-    //hyd,gst
-    populationUG = hyd["GST"][0][0].total_final_years;
-    populationPG = hyd["GST"][1][0].total_final_years;
-  }
-  if (campusId === 2 && instId === 0) {
-    //blr,git
-    populationUG = blr["GIT"][0][0].total_final_years;
-    populationPG = blr["GIT"][1][0].total_final_years;
-  }
-  if (campusId === 2 && instId === 1) {
-    //blr,gim
-    populationUG = blr["GIM"][0][0].total_final_years;
-    populationPG = blr["GIM"][1][0].total_final_years;
-  }
-  if (campusId === 2 && instId === 2) {
-    //blr,gst
-    populationUG = blr["GST"][0][0].total_final_years;
-    populationPG = blr["GST"][1][0].total_final_years;
-  }
+  //  --------------------------- @modify these to add new institute or campus @-------------------------
+  const dirCamp = ["vskp","hyd","blr"]
+  const dirIns = Object.keys(result[dirCamp[campusId]])
+  if(unlockHoriChart)
+  {
+  populationUG = result[dirCamp[campusId]][dirIns[instId]][0].total_final_years
+  populationPG = result[dirCamp[campusId]][dirIns[instId]][1].total_final_years
+}
 
   //   HorizontalBar data
-  const data = {
+  const dataHC = {
     labels: ["UnderGraduate", "PostGraduate"],
     datasets: [
       {
-        label: [''],
+        label: '# number of students',
         data: [populationUG, populationPG],
         backgroundColor: [
           "rgba(75, 192, 192, 0.2)",
@@ -182,32 +158,36 @@ function Fetcher() {
     ],
   };
 
-  let campuses = ["vskp", "hyd", "blr"]; // this is used in dataUG,dataPG,dataUGPG
-  let allInsitutes = ["GIT", "GIM", "GST"]; // this is used in dataUG,dataPG,dataUGPG
+  let campuses = dirCamp; // this is used in dataUG,dataPG,dataUGPG
+
+  // ------------------------------------------ITERATE AND ASSIGN -----------------------------
+  let allInsitutes = dirIns
+  ; // this is used in dataUG,dataPG,dataUGPG
 
   //this function is called when the dataUG button is clicked
   //this function is responsible for displaying the UG data provided the campusId and instId
   const dataUG = () => {
     let total_higher_study_and_pay_crt =
-      result[campuses[campusId]][allInsitutes[instId]][0][0]
+      result[campuses[campusId]][allInsitutes[instId]][0]
         .total_higher_study_and_pay_crt;
     let total_not_intrested_in_placments =
-      result[campuses[campusId]][allInsitutes[instId]][0][0]
+      result[campuses[campusId]][allInsitutes[instId]][0]
         .total_not_intrested_in_placments;
     let total_backlogs =
-      result[campuses[campusId]][allInsitutes[instId]][0][0].total_backlogs;
+      result[campuses[campusId]][allInsitutes[instId]][0].total_backlogs;
     let total_students_eligible =
-      result[campuses[campusId]][allInsitutes[instId]][0][0]
+      result[campuses[campusId]][allInsitutes[instId]][0]
         .total_students_eligible;
     let total_offers =
-      result[campuses[campusId]][allInsitutes[instId]][0][0].total_offers;
+      result[campuses[campusId]][allInsitutes[instId]][0].total_offers;
     let total_multiple_offers =
-      result[campuses[campusId]][allInsitutes[instId]][0][0]
+      result[campuses[campusId]][allInsitutes[instId]][0]
         .total_multiple_offers;
     let total_placed =
-      result[campuses[campusId]][allInsitutes[instId]][0][0].total_placed;
+      result[campuses[campusId]][allInsitutes[instId]][0].total_placed;
     let total_yet_to_place =
-      result[campuses[campusId]][allInsitutes[instId]][0][0].total_yet_to_place;
+      result[campuses[campusId]][allInsitutes[instId]][0].total_yet_to_place;
+      // --------------------------ITERATE AND ASSIGN -------------------------------------------
 
     let arr = [
       total_higher_study_and_pay_crt,
@@ -220,15 +200,16 @@ function Fetcher() {
       total_yet_to_place,
     ];
     setDataPie({
+      // --------------------------ITERATE AND ASSIGN -------------------------------------------
       labels: [
         "Higher Studies and Pay CRT",
-        "total_not_intrested_in_placments",
-        "total_backlogs",
-        "total_students_eligible",
-        "total_offers",
-        "total_multiple_offers",
-        "total_placed",
-        "total_yet_to_place",
+        "not intrested in placments",
+        "backlogs",
+        "students eligible",
+        "offers",
+        "multiple offers",
+        "placed",
+        "yet to place",
       ],
       datasets: [
         {
@@ -258,25 +239,26 @@ function Fetcher() {
   };
   const dataPG = () => {
     let total_higher_study_and_pay_crt =
-      result[campuses[campusId]][allInsitutes[instId]][1][0]
+      result[campuses[campusId]][allInsitutes[instId]][1]
         .total_higher_study_and_pay_crt;
     let total_not_intrested_in_placments =
-      result[campuses[campusId]][allInsitutes[instId]][1][0]
+      result[campuses[campusId]][allInsitutes[instId]][1]
         .total_not_intrested_in_placments;
     let total_backlogs =
-      result[campuses[campusId]][allInsitutes[instId]][1][0].total_backlogs;
+      result[campuses[campusId]][allInsitutes[instId]][1].total_backlogs;
     let total_students_eligible =
-      result[campuses[campusId]][allInsitutes[instId]][1][0]
+      result[campuses[campusId]][allInsitutes[instId]][1]
         .total_students_eligible;
     let total_offers =
-      result[campuses[campusId]][allInsitutes[instId]][1][0].total_offers;
+      result[campuses[campusId]][allInsitutes[instId]][1].total_offers;
     let total_multiple_offers =
-      result[campuses[campusId]][allInsitutes[instId]][1][0]
+      result[campuses[campusId]][allInsitutes[instId]][1]
         .total_multiple_offers;
     let total_placed =
-      result[campuses[campusId]][allInsitutes[instId]][1][0].total_placed;
+      result[campuses[campusId]][allInsitutes[instId]][1].total_placed;
     let total_yet_to_place =
-      result[campuses[campusId]][allInsitutes[instId]][1][0].total_yet_to_place;
+      result[campuses[campusId]][allInsitutes[instId]][1].total_yet_to_place;
+      // --------------------------ITERATE AND ASSIGN -------------------------------------------
 
     let arr = [
       total_higher_study_and_pay_crt,
@@ -289,6 +271,8 @@ function Fetcher() {
       total_yet_to_place,
     ];
     setDataPie({
+      // --------------------------ITERATE AND ASSIGN -------------------------------------------
+
       labels: [
         "Higher Studies and Pay CRT",
         "total_not_intrested_in_placments",
@@ -328,38 +312,39 @@ function Fetcher() {
   };
   const dataUGPG = () => {
     let total_higher_study_and_pay_crt =
-      result[campuses[campusId]][allInsitutes[instId]][1][0]
+      result[campuses[campusId]][allInsitutes[instId]][1]
         .total_higher_study_and_pay_crt +
-      result[campuses[campusId]][allInsitutes[instId]][0][0]
+      result[campuses[campusId]][allInsitutes[instId]][0]
         .total_higher_study_and_pay_crt;
     let total_not_intrested_in_placments =
-      result[campuses[campusId]][allInsitutes[instId]][1][0]
+      result[campuses[campusId]][allInsitutes[instId]][1]
         .total_not_intrested_in_placments +
-      result[campuses[campusId]][allInsitutes[instId]][0][0]
+      result[campuses[campusId]][allInsitutes[instId]][0]
         .total_not_intrested_in_placments;
     let total_backlogs =
-      result[campuses[campusId]][allInsitutes[instId]][1][0].total_backlogs +
-      result[campuses[campusId]][allInsitutes[instId]][0][0].total_backlogs;
+      result[campuses[campusId]][allInsitutes[instId]][1].total_backlogs +
+      result[campuses[campusId]][allInsitutes[instId]][0].total_backlogs;
     let total_students_eligible =
-      result[campuses[campusId]][allInsitutes[instId]][1][0]
+      result[campuses[campusId]][allInsitutes[instId]][1]
         .total_students_eligible +
-      result[campuses[campusId]][allInsitutes[instId]][0][0]
+      result[campuses[campusId]][allInsitutes[instId]][0]
         .total_students_eligible;
     let total_offers =
-      result[campuses[campusId]][allInsitutes[instId]][1][0].total_offers +
-      result[campuses[campusId]][allInsitutes[instId]][0][0].total_offers;
+      result[campuses[campusId]][allInsitutes[instId]][1].total_offers +
+      result[campuses[campusId]][allInsitutes[instId]][0].total_offers;
     let total_multiple_offers =
-      result[campuses[campusId]][allInsitutes[instId]][1][0]
+      result[campuses[campusId]][allInsitutes[instId]][1]
         .total_multiple_offers +
-      result[campuses[campusId]][allInsitutes[instId]][0][0]
+      result[campuses[campusId]][allInsitutes[instId]][0]
         .total_multiple_offers;
     let total_placed =
-      result[campuses[campusId]][allInsitutes[instId]][1][0].total_placed +
-      result[campuses[campusId]][allInsitutes[instId]][0][0].total_placed;
+      result[campuses[campusId]][allInsitutes[instId]][1].total_placed +
+      result[campuses[campusId]][allInsitutes[instId]][0].total_placed;
     let total_yet_to_place =
-      result[campuses[campusId]][allInsitutes[instId]][1][0]
+      result[campuses[campusId]][allInsitutes[instId]][1]
         .total_yet_to_place +
-      result[campuses[campusId]][allInsitutes[instId]][0][0].total_yet_to_place;
+      result[campuses[campusId]][allInsitutes[instId]][0].total_yet_to_place;
+      // --------------------------ITERATE AND ASSIGN -------------------------------------------
 
     let arr = [
       total_higher_study_and_pay_crt,
@@ -371,6 +356,8 @@ function Fetcher() {
       total_placed,
       total_yet_to_place,
     ];
+      // --------------------------ITERATE AND ASSIGN -------------------------------------------
+
     setDataPie({
       labels: [
         "Higher Studies and Pay CRT",
@@ -414,40 +401,71 @@ function Fetcher() {
     <div className="fetcher">
       <Carousel
       className="fetcher_charts_div"
-      useKeyboardArrows={true}
+      // useKeyboardArrows={true}
+      showIndicators={false}
+      showArrows={false}
+      selectedItem={slideNo}
+      showStatus={false}
       >         
-        <div className="Chart_holder" style={{width:"500px"}}>
-          <DoughnutChart
-            style={{ boxShadow: "0 3px 10px black;" }}
-            campusId={campusId}
-            data={dataDoughnut}
-            options={optionsDoughnut}
-          />
-          <p className="legend">Campus-wise Division</p>
+        <div className="Chart_holder" style={{width:"500px",textAlign:'center',margin:"auto"}}>
+              <DoughnutChart
+                style={{ boxShadow: "0 3px 10px black;" }}
+                campusId={campusId}
+                data={dataDoughnut}
+                options={optionsDoughnut}
+                setUnlockVC={setUnlockVC}
+                setSlideNo={setSlideNo}
+              />
         </div>
-
-        <div className="Chart_holder" style={{width:"700px"}}>
-          {campusId == 0 ? (
-            <VerticalBar campus={totalResult["vskp"]} options={options} />
-          ) : null}
-          {campusId == 1 ? (
-            <VerticalBar campus={totalResult["hyd"]} options={options} />
-          ) : null}
-          {campusId == 2 ? (
-            <VerticalBar campus={totalResult["blr"]} options={options} />
-          ) : null}
-          <p className="legend">Campus-wise Division</p>
-        </div>
-        <div className="Chart_holder" style={{width:"700px"}}>
-          <HorizontalBarChart data={data} />
-        </div>
-        <div className="Chart_holder" style={{width:"500px"}}>
-          <PieChart data={dataPie} type={type}/>
-          <div className="PieButtons">
-          <button onClick={dataUG}><Button btnText="UG"></Button></button>
-          <button onClick={dataPG}><Button btnText="PG"></Button></button>
-          <button onClick={dataUGPG}><Button btnText="UG+PG"></Button></button>
-          </div>
+        {
+        unlockVertChart ?
+        <div className="Chart_holder" style={{width:"700px",textAlign:'center',margin:"auto"}}>
+         <button onClick={()=>{
+            unstable_batchedUpdates(()=>{
+              setSlideNo(prev=>prev-1)
+              setUnlockVC(true)
+            })
+          }}>
+            Back
+          </button>
+            {campusId == 0 ? (
+              <VerticalBar campus={totalResult["vskp"]} options={optionsVert} />
+            ) : null}
+            {campusId == 1 ? (
+              <VerticalBar campus={totalResult["hyd"]} options={optionsVert} />
+            ) : null}
+            {campusId == 2 ? (
+              <VerticalBar campus={totalResult["blr"]} options={optionsVert} />
+            ) : null}
+        </div> : <p ></p>
+        }
+        {
+          unlockHoriChart?
+          <div className="Chart_holder" style={{width:"700px",textAlign:'center',margin:"auto"}}>
+            <button onClick={()=>{
+            unstable_batchedUpdates(()=>{
+              setSlideNo(prev=>prev-1)
+              setUnlockHC(true)
+            })
+            }}>
+              Back
+            </button>
+          <button onClick={()=>setSlideNo(prev=>prev+1)}>
+            Next
+          </button>
+            <HorizontalBarChart data={dataHC} inst={result[dirCamp[campusId]][dirIns[instId]][0]} />
+          </div> :<p></p>
+        }
+        <div className="Chart_holder" style={{width:"500px",textAlign:'center',margin:"auto"}}>
+        <button onClick={()=>setSlideNo(prev=>prev-1)}>
+            Back
+          </button>
+            <PieChart data={dataPie} type={type}/>
+            <div style={{display:"flex"}}>
+            <button onClick={dataUG}>UG</button>
+            <button onClick={dataPG}>PG</button>
+            <button onClick={dataUGPG}>UG+PG</button>
+            </div>
         </div>
       </Carousel>
       <div  className="fetcher_content_div">
