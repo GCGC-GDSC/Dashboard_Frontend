@@ -8,6 +8,7 @@ import VerticalBar from "../VerticalBar/VerticalBarChart";
 import HorizontalBarChart from "../HorizontalBar/HorizontalBar";
 import result from "./localDB";
 import PieChart from "../PieChart/PieChart";
+import Button from "../Buttons/Button"
 import './Fetcher.style.scss'
 function Fetcher() {
   const [totalResult, setTotalResult] = useState({});
@@ -442,9 +443,11 @@ function Fetcher() {
         </div>
         <div className="Chart_holder" style={{width:"500px"}}>
           <PieChart data={dataPie} type={type}/>
-          <button onClick={dataUG}>UG</button>
-          <button onClick={dataPG}>PG</button>
-          <button onClick={dataUGPG}>UG+PG</button>
+          <div className="PieButtons">
+          <button onClick={dataUG}><Button btnText="UG"></Button></button>
+          <button onClick={dataPG}><Button btnText="PG"></Button></button>
+          <button onClick={dataUGPG}><Button btnText="UG+PG"></Button></button>
+          </div>
         </div>
       </Carousel>
       <div  className="fetcher_content_div">
