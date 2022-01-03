@@ -14,30 +14,30 @@
 // }
 // export default Footer;
 import React from "react"
+import "./Footer.style.scss"
 const Footer = () => {
     return (
       <div className="FooterStyle">
         <div className="container">
-          <div>
+          
             <ul>
               
               <li>
-                <a href="">linkedin</a>
+                <a href="">GDSC</a>
               </li>
               <li>
-                <a href="">Email</a>
+                <a href="">Web-Dev Team</a>
               </li>
               <li>
-                <a href="">Instagram</a>
+                <a href="">2021</a>
               </li>
               <li>
-                <a href="">Github</a>
+                <a href="">Vikas</a>
               </li>
               <li>
-                <p>👋</p>
+                <span>👋</span>
               </li>
             </ul>
-          </div>
         </div>
       </div>
     );
