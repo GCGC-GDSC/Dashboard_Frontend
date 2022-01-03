@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import DoughnutChart from "../../Components/Doughnut/DoughnutChart"
 import Fetcher from '../../Components/Fetcher/Fetcher'
+import Fetcher2 from '../../Components/Fetcher2/Fetcher2'
 import HorizontalBarChart from '../../Components/HorizontalBar/HorizontalBar'
 import ParticlesComponent from '../../Components/Particles/ParticlesComponent'
 import PieChart from "../../Components/PieChart/PieChart"
@@ -30,6 +31,7 @@ function Home() {
         <main className='main_section'>
             <Fetcher/>
         </main>
+        <Fetcher2/>
             <Footer/>
         
         </>

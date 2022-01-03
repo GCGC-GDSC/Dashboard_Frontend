@@ -1,0 +1,12 @@
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.search-box {
+  outline: none;
+  width: 70%;
+  border: 1px solid grey;
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}

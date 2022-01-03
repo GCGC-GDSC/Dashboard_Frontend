@@ -13,6 +13,7 @@ import VerticalBar from "../VerticalBar/VerticalBarChart";
 import HorizontalBarChart from "../HorizontalBar/HorizontalBar";
 import result from "./localDB";
 import PieChart from "../PieChart/PieChart";
+import Button from "../Buttons/Button"
 import './Fetcher.style.scss'
 
 function Fetcher() {
@@ -426,7 +427,7 @@ function Fetcher() {
               setUnlockVC(true)
             })
           }}>
-            Back
+            <Button btnText="⬅Back"></Button>
           </button>
             {campusId == 0 ? (
               <VerticalBar campus={totalResult["vskp"]} options={optionsVert} />
@@ -448,23 +449,23 @@ function Fetcher() {
               setUnlockHC(true)
             })
             }}>
-              Back
+              <Button btnText="⬅Back"></Button>
             </button>
           <button onClick={()=>setSlideNo(prev=>prev+1)}>
-            Next
+          <Button btnText="Next ➡"></Button>
           </button>
             <HorizontalBarChart data={dataHC} inst={result[dirCamp[campusId]][dirIns[instId]][0]} />
           </div> :<p></p>
         }
         <div className="Chart_holder" style={{width:"500px",textAlign:'center',margin:"auto"}}>
         <button onClick={()=>setSlideNo(prev=>prev-1)}>
-            Back
+        <Button btnText="⬅Back"></Button>
           </button>
             <PieChart data={dataPie} type={type}/>
-            <div style={{display:"flex"}}>
-            <button onClick={dataUG}>UG</button>
-            <button onClick={dataPG}>PG</button>
-            <button onClick={dataUGPG}>UG+PG</button>
+            <div className="PieButtons">
+            <button onClick={dataUG}><Button btnText="UG"></Button></button>
+            <button onClick={dataPG}><Button btnText="PG"></Button></button>
+            <button onClick={dataUGPG}><Button btnText="UG + PG"></Button></button>
             </div>
         </div>
       </Carousel>
