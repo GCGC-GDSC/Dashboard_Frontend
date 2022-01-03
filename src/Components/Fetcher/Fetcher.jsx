@@ -1,9 +1,4 @@
-// 
-// // TO DO !!
-// WHILE SETTING UP BREADCRUMPS TO GO BACKWARDD IN THE SLIDER, WHEN ON CLICK ON THE PREV TAG, MAKE A FUCNTION 
-// WHICH LOCKS THE NEXT DISPLAYING CHART SETuNLOCK<>(FALSE)
-// ------------------------------------
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { unstable_batchedUpdates } from "react-dom";
 import Axios from "axios";
 import { Carousel } from 'react-responsive-carousel';
