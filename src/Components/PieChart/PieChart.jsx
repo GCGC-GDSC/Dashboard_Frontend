@@ -3,7 +3,7 @@ import { Pie } from 'react-chartjs-2';
 
 
 
-const PieChart = ({data,type}) => (
+const PieChart = ({instName,data,type}) => (
   <>
     <div className='header'>
       <h1 className='title'>Institute Population</h1>

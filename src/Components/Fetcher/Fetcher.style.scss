@@ -6,8 +6,7 @@
   width: 100%;
   align-items: center;
   &_charts_div {
-    flex: 0.7;
-    width: 400px;
+    min-width: 400px;
   }
   &_content_div {
     flex: 0.3;
@@ -18,4 +17,21 @@
     justify-content: center;
     align-items: center;
   }
+  &_carousel-container{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    .breadCrumps{
+      font-size: 1.2rem;
+      text-align: center;
+      flex:0.8;
+    }
+  }
+}
+.Chart_holder{
+  background-color:pink;
+  padding:30px;
+  max-width:600px !important;
+  min-width:600px !important;
+  max-height:fit-content !important;
 }

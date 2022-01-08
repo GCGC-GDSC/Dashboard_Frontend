@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
 import { unstable_batchedUpdates } from "react-dom";
 import Axios from "axios";
 import { Carousel } from 'react-responsive-carousel';
@@ -13,6 +15,7 @@ import './Fetcher.style.scss'
 
 function Fetcher() {
   const [totalResult, setTotalResult] = useState({});
+  const [showBC,setShowBC] = useState([true,false,false])
   const [unlockVertChart,setUnlockVC] = useState(false)
   const [unlockHoriChart,setUnlockHC] = useState(false)
   const [slideNo,setSlideNo] = useState(0)
@@ -61,20 +64,22 @@ function Fetcher() {
       setHStudents(hydTotal);
     });
   };
-
-  useEffect(() => {
-    getLocalStudents();
-    dataUGPG();
-  },[]);
+  function handleClick(event) {
+    event.preventDefault();
+    console.info('You clicked a breadcrumb.');
+  }
 
   // DoughNut data and options
   //options
   const optionsDoughnut = {
     onClick: function (evt, item) {
       // console.log('@@@',item[0])
+      var arr = showBC
+      arr[1] = true
       if(item[0])
       {unstable_batchedUpdates(()=>{
         setSlideNo(prev=>prev+1)
+        setShowBC(arr)
         setCampusId(item[0].index);
         setUnlockVC(true)
       })}
@@ -107,9 +112,12 @@ function Fetcher() {
   // VertticalBar chart options
   const optionsVert = {
     onClick: function (evt, item) {
+       var arr = showBC
+      arr[2] = true
       if(item && item[0])
      { unstable_batchedUpdates(()=>{
-        setSlideNo(prev=>prev+1)
+        setSlideNo(prev=>prev+1);
+        setShowBC(arr)
         setInstId(item[0].index);
         setUnlockHC(true)
       })}
@@ -131,12 +139,11 @@ function Fetcher() {
   //  --------------------------- @modify these to add new institute or campus @-------------------------
   const dirCamp = ["vskp","hyd","blr"]
   const dirIns = Object.keys(result[dirCamp[campusId]])
-  if(unlockHoriChart)
+  if(unlockHoriChart && showBC[2])
   {
   populationUG = result[dirCamp[campusId]][dirIns[instId]][0].total_final_years
   populationPG = result[dirCamp[campusId]][dirIns[instId]][1].total_final_years
 }
-
   //   HorizontalBar data
   const dataHC = {
     labels: ["UnderGraduate", "PostGraduate"],
@@ -392,85 +399,141 @@ function Fetcher() {
       ],
     });
     setType("UG + PG")
-
   };
-
+  const handleIndexChange = (e)=>{
+    const val = e.target.dataset.name
+    var arr = showBC
+    arr[val] = true
+    for(let i=0;i<3;i++)
+    {
+      if(i>val)
+      {
+        arr[i] = false
+      }
+    }
+    if(val === 1){
+      unstable_batchedUpdates(()=>{
+      setShowBC(arr)
+      setUnlockVC(true)
+      setSlideNo(parseInt(e.target.dataset.name))
+      })
+    }
+    else{
+      unstable_batchedUpdates(()=>{
+      setShowBC(arr)
+      setSlideNo(parseInt(e.target.dataset.name))
+      })
+    }
+  }
+  useEffect(() => {
+    getLocalStudents();
+    dataUGPG();
+  },[]);
   return (
-    <div className="fetcher">
-      <Carousel
-      className="fetcher_charts_div"
-      // useKeyboardArrows={true}
-      showIndicators={false}
-      showArrows={false}
-      showThumbs={false}
-      selectedItem={slideNo}
-      showStatus={false}
-      >         
-        <div className="Chart_holder" style={{width:"500px",textAlign:'center',margin:"auto"}}>
-              <DoughnutChart
-                style={{ boxShadow: "0 3px 10px black;" }}
-                campusId={campusId}
-                data={dataDoughnut}
-                options={optionsDoughnut}
-                setUnlockVC={setUnlockVC}
-                setSlideNo={setSlideNo}
-              />
-        </div>
-        {
-        unlockVertChart ?
-        <div className="Chart_holder" style={{width:"700px",textAlign:'center',margin:"auto"}}>
-         <button onClick={()=>{
-            unstable_batchedUpdates(()=>{
-              setSlideNo(prev=>prev-1)
-              setUnlockVC(true)
-            })
-          }}>
-            <Button btnText="⬅Back"></Button>
-          </button>
-            {campusId === 0 ? (
-              <VerticalBar campus={totalResult["vskp"]} options={optionsVert} />
-            ) : null}
-            {campusId === 1 ? (
-              <VerticalBar campus={totalResult["hyd"]} options={optionsVert} />
-            ) : null}
-            {campusId === 2 ? (
-              <VerticalBar campus={totalResult["blr"]} options={optionsVert} />
-            ) : null}
-        </div> : <p ></p>
-        }
-        {
-          unlockHoriChart?
-          <div className="Chart_holder" style={{width:"700px",textAlign:'center',margin:"auto"}}>
-            <button onClick={()=>{
-            unstable_batchedUpdates(()=>{
-              setSlideNo(prev=>prev-1)
-              setUnlockHC(true)
-            })
-            }}>
-              <Button btnText="⬅Back"></Button>
-            </button>
-          <button onClick={()=>setSlideNo(prev=>prev+1)}>
-          <Button btnText="Next ➡"></Button>
-          </button>
-            <HorizontalBarChart data={dataHC} inst={result[dirCamp[campusId]][dirIns[instId]][0]} />
-          </div> :<p></p>
-        }
-        <div className="Chart_holder" style={{width:"500px",textAlign:'center',margin:"auto"}}>
-        <button onClick={()=>setSlideNo(prev=>prev-1)}>
-        <Button btnText="⬅Back"></Button>
-          </button>
-            <PieChart data={dataPie} type={type}/>
-            <div className="PieButtons">
-            <button onClick={dataUG}><Button btnText="UG"></Button></button>
-            <button onClick={dataPG}><Button btnText="PG"></Button></button>
-            <button onClick={dataUGPG}><Button btnText="UG + PG"></Button></button>
+    <div className="fetcher-container">
+    {console.log(showBC,'bc states')}
+      <div className="fetcher">
+        <div className="fetcher_carousel-container">
+          <div className="breadCrumps">
+             <div role="presentation">
+                <Breadcrumbs aria-label="breadcrumb">
+                  <p data-name='0' onClick={handleIndexChange}>
+                    University
+                  </p>
+                  {unlockVertChart && showBC[1]?  
+                    <p data-name='1' onClick={handleIndexChange}>
+                      Campus
+                    </p>
+                    : null}
+                  {unlockHoriChart && showBC[2]?
+                  <p style={{display:'flex',flexDirection:'row'}}>
+                    <p data-name='2' onClick={handleIndexChange}>
+                    Institutes / {' '}
+                    </p> 
+                    <p data-name='3' onClick={handleIndexChange}>
+                      Graduation system
+                    </p>
+                  </p>:null}
+                </Breadcrumbs>
+              </div>
+          </div>
+          <Carousel
+          className="fetcher_charts_div"
+          // useKeyboardArrows={true}
+          showIndicators={false}
+          showArrows={false}
+          showThumbs={false}
+          selectedItem={slideNo}
+          showStatus={false}
+          >         
+            <div className="Chart_holder">
+                  <DoughnutChart
+                    style={{ boxShadow: "0 3px 10px black;" }}
+                    campusId={campusId}
+                    data={dataDoughnut}
+                    options={optionsDoughnut}
+                    setUnlockVC={setUnlockVC}
+                    setSlideNo={setSlideNo}
+                  />
             </div>
+            {
+            unlockVertChart && showBC[1]?
+            <div className="Chart_holder">
+            <button onClick={()=>{
+                unstable_batchedUpdates(()=>{
+                  setSlideNo(prev=>prev-1)
+                  setUnlockVC(false)
+                })
+              }}>
+                <Button btnText="⬅Back"></Button>
+              </button>
+                {campusId === 0 ? (
+                  <VerticalBar campus={totalResult["vskp"]} options={optionsVert} />
+                ) : null}
+                {campusId === 1 ? (
+                  <VerticalBar campus={totalResult["hyd"]} options={optionsVert} />
+                ) : null}
+                {campusId === 2 ? (
+                  <VerticalBar campus={totalResult["blr"]} options={optionsVert} />
+                ) : null}
+            </div> : <p ></p>
+            }
+            {
+              unlockHoriChart && showBC[2]?
+              <div className="Chart_holder">
+                <button onClick={()=>{
+                unstable_batchedUpdates(()=>{
+                  setSlideNo(prev=>prev-1)
+                  setUnlockHC(false)
+                })
+                }}>
+                  <Button btnText="⬅Back"></Button>
+                </button>
+              <button onClick={()=>setSlideNo(prev=>prev+1)}>
+              <Button btnText="Next ➡"></Button>
+              </button>
+                <HorizontalBarChart data={dataHC} inst={result[dirCamp[campusId]][dirIns[instId]][0]} />
+              </div> :<p></p>
+            }
+            { unlockHoriChart && showBC[2]?
+            <div className="Chart_holder">
+                <button onClick={()=>setSlideNo(prev=>prev-1)}>
+                <Button btnText="⬅Back"></Button>
+                </button>
+                  <PieChart instName={result[dirCamp[campusId]][dirIns[instId]][0].under_institute_name} data={dataPie} type={type}/>
+                  <div className="PieButtons">
+                  <button onClick={dataUG}><Button btnText="UG"></Button></button>
+                  <button onClick={dataPG}><Button btnText="PG"></Button></button>
+                  <button onClick={dataUGPG}><Button btnText="UG + PG"></Button></button>
+                </div>
+            </div>:<p></p>}
+          </Carousel>
         </div>
-      </Carousel>
-      <div  className="fetcher_content_div">
+        <div  className="fetcher_content_div">
             <p>
             Gandhi Institute of Technology and Management, formerly GITAM University and GITAM College of Engineering is a private deemed university located in Visakhapatnam, Hyderabad and Bengaluru in India. It was founded in 1980 by Dr. M.V.V.S. Murthi.
             </p>
+        </div>
       </div>
     </div>
   );
