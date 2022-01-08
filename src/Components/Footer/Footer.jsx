@@ -23,16 +23,16 @@ const Footer = () => {
             <ul>
               
               <li>
-                <a href="">GDSC</a>
+                <a href="#">GDSC</a>
               </li>
               <li>
-                <a href="">Web-Dev Team</a>
+                <a href="#">Web-Dev Team</a>
               </li>
               <li>
-                <a href="">2021</a>
+                <a href="#">2021</a>
               </li>
               <li>
-                <a href="">Vikas</a>
+                <a href="#">Vikas</a>
               </li>
               <li>
                 <span>👋</span>

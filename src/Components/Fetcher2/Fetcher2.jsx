@@ -86,7 +86,7 @@ useEffect(() => {
 },[])
   return (
     <div className="App">
-      {console.log('rendered')}
+      {/* {console.log('rendered')}
       <h1>Company Cards</h1>
       <input className="search-box" onChange={filterCards} placeholder="Search..."/>
       <div className="cards-container">
@@ -94,7 +94,7 @@ useEffect(() => {
           <Card key={`company-${index}`} index={index} company={company} companySet={companySetState}/>
         )}
       
-      </div>
+      </div> */}
     </div>
   );
 }
