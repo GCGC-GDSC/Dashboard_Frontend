@@ -65,18 +65,19 @@ function Fetcher() {
   useEffect(() => {
     getLocalStudents();
     dataUGPG();
-  }, []);
+  },[]);
 
   // DoughNut data and options
   //options
   const optionsDoughnut = {
     onClick: function (evt, item) {
-      console.log('@@@',item[0].index)
-      unstable_batchedUpdates(()=>{
+      // console.log('@@@',item[0])
+      if(item[0])
+      {unstable_batchedUpdates(()=>{
         setSlideNo(prev=>prev+1)
         setCampusId(item[0].index);
         setUnlockVC(true)
-      })
+      })}
     },
     rotation: Math.PI * 0.5,
   };
@@ -106,11 +107,12 @@ function Fetcher() {
   // VertticalBar chart options
   const optionsVert = {
     onClick: function (evt, item) {
-      unstable_batchedUpdates(()=>{
+      if(item && item[0])
+     { unstable_batchedUpdates(()=>{
         setSlideNo(prev=>prev+1)
         setInstId(item[0].index);
         setUnlockHC(true)
-      })
+      })}
     },
     scales: {
       yAxes: [
@@ -400,6 +402,7 @@ function Fetcher() {
       // useKeyboardArrows={true}
       showIndicators={false}
       showArrows={false}
+      showThumbs={false}
       selectedItem={slideNo}
       showStatus={false}
       >         
@@ -424,13 +427,13 @@ function Fetcher() {
           }}>
             <Button btnText="⬅Back"></Button>
           </button>
-            {campusId == 0 ? (
+            {campusId === 0 ? (
               <VerticalBar campus={totalResult["vskp"]} options={optionsVert} />
             ) : null}
-            {campusId == 1 ? (
+            {campusId === 1 ? (
               <VerticalBar campus={totalResult["hyd"]} options={optionsVert} />
             ) : null}
-            {campusId == 2 ? (
+            {campusId === 2 ? (
               <VerticalBar campus={totalResult["blr"]} options={optionsVert} />
             ) : null}
         </div> : <p ></p>
