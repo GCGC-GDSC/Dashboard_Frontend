@@ -1,9 +1,12 @@
+import React from "react"
 import { useState, useEffect } from "react";
 import Card from "./Card";
 import result from "./localDB2"
 import "./Fetcher2.scss"
+import BasicTabs from "../Tabs/Tabs"
 
 function Fetcher2() {
+  
 //   const [allUsers, setAllUsers] = useState([]);
 //   const [users, setUsers] = useState([]);
 //   *********
@@ -62,8 +65,8 @@ const getCompanyList = () => {
     setDictState(dict)
     setFilterState(dict)
     // ---------------------------------------
-    // console.log("😉😉😉😉");
-    // console.log(dict);
+    console.log("😉😉😉😉");
+    console.log(filterState);
 
 
   
@@ -85,17 +88,20 @@ useEffect(() => {
   getCompanyList()
 },[])
   return (
+    <>
+    <BasicTabs/>
     <div className="App">
       {console.log('rendered')}
       <h1>Company Cards</h1>
       <input className="search-box" onChange={filterCards} placeholder="Search..."/>
       <div className="cards-container">
        { filterState.map((company, index) =>
-          <Card key={`company-${index}`} index={index} company={company} companySet={companySetState}/>
+          <Card key={`company-${index}`} index={index} company={company} />
         )}
       
       </div>
     </div>
+    </>
   );
 }
 
