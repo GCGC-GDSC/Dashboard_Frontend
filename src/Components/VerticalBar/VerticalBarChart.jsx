@@ -23,14 +23,17 @@ const VerticalBar = ({campus,options}) => {
         label: 'Number of Students',
         data: getInstData(),
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
+          '#82b74b',
+          '#c94c4c',
+          '#80ced6',
+          '#ffcc5c',
+          '#7e4a35',
+          '#622569',
+
+
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
+          'white'
         ],
         borderWidth: 1,
       },

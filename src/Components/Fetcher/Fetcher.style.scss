@@ -1,3 +1,8 @@
+.fetcher-container {
+  margin: auto;
+  width: 85%;
+}
+
 .fetcher {
   display: flex;
   flex-direction: row;
@@ -6,16 +11,59 @@
   width: 100%;
   align-items: center;
   &_charts_div {
-    flex: 0.7;
-    width: 400px;
+    min-width: 400px;
+    width: 800px; //krishna
   }
   &_content_div {
-    flex: 0.3;
+    flex: 1;
     width: 300px;
   }
-  &_PieButtons {
+  &_carousel-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    justify-self: left;
+    // margin: auto;
+    flex-direction: column;
+
+    .breadCrumps {
+      font-size: 1.2rem;
+      text-align: center;
+      flex: 0.8;
+    }
   }
+}
+.Chart_holder {
+  margin: auto;
+  background-color: rgb(245, 245, 245);
+  padding: 30px;
+  max-width: 700px !important;
+  min-width: 600px !important;
+  max-height: fit-content !important;
+  transform: scale(0.8);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+.Chart_holder button:nth-child(1) {
+  margin-right: 27%;
+}
+.Chart_holder button:nth-child(2) {
+  margin-left: 27%;
+}
+.Chart_holder2 {
+  margin: auto;
+  background-color: rgb(253, 253, 253);
+  padding: 30px;
+  max-width: 600px !important;
+  min-width: 600px !important;
+  max-height: fit-content !important;
+  transform: scale(1);
+}
+
+//left and right buttons in Horizontal Bar Chart
+
+.presentation p,
+span {
+  font-weight: bold;
 }

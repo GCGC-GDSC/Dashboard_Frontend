@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
-
+  background-color: mintcream;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   max-width: 100vw;

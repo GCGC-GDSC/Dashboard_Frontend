@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from "react";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
 import { unstable_batchedUpdates } from "react-dom";
 import Axios from "axios";
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import DoughnutChart from "../Doughnut/DoughnutChart";
 import VerticalBar from "../VerticalBar/VerticalBarChart";
 import HorizontalBarChart from "../HorizontalBar/HorizontalBar";
 import result from "./localDB";
 import PieChart from "../PieChart/PieChart";
-import Button from "../Buttons/Button"
-import './Fetcher.style.scss'
+// import Button from "../Buttons/Button"
+import "./Fetcher.style.scss";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import Button from "@mui/material/Button";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { emphasize, styled } from "@mui/material/styles";
+import Chip from "@mui/material/Chip";
 
 function Fetcher() {
   const [totalResult, setTotalResult] = useState({});
-  const [unlockVertChart,setUnlockVC] = useState(false)
-  const [unlockHoriChart,setUnlockHC] = useState(false)
-  const [slideNo,setSlideNo] = useState(0)
+  const [showBC, setShowBC] = useState([true, false, false]);
+  const [unlockVertChart, setUnlockVC] = useState(false);
+  const [unlockHoriChart, setUnlockHC] = useState(false);
+  const [slideNo, setSlideNo] = useState(0);
   const [campusId, setCampusId] = useState(0);
   const [instId, setInstId] = useState(0); //this is for institutions like GIT,GST under specific campuses
   const [Hstudents, setHStudents] = useState([]);
   const [Vstudents, setVStudents] = useState([]);
   const [Bstudents, setBStudents] = useState([]);
-  const [type, setType] = useState() // this is for the PieChart Component in the HomePage
+  const [type, setType] = useState(); // this is for the PieChart Component in the HomePage
   const [dataPie, setDataPie] = useState({
     //This is setting the data object with some inital values, after the UG,PG or UGPG button is clicked which are in the PieChart this PieData will be replaced.
     labels: ["Please select the Campus and Insitution"],
@@ -33,26 +42,33 @@ function Fetcher() {
       },
     ],
   });
+
+  // Diffrent colors for UG,PG,UG+PG in PieChart, so will store the colors in an array and pass to the dataPie
+  const [pieColors, setPieColors] = useState([
+    "rgba(255, 99, 132, 0.2)",
+    "rgba(54, 162, 235, 0.2)",
+    "rgba(255, 206, 86, 0.2)",
+    "rgba(75, 192, 192, 0.2)",
+    "rgba(153, 102, 255, 0.2)",
+    "rgba(255, 159, 64, 0.2)",
+  ])
   const { vskp, blr, hyd } = result;
-//  this function iterates over all the campuses and gets the total number of students in total (city wise)
+  //  this function iterates over all the campuses and gets the total number of students in total (city wise)
   const getLocalStudents = () => {
     var vskpTotal = 0;
     for (let inst in vskp) {
       let institute = vskp[inst];
-      vskpTotal +=
-        institute[0].total_students + institute[1].total_students;
+      vskpTotal += institute[0].total_students + institute[1].total_students;
     }
     var blrTotal = 0;
     for (let inst in blr) {
       let institute = blr[inst];
-      blrTotal +=
-        institute[0].total_students + institute[1].total_students;
+      blrTotal += institute[0].total_students + institute[1].total_students;
     }
     var hydTotal = 0;
     for (let inst in hyd) {
       let institute = hyd[inst];
-      hydTotal +=
-        institute[0].total_students + institute[1].total_students;
+      hydTotal += institute[0].total_students + institute[1].total_students;
     }
     unstable_batchedUpdates(() => {
       setTotalResult(result);
@@ -61,23 +77,26 @@ function Fetcher() {
       setHStudents(hydTotal);
     });
   };
-
-  useEffect(() => {
-    getLocalStudents();
-    dataUGPG();
-  },[]);
+  function handleClick(event) {
+    event.preventDefault();
+    console.info("You clicked a breadcrumb.");
+  }
 
   // DoughNut data and options
   //options
   const optionsDoughnut = {
     onClick: function (evt, item) {
       // console.log('@@@',item[0])
-      if(item[0])
-      {unstable_batchedUpdates(()=>{
-        setSlideNo(prev=>prev+1)
-        setCampusId(item[0].index);
-        setUnlockVC(true)
-      })}
+      var arr = showBC;
+      arr[1] = true;
+      if (item[0]) {
+        unstable_batchedUpdates(() => {
+          setSlideNo((prev) => prev + 1);
+          setShowBC(arr);
+          setCampusId(item[0].index);
+          setUnlockVC(true);
+        });
+      }
     },
     rotation: Math.PI * 0.5,
   };
@@ -89,16 +108,8 @@ function Fetcher() {
       {
         label: "# of Votes",
         data: [Vstudents, Hstudents, Bstudents],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-        ],
+        backgroundColor: ["#EC6B56", "#FFC154", " #47B39C"],
+        borderColor: ["#EC6B56", "#FFC154", "#47B39C"],
         borderWidth: 2,
       },
     ],
@@ -107,12 +118,16 @@ function Fetcher() {
   // VertticalBar chart options
   const optionsVert = {
     onClick: function (evt, item) {
-      if(item && item[0])
-     { unstable_batchedUpdates(()=>{
-        setSlideNo(prev=>prev+1)
-        setInstId(item[0].index);
-        setUnlockHC(true)
-      })}
+      var arr = showBC;
+      arr[2] = true;
+      if (item && item[0]) {
+        unstable_batchedUpdates(() => {
+          setSlideNo((prev) => prev + 1);
+          setShowBC(arr);
+          setInstId(item[0].index);
+          setUnlockHC(true);
+        });
+      }
     },
     scales: {
       yAxes: [
@@ -129,20 +144,20 @@ function Fetcher() {
   let populationPG = 0;
   let populationUG = 0;
   //  --------------------------- @modify these to add new institute or campus @-------------------------
-  const dirCamp = ["vskp","hyd","blr"]
-  const dirIns = Object.keys(result[dirCamp[campusId]])
-  if(unlockHoriChart)
-  {
-  populationUG = result[dirCamp[campusId]][dirIns[instId]][0].total_final_years
-  populationPG = result[dirCamp[campusId]][dirIns[instId]][1].total_final_years
-}
-
+  const dirCamp = ["vskp", "hyd", "blr"];
+  const dirIns = Object.keys(result[dirCamp[campusId]]);
+  if (unlockHoriChart && showBC[2]) {
+    populationUG =
+      result[dirCamp[campusId]][dirIns[instId]][0].total_final_years;
+    populationPG =
+      result[dirCamp[campusId]][dirIns[instId]][1].total_final_years;
+  }
   //   HorizontalBar data
   const dataHC = {
     labels: ["UnderGraduate", "PostGraduate"],
     datasets: [
       {
-        label: '# number of students',
+        label: "# number of students",
         data: [populationUG, populationPG],
         backgroundColor: [
           "rgba(75, 192, 192, 0.2)",
@@ -159,12 +174,18 @@ function Fetcher() {
   let campuses = dirCamp; // this is used in dataUG,dataPG,dataUGPG
 
   // ------------------------------------------ITERATE AND ASSIGN -----------------------------
-  let allInsitutes = dirIns
-  ; // this is used in dataUG,dataPG,dataUGPG
-
+  let allInsitutes = dirIns; // this is used in dataUG,dataPG,dataUGPG
   //this function is called when the dataUG button is clicked
   //this function is responsible for displaying the UG data provided the campusId and instId
   const dataUG = () => {
+    setPieColors([
+      "#6050DC",
+      "#D52DB7",
+      "#FF2E7E",
+      "#FF6B45",
+      "#FFAB05",
+      "rgba(255, 159, 64, 1)",
+    ])
     let total_higher_study_and_pay_crt =
       result[campuses[campusId]][allInsitutes[instId]][0]
         .total_higher_study_and_pay_crt;
@@ -179,13 +200,12 @@ function Fetcher() {
     let total_offers =
       result[campuses[campusId]][allInsitutes[instId]][0].total_offers;
     let total_multiple_offers =
-      result[campuses[campusId]][allInsitutes[instId]][0]
-        .total_multiple_offers;
+      result[campuses[campusId]][allInsitutes[instId]][0].total_multiple_offers;
     let total_placed =
       result[campuses[campusId]][allInsitutes[instId]][0].total_placed;
     let total_yet_to_place =
       result[campuses[campusId]][allInsitutes[instId]][0].total_yet_to_place;
-      // --------------------------ITERATE AND ASSIGN -------------------------------------------
+    // --------------------------ITERATE AND ASSIGN -------------------------------------------
 
     let arr = [
       total_higher_study_and_pay_crt,
@@ -213,29 +233,16 @@ function Fetcher() {
         {
           label: "# of Votes",
           data: arr,
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
+          backgroundColor: pieColors,
+          borderColor: pieColors,
           borderWidth: 1,
         },
       ],
     });
-    setType("UG")
+    setType("UG");
   };
   const dataPG = () => {
+    setPieColors(['#F66D44','#FEAE65','#E6F69D','#AADEA7','#64C2A6','#2D87BB'])
     let total_higher_study_and_pay_crt =
       result[campuses[campusId]][allInsitutes[instId]][1]
         .total_higher_study_and_pay_crt;
@@ -250,13 +257,12 @@ function Fetcher() {
     let total_offers =
       result[campuses[campusId]][allInsitutes[instId]][1].total_offers;
     let total_multiple_offers =
-      result[campuses[campusId]][allInsitutes[instId]][1]
-        .total_multiple_offers;
+      result[campuses[campusId]][allInsitutes[instId]][1].total_multiple_offers;
     let total_placed =
       result[campuses[campusId]][allInsitutes[instId]][1].total_placed;
     let total_yet_to_place =
       result[campuses[campusId]][allInsitutes[instId]][1].total_yet_to_place;
-      // --------------------------ITERATE AND ASSIGN -------------------------------------------
+    // --------------------------ITERATE AND ASSIGN -------------------------------------------
 
     let arr = [
       total_higher_study_and_pay_crt,
@@ -285,30 +291,16 @@ function Fetcher() {
         {
           label: "# of Votes",
           data: arr,
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
+          backgroundColor:pieColors,
+          borderColor: pieColors,
           borderWidth: 1,
         },
       ],
     });
-    setType("PG")
-
+    setType("PG");
   };
   const dataUGPG = () => {
+    setPieColors(['#3C9D4E','#7031AC','#C94D6D','#E4BF58','#4174C9'])
     let total_higher_study_and_pay_crt =
       result[campuses[campusId]][allInsitutes[instId]][1]
         .total_higher_study_and_pay_crt +
@@ -333,16 +325,14 @@ function Fetcher() {
     let total_multiple_offers =
       result[campuses[campusId]][allInsitutes[instId]][1]
         .total_multiple_offers +
-      result[campuses[campusId]][allInsitutes[instId]][0]
-        .total_multiple_offers;
+      result[campuses[campusId]][allInsitutes[instId]][0].total_multiple_offers;
     let total_placed =
       result[campuses[campusId]][allInsitutes[instId]][1].total_placed +
       result[campuses[campusId]][allInsitutes[instId]][0].total_placed;
     let total_yet_to_place =
-      result[campuses[campusId]][allInsitutes[instId]][1]
-        .total_yet_to_place +
+      result[campuses[campusId]][allInsitutes[instId]][1].total_yet_to_place +
       result[campuses[campusId]][allInsitutes[instId]][0].total_yet_to_place;
-      // --------------------------ITERATE AND ASSIGN -------------------------------------------
+    // --------------------------ITERATE AND ASSIGN -------------------------------------------
 
     let arr = [
       total_higher_study_and_pay_crt,
@@ -354,7 +344,7 @@ function Fetcher() {
       total_placed,
       total_yet_to_place,
     ];
-      // --------------------------ITERATE AND ASSIGN -------------------------------------------
+    // --------------------------ITERATE AND ASSIGN -------------------------------------------
 
     setDataPie({
       labels: [
@@ -371,106 +361,214 @@ function Fetcher() {
         {
           label: "# of Votes",
           data: arr,
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
+          backgroundColor: pieColors,
+          borderColor: pieColors,
           borderWidth: 1,
         },
       ],
     });
-    setType("UG + PG")
-
+    setType("UG + PG");
   };
-
+  const handleIndexChange = (e) => {
+    const val = e.target.dataset.name;
+    var arr = showBC;
+    arr[val] = true;
+    for (let i = 0; i < 3; i++) {
+      if (i > val) {
+        arr[i] = false;
+      }
+    }
+    if (val === 1) {
+      unstable_batchedUpdates(() => {
+        setShowBC(arr);
+        setUnlockVC(true);
+        setSlideNo(parseInt(e.target.dataset.name));
+      });
+    } else {
+      unstable_batchedUpdates(() => {
+        setShowBC(arr);
+        setSlideNo(parseInt(e.target.dataset.name));
+      });
+    }
+  };
+  const StyledBreadcrumb = styled(Chip)(({ theme }) => {
+    const backgroundColor =
+      theme.palette.mode === "dark"
+        ? theme.palette.grey[100]
+        : theme.palette.grey[400];
+    return {
+      backgroundColor,
+      height: theme.spacing(3),
+      color: theme.palette.text.primary,
+      fontWeight: theme.typography.fontWeightRegular,
+      "&:hover, &:focus": {
+        backgroundColor: emphasize(backgroundColor, 0.06),
+      },
+      "&:active": {
+        boxShadow: theme.shadows[1],
+        backgroundColor: emphasize(backgroundColor, 0.12),
+      },
+    };
+  });
+  useEffect(() => {
+    getLocalStudents();
+    dataUGPG();
+  }, []);
   return (
-    <div className="fetcher">
-      <Carousel
-      className="fetcher_charts_div"
-      // useKeyboardArrows={true}
-      showIndicators={false}
-      showArrows={false}
-      showThumbs={false}
-      selectedItem={slideNo}
-      showStatus={false}
-      >         
-        <div className="Chart_holder" style={{width:"500px",textAlign:'center',margin:"auto"}}>
+    <div className="fetcher-container">
+      {console.log(showBC, "bc states")}
+      <div className="fetcher">
+        <div className="fetcher_carousel-container">
+          <div className="breadCrumps">
+            <div role="presentation">
+              <Breadcrumbs
+                separator={<NavigateNextIcon fontSize="medium" />}
+                aria-label="breadcrumb"
+              >
+                <StyledBreadcrumb component="a" href="#" label="Home" />
+                <p data-name="0" onClick={handleIndexChange}>
+                  University
+                </p>
+                {unlockVertChart && showBC[1] ? (
+                  <p data-name="1" onClick={handleIndexChange}>
+                    Campus
+                  </p>
+                ) : null}
+                {unlockHoriChart && showBC[2] ? (
+                  <span style={{ display: "flex", flexDirection: "row" }}>
+                    <span data-name="2" onClick={handleIndexChange}>Institutes</span>
+                    <span>
+                      <NavigateNextIcon />
+                    </span>
+                    <span data-name="3" onClick={handleIndexChange}>
+                      Graduation system
+                    </span>
+                  </span>
+                ) : null}
+              </Breadcrumbs>
+            </div>
+          </div>
+          <Carousel
+            className="fetcher_charts_div"
+            // useKeyboardArrows={true}
+            showIndicators={false}
+            showArrows={false}
+            showThumbs={false}
+            selectedItem={slideNo}
+            showStatus={false}
+          >
+            <div className="Chart_holder">
               <DoughnutChart
-                style={{ boxShadow: "0 3px 10px black;" }}
                 campusId={campusId}
                 data={dataDoughnut}
                 options={optionsDoughnut}
                 setUnlockVC={setUnlockVC}
                 setSlideNo={setSlideNo}
               />
-        </div>
-        {
-        unlockVertChart ?
-        <div className="Chart_holder" style={{width:"700px",textAlign:'center',margin:"auto"}}>
-         <button onClick={()=>{
-            unstable_batchedUpdates(()=>{
-              setSlideNo(prev=>prev-1)
-              setUnlockVC(true)
-            })
-          }}>
-            <Button btnText="⬅Back"></Button>
-          </button>
-            {campusId === 0 ? (
-              <VerticalBar campus={totalResult["vskp"]} options={optionsVert} />
-            ) : null}
-            {campusId === 1 ? (
-              <VerticalBar campus={totalResult["hyd"]} options={optionsVert} />
-            ) : null}
-            {campusId === 2 ? (
-              <VerticalBar campus={totalResult["blr"]} options={optionsVert} />
-            ) : null}
-        </div> : <p ></p>
-        }
-        {
-          unlockHoriChart?
-          <div className="Chart_holder" style={{width:"700px",textAlign:'center',margin:"auto"}}>
-            <button onClick={()=>{
-            unstable_batchedUpdates(()=>{
-              setSlideNo(prev=>prev-1)
-              setUnlockHC(true)
-            })
-            }}>
-              <Button btnText="⬅Back"></Button>
-            </button>
-          <button onClick={()=>setSlideNo(prev=>prev+1)}>
-          <Button btnText="Next ➡"></Button>
-          </button>
-            <HorizontalBarChart data={dataHC} inst={result[dirCamp[campusId]][dirIns[instId]][0]} />
-          </div> :<p></p>
-        }
-        <div className="Chart_holder" style={{width:"500px",textAlign:'center',margin:"auto"}}>
-        <button onClick={()=>setSlideNo(prev=>prev-1)}>
-        <Button btnText="⬅Back"></Button>
-          </button>
-            <PieChart data={dataPie} type={type}/>
-            <div className="PieButtons">
-            <button onClick={dataUG}><Button btnText="UG"></Button></button>
-            <button onClick={dataPG}><Button btnText="PG"></Button></button>
-            <button onClick={dataUGPG}><Button btnText="UG + PG"></Button></button>
             </div>
+            {unlockVertChart && showBC[1] ? (
+              <div className="Chart_holder Chart_holder2">
+                <button
+                  onClick={() => {
+                    unstable_batchedUpdates(() => {
+                      setSlideNo((prev) => prev - 1);
+                      setUnlockVC(false);
+                    });
+                  }}
+                >
+                  {/*  <KeyboardBackspaceIcon/>
+                   */}
+                  <KeyboardBackspaceIcon />
+                </button>
+                {campusId === 0 ? (
+                  <VerticalBar
+                    campus={totalResult["vskp"]}
+                    options={optionsVert}
+                  />
+                ) : null}
+                {campusId === 1 ? (
+                  <VerticalBar
+                    campus={totalResult["hyd"]}
+                    options={optionsVert}
+                  />
+                ) : null}
+                {campusId === 2 ? (
+                  <VerticalBar
+                    campus={totalResult["blr"]}
+                    options={optionsVert}
+                  />
+                ) : null}
+              </div>
+            ) : (
+              <p></p>
+            )}
+            {unlockHoriChart && showBC[2] ? (
+              <div className="Chart_holder Chart_holder2">
+                <button
+                  onClick={() => {
+                    unstable_batchedUpdates(() => {
+                      setSlideNo((prev) => prev - 1);
+                      setUnlockHC(false);
+                    });
+                  }}
+                >
+                  <KeyboardBackspaceIcon />
+                </button>
+                <button onClick={() => setSlideNo((prev) => prev + 1)}>
+                  <ArrowRightAltIcon fontSize="medium" />
+                </button>
+                <HorizontalBarChart
+                  data={dataHC}
+                  inst={result[dirCamp[campusId]][dirIns[instId]][0]}
+                />
+              </div>
+            ) : (
+              <p></p>
+            )}
+            {unlockHoriChart && showBC[2] ? (
+              <div className="Chart_holder">
+                <button onClick={() => setSlideNo((prev) => prev - 1)}>
+                  <KeyboardBackspaceIcon />
+                </button>
+                <PieChart
+                  instName={
+                    result[dirCamp[campusId]][dirIns[instId]][0]
+                      .under_institute_name
+                  }
+                  data={dataPie}
+                  type={type}
+                />
+                <div className="PieButtons">
+                  <button onClick={dataUG}>
+                    <Button variant="contained" color="success">
+                      Contained
+                    </Button>
+                  </button>
+                  <button onClick={dataPG}>
+                    <Button variant="contained" color="success">
+                      Contained
+                    </Button>
+                  </button>
+                  <button onClick={dataUGPG}>
+                    <Button variant="contained" color="success">
+                      Contained
+                    </Button>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <p></p>
+            )}
+          </Carousel>
         </div>
-      </Carousel>
-      <div  className="fetcher_content_div">
-            <p>
-            Gandhi Institute of Technology and Management, formerly GITAM University and GITAM College of Engineering is a private deemed university located in Visakhapatnam, Hyderabad and Bengaluru in India. It was founded in 1980 by Dr. M.V.V.S. Murthi.
-            </p>
+        <div className="fetcher_content_div">
+          <p>
+            Gandhi Institute of Technology and Management, formerly GITAM
+            University and GITAM College of Engineering is a private deemed
+            university located in Visakhapatnam, Hyderabad and Bengaluru in
+            India. It was founded in 1980 by Dr. M.V.V.S. Murthi.
+          </p>
+        </div>
       </div>
     </div>
   );
