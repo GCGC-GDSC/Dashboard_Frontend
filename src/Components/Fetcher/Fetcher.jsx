@@ -10,7 +10,6 @@ import VerticalBar from "../VerticalBar/VerticalBarChart";
 import HorizontalBarChart from "../HorizontalBar/HorizontalBar";
 import result from "./localDB";
 import PieChart from "../PieChart/PieChart";
-// import Button from "../Buttons/Button"
 import "./Fetcher.style.scss";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
