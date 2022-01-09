@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Link from "@mui/material/Link";
 import { unstable_batchedUpdates } from "react-dom";
 import Axios from "axios";
 import { Carousel } from "react-responsive-carousel";
@@ -11,12 +10,13 @@ import HorizontalBarChart from "../HorizontalBar/HorizontalBar";
 import result from "./localDB";
 import PieChart from "../PieChart/PieChart";
 import "./Fetcher.style.scss";
-import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import Button from "@mui/material/Button";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { emphasize, styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
+import cors from "cors"
 
 function Fetcher() {
   const [totalResult, setTotalResult] = useState({});

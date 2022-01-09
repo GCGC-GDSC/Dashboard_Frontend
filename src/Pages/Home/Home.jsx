@@ -12,6 +12,7 @@ import HeroText from "../../Components/HeroText/HeroText"
 import Aos from "aos"
 import "aos/dist/aos.css"
 import Footer from '../../Components/Footer/Footer'
+import Overall from '../../Views/Overall/Overall'
 
 function Home() {
     useEffect(() => {
@@ -31,7 +32,9 @@ function Home() {
         <main className='main_section'>
             <Fetcher/>
         </main>
-        <Fetcher2/>
+            {/* <Fetcher2/> */}
+            <hr></hr>
+            <Overall/>
             <Footer/>
         
         </>
