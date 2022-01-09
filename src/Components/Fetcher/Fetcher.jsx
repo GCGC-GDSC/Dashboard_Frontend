@@ -540,17 +540,17 @@ function Fetcher() {
                 <div className="PieButtons">
                   <button onClick={dataUG}>
                     <Button variant="contained" color="success">
-                      Contained
+                      {" "} {" "} UG {" "} {" "}
                     </Button>
                   </button>
                   <button onClick={dataPG}>
                     <Button variant="contained" color="success">
-                      Contained
+                    {" "} {" "} PG {" "} {" "}
                     </Button>
                   </button>
                   <button onClick={dataUGPG}>
                     <Button variant="contained" color="success">
-                      Contained
+                    {" "} {" "} UG +  PG {" "} {" "}
                     </Button>
                   </button>
                 </div>

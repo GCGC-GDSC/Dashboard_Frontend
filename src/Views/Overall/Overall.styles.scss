@@ -1,8 +1,49 @@
 .overall{
-    background-color: mediumaquamarine;
+    width:85%;
+    margin: auto;
 }
-.chartContainer {
-    min-width: 400px;
-    width: 400px; 
-    // transform: scale(0.5);
+.chartsContainer {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    text-align: center;
+    .row1{
+        // background-color: olive;
+        display: flex;
+        flex-direction: row;
+        justify-content:space-around;
+        div{
+            max-width: 65%;
+        justify-content:space-around;
+
+        }
+    }
+    .row2{
+        // background-color: rgb(128, 190, 29);
+        display: flex;
+        flex-direction: row;
+        justify-content:space-around;
+        div{
+            max-width: 55%;
+            margin: 20px;
+        justify-content:space-around;
+
+        }
+    }
+        .overall_charts{
+            min-width: 400px;
+            width: 400px; 
+            flex: 0.5;
+            transition: all .5s ease;
+            flex-grow: 1;
+
+        }
+}
+
+#c1{
+    // max-width: 400px !important;
+    // width:30%;
+}
+#c2, #c3,  #c4{
+    // display: none;
 }
