@@ -1,6 +1,6 @@
 .fetcher-container {
   margin: auto;
-  width: 85%;
+  width: 100%;
 }
 
 .fetcher {
@@ -11,8 +11,9 @@
   width: 100%;
   align-items: center;
   &_charts_div {
+    // background-color: brown;
     min-width: 400px;
-    width: 800px; //krishna
+    width: 700px; //krishna
   }
   &_content_div {
     flex: 1;
@@ -46,10 +47,12 @@
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 .Chart_holder button:nth-child(1) {
-  margin-right: 27%;
+  position: absolute;
+  top: 3px;
+  left: 2px;
 }
 .Chart_holder button:nth-child(2) {
-  margin-left: 27%;
+  position: absolute;
 }
 .Chart_holder2 {
   margin: auto;
@@ -61,10 +64,7 @@
   transform: scale(1);
 }
 
-//left and right buttons in Horizontal Bar Chart
-
 .presentation p,
 span {
-  font-weight: bold;
   cursor: pointer;
 }

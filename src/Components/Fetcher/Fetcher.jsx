@@ -17,6 +17,7 @@ import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { emphasize, styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import cors from "cors"
+import SimpleContainer from "../InfoArea/InfoArea"
 
 function Fetcher() {
   const [totalResult, setTotalResult] = useState({});
@@ -42,15 +43,15 @@ function Fetcher() {
     ],
   });
 
+  // InfoArea states
+  const mainHeading = ['chart1Heading','chart2heading','chart3Heading','chart4Heading']
+  const  subHeading = ['chart1subHeading','chart2subHeading','chart3subHeading','chart4subHeading']
+  const text = ['qwe','asd','zxc','iop']
+
+
+
   // Diffrent colors for UG,PG,UG+PG in PieChart, so will store the colors in an array and pass to the dataPie
-  const [pieColors, setPieColors] = useState([
-    "rgba(255, 99, 132, 0.2)",
-    "rgba(54, 162, 235, 0.2)",
-    "rgba(255, 206, 86, 0.2)",
-    "rgba(75, 192, 192, 0.2)",
-    "rgba(153, 102, 255, 0.2)",
-    "rgba(255, 159, 64, 0.2)",
-  ])
+  const [pieColors, setPieColors] = useState(['#3C9D4E','#7031AC','#C94D6D','#E4BF58','#4174C9'])
   const { vskp, blr, hyd } = result;
   //  this function iterates over all the campuses and gets the total number of students in total (city wise)
   const getLocalStudents = () => {
@@ -425,11 +426,11 @@ function Fetcher() {
                 aria-label="breadcrumb"
               >
                 <StyledBreadcrumb component="a" href="#" label="Home" />
-                <p data-name="0" onClick={handleIndexChange}>
+                <p data-name="0" onClick={handleIndexChange} style={{cursor:"pointer"}}>
                   University
                 </p>
                 {unlockVertChart && showBC[1] ? (
-                  <p data-name="1" onClick={handleIndexChange}>
+                  <p data-name="1" onClick={handleIndexChange} style={{cursor:"pointer"}}>
                     Campus
                   </p>
                 ) : null}
@@ -511,7 +512,7 @@ function Fetcher() {
                     });
                   }}
                 >
-                  <KeyboardBackspaceIcon />
+                  <KeyboardBackspaceIcon fontSize="large" style={{backgroundColor:"white"}}/>
                 </button>
                 <button onClick={() => setSlideNo((prev) => prev + 1)}>
                   <ArrowRightAltIcon fontSize="medium" />
@@ -540,17 +541,17 @@ function Fetcher() {
                 <div className="PieButtons">
                   <button onClick={dataUG}>
                     <Button variant="contained" color="success">
-                      {" "} {" "} UG {" "} {" "}
+                    UnderGrad
                     </Button>
                   </button>
                   <button onClick={dataPG}>
                     <Button variant="contained" color="success">
-                    {" "} {" "} PG {" "} {" "}
+                    PostGrad 
                     </Button>
                   </button>
                   <button onClick={dataUGPG}>
                     <Button variant="contained" color="success">
-                    {" "} {" "} UG +  PG {" "} {" "}
+                     UG+PG
                     </Button>
                   </button>
                 </div>
@@ -561,12 +562,7 @@ function Fetcher() {
           </Carousel>
         </div>
         <div className="fetcher_content_div">
-          <p>
-            Gandhi Institute of Technology and Management, formerly GITAM
-            University and GITAM College of Engineering is a private deemed
-            university located in Visakhapatnam, Hyderabad and Bengaluru in
-            India. It was founded in 1980 by Dr. M.V.V.S. Murthi.
-          </p>
+          <SimpleContainer heading={mainHeading[slideNo]} subheading={subHeading[slideNo]} text={text[slideNo]}/>
         </div>
       </div>
     </div>
