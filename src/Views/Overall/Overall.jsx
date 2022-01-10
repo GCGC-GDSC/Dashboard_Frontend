@@ -10,7 +10,7 @@ function Overall() {
     const [stream,setStream] = useState('')
     const [streamData,setStreamData] = useState({})
     const [streamList,setStreamList] = useState([])
-    const streamsList = ['engineering','management','sciences','pharmacy','oco','statistics' ]
+    // const streamsList = ['engineering','management','sciences','pharmacy','oco','statistics' ]
     
     const parseData = () =>{
 
@@ -175,7 +175,7 @@ function Overall() {
         })}
     }
     useEffect(()=>{
-
+        setStreamList()
     })
     return(
         <div className="overall">
