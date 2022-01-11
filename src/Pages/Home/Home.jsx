@@ -13,6 +13,7 @@ import Aos from "aos"
 import "aos/dist/aos.css"
 import Footer from '../../Components/Footer/Footer'
 import Overall from '../../Views/Overall/Overall'
+import BasicTabs from "../../Components/Tabs/Tabs"
 
 function Home() {
     useEffect(() => {
@@ -20,6 +21,7 @@ function Home() {
     },[])
     return ( 
         <>  
+        {/* hero section particles js */}
         <section className='hero_section'>
             <div className ="hero_section_outer">
                 <div className = 'hero_section_inner'>
@@ -29,12 +31,11 @@ function Home() {
                 </div>
             </div>
         </section>
+
         <main className='main_section'>
-            <Fetcher/>
+            <BasicTabs/>
         </main>
-            {/* <Fetcher2/> */}
-            <hr></hr>
-            <Overall/>
+            {/* <Overall/> */}
             <Footer/>
         
         </>

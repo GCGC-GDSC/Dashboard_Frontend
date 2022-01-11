@@ -17,13 +17,13 @@ const OPieChart = ({instName,data,type}) => {
     }
   }
   return(
-  <>
+  <div>
     <div className='header'>
       <h1 className='title'>Institute Population</h1>
       <h2>{type}</h2>
     </div>
     <Pie data={data} options={options}/>
-  </>)
+  </div>)
 };
 
 export default OPieChart;

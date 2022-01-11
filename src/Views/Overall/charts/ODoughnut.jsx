@@ -5,7 +5,7 @@ const ODoughnutChart = ({data,options}) => {
   return(
   <div className='ODoughnut'>
     <div className='header'>
-      <h1 className='title'> Total Strength</h1>
+      <h1 className='title'> University Overview</h1>
     </div>
     <Doughnut 
         data={data} 

@@ -3,10 +3,10 @@ import { Bar } from 'react-chartjs-2';
 
 
 
-const OVerticalBarChart = ({data,options}) => {  
+const OVerticalBarChart = ({title ,data,options}) => {  
   return(<>
     <div className='header'>
-      <h1 className='title'>Title </h1>
+      <h1 className='title'>{title}</h1>
     </div>
     <Bar data={data} options={options} />
   </>)

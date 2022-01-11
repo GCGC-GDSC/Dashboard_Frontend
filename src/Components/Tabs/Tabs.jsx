@@ -4,6 +4,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Overall from '../../Views/Overall/Overall';
+import Fetcher from '../Fetcher/Fetcher'
+import CampusWise from '../../Views/CampusWise/CampusWise';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -49,20 +52,18 @@ function TabPanel(props) {
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="Visakhapatnam" {...a11yProps(0)} />
-            <Tab label="Hydrabad" {...a11yProps(1)} />
-            <Tab label="Banglore" {...a11yProps(2)} />
+            <Tab label ="Overall" {...a11yProps(0)} />
+            <Tab label="Campus-Wise" {...a11yProps(1)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          vskp company cards
+          <Overall/>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          hyd company cards
+         {/* <Fetcher/> */}
+         <CampusWise/>
         </TabPanel>
-        <TabPanel value={value} index={2}>
-          blr company cards
-        </TabPanel>
+        
       </Box>
     );
   }

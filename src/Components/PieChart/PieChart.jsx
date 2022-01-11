@@ -18,10 +18,10 @@ const PieChart = ({instName,data,type}) => {
   }
   return(
   <>
-    <div className='header'>
+    {/* <div className='header'>
       <h1 className='title'>Institute Population</h1>
       <h2>{type}</h2>
-    </div>
+    </div> */}
     <Pie data={data} options={options}/>
   </>)
 };
