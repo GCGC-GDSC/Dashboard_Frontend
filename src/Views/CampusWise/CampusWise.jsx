@@ -4,8 +4,13 @@ import React, { useEffect, useState } from "react";
 import ODoughnutChart from "../Overall/charts/ODoughnut";
 import OVerticalBarChart from "../Overall/charts/OVerticalBarChart";
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 import { unstable_batchedUpdates } from "react-dom";
 import objRef from "./APIKeys.js"
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 const CampusNames = {
     "vskp": "Visakhapatnam",
     "hyd": "Hyderabad",
@@ -17,14 +22,48 @@ function CampusWise() {
     const [instData, setInstData] = useState([])
     const [instList, setInstList] = useState([])
     const [campusList, setCampusList] = useState([])
+    const [campusName,setCampusName] = useState("")
     const [showD2, setShowD2] = useState(false)
     const [showCharts, setShowCharts] = useState(false)
-    const VChartColors = [
-        "#6050DC",
-        "#FF2E7E",
-        "#FF6B45",
-        "#FFAB05",
-        "rgba(255, 159, 64, 1)"]
+    const VChartColors = ["#115f9a", "#1984c5", "#22a7f0", "#48b5c4", "#76c68f", "#a6d75b", "#c9e52f", "#d0ee11", "#d0f400"]
+
+    function TabPanel(props) {
+        const { children, value, index, ...other } = props;
+      
+        return (
+          <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+          >
+            {value === index && (
+              <Box sx={{ p: 3 }}>
+                <Typography>{children}</Typography>
+              </Box>
+            )}
+          </div>
+        );
+      }
+      
+      TabPanel.propTypes = {
+        children: PropTypes.node,
+        index: PropTypes.number.isRequired,
+        value: PropTypes.number.isRequired,
+      };
+      function a11yProps(index) {
+        return {
+          id: `simple-tab-${index}`,
+          'aria-controls': `simple-tabpanel-${index}`,
+        };
+    }
+    const [value, setValue] = useState(0);
+  
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
+
     const chartOptions = {
         Doughnut: {
             onClick: function (evt, item) {
@@ -160,9 +199,8 @@ function CampusWise() {
             const dataObj = [{
                 label: "Salary in LPA",
                 data: arr,
-                backgroundColor: VChartColors[1],
-                borderColor: [
-                    "rgba(255, 159, 64, 1)",],
+                backgroundColor: VChartColors,
+                borderColor: VChartColors,
                 borderWidth: 2,
             }]
             return dataObj
@@ -264,6 +302,7 @@ function CampusWise() {
         const arr = _.without(campusData.map(item => item.name === campusName ? item.institutes : null), null)
         console.log('institutes for the campus', campusName, ...arr)
         unstable_batchedUpdates(() => {
+            setCampusName(CampusNames[campusName])
             setInstList(...arr)
             setShowD2(true)
         })
@@ -273,7 +312,7 @@ function CampusWise() {
         axios.get('https://gcgc-dashboard.herokuapp.com/organization/campus/')
             .then(resp => {
                 var arr = _.get(resp, ['data', 'result']).map(item => [item.name, item.inst_count])
-                console.log(arr)
+                // console.log(arr)
                 unstable_batchedUpdates(() => {
                     setCampusList(arr)
                     setCampusData(_.get(resp, ['data', 'result']))
@@ -292,46 +331,62 @@ function CampusWise() {
                             <ODoughnutChart title={"Campus Wise Overview"} data={dataDoughnut} options={chartOptions.Doughnut} />
                         </div>
                         {showD2 ?
-                            <ODoughnutChart title={"Institute Overview"} data={dataDoughnut2} options={chartOptions.Doughnut2} />
+                            <ODoughnutChart title={`${campusName} Institute Overview`} data={dataDoughnut2} options={chartOptions.Doughnut2} />
                             : null}
                     </div>
                     {showCharts ?
                     <div>
+                        <Box>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                            <Tab label="UG + PG Data" {...a11yProps(0)} />
+                                <Tab label ="UG Data" {...a11yProps(1)} />
+                                <Tab label="PG Data" {...a11yProps(2)} />
+                                {/* <Tab label="UG + PG Data" {...a11yProps(2)} /> */}
+                            </Tabs>
+                        </Box>
+                        <TabPanel value={value} index={0}>
                         <div className='row2'>
                             <div>
-                            <ODoughnutChart title={"UG"} data={DoughnutUGSD} options={chartOptions.DoughnutUGPG} />
+                            <ODoughnutChart title={`${instData.name.toUpperCase()} Student Details`} data={DoughnutUGPGSD} options={chartOptions.DoughnutUGPG} />
                             </div>
                             <div>
-                            <ODoughnutChart title={"UG"} data={DoughnutUGPD} options={chartOptions.DoughnutUGPG} />
+                            <ODoughnutChart title={`${instData.name.toUpperCase()} Placement Details`} data={DoughnutUGPGPD} options={chartOptions.DoughnutUGPG} />
                             </div>
                             <div className="overall_charts" id="c4">
-                                <OVerticalBarChart title={"Salary Details for UG"} data={VerticalBarChartUG} options={chartOptions.VerticalBarChart1} />
+                                <OVerticalBarChart title={`${instData.name.toUpperCase()} Salary Details`} data={VerticalBarChartUGPG} options={chartOptions.VerticalBarChart1} />
                             </div>
-
                         </div>
+                        </TabPanel>
+                        <TabPanel value={value} index={1}>
+                            <div className='row2'>
+                                <div>
+                                <ODoughnutChart title={`${instData.name.toUpperCase()} Student Details`} data={DoughnutUGSD} options={chartOptions.DoughnutUGPG} />
+                                </div>
+                                <div>
+                                <ODoughnutChart title={`${instData.name.toUpperCase()} Placement Details`} data={DoughnutUGPD} options={chartOptions.DoughnutUGPG} />
+                                </div>
+                                <div className="overall_charts" id="c4">
+                                    <OVerticalBarChart title={`${instData.name.toUpperCase()} Salary Details`} data={VerticalBarChartUG} options={chartOptions.VerticalBarChart1} />
+                                </div>
+                            </div>
+                        </TabPanel>
+                        <TabPanel value={value} index={2}>
                         <div className='row2'>
                             <div>
-                            <ODoughnutChart title={"PG"} data={DoughnutPGSD} options={chartOptions.DoughnutUGPG} />
+                            <ODoughnutChart title={`${instData.name.toUpperCase()} Student Details`} data={DoughnutPGSD} options={chartOptions.DoughnutUGPG} />
                             </div>
                             <div>
-                            <ODoughnutChart title={"PG"} data={DoughnutPGPD} options={chartOptions.DoughnutUGPG} />
+                            <ODoughnutChart title={`${instData.name.toUpperCase()} Placement Details`} data={DoughnutPGPD} options={chartOptions.DoughnutUGPG} />
                             </div>
                             <div className="overall_charts" id="c4">
-                                <OVerticalBarChart title={"Salary Details for PG"} data={VerticalBarChartPG} options={chartOptions.VerticalBarChart1} />
+                                <OVerticalBarChart title={`${instData.name.toUpperCase()} Salary Details`} data={VerticalBarChartPG} options={chartOptions.VerticalBarChart1} />
                             </div>
                         </div>
-                        <div className='row2'>
-                            <div>
-                            <ODoughnutChart title={"UG + PG"} data={DoughnutUGPGSD} options={chartOptions.DoughnutUGPG} />
-                            </div>
-                            <div>
-                            <ODoughnutChart title={"UG + PG"} data={DoughnutUGPGPD} options={chartOptions.DoughnutUGPG} />
-                            </div>
-                            <div className="overall_charts" id="c4">
-                                <OVerticalBarChart title={"Salary Details for UG + PG"} data={VerticalBarChartUGPG} options={chartOptions.VerticalBarChart1} />
-                            </div>
-                        </div>
-                        </div> : null}
+                        </TabPanel>
+                        </Box>
+                        </div> 
+                        : null}
                 </div>
             </div>
         </div>

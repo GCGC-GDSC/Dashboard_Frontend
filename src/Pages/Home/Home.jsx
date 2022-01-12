@@ -37,7 +37,6 @@ function Home() {
         </main>
             {/* <Overall/> */}
             <Footer/>
-        
         </>
     )
 }
