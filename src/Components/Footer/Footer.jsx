@@ -16,6 +16,10 @@
 import React from "react"
 import "./Footer.style.scss"
 const Footer = () => {
+  const handleChange=(e)=>{
+    const color = e.target.value
+    document.documentElement.style.setProperty('--themeBackground',color)
+  }
     return (
       <div className="FooterStyle">
         <div className="container">
@@ -36,6 +40,9 @@ const Footer = () => {
               </li>
               <li>
                 <span>👋</span>
+              </li>
+              <li>
+                <input type="color" onChange={handleChange}/>
               </li>
             </ul>
         </div>
