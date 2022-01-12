@@ -32,7 +32,7 @@ const Footer = () => {
                 <a href="#">2021</a>
               </li>
               <li>
-                <a href="#">Vikas</a>
+                <a href="#">Vikas sir</a>
               </li>
               <li>
                 <span>👋</span>

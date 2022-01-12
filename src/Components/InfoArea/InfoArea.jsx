@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import "./InfoArea.styles.scss"
 
-function SimpleContainer({heading,subheading,text}) {
+function InfoArea({heading,subheading,text}) {
   return (
       <div className="main">
     <React.Fragment>
@@ -20,4 +20,4 @@ function SimpleContainer({heading,subheading,text}) {
   );
 }
 
-export default SimpleContainer;
+export default InfoArea ;
