@@ -5,6 +5,8 @@ import OVerticalBarChart from './charts/OVerticalBarChart';
 import './Overall.styles.scss'
 import OverallFetcher from './OverallFetcher.component';
 import { unstable_batchedUpdates } from 'react-dom';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import _ from 'lodash';
 import objRef from './APIKeys.js'
 function Overall() {
@@ -138,33 +140,31 @@ function Overall() {
         getStreams()
     },[])
     return(
-        <div className="overall">
+      <Grid container spacing={10} p={5}>
                 <h2>
                     Overall University Statistics
                 </h2>
-            <div className='overall-layout'>
-                <div className="chartsContainer">
-                    <div className='row1'>
-                        <div className='overall_charts' id='c1'>
+               
+                    
+                    <Grid item xs={5}>
                             <ODoughnutChart title={"University Overview"} data={dataDoughnut} options={chartOptions.Doughnut}/> 
-                        </div>
+                            </Grid>
                         {showVC?
-                        <div className="overall_charts" id="c2">
+                        <Grid item xs={7} mt={10}>
                             <OVerticalBarChart title={"Student Details"} data={VerticalBarChart1} options={chartOptions.VerticalBarChart1}/>
-                        </div> : null }
-                    </div>
+                            </Grid> : null }
+                   
                     {showVC?
                     <div className='row2'>
-                        <div className="overall_charts" id="c3">
+                       <Grid item xs={6}>
                             <OVerticalBarChart title={"Placement Details"} data={VerticalBarChart2} options={chartOptions.VerticalBarChart2}/>
-                        </div>
-                        <div className="overall_charts" id="c4">
+                        </Grid>
+                        <Grid item xs={6}>
                             <OVerticalBarChart title={"Salary Details"} data={VerticalBarChart3} options={chartOptions.VerticalBarChart3}/>
-                        </div>
+                        </Grid>
                     </div> : null}
-                </div>
-            </div>
-        </div>
+                
+        </Grid>
     )
 }
 export default Overall
