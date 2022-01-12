@@ -1,69 +1,77 @@
 
 import axios from "axios";
-import React, {useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import ODoughnutChart from "../Overall/charts/ODoughnut";
 import OVerticalBarChart from "../Overall/charts/OVerticalBarChart";
 import _ from 'lodash';
 import { unstable_batchedUpdates } from "react-dom";
-
+import objRef from "./APIKeys.js"
 const CampusNames = {
     "vskp": "Visakhapatnam",
     "hyd": "Hyderabad",
-    "blr":"Bengaluru",
+    "blr": "Bengaluru",
 }
 
-function CampusWise(){
-    const [campusData,setCampusData] = useState({})
-    const [instData,setInstData] = useState([])
-    const [instList,setInstList] = useState([])
-    const [campusList,setCampusList] = useState([])
-    const [showD2,setShowD2] = useState(false)
-    const [showVC,setShowVc] = useState(false)
+function CampusWise() {
+    const [campusData, setCampusData] = useState({})
+    const [instData, setInstData] = useState([])
+    const [instList, setInstList] = useState([])
+    const [campusList, setCampusList] = useState([])
+    const [showD2, setShowD2] = useState(false)
+    const [showCharts, setShowCharts] = useState(false)
+    const VChartColors = [
+        "#6050DC",
+        "#FF2E7E",
+        "#FF6B45",
+        "#FFAB05",
+        "rgba(255, 159, 64, 1)"]
     const chartOptions = {
-        Doughnut : {
+        Doughnut: {
             onClick: function (evt, item) {
-              if (item[0]) {
+                if (item[0]) {
                     // console.log('ask data for',campusList[item[0].index])
-                  getData(campusList[item[0].index][0])
-              }
+                    getData(campusList[item[0].index][0])
+                }
             },
             rotation: Math.PI * 5,
         },
-        Doughnut2 : {
+        Doughnut2: {
             onClick: function (evt, item) {
-              if (item[0]) {
-                  getData(campusList[item[0].index])
-              }
+                if (item[0]) {
+                    getDataInst(instList[item[0].index])
+                }
             },
             rotation: Math.PI * 5,
         },
-        VerticalBarChart1 : {
+        DoughnutUGPG: {
             onClick: function (evt, item) {
                 if (item[0]) {
 
                 }
-              },
+            },
         },
-        VerticalBarChart2 : {
+        Doughnut4: {
             onClick: function (evt, item) {
                 if (item[0]) {
 
                 }
-              },
+            },
         },
-        VerticalBarChart3 : {
+        VerticalBarChart1: {
             onClick: function (evt, item) {
                 if (item[0]) {
 
                 }
-              },
+            },
         }
     }
-    var dataDoughnut ={
-        labels: campusList.map(item=>CampusNames[item[0]]),
+
+    // data for the initial University campus wise doughnut
+    var dataDoughnut = {
+        labels: campusList.map(item => CampusNames[item[0]]),
         datasets: [{
             label: "Number of Institutes",
-            data: campusList.map(item=>item[1]), 
+            data: campusList.map(item => item[1]),
             backgroundColor: [
                 "#6050DC",
                 "#D52DB7",
@@ -79,82 +87,251 @@ function CampusWise(){
                 "#FFAB05",
                 "rgba(255, 159, 64, 1)",],
             borderWidth: 2,
+        },],
+    }
+
+    //  data for the Institutions in campus doughnut
+    if (showD2) {
+        var dataDoughnut2 = {
+            labels: instList.map(item => item.toUpperCase()),
+            datasets: [{
+                label: `Institutes in Campus`,
+                data: instList.map(item => 1),
+                backgroundColor: [
+                    "#6050DC",
+                    "#D52DB7",
+                    "#FF2E7E",
+                    "#FF6B45",
+                    "#FFAB05",
+                    "rgba(255, 159, 64, 1)",],
+                borderColor: [
+                    "#6050DC",
+                    "#D52DB7",
+                    "#FF2E7E",
+                    "#FF6B45",
+                    "#FFAB05",
+                    "rgba(255, 159, 64, 1)",],
+                borderWidth: 2,
             },],
         }
-    if(showD2)
-    {
-        var dataDoughnut2 ={
-        labels: instList.map(item=>item.toUpperCase()),
-        datasets: [{
-            label:`Institutes in Campus`,
-            data: instList.map(item=>1), 
-            backgroundColor: [
-                "#6050DC",
-                "#D52DB7",
-                "#FF2E7E",
-                "#FF6B45",
-                "#FFAB05",
-                "rgba(255, 159, 64, 1)",],
-            borderColor: [
-                "#6050DC",
-                "#D52DB7",
-                "#FF2E7E",
-                "#FF6B45",
-                "#FFAB05",
-                "rgba(255, 159, 64, 1)",],
-            borderWidth: 2,
-            },],
     }
-}
+
+    if (showCharts) {
+        const combineArrays = (k,a1,a2,category) =>{
+            const arr = []
+            if(category === "salary"){
+                for(let i =0;i <k.length;i++)
+                {
+                    arr.push(Math.max(a1[k[i]] ,a2[k[i]] ) )
+                }
+            }
+            else{
+                for(let i =0;i <k.length;i++)
+                {
+                    arr.push(a1[k[i]] + a2[k[i]])
+                }
+            }
+            return {keys:k,values:arr}
+        }
+
+        //  -------------------------------------------------DC ----------
+        const getDataForDC = (graduate, keys, category) => {
+            var arr = []
+            if ( graduate == "UGPG")
+            {
+                const combinedObj = combineArrays(keys,instData.data[0][category],instData.data[1][category],category)
+                arr = combinedObj.values
+            }
+            else{
+                var data;   
+                switch (graduate) {
+                case "UG":
+                    data = instData.data[0][category]
+                    break;
+                default :
+                    data = instData.data[1][category]
+                    break;
+                }
+                for (let i = 0; i < keys.length; i++) {
+                    arr.push(data[keys[i]])
+                }
+                
+            }
+            const dataObj = [{
+                label: "Salary in LPA",
+                data: arr,
+                backgroundColor: VChartColors[1],
+                borderColor: [
+                    "rgba(255, 159, 64, 1)",],
+                borderWidth: 2,
+            }]
+            return dataObj
+            
+        }
+        
+        
+        var DoughnutUGSD = {
+            labels: objRef["student_details"],
+            datasets: getDataForDC("UG",objRef["student_details"], "student_details")
+        }
+        var DoughnutPGSD = {
+            labels: objRef["student_details"],
+            datasets: getDataForDC("PG",objRef["student_details"], "student_details")
+        }
+        var DoughnutUGPGSD = {
+            labels: objRef["student_details"],
+            datasets: getDataForDC("UGPG",objRef["student_details"], "student_details")
+        }
+
+
+        var DoughnutUGPD = {
+            labels: objRef["placement_details"],
+            datasets: getDataForDC("UG",objRef["placement_details"], "placement_details")
+        }
+        var DoughnutPGPD = {
+            labels: objRef["placement_details"],
+            datasets: getDataForDC("PG",objRef["placement_details"], "placement_details")
+        }
+        var DoughnutUGPGPD = {
+            labels: objRef["placement_details"],
+            datasets: getDataForDC("UGPG",objRef["placement_details"], "placement_details")
+        }
+        //  -------------------DC --------------------------
+
+        //  ----------------------------------------------------------VC ----------
+        const getDataForVC = (graduate, keys, category) => {
+            var arr = []
+            if ( graduate == "UGPG")
+            {
+                const combinedObj = combineArrays(keys,instData.data[0][category],instData.data[1][category],category)
+                arr = combinedObj.values
+
+            }
+            else{
+                var data;   
+                switch (graduate) {
+                case "UG":
+                    data = instData.data[0][category]
+                    break;
+                default :
+                    data = instData.data[1][category]
+                    break;
+                }
+                for (let i = 0; i < keys.length; i++) {
+                    arr.push(data[keys[i]])
+                }
+                
+            }
+            const dataObj = [{
+                label: "Salary in LPA",
+                data: arr,
+                backgroundColor: VChartColors[1],
+                borderColor: [
+                    "rgba(255, 159, 64, 1)",],
+                borderWidth: 2,
+            }]
+            return dataObj
+            
+        }
+        var VerticalBarChartUG = {
+            labels: objRef["salary"],
+            datasets: getDataForVC("UG",objRef["salary"], "salary")
+        }
+        var VerticalBarChartPG = {
+            labels: objRef["salary"],
+            datasets: getDataForVC("PG",objRef["salary"], "salary")
+        }
+        var VerticalBarChartUGPG = {
+            labels: objRef["salary"],
+            datasets: getDataForVC("UGPG",objRef["salary"], "salary")
+        }
+        //  --------------------------------------/VC --------------------
+    }
+
+    const getDataInst = (instName) => {
+        axios.get(`https://gcgc-dashboard.herokuapp.com/students/${instName}`)
+            .then(resp => {
+                var arr = _.get(resp, ['data', 'result'])
+                console.log({ name: instName, data: [...arr] })
+                unstable_batchedUpdates(() => {
+                    setInstData({ name: instName, data: [...arr] })
+                    setShowCharts(true)
+                })
+            })
+    }
     // getting the list of campuses in each
-    const getData =(campusName)=>{
-        const arr = _.without(campusData.map(item=>item.name===campusName?item.institutes:null),null)
-        console.log('institutes for the campus',campusName,...arr)
-        unstable_batchedUpdates(()=>{
+    const getData = (campusName) => {
+        const arr = _.without(campusData.map(item => item.name === campusName ? item.institutes : null), null)
+        console.log('institutes for the campus', campusName, ...arr)
+        unstable_batchedUpdates(() => {
             setInstList(...arr)
             setShowD2(true)
         })
 
     }
-    const getCampus = () =>{
+    const getCampus = () => {
         axios.get('https://gcgc-dashboard.herokuapp.com/organization/campus/')
-        .then(resp=>{
-            var arr = _.get(resp,['data','result']).map(item=>[item.name,item.inst_count])
-            console.log(arr)
-            unstable_batchedUpdates(()=>{
-                setCampusList(arr)
-                setCampusData(_.get(resp,['data','result']))
+            .then(resp => {
+                var arr = _.get(resp, ['data', 'result']).map(item => [item.name, item.inst_count])
+                console.log(arr)
+                unstable_batchedUpdates(() => {
+                    setCampusList(arr)
+                    setCampusData(_.get(resp, ['data', 'result']))
+                })
             })
-        })
     }
-    useEffect(()=>{
+    useEffect(() => {
         getCampus()
-    },[])
+    }, [])
     return (
         <div>
             <div className='overall-layout'>
                 <div className="chartsContainer">
                     <div className='row1'>
                         <div className='overall_charts' id='c1'>
-                            <ODoughnutChart title={"Campus Wise Overview"} data={dataDoughnut} options={chartOptions.Doughnut}/> 
+                            <ODoughnutChart title={"Campus Wise Overview"} data={dataDoughnut} options={chartOptions.Doughnut} />
                         </div>
-                            {showD2?
-                            <ODoughnutChart title={"Institute Overview"} data={dataDoughnut2} options={chartOptions.Doughnut2}/> 
-                            :null}
-                        {/* {showVC?
-                        <div className="overall_charts" id="c2">
-                            <OVerticalBarChart title={"Student Details"} data={VerticalBarChart1} options={chartOptions.VerticalBarChart1}/>
-                        </div> : null } */}
+                        {showD2 ?
+                            <ODoughnutChart title={"Institute Overview"} data={dataDoughnut2} options={chartOptions.Doughnut2} />
+                            : null}
                     </div>
-                    {/* {showVC?
-                    <div className='row2'>
-                        <div className="overall_charts" id="c3">
-                            <OVerticalBarChart title={"Placement Details"} data={VerticalBarChart2} options={chartOptions.VerticalBarChart2}/>
+                    {showCharts ?
+                    <div>
+                        <div className='row2'>
+                            <div>
+                            <ODoughnutChart title={"UG"} data={DoughnutUGSD} options={chartOptions.DoughnutUGPG} />
+                            </div>
+                            <div>
+                            <ODoughnutChart title={"UG"} data={DoughnutUGPD} options={chartOptions.DoughnutUGPG} />
+                            </div>
+                            <div className="overall_charts" id="c4">
+                                <OVerticalBarChart title={"Salary Details for UG"} data={VerticalBarChartUG} options={chartOptions.VerticalBarChart1} />
+                            </div>
+
                         </div>
-                        <div className="overall_charts" id="c4">
-                            <OVerticalBarChart title={"Salary Details"} data={VerticalBarChart3} options={chartOptions.VerticalBarChart3}/>
+                        <div className='row2'>
+                            <div>
+                            <ODoughnutChart title={"PG"} data={DoughnutPGSD} options={chartOptions.DoughnutUGPG} />
+                            </div>
+                            <div>
+                            <ODoughnutChart title={"PG"} data={DoughnutPGPD} options={chartOptions.DoughnutUGPG} />
+                            </div>
+                            <div className="overall_charts" id="c4">
+                                <OVerticalBarChart title={"Salary Details for PG"} data={VerticalBarChartPG} options={chartOptions.VerticalBarChart1} />
+                            </div>
                         </div>
-                    </div> : null} */}
+                        <div className='row2'>
+                            <div>
+                            <ODoughnutChart title={"UG + PG"} data={DoughnutUGPGSD} options={chartOptions.DoughnutUGPG} />
+                            </div>
+                            <div>
+                            <ODoughnutChart title={"UG + PG"} data={DoughnutUGPGPD} options={chartOptions.DoughnutUGPG} />
+                            </div>
+                            <div className="overall_charts" id="c4">
+                                <OVerticalBarChart title={"Salary Details for UG + PG"} data={VerticalBarChartUGPG} options={chartOptions.VerticalBarChart1} />
+                            </div>
+                        </div>
+                        </div> : null}
                 </div>
             </div>
         </div>
