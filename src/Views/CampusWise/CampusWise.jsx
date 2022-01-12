@@ -109,7 +109,7 @@ function CampusWise() {
     var dataDoughnut = {
         labels: campusList.map(item => CampusNames[item[0]]),
         datasets: [{
-            label: "Number of Institutes",
+            label: "Number of Institute",
             data: campusList.map(item => item[1]),
             backgroundColor: [
                 "#6050DC",
