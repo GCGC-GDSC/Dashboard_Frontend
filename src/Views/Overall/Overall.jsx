@@ -146,7 +146,7 @@ function Overall() {
                 <div className="chartsContainer">
                     <div className='row1'>
                         <div className='overall_charts' id='c1'>
-                            <ODoughnutChart data={dataDoughnut} options={chartOptions.Doughnut}/> 
+                            <ODoughnutChart title={"University Overview"} data={dataDoughnut} options={chartOptions.Doughnut}/> 
                         </div>
                         {showVC?
                         <div className="overall_charts" id="c2">

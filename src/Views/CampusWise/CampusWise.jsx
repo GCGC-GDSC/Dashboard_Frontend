@@ -4,6 +4,7 @@ import React, {useEffect,useState} from "react";
 import ODoughnutChart from "../Overall/charts/ODoughnut";
 import OVerticalBarChart from "../Overall/charts/OVerticalBarChart";
 import _ from 'lodash';
+import { unstable_batchedUpdates } from "react-dom";
 
 const CampusNames = {
     "vskp": "Visakhapatnam",
@@ -13,13 +14,25 @@ const CampusNames = {
 
 function CampusWise(){
     const [campusData,setCampusData] = useState({})
+    const [instData,setInstData] = useState([])
+    const [instList,setInstList] = useState([])
     const [campusList,setCampusList] = useState([])
+    const [showD2,setShowD2] = useState(false)
     const [showVC,setShowVc] = useState(false)
     const chartOptions = {
         Doughnut : {
             onClick: function (evt, item) {
               if (item[0]) {
-                //   getData(streamList[item[0].index])
+                    // console.log('ask data for',campusList[item[0].index])
+                  getData(campusList[item[0].index][0])
+              }
+            },
+            rotation: Math.PI * 5,
+        },
+        Doughnut2 : {
+            onClick: function (evt, item) {
+              if (item[0]) {
+                  getData(campusList[item[0].index])
               }
             },
             rotation: Math.PI * 5,
@@ -46,7 +59,7 @@ function CampusWise(){
               },
         }
     }
-    const dataDoughnut ={
+    var dataDoughnut ={
         labels: campusList.map(item=>CampusNames[item[0]]),
         datasets: [{
             label: "Number of Institutes",
@@ -68,13 +81,50 @@ function CampusWise(){
             borderWidth: 2,
             },],
         }
+    if(showD2)
+    {
+        var dataDoughnut2 ={
+        labels: instList.map(item=>item.toUpperCase()),
+        datasets: [{
+            label:`Institutes in Campus`,
+            data: instList.map(item=>1), 
+            backgroundColor: [
+                "#6050DC",
+                "#D52DB7",
+                "#FF2E7E",
+                "#FF6B45",
+                "#FFAB05",
+                "rgba(255, 159, 64, 1)",],
+            borderColor: [
+                "#6050DC",
+                "#D52DB7",
+                "#FF2E7E",
+                "#FF6B45",
+                "#FFAB05",
+                "rgba(255, 159, 64, 1)",],
+            borderWidth: 2,
+            },],
+    }
+}
+    // getting the list of campuses in each
+    const getData =(campusName)=>{
+        const arr = _.without(campusData.map(item=>item.name===campusName?item.institutes:null),null)
+        console.log('institutes for the campus',campusName,...arr)
+        unstable_batchedUpdates(()=>{
+            setInstList(...arr)
+            setShowD2(true)
+        })
+
+    }
     const getCampus = () =>{
         axios.get('https://gcgc-dashboard.herokuapp.com/organization/campus/')
         .then(resp=>{
             var arr = _.get(resp,['data','result']).map(item=>[item.name,item.inst_count])
             console.log(arr)
-            setCampusList(arr)
-            setCampusData(_.get(resp,['data','result']))
+            unstable_batchedUpdates(()=>{
+                setCampusList(arr)
+                setCampusData(_.get(resp,['data','result']))
+            })
         })
     }
     useEffect(()=>{
@@ -86,8 +136,11 @@ function CampusWise(){
                 <div className="chartsContainer">
                     <div className='row1'>
                         <div className='overall_charts' id='c1'>
-                            <ODoughnutChart data={dataDoughnut} options={chartOptions.Doughnut}/> 
+                            <ODoughnutChart title={"Campus Wise Overview"} data={dataDoughnut} options={chartOptions.Doughnut}/> 
                         </div>
+                            {showD2?
+                            <ODoughnutChart title={"Institute Overview"} data={dataDoughnut2} options={chartOptions.Doughnut2}/> 
+                            :null}
                         {/* {showVC?
                         <div className="overall_charts" id="c2">
                             <OVerticalBarChart title={"Student Details"} data={VerticalBarChart1} options={chartOptions.VerticalBarChart1}/>
