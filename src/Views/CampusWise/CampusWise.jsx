@@ -199,7 +199,13 @@ function CampusWise() {
             const dataObj = [{
                 label: "Salary in LPA",
                 data: arr,
-                backgroundColor: VChartColors,
+                backgroundColor: [
+                    "#D52DB7",
+                    "#FFAB05",
+                    "#FF2E7E",
+                    "#FF6B45",
+                    "#6050DC",
+                    "rgba(255, 159, 64, 1)",],
                 borderColor: VChartColors,
                 borderWidth: 2,
             }]
@@ -334,8 +340,46 @@ function CampusWise() {
                             <ODoughnutChart title={`${campusName} Institute Overview`} data={dataDoughnut2} options={chartOptions.Doughnut2} />
                             : null}
                     </div>
-                    {showCharts ?
+                    {showCharts?
                     <div>
+
+                    <div className='row2'>
+                            <div>
+                            <ODoughnutChart title={`${instData.name.toUpperCase()} Student Details`} data={DoughnutUGPGSD} options={chartOptions.DoughnutUGPG} />
+                            </div>
+                            <div>
+                            <ODoughnutChart title={`${instData.name.toUpperCase()} Placement Details`} data={DoughnutUGPGPD} options={chartOptions.DoughnutUGPG} />
+                            </div>
+                            <div className="overall_charts" id="c4">
+                                <OVerticalBarChart title={`${instData.name.toUpperCase()} Salary Details`} data={VerticalBarChartUGPG} options={chartOptions.VerticalBarChart1} />
+                            </div>
+                    </div>
+                    <div className='row2'>
+                        <div>
+                        <ODoughnutChart title={`${instData.name.toUpperCase()} Student Details`} data={DoughnutUGSD} options={chartOptions.DoughnutUGPG} />
+                        </div>
+                        <div>
+                        <ODoughnutChart title={`${instData.name.toUpperCase()} Placement Details`} data={DoughnutUGPD} options={chartOptions.DoughnutUGPG} />
+                        </div>
+                        <div className="overall_charts" id="c4">
+                            <OVerticalBarChart title={`${instData.name.toUpperCase()} Salary Details`} data={VerticalBarChartUG} options={chartOptions.VerticalBarChart1} />
+                        </div>
+                    </div>
+                    <div className='row2'>
+                            <div>
+                            <ODoughnutChart title={`${instData.name.toUpperCase()} Student Details`} data={DoughnutPGSD} options={chartOptions.DoughnutUGPG} />
+                            </div>
+                            <div>
+                            <ODoughnutChart title={`${instData.name.toUpperCase()} Placement Details`} data={DoughnutPGPD} options={chartOptions.DoughnutUGPG} />
+                            </div>
+                            <div className="overall_charts" id="c4">
+                                <OVerticalBarChart title={`${instData.name.toUpperCase()} Salary Details`} data={VerticalBarChartPG} options={chartOptions.VerticalBarChart1} />
+                            </div>
+                        </div>
+                    </div>:null}
+                    
+                    {showCharts ?
+                        <div>
                         <Box>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
