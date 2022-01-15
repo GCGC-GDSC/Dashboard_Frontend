@@ -457,7 +457,7 @@ function CampusWise() {
             </Grid>
           </Grid>
         
-          <h1 className="gradHeading">UG</h1>
+          <h1 className="gradHeading">Undergraduate</h1>
           <Grid container>
             <Grid item xs={3.5} className="shadow">
               <ODoughnutChart
@@ -479,7 +479,14 @@ function CampusWise() {
             </Grid>
           </Grid>
          
-          <h1 className="gradHeading">PG</h1>
+          {/* <h1 className="gradHeading">PostGraduate</h1> */}
+          <div class="deconstructed">
+  POSTGRADUATE
+  <div>POSTGRADUATE</div>
+  <div>POSTGRADUATE</div>
+  <div>POSTGRADUATE</div>
+  <div>POSTGRADUATE</div>
+</div>
           <Grid container>
             <Grid item xs={3.5} className="shadow">
               <ODoughnutChart
