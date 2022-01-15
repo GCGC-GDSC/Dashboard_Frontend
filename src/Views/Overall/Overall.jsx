@@ -7,6 +7,11 @@ import OverallFetcher from './OverallFetcher.component';
 import { unstable_batchedUpdates } from 'react-dom';
 import _ from 'lodash';
 import objRef from './APIKeys.js'
+
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+
+
 function Overall() {
     const hostname = 'https://gcgc-dashboard.herokuapp.com'
     const [streamData,setStreamData] = useState({})
@@ -18,6 +23,18 @@ function Overall() {
         "#FF6B45",
         "#FFAB05",
         "rgba(255, 159, 64, 1)"]
+    
+        const replaceUnderscoreWithSpace = (anArray) => {
+            let newArr=[]
+            anArray.forEach((label) => {
+
+                let newLabel = label.replace("total_","")
+                newLabel = newLabel.replace(/_/g, " ");
+                newArr.push(newLabel)
+        
+            })
+            return newArr;
+        }
     const chartOptions = {
         Doughnut : {
             onClick: function (evt, item) {
@@ -26,6 +43,13 @@ function Overall() {
               }
             },
             rotation: Math.PI * 5,
+            plugins: {
+                legend: {
+                    
+                  position: 'left',
+               },
+           },
+
         },
         VerticalBarChart1 : {
             onClick: function (evt, item) {
@@ -105,15 +129,15 @@ function Overall() {
             return dataArray
         }
         var VerticalBarChart1 ={
-        labels: objRef["student_details"],
+        labels: replaceUnderscoreWithSpace(objRef["student_details"]),
         datasets :getDataForVC(objRef["student_details"],"student_details")
         }
         var VerticalBarChart2 ={
-            labels: objRef["placement_details"],
+            labels: replaceUnderscoreWithSpace(objRef["placement_details"]),
             datasets :getDataForVC(objRef["placement_details"],"placement_details")
             }
         var VerticalBarChart3 ={
-            labels: objRef["salary"],
+            labels: replaceUnderscoreWithSpace(objRef["salary"]),
             datasets :getDataForVC(objRef["salary"],"salary")
             }
     }
@@ -138,33 +162,45 @@ function Overall() {
         getStreams()
     },[])
     return(
-        <div className="overall">
-                <h2>
-                    Overall University Statistics
-                </h2>
-            <div className='overall-layout'>
-                <div className="chartsContainer">
-                    <div className='row1'>
-                        <div className='overall_charts' id='c1'>
-                            <ODoughnutChart title={"University Overview"} data={dataDoughnut} options={chartOptions.Doughnut}/> 
-                        </div>
-                        {showVC?
-                        <div className="overall_charts" id="c2">
-                            <OVerticalBarChart title={"Student Details"} data={VerticalBarChart1} options={chartOptions.VerticalBarChart1}/>
-                        </div> : null }
-                    </div>
-                    {showVC?
-                    <div className='row2'>
-                        <div className="overall_charts" id="c3">
-                            <OVerticalBarChart title={"Placement Details"} data={VerticalBarChart2} options={chartOptions.VerticalBarChart2}/>
-                        </div>
-                        <div className="overall_charts" id="c4">
-                            <OVerticalBarChart title={"Salary Details"} data={VerticalBarChart3} options={chartOptions.VerticalBarChart3}/>
-                        </div>
-                    </div> : null}
-                </div>
-            </div>
-        </div>
+        <Box p={5} className='overall_box'>
+  <Grid container spacing={9} className="firstItem">
+      <Grid item xs={5} >
+        <ODoughnutChart
+          title={"University Overview"}
+          data={dataDoughnut}
+          options={chartOptions.Doughnut}
+        />
+      </Grid>
+      {showVC ? (
+       <Grid item xs={7} mt={6}>
+          <OVerticalBarChart
+            title={"Student Details"}
+            data={VerticalBarChart1}
+            options={chartOptions.VerticalBarChart1}
+          />
+        </Grid>
+      ) : null}
+    {showVC ? (
+        <>
+        <Grid item xs={6}>
+          <OVerticalBarChart
+            title={"Placement Details"}
+            data={VerticalBarChart2}
+            options={chartOptions.VerticalBarChart2}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <OVerticalBarChart
+            title={"Salary Details"}
+            data={VerticalBarChart3}
+            options={chartOptions.VerticalBarChart3}
+          />
+        </Grid>
+        </>
+    ) : null}
+  </Grid>
+</Box>
+
     )
 }
 export default Overall

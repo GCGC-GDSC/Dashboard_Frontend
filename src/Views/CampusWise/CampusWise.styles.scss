@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla&family=Montserrat:wght@600&family=PT+Sans:ital@1&display=swap");
+.overall-layout {
+  font-family: "Karla", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-family: "PT Sans", sans-serif;
+  color: grey;
+  font-size: small;
+}
+.secondSection {
+  // background-color: aqua;
+  margin-top: 50px;
+  padding-top: 6rem;
+}
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  padding-bottom: 20px;
+}
+.mark {
+  margin: 0 -0.4em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.8em 0.3em;
+  background: transparent;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 225, 0, 0.1),
+    rgba(255, 225, 0, 0.7) 4%,
+    rgba(255, 225, 0, 0.3)
+  );
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.gradHeading {
+  flex: 1;
+  text-align: center;
+  margin-top: 3rem;
+  text-decoration: underline;
+  font-size: xx-large;
+}
