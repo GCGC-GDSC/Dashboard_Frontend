@@ -17,4 +17,23 @@ const InstituteStudentDataFormat = {
   ],
 };
 
+export const parsedDataFormat = {
+  placement_details: [
+    "Placed",
+    "Multiple Offers",
+    "Not Intrested",
+    "Offers",
+    "Eligible",
+    "Yet To Place",
+  ],
+
+  salary: ["Average", "Highest", "Lowest"],
+  student_details: [
+    "Backlogs",
+    "FinalYears",
+    "PayCRT & HigherStudies",
+    "TotalStudents",
+  ],
+};
+
 export default InstituteStudentDataFormat;

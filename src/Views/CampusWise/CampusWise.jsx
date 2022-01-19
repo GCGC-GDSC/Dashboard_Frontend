@@ -5,7 +5,7 @@ import OVerticalBarChart from "../Overall/charts/OVerticalBarChart";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import { unstable_batchedUpdates } from "react-dom";
-import objRef from "./APIKeys.js";
+import objRef,{parsedInstituteStudentDataFormatCampusWise} from "./APIKeys.js";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
@@ -38,15 +38,6 @@ function CampusWise() {
     "#d0f400",
   ];
 
-  const replaceUnderscoreWithSpace = (anArray) => {
-    let newArr = [];
-    anArray.forEach((label) => {
-      let newLabel = label.replace("total_", "");
-      newLabel = newLabel.replace(/_/g, " ");
-      newArr.push(newLabel);
-    });
-    return newArr;
-  };
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -142,7 +133,7 @@ function CampusWise() {
         data: campusList.map((item) => item[1]),
         backgroundColor: [
           "#fd7f6f",
-          "#7eb0d5",
+          "#5ea1d2",
           "#b2e061",
           "#bd7ebe",
           "#ffb55a",
@@ -153,7 +144,7 @@ function CampusWise() {
         ],
         borderColor: [
           "#fd7f6f",
-          "#7eb0d5",
+          "#5ea1d2",
           "#b2e061",
           "#bd7ebe",
           "#ffb55a",
@@ -177,7 +168,7 @@ function CampusWise() {
           data: instList.map((item) => 1),
           backgroundColor: [
             "#fd7f6f",
-            "#7eb0d5",
+            "#5ea1d2",
             "#b2e061",
             "#bd7ebe",
             "#ffb55a",
@@ -188,7 +179,7 @@ function CampusWise() {
           ],
           borderColor: [
             "#fd7f6f",
-            "#7eb0d5",
+            "#5ea1d2",
             "#b2e061",
             "#bd7ebe",
             "#ffb55a",
@@ -248,22 +239,37 @@ function CampusWise() {
           label: "Salary in LPA",
           data: arr,
           backgroundColor: [
-            "#D52DB7",
-            "#FFAB05",
-            "#FF2E7E",
-            "#FF6B45",
-            "#6050DC",
-            "rgba(255, 159, 64, 1)",
-          ],
-          borderColor: VChartColors,
+            "#fd7f6f",
+            "#5ea1d2",
+            "#b2e061",
+            "#bd7ebe",
+            "#ffb55a",
+            "#ffee65",
+            "#beb9db",
+            "#fdcce5",
+            "#8bd3c7",
+          ]
+          ,
+          borderColor: [
+            "#fd7f6f",
+            "#5ea1d2",
+            "#b2e061",
+            "#bd7ebe",
+            "#ffb55a",
+            "#ffee65",
+            "#beb9db",
+            "#fdcce5",
+            "#8bd3c7",
+          ]
+          ,
           borderWidth: 2,
         },
       ];
       return dataObj;
     };
 
-    var DoughnutUGSD = {
-      labels: replaceUnderscoreWithSpace(objRef["student_details"]),
+    var DoughnutUGSD={ 
+    labels:parsedInstituteStudentDataFormatCampusWise["student_details"],
       datasets: getDataForDC(
         "UG",
         objRef["student_details"],
@@ -271,7 +277,7 @@ function CampusWise() {
       ),
     };
     var DoughnutPGSD = {
-      labels: replaceUnderscoreWithSpace(objRef["student_details"]),
+      labels:parsedInstituteStudentDataFormatCampusWise["student_details"],
       datasets: getDataForDC(
         "PG",
         objRef["student_details"],
@@ -279,7 +285,7 @@ function CampusWise() {
       ),
     };
     var DoughnutUGPGSD = {
-      labels: replaceUnderscoreWithSpace(objRef["student_details"]),
+      labels:parsedInstituteStudentDataFormatCampusWise["student_details"],
       datasets: getDataForDC(
         "UGPG",
         objRef["student_details"],
@@ -288,7 +294,7 @@ function CampusWise() {
     };
 
     var DoughnutUGPD = {
-      labels: replaceUnderscoreWithSpace(objRef["placement_details"]),
+      labels:parsedInstituteStudentDataFormatCampusWise["placement_details"],
       datasets: getDataForDC(
         "UG",
         objRef["placement_details"],
@@ -296,7 +302,7 @@ function CampusWise() {
       ),
     };
     var DoughnutPGPD = {
-      labels: replaceUnderscoreWithSpace(objRef["placement_details"]),
+      labels:parsedInstituteStudentDataFormatCampusWise["placement_details"],
       datasets: getDataForDC(
         "PG",
         objRef["placement_details"],
@@ -304,7 +310,7 @@ function CampusWise() {
       ),
     };
     var DoughnutUGPGPD = {
-      labels: replaceUnderscoreWithSpace(objRef["placement_details"]),
+      labels:parsedInstituteStudentDataFormatCampusWise["placement_details"],
       datasets: getDataForDC(
         "UGPG",
         objRef["placement_details"],
@@ -342,23 +348,45 @@ function CampusWise() {
         {
           label: "Salary in LPA",
           data: arr,
-          backgroundColor: VChartColors[1],
-          borderColor: ["rgba(255, 159, 64, 1)"],
+          backgroundColor: [
+          "#fd7f6f",
+          "#5ea1d2",
+          "#b2e061",
+          "#bd7ebe",
+          "#ffb55a",
+          "#ffee65",
+          "#beb9db",
+          "#fdcce5",
+          "#8bd3c7",
+        ]
+          ,
+          borderColor: [
+          "#fd7f6f",
+          "#5ea1d2",
+          "#b2e061",
+          "#bd7ebe",
+          "#ffb55a",
+          "#ffee65",
+          "#beb9db",
+          "#fdcce5",
+          "#8bd3c7",
+        ]
+          ,
           borderWidth: 2,
         },
       ];
       return dataObj;
     };
     var VerticalBarChartUG = {
-      labels: replaceUnderscoreWithSpace(objRef["salary"]),
+      labels:parsedInstituteStudentDataFormatCampusWise["salary"],
       datasets: getDataForVC("UG", objRef["salary"], "salary"),
     };
     var VerticalBarChartPG = {
-      labels: replaceUnderscoreWithSpace(objRef["salary"]),
+      labels:parsedInstituteStudentDataFormatCampusWise["salary"],
       datasets: getDataForVC("PG", objRef["salary"], "salary"),
     };
     var VerticalBarChartUGPG = {
-      labels: replaceUnderscoreWithSpace(objRef["salary"]),
+      labels:parsedInstituteStudentDataFormatCampusWise["salary"],
       datasets: getDataForVC("UGPG", objRef["salary"], "salary"),
     };
     //  --------------------------------------/VC --------------------
@@ -411,7 +439,7 @@ function CampusWise() {
   }, []);
   return (
     <Box className="overall-layout">
-      <Grid container spacing={2} className="firstItem">
+      <Grid container spacing={2} className="firstContainer">
         <Grid item xs={5}>
           <ODoughnutChart
             title={"Campus Wise Overview"}
@@ -479,14 +507,7 @@ function CampusWise() {
             </Grid>
           </Grid>
          
-          {/* <h1 className="gradHeading">PostGraduate</h1> */}
-          <div class="deconstructed">
-  POSTGRADUATE
-  <div>POSTGRADUATE</div>
-  <div>POSTGRADUATE</div>
-  <div>POSTGRADUATE</div>
-  <div>POSTGRADUATE</div>
-</div>
+          <h1 className="gradHeading">PostGraduate</h1>
           <Grid container>
             <Grid item xs={3.5} className="shadow">
               <ODoughnutChart
@@ -512,7 +533,7 @@ function CampusWise() {
 
       <h1>The End</h1>
 
-      {showCharts ? (
+      {/* {showCharts ? (
         <div>
           <Box>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -524,7 +545,6 @@ function CampusWise() {
                 <Tab label="UG + PG Data" {...a11yProps(0)} />
                 <Tab label="UG Data" {...a11yProps(1)} />
                 <Tab label="PG Data" {...a11yProps(2)} />
-                {/* <Tab label="UG + PG Data" {...a11yProps(2)} /> */}
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
@@ -604,7 +624,7 @@ function CampusWise() {
             </TabPanel>
           </Box>
         </div>
-      ) : null}
+      ) : null} */}
     </Box>
   );
 }

@@ -6,7 +6,8 @@ import './Overall.styles.scss'
 import OverallFetcher from './OverallFetcher.component';
 import { unstable_batchedUpdates } from 'react-dom';
 import _ from 'lodash';
-import objRef from './APIKeys.js'
+import objRef,{parsedDataFormat} from './APIKeys.js'
+
 
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -19,22 +20,12 @@ function Overall() {
     const [showVC,setShowVC] = useState(false)
     const VChartColors = [
         "#6050DC",
+        "#D52DB7",
         "#FF2E7E",
         "#FF6B45",
         "#FFAB05",
-        "rgba(255, 159, 64, 1)"]
+        "rgba(255, 159, 64, 1)",]
     
-        const replaceUnderscoreWithSpace = (anArray) => {
-            let newArr=[]
-            anArray.forEach((label) => {
-
-                let newLabel = label.replace("total_","")
-                newLabel = newLabel.replace(/_/g, " ");
-                newArr.push(newLabel)
-        
-            })
-            return newArr;
-        }
     const chartOptions = {
         Doughnut : {
             onClick: function (evt, item) {
@@ -118,26 +109,28 @@ function Overall() {
             const insts = streamData.institutes
                 const dataArray = insts.map((inst,index)=>{
                 return{
-                    label:inst ,
+                    label:inst.toUpperCase(),
                     data: combineArrays(keys,streamData[inst][0][0][category],streamData[inst][0][1][category],category).values ,
                     backgroundColor: VChartColors[index],
-                    borderColor: [
-                        "rgba(255, 159, 64, 1)",],
+                    borderColor: VChartColors[index],
                     borderWidth: 2,
                 }   
                 })
             return dataArray
         }
         var VerticalBarChart1 ={
-        labels: replaceUnderscoreWithSpace(objRef["student_details"]),
+        // labels: replaceUnderscoreWithSpace(objRef["student_details"]),
+        labels:parsedDataFormat["student_details"],
         datasets :getDataForVC(objRef["student_details"],"student_details")
         }
         var VerticalBarChart2 ={
-            labels: replaceUnderscoreWithSpace(objRef["placement_details"]),
+            // labels: replaceUnderscoreWithSpace(objRef["placement_details"]),
+            labels:parsedDataFormat["placement_details"],
             datasets :getDataForVC(objRef["placement_details"],"placement_details")
             }
         var VerticalBarChart3 ={
-            labels: replaceUnderscoreWithSpace(objRef["salary"]),
+            // labels: replaceUnderscoreWithSpace(objRef["salary"]),
+            labels:parsedDataFormat["salary"],
             datasets :getDataForVC(objRef["salary"],"salary")
             }
     }
@@ -164,6 +157,7 @@ function Overall() {
     return(
         <Box p={5} className='overall_box'>
   <Grid container spacing={9} className="firstItem">
+
       <Grid item xs={5} >
         <ODoughnutChart
           title={"University Overview"}
@@ -171,22 +165,22 @@ function Overall() {
           options={chartOptions.Doughnut}
         />
       </Grid>
-      {showVC ? (
-       <Grid item xs={7} mt={6}>
-          <OVerticalBarChart
-            title={"Student Details"}
-            data={VerticalBarChart1}
-            options={chartOptions.VerticalBarChart1}
-          />
-        </Grid>
-      ) : null}
-    {showVC ? (
-        <>
-        <Grid item xs={6}>
+      {showVC ? (        <>
+        <Grid item xs={7}>
           <OVerticalBarChart
             title={"Placement Details"}
             data={VerticalBarChart2}
             options={chartOptions.VerticalBarChart2}
+          />
+        </Grid></>
+      ) : null}
+    {showVC ? (
+        <>
+        <Grid item xs={6} >
+          <OVerticalBarChart
+            title={"Student Details"}
+            data={VerticalBarChart1}
+            options={chartOptions.VerticalBarChart1}
           />
         </Grid>
         <Grid item xs={6}>

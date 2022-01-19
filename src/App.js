@@ -1,11 +1,12 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import MediaCard from "./Pages/Team/Team";
 
-import Admin from "./Pages/Admin";
+import Admin from "./Pages/Admin/Admin";
 import NavBar from "./Components/Navbar/NavBar";
 
 const App = () => {
@@ -13,12 +14,12 @@ const App = () => {
     <div className="app">
       <Router>
         <NavBar />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/admin" component={Admin} />
-          <Route path="/login" component={Login} />
-          <Route path="/team" component={MediaCard} />
-        </Switch>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/team" element={<MediaCard />} />
+        </Routes>
       </Router>
     </div>
   );
