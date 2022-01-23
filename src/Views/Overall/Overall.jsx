@@ -7,6 +7,9 @@ import OverallFetcher from './OverallFetcher.component';
 import { unstable_batchedUpdates } from 'react-dom';
 import _ from 'lodash';
 import objRef,{parsedDataFormat} from './APIKeys.js'
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Table from "../../Components/Table/Table"
 
 
 import Box from '@mui/material/Box';
@@ -14,10 +17,25 @@ import Grid from '@mui/material/Grid';
 
 
 function Overall() {
+    // skrr
+    const [mode, setMode] =useState('chart');
+
+  const handleChange = (event, newMode) => {
+    setMode(newMode);
+  };
+
+  // wooooww wonderfull idea
+  // credit - Guru
+  function tranpose(matrix) {
+    return _.zip(...matrix);
+  }
+//   skrr end
     const hostname = 'https://gcgc-dashboard.herokuapp.com'
     const [streamData,setStreamData] = useState({})
     const [streamList,setStreamList] = useState([])
     const [showVC,setShowVC] = useState(false)
+    // for the table
+    const [tableData, setTableData] = useState([])
     const VChartColors = [
         "#6050DC",
         "#D52DB7",
@@ -37,7 +55,8 @@ function Overall() {
             plugins: {
                 legend: {
                     
-                  position: 'left',
+                    position: showVC?"top":"left",
+
                },
            },
 
@@ -90,6 +109,7 @@ function Overall() {
      {
         const combineArrays = (k,a1,a2,category) =>{
             const arr = []
+            // console.log(a1,a2)
             if(category === "salary"){
                 for(let i =0;i <k.length;i++)
                 {
@@ -118,21 +138,54 @@ function Overall() {
                 })
             return dataArray
         }
+        const returnDataAsString = (obj,objName)=>{
+            let str = ""
+            let keys  = objRef[objName]
+            for(let i=0;i<keys.length;i++){
+                str += obj[keys[i]]
+            }
+            return str
+        }
+        const getTableData = (category)=>{
+            const insts = streamData.institutes;
+            let keys  = objRef[category]
+            const matrix = []
+            insts.forEach(inst=>{
+                const data = combineArrays(keys,streamData[inst][0][0][category],streamData[inst][0][1][category],category).values
+                // console.log("data",data)
+                matrix.push(data)
+            })
+            console.log("matrix",matrix)
+           const tp =  tranpose(matrix)
+            console.log("Transpose of a matrix",tp);
+            return tp
+        }
         var VerticalBarChart1 ={
-        // labels: replaceUnderscoreWithSpace(objRef["student_details"]),
         labels:parsedDataFormat["student_details"],
         datasets :getDataForVC(objRef["student_details"],"student_details")
         }
         var VerticalBarChart2 ={
-            // labels: replaceUnderscoreWithSpace(objRef["placement_details"]),
             labels:parsedDataFormat["placement_details"],
             datasets :getDataForVC(objRef["placement_details"],"placement_details")
             }
         var VerticalBarChart3 ={
-            // labels: replaceUnderscoreWithSpace(objRef["salary"]),
             labels:parsedDataFormat["salary"],
             datasets :getDataForVC(objRef["salary"],"salary")
             }
+// - ---------------------------------- tables -
+            var Table1 ={
+            column:streamData.institutes,
+            data :getTableData("student_details")
+            }
+            var Table2 ={
+                column:streamData.institutes,
+                data :getTableData("placement_details")
+                }
+            var Table3 ={
+                column:streamData.institutes,
+                data :getTableData("salary")
+
+                }
     }
     const getData = (stream)=>{
         axios.get(`${hostname}/students/overall/${stream}/`).then(resp=>{
@@ -155,17 +208,30 @@ function Overall() {
         getStreams()
     },[])
     return(
-        <Box p={5} className='overall_box'>
+<Box p={5} className='overall_box'>
+                  {/* purrrrr */}
+                  <ToggleButtonGroup
+      color="primary"
+      value={mode}
+      exclusive
+      onChange={handleChange}
+    >
+      <ToggleButton value="chart">Charts</ToggleButton>
+      <ToggleButton value="table">Tables</ToggleButton>
+    </ToggleButtonGroup>
+  
   <Grid container spacing={9} className="firstItem">
+  
+      <Grid item xs={showVC?5:7}>
 
-      <Grid item xs={5} >
         <ODoughnutChart
           title={"University Overview"}
           data={dataDoughnut}
           options={chartOptions.Doughnut}
         />
       </Grid>
-      {showVC ? (        <>
+      {showVC && mode=="chart" ? (        <>
+      {console.log(streamData)}
         <Grid item xs={7}>
           <OVerticalBarChart
             title={"Placement Details"}
@@ -174,7 +240,14 @@ function Overall() {
           />
         </Grid></>
       ) : null}
-    {showVC ? (
+       {showVC && mode=="table" ? (        <>
+        <Grid item xs={6} >
+            <div>
+        <Table column={Table3.column} data={Table3.data} category={"Salary"} keys={parsedDataFormat["salary"]}/> 
+        </div>
+        </Grid></>
+      ) : null}
+    {showVC && mode==="chart"?
         <>
         <Grid item xs={6} >
           <OVerticalBarChart
@@ -190,8 +263,18 @@ function Overall() {
             options={chartOptions.VerticalBarChart3}
           />
         </Grid>
-        </>
-    ) : null}
+        </>: null}
+        {showVC && mode==="table"?
+        <>
+        <Grid item xs={6} >
+        <Table column={Table2.column} data={Table2.data} category={"Placement Details"} keys={parsedDataFormat["placement_details"]}/>
+        </Grid>
+        <Grid item xs={6}>
+        <Table column={Table1.column} data={Table1.data} category={"Student Details"} keys={parsedDataFormat["student_details"]}/>
+
+
+        </Grid>
+        </>: null}
   </Grid>
 </Box>
 

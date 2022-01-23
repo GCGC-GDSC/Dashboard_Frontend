@@ -8,7 +8,7 @@ const ODoughnutChart = ({title,data,options}) => {
   <div className='ODoughnut'>
     {title?
     <div className='header'>
-      <h1 className='title mark'>{title}</h1>
+      <h1 className='title'>{title}</h1>
     </div>:null
     }
     <Doughnut 

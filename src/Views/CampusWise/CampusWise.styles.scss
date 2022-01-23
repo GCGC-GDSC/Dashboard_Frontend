@@ -25,20 +25,7 @@
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
   padding-bottom: 20px;
 }
-.mark {
-  margin: 0 -0.4em;
-  padding: 0.1em 0.4em;
-  border-radius: 0.8em 0.3em;
-  background: transparent;
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 225, 0, 0.1),
-    rgba(255, 225, 0, 0.7) 4%,
-    rgba(255, 225, 0, 0.3)
-  );
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
+
 .gradHeading {
   flex: 1;
   text-align: center;
