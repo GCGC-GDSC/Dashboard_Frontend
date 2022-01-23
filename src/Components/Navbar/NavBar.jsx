@@ -56,9 +56,9 @@ function NavBar() {
             <NavLink className='navbar-link' activeStyle={selected}  to = '/login'>
                 Login
             </NavLink>
-            <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
+            {/* <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
                 Team
-            </NavLink>
+            </NavLink> */}
     
         </div>
 
