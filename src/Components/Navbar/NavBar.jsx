@@ -2,7 +2,8 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import DarkShade from '../DarkShade/DarkShade.component'
 import './navbar.style.scss'
-function NavBar() {
+import {firebase} from "../../backend/firebase.config"
+function NavBar({user}) {
     const selected ={
         fontWeight:'bold',
         textDecoration:'underline'
@@ -22,15 +23,21 @@ function NavBar() {
             <h3>GITAM CAREER GUIDANCE CENTRE</h3>
         </div>
         <div className='navbar_links'>
+            {user?
+            <div>
             <NavLink className='navbar-link' activeStyle={selected}  exact to = '/'>
                 Home
             </NavLink>
             <NavLink className='navbar-link' activeStyle={selected}  to = '/admin'>
                 Admin
             </NavLink>
-            <NavLink className='navbar-link' activeStyle={selected}  to = '/login'>
+            <button className='navbar-link' onClick={()=>firebase.auth().signOut()}>
+                Logout
+            </button>
+            </div>:
+            <NavLink className='navbar-link' activeStyle={selected}  to = '/'>
                 Login
-            </NavLink>
+            </NavLink>}
             {/* <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
                 Team
             </NavLink> */}

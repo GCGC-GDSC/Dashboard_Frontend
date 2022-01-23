@@ -14,9 +14,10 @@ import "aos/dist/aos.css"
 import Footer from '../../Components/Footer/Footer'
 import Overall from '../../Views/Overall/Overall'
 import BasicTabs from "../../Components/Tabs/Tabs"
+import Login from '../../Components/Login/Login.component'
 // import Assistant from "../../Components/Assistant/Assistant"
 
-function Home() {
+function Home({user}) {
     useEffect(() => {
         Aos.init({})
     },[])
@@ -32,10 +33,11 @@ function Home() {
                 </div>
             </div>
         </section> */}
+     
         <HeroText year={2022}/>
-
-
         <main className='main_section'>
+        {user && user.email?
+        <p>{user.email}</p>:null}
             <BasicTabs/>
         </main>
             <Footer/>
