@@ -7,31 +7,6 @@ function NavBar() {
         fontWeight:'bold',
         textDecoration:'underline'
     }
-    // menu-bar open
-    const openMenu = ()=>{
-        const sidebar = document.querySelector('.sidebar')
-        if(sidebar) sidebar.style.display = 'block'
-    }
-    //   window resizing
-    window.addEventListener('resize', ()=>{
-        if(window.innerWidth<=700)
-        { 
-            const nm= document.querySelector('.navbar_menu')
-            if(nm) nm.style.display = 'block';
-            document.querySelector('.navbar_links').style.display = 'none';
-            // const nl= document.querySelector('.navbar_icon')
-            // if(nl) nl.style.display = 'none';
-        }
-        else
-        {
-            document.querySelector('.darkshade').style.display = 'none';
-            const nm = document.querySelector('navbar_menu')
-            if(nm) nm.style.display = 'none';
-            document.querySelector('.navbar_links').style.display = 'block';
-            const nl= document.querySelector('.navbar_icon')
-            if(nl) nl.style.display = 'block';
-        }
-    })
     return (
     <div className = 'navbar'>
         {/* <DarkShade/>

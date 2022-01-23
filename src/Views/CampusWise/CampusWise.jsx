@@ -123,7 +123,6 @@ function CampusWise() {
       },
     },
   };
-
   // data for the initial University campus wise doughnut
   var dataDoughnut = {
     labels: campusList.map((item) => CampusNames[item[0]]),
@@ -208,7 +207,6 @@ function CampusWise() {
       }
       return { keys: k, values: arr };
     };
-
     //  -------------------------------------------------DC ----------
     const getDataForDC = (graduate, keys, category) => {
       var arr = [];
