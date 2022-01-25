@@ -30,7 +30,7 @@ const App = () => {
     <div className="app">
       <Router>
         <NavBar user={isUserSignedIn} />
-        {isUserSignedIn ? (
+        {true ? (
           <Routes>
             <Route exact path="/" element={<Home user={userProfile} />} />
             <Route path="/admin" element={<Admin />} />
