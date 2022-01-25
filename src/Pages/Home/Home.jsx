@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import "./Home.scss"
-import HeroText from "../../Components/HeroText/HeroText"
+// import HeroText from "../../Components/HeroText/HeroText"
 import Aos from "aos"
 import "aos/dist/aos.css"
 import Footer from '../../Components/Footer/Footer'
@@ -23,7 +23,7 @@ function Home({user}) {
             </div>
         </section> */}
      
-        <HeroText year={2022}/>
+        {/* <HeroText year={2022}/> */}
         <main className='main_section'>
         {user && user.email?
         <p>{user.email}</p>:null}
