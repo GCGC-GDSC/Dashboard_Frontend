@@ -24,8 +24,7 @@ function Overall() {
     setMode(newMode);
   };
 
-  // wooooww wonderfull idea
-  // credit - Guru
+
   function tranpose(matrix) {
     return _.zip(...matrix);
   }

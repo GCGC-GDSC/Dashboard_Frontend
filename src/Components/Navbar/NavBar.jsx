@@ -4,36 +4,12 @@ import DarkShade from '../DarkShade/DarkShade.component'
 import './navbar.style.scss'
 import gcgcLogo from "../../Components/images/gcgclogo.png"
 import HeroText from "../HeroText/HeroText"
-function NavBar() {
+import {firebase} from "../../backend/firebase.config"
+function NavBar({user}) {
     const selected ={
         fontWeight:'bold',
         textDecoration:'underline'
     }
-    // menu-bar open
-    const openMenu = ()=>{
-        const sidebar = document.querySelector('.sidebar')
-        if(sidebar) sidebar.style.display = 'block'
-    }
-    //   window resizing
-    window.addEventListener('resize', ()=>{
-        if(window.innerWidth<=700)
-        { 
-            const nm= document.querySelector('.navbar_menu')
-            if(nm) nm.style.display = 'block';
-            document.querySelector('.navbar_links').style.display = 'none';
-            // const nl= document.querySelector('.navbar_icon')
-            // if(nl) nl.style.display = 'none';
-        }
-        else
-        {
-            document.querySelector('.darkshade').style.display = 'none';
-            const nm = document.querySelector('navbar_menu')
-            if(nm) nm.style.display = 'none';
-            document.querySelector('.navbar_links').style.display = 'block';
-            const nl= document.querySelector('.navbar_icon')
-            if(nl) nl.style.display = 'block';
-        }
-    })
     return (
     <div className = 'navbar'>
         {/* <DarkShade/>
@@ -50,15 +26,21 @@ function NavBar() {
             <HeroText year={2022}/>
         </div>
         <div className='navbar_links'>
+            {user?
+            <div>
             <NavLink className='navbar-link' activeStyle={selected}  exact to = '/'>
                 Home
             </NavLink>
             <NavLink className='navbar-link' activeStyle={selected}  to = '/admin'>
                 Admin
             </NavLink>
-            <NavLink className='navbar-link' activeStyle={selected}  to = '/login'>
+            <button className='navbar-link' onClick={()=>firebase.auth().signOut()}>
+                Logout
+            </button>
+            </div>:
+            <NavLink className='navbar-link' activeStyle={selected}  to = '/'>
                 Login
-            </NavLink>
+            </NavLink>}
             {/* <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
                 Team
             </NavLink> */}
