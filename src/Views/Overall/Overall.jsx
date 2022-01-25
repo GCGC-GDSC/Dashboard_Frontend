@@ -36,12 +36,15 @@ function Overall() {
     // for the table
     const [tableData, setTableData] = useState([])
     const VChartColors = [
-        "#6050DC",
-        "#D52DB7",
-        "#FF2E7E",
-        "#FF6B45",
-        "#FFAB05",
-        "rgba(255, 159, 64, 1)",]
+        "#115f9a",
+        "#1984c5",
+        "#22a7f0",
+        "#48b5c4",
+        "#76c68f",
+        "#a6d75b",
+        "#c9e52f",
+        "#d0ee11",
+        "#d0f400",]
     
     const chartOptions = {
         Doughnut : {
@@ -88,20 +91,28 @@ function Overall() {
         label: "Number of Students",
         data: [32490,23003,12034,45044,23034,22032], 
         backgroundColor: [
-            "#6050DC",
-            "#D52DB7",
-            "#FF2E7E",
-            "#FF6B45",
-            "#FFAB05",
-            "rgba(255, 159, 64, 1)",],
-        borderColor: [
-            "#6050DC",
-            "#D52DB7",
-            "#FF2E7E",
-            "#FF6B45",
-            "#FFAB05",
-            "rgba(255, 159, 64, 1)",],
-        borderWidth: 2,
+            "#fd7f6f",
+            "#5ea1d2",
+            "#b2e061",
+            "#bd7ebe",
+            "#ffb55a",
+            "#ffee65",
+            "#beb9db",
+            "#fdcce5",
+            "#8bd3c7",
+          ],
+          borderColor: [
+            "#fd7f6f",
+            "#5ea1d2",
+            "#b2e061",
+            "#bd7ebe",
+            "#ffb55a",
+            "#ffee65",
+            "#beb9db",
+            "#fdcce5",
+            "#8bd3c7",
+          ],
+        borderWidth: 1,
         },],
     }
     if(showVC)
@@ -221,7 +232,7 @@ function Overall() {
   
   <Grid container spacing={9} className="firstItem">
   
-      <Grid item xs={showVC?5:7}>
+      <Grid item xs={5}>
 
         <ODoughnutChart
           title={"University Overview"}

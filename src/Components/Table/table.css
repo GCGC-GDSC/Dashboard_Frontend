@@ -3,21 +3,21 @@ table {
   max-width: 900px;
   width: 100%;
   margin: 2rem auto;
-  background: linear-gradient(45deg, #49a09d, #5f2c82);
-  border-radius: 10px;
+  background: rgba(179, 179, 179, 0.322);
+  border-radius: 5px;
   font-weight: bold;
 }
 th,
 td {
   padding: 15px;
   background-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 th {
   text-align: left;
 }
 thead th {
-  background-color: #55608f;
+  background-color: #506ce6;
 }
 tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.3);

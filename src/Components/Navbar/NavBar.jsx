@@ -6,6 +6,11 @@ import gcgcLogo from "../../Components/images/gcgclogo.png"
 import HeroText from "../HeroText/HeroText"
 import {firebase} from "../../backend/firebase.config"
 function NavBar({user}) {
+    const signoutfromapp = () =>{
+       const action =  window.confirm("Are you sure you want to signout !")
+       if (action)
+        firebase.auth().signOut()
+    }
     const selected ={
         fontWeight:'bold',
         textDecoration:'underline'
@@ -34,9 +39,9 @@ function NavBar({user}) {
             <NavLink className='navbar-link' activeStyle={selected}  to = '/admin'>
                 Admin
             </NavLink>
-            {/* <button className='navbar-link' onClick={()=>firebase.auth().signOut()}>
+            <button className='navbar-link-btn' onClick={signoutfromapp}>
                 Logout
-            </button> */}
+            </button> 
             </div>:
             <NavLink className='navbar-link' activeStyle={selected}  to = '/'>
                 Login

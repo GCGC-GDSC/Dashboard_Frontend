@@ -36,6 +36,18 @@
     text-decoration: none;
     align-self: center;
     font-size: 1.2rem;
+    &-btn{
+      border:none;
+      border-radius: 10px;
+      outline:none;
+      padding: 0.3em;
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+      align-self: center;
+      font-size: 1.2rem;
+      background-color: rgb(168, 15, 15);;
+      font-weight: 300;
+    }
   }
   &_menu {
     font-size: 2rem;
