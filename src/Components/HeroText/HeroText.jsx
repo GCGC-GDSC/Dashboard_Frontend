@@ -3,10 +3,10 @@ import React from "react"
 const HeroText = ({year}) => {
     const myStyle = {
         color: "maroon",
-        fontSize:"xx-large",
+        fontSize:"x-large",
     }
     const heading = {
-        fontSize:"xx-large",
+        fontSize:"large",
         display:"flex",
         justifyContent:"center",
         alignItems:"center",
