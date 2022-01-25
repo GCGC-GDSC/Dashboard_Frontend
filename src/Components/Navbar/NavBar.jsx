@@ -34,9 +34,9 @@ function NavBar({user}) {
             <NavLink className='navbar-link' activeStyle={selected}  to = '/admin'>
                 Admin
             </NavLink>
-            <button className='navbar-link' onClick={()=>firebase.auth().signOut()}>
+            {/* <button className='navbar-link' onClick={()=>firebase.auth().signOut()}>
                 Logout
-            </button>
+            </button> */}
             </div>:
             <NavLink className='navbar-link' activeStyle={selected}  to = '/'>
                 Login
