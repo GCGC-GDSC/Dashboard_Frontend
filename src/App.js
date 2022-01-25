@@ -8,7 +8,6 @@ import MediaCard from "./Pages/Team/Team";
 
 import Admin from "./Pages/Admin/Admin";
 import NavBar from "./Components/Navbar/NavBar";
-
 const App = () => {
   return (
     <div className="app">

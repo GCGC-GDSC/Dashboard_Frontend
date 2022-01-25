@@ -14,7 +14,6 @@ import "aos/dist/aos.css"
 import Footer from '../../Components/Footer/Footer'
 import Overall from '../../Views/Overall/Overall'
 import BasicTabs from "../../Components/Tabs/Tabs"
-// import Assistant from "../../Components/Assistant/Assistant"
 
 function Home() {
     useEffect(() => {
@@ -32,11 +31,13 @@ function Home() {
                 </div>
             </div>
         </section> */}
-        <HeroText year={2022}/>
+        {/* <HeroText year={2022}/> */}
 
 
         <main className='main_section'>
+
             <BasicTabs/>
+
         </main>
             <Footer/>
         </div>
