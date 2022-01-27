@@ -17,7 +17,7 @@ const App = () => {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({});
   firebase.auth().onAuthStateChanged((user) => {
-    console.log(user);
+    // console.log(user)
     if (user) {
       setUserProfile(user);
       return setIsUserSignedIn(true);

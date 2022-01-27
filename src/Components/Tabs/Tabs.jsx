@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Overall from '../../Views/Overall/Overall';
 import Fetcher from '../Fetcher/Fetcher'
 import CampusWise from '../../Views/CampusWise/CampusWise';
-
+import GBStats from "../../Views/GBStats/GBStats"
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
@@ -54,16 +54,18 @@ function TabPanel(props) {
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab label ="Overall" {...a11yProps(0)} />
             <Tab label="Campus-Wise" {...a11yProps(1)} />
+            <Tab label="GB statistics" {...a11yProps(2)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
           <Overall/>
         </TabPanel>
         <TabPanel value={value} index={1}>
-         {/* <Fetcher/> */}
          <CampusWise/>
         </TabPanel>
-        
+        <TabPanel value={value} index={2}>
+         <GBStats/>
+        </TabPanel>
       </Box>
     );
   }
