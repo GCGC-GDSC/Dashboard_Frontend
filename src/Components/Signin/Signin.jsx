@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import {firebase} from "../../backend/firebase.config"
-
+import {ReactComponent as Login} from "../../assets/login.svg"
 import './Signin.styles.scss';
 function Signin() {
+    const signoutfromapp = () =>{
+        firebase.auth().signOut()
+    }
+ 
     const SiginiWithFirebase =() =>{
         const google_provider = new firebase.auth.GoogleAuthProvider()
         firebase.auth().signInWithPopup(google_provider)
@@ -15,10 +19,14 @@ function Signin() {
     }
     return (
         <div className='sign-in'>
-        <button   className='sign-inUsingGoogle' onClick = {SiginiWithFirebase}>
-        <img  src="https://image.flaticon.com/icons/png/512/281/281764.png" alt="google"/>
+        <Login/>
+        <button type="button"  className="login-with-google-btn" onClick = {SiginiWithFirebase}>
+        {/* <img  src="https://image.flaticon.com/icons/png/512/281/281764.png" alt="google"/> */}
+        Sign in with Google
         </button>
+       
     </div>  
+ 
     )
 }
 export default Signin

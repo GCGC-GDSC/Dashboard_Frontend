@@ -152,7 +152,7 @@ function CampusWise() {
           "#fdcce5",
           "#8bd3c7",
         ],
-        borderWidth: 2,
+        borderWidth: 1,
       },
     ],
   };
@@ -265,7 +265,7 @@ function CampusWise() {
       ];
       return dataObj;
     };
-
+    
     var DoughnutUGSD={ 
     labels:parsedInstituteStudentDataFormatCampusWise["student_details"],
       datasets: getDataForDC(
@@ -410,7 +410,6 @@ function CampusWise() {
       ),
       null
     );
-    console.log("institutes for the campus", campusName, ...arr);
     unstable_batchedUpdates(() => {
       setCampusName(CampusNames[campusName]);
       setInstList(...arr);
@@ -531,7 +530,7 @@ function CampusWise() {
 
       <h1>The End</h1>
 
-      {/* {showCharts ? (
+      {showCharts ? (
         <div>
           <Box>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -622,7 +621,7 @@ function CampusWise() {
             </TabPanel>
           </Box>
         </div>
-      ) : null} */}
+      ) : null}
     </Box>
   );
 }

@@ -65,7 +65,7 @@
   font-family: "Karla", sans-serif;
   font-family: "Montserrat", sans-serif;
   font-family: "PT Sans", sans-serif;
-  color: grey;
+  color: black;
   border-radius: 15px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
@@ -75,4 +75,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.firstDoughnut {
+  padding-left: 0px !important;
+  padding-top: 0px !important;
+}
+.headings {
+  width: 100%;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 3rem;
+  font-size: xx-large;
+  font-weight: bolder;
 }

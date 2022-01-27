@@ -36,12 +36,15 @@ function Overall() {
     // for the table
     const [tableData, setTableData] = useState([])
     const VChartColors = [
-        "#6050DC",
-        "#D52DB7",
-        "#FF2E7E",
-        "#FF6B45",
-        "#FFAB05",
-        "rgba(255, 159, 64, 1)",]
+        "#115f9a",
+        "#1984c5",
+        "#22a7f0",
+        "#48b5c4",
+        "#76c68f",
+        "#a6d75b",
+        "#c9e52f",
+        "#d0ee11",
+        "#d0f400",]
     
     const chartOptions = {
         Doughnut : {
@@ -54,7 +57,7 @@ function Overall() {
             plugins: {
                 legend: {
                     
-                    position: showVC?"top":"left",
+                    position: "left",
 
                },
            },
@@ -88,20 +91,28 @@ function Overall() {
         label: "Number of Students",
         data: [32490,23003,12034,45044,23034,22032], 
         backgroundColor: [
-            "#6050DC",
-            "#D52DB7",
-            "#FF2E7E",
-            "#FF6B45",
-            "#FFAB05",
-            "rgba(255, 159, 64, 1)",],
-        borderColor: [
-            "#6050DC",
-            "#D52DB7",
-            "#FF2E7E",
-            "#FF6B45",
-            "#FFAB05",
-            "rgba(255, 159, 64, 1)",],
-        borderWidth: 2,
+            "#fd7f6f",
+            "#5ea1d2",
+            "#b2e061",
+            "#bd7ebe",
+            "#ffb55a",
+            "#ffee65",
+            "#beb9db",
+            "#fdcce5",
+            "#8bd3c7",
+          ],
+          borderColor: [
+            "#fd7f6f",
+            "#5ea1d2",
+            "#b2e061",
+            "#bd7ebe",
+            "#ffb55a",
+            "#ffee65",
+            "#beb9db",
+            "#fdcce5",
+            "#8bd3c7",
+          ],
+        borderWidth: 1,
         },],
     }
     if(showVC)
@@ -209,7 +220,7 @@ function Overall() {
     return(
 <Box p={5} className='overall_box'>
                   {/* purrrrr */}
-                  <ToggleButtonGroup
+    <ToggleButtonGroup
       color="primary"
       value={mode}
       exclusive
@@ -221,7 +232,7 @@ function Overall() {
   
   <Grid container spacing={9} className="firstItem">
   
-      <Grid item xs={showVC?5:7}>
+      <Grid item xs={6} className='firstDoughnut'>
 
         <ODoughnutChart
           title={"University Overview"}
@@ -229,41 +240,81 @@ function Overall() {
           options={chartOptions.Doughnut}
         />
       </Grid>
+      
+      {/* 2nd row */}
       {showVC && mode=="chart" ? (        <>
-      {console.log(streamData)}
-        <Grid item xs={7}>
+        <div class="headings">
+       { streamData.streamName.toUpperCase()}
+
+          </div>
+      {/* {console.log(streamData)} */}
+      {/* <Grid container>
+        <Grid item xs={10} >
+          <div class="headings">
+          Enginerring
+          </div>
+        </Grid>
+      </Grid> */}
+      <Grid container ml={6} mt={6} spacing={5}>
+      <Grid item xs={7}>
           <OVerticalBarChart
-            title={"Placement Details"}
+            
             data={VerticalBarChart2}
             options={chartOptions.VerticalBarChart2}
           />
-        </Grid></>
+        </Grid>
+      <Grid item xs={5} >
+        <Table column={Table2.column} data={Table2.data} category={"Placement Details"} keys={parsedDataFormat["placement_details"]}/>
+      </Grid>
+        
+
+        </Grid>
+        
+        </>
       ) : null}
-       {showVC && mode=="table" ? (        <>
+      
+       {/* {showVC && mode=="table" ? (        <>
         <Grid item xs={6} >
             <div>
         <Table column={Table3.column} data={Table3.data} category={"Salary"} keys={parsedDataFormat["salary"]}/> 
         </div>
         </Grid></>
-      ) : null}
+      ) : null} */}
     {showVC && mode==="chart"?
         <>
+        <div class="headings">
+      Student Details
+          </div>
         <Grid item xs={6} >
           <OVerticalBarChart
-            title={"Student Details"}
+            
             data={VerticalBarChart1}
             options={chartOptions.VerticalBarChart1}
           />
         </Grid>
         <Grid item xs={6}>
+        <Table column={Table1.column} data={Table1.data} category={"Student Details"} keys={parsedDataFormat["student_details"]}/>
+
+
+        </Grid>
+        <div class="headings">
+      Student Details
+          </div>
+        <Grid item xs={6}>
           <OVerticalBarChart
-            title={"Salary Details"}
+            
             data={VerticalBarChart3}
             options={chartOptions.VerticalBarChart3}
           />
         </Grid>
+        <Grid item xs={6} >
+            <div>
+        <Table column={Table3.column} data={Table3.data} category={"Salary"} keys={parsedDataFormat["salary"]}/> 
+        </div>
+        </Grid>
+        
         </>: null}
-        {showVC && mode==="table"?
+        {/* {showVC && mode==="table"?
         <>
         <Grid item xs={6} >
         <Table column={Table2.column} data={Table2.data} category={"Placement Details"} keys={parsedDataFormat["placement_details"]}/>
@@ -273,7 +324,7 @@ function Overall() {
 
 
         </Grid>
-        </>: null}
+        </>: null} */}
   </Grid>
 </Box>
 

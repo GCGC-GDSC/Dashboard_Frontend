@@ -10,7 +10,6 @@ import {
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import MediaCard from "./Pages/Team/Team";
-import { auth, createUserProfileDocument } from "./backend/firebase.config";
 import Admin from "./Pages/Admin/Admin";
 import NavBar from "./Components/Navbar/NavBar";
 import { firebase } from "./backend/firebase.config";
@@ -18,19 +17,20 @@ const App = () => {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({});
   firebase.auth().onAuthStateChanged((user) => {
+    console.log(user);
     if (user) {
       setUserProfile(user);
       return setIsUserSignedIn(true);
     } else {
-      setUserProfile({});
-      return setIsUserSignedIn(false);
+      // setUserProfile({});
+      setIsUserSignedIn(false);
     }
   });
   return (
     <div className="app">
       <Router>
         <NavBar user={isUserSignedIn} />
-        {true ? (
+        {isUserSignedIn ? (
           <Routes>
             <Route exact path="/" element={<Home user={userProfile} />} />
             <Route path="/admin" element={<Admin />} />
