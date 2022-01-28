@@ -1,13 +1,13 @@
 .login {
   display: flex;
+  flex-direction: column;
   background: rgba(255, 255, 255, 0.651);
   // box-shadow: 0 3px 10px rgba(0, 0, 0, 0.671);
   width: 60%;
   margin: auto;
-  margin-top: 7rem;
+  margin-top: 5rem;
   border-radius: 15px;
   padding: 1em;
-  flex-direction: column;
   &-container {
     text-align: center;
     display: flex;

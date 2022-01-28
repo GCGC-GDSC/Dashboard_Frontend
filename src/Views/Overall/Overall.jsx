@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import ODoughnutChart from './charts/ODoughnut';
 import axios from 'axios';
 import OVerticalBarChart from './charts/OVerticalBarChart';
@@ -7,27 +7,21 @@ import OverallFetcher from './OverallFetcher.component';
 import { unstable_batchedUpdates } from 'react-dom';
 import _ from 'lodash';
 import objRef,{parsedDataFormat} from './APIKeys.js'
+import Table from "../../Components/Table/Table"
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import Table from "../../Components/Table/Table"
-
-
+import ColorPallet from "../ColorAssets/colorPallet.js";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 
 function Overall() {
-    // skrr
-    const [mode, setMode] =useState('chart');
-
-  const handleChange = (event, newMode) => {
-    setMode(newMode);
-  };
-
 
   function tranpose(matrix) {
     return _.zip(...matrix);
   }
+
+  const headingRef = useRef()
 //   skrr end
     const hostname = 'https://gcgc-dashboard.herokuapp.com'
     const [streamData,setStreamData] = useState({})
@@ -35,17 +29,9 @@ function Overall() {
     const [showVC,setShowVC] = useState(false)
     // for the table
     const [tableData, setTableData] = useState([])
-    const VChartColors = [
-        "#115f9a",
-        "#1984c5",
-        "#22a7f0",
-        "#48b5c4",
-        "#76c68f",
-        "#a6d75b",
-        "#c9e52f",
-        "#d0ee11",
-        "#d0f400",]
-    
+    const VChartColors =ColorPallet
+   
+  
     const chartOptions = {
         Doughnut : {
             onClick: function (evt, item) {
@@ -83,6 +69,7 @@ function Overall() {
 
                 }
               },
+            
         }
     }
     const dataDoughnut ={
@@ -90,29 +77,10 @@ function Overall() {
     datasets: [{
         label: "Number of Students",
         data: [32490,23003,12034,45044,23034,22032], 
-        backgroundColor: [
-            "#fd7f6f",
-            "#5ea1d2",
-            "#b2e061",
-            "#bd7ebe",
-            "#ffb55a",
-            "#ffee65",
-            "#beb9db",
-            "#fdcce5",
-            "#8bd3c7",
-          ],
-          borderColor: [
-            "#fd7f6f",
-            "#5ea1d2",
-            "#b2e061",
-            "#bd7ebe",
-            "#ffb55a",
-            "#ffee65",
-            "#beb9db",
-            "#fdcce5",
-            "#8bd3c7",
-          ],
+        backgroundColor: ColorPallet,
+          borderColor:ColorPallet,
         borderWidth: 1,
+        
         },],
     }
     if(showVC)
@@ -198,12 +166,13 @@ function Overall() {
                 }
     }
     const getData = (stream)=>{
-        axios.get(`${hostname}/students/overall/${stream}/`).then(resp=>{
-            var responseData = _.get(resp,['data','result'])
-            unstable_batchedUpdates(()=>{
-                setStreamData({...responseData,institutes:[...Object.keys(responseData)],streamName:stream})
-                setShowVC(true)
-            })
+      axios.get(`${hostname}/students/overall/${stream}/`).then(resp=>{
+        var responseData = _.get(resp,['data','result'])
+        headingRef.current.click()
+        unstable_batchedUpdates(()=>{
+          setStreamData({...responseData,institutes:[...Object.keys(responseData)],streamName:stream})
+          setShowVC(true)
+        })
 
         })
     }
@@ -219,8 +188,7 @@ function Overall() {
     },[])
     return(
 <Box p={5} className='overall_box'>
-                  {/* purrrrr */}
-    <ToggleButtonGroup
+{/* <ToggleButtonGroup
       color="primary"
       value={mode}
       exclusive
@@ -228,10 +196,10 @@ function Overall() {
     >
       <ToggleButton value="chart">Charts</ToggleButton>
       <ToggleButton value="table">Tables</ToggleButton>
-    </ToggleButtonGroup>
+    </ToggleButtonGroup> */}
   
-  <Grid container spacing={9} className="firstItem">
-  
+  <Grid container spacing={9}  className="firstItem" alignItems="center">
+
       <Grid item xs={6} className='firstDoughnut'>
 
         <ODoughnutChart
@@ -239,94 +207,83 @@ function Overall() {
           data={dataDoughnut}
           options={chartOptions.Doughnut}
         />
+
       </Grid>
-      
+      </Grid>
+      <Grid container spacing={9} mt={4}>
       {/* 2nd row */}
-      {showVC && mode=="chart" ? (        <>
-        <div class="headings">
-       { streamData.streamName.toUpperCase()}
-
-          </div>
-      {/* {console.log(streamData)} */}
-      {/* <Grid container>
-        <Grid item xs={10} >
-          <div class="headings">
-          Enginerring
-          </div>
-        </Grid>
-      </Grid> */}
-      <Grid container ml={6} mt={6} spacing={5}>
-      <Grid item xs={7}>
-          <OVerticalBarChart
-            
-            data={VerticalBarChart2}
-            options={chartOptions.VerticalBarChart2}
-          />
-        </Grid>
-      <Grid item xs={5} >
-        <Table column={Table2.column} data={Table2.data} category={"Placement Details"} keys={parsedDataFormat["placement_details"]}/>
-      </Grid>
-        
-
-        </Grid>
-        
-        </>
-      ) : null}
+      <a href={`#stream`} ref={headingRef}>
+      </a>
       
-       {/* {showVC && mode=="table" ? (        <>
-        <Grid item xs={6} >
-            <div>
-        <Table column={Table3.column} data={Table3.data} category={"Salary"} keys={parsedDataFormat["salary"]}/> 
-        </div>
-        </Grid></>
-      ) : null} */}
-    {showVC && mode==="chart"?
-        <>
-        <div class="headings">
-      Student Details
+      {showVC ? (      
+          <>
+        <div class="headings" id={`stream`} >
+          <div className="sub">
+     { streamData.streamName.toUpperCase()}
+     </div>
           </div>
-        <Grid item xs={6} >
+      <Grid container  spacing={2} ml={10} mt={6} marginTop="0px">
+      
+      <Grid item xs={7}   mr={5} className='firstDoughnut'>
           <OVerticalBarChart
             
             data={VerticalBarChart1}
             options={chartOptions.VerticalBarChart1}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4} >
         <Table column={Table1.column} data={Table1.data} category={"Student Details"} keys={parsedDataFormat["student_details"]}/>
 
 
         </Grid>
-        <div class="headings">
-      Student Details
+
+        </Grid>
+        
+        </>
+      ) : null}
+    {showVC?
+        <>
+           <div class="headings" id={`stream`} >
+          <div className="sub">
+     { streamData.streamName.toUpperCase()}
+     </div>
           </div>
-        <Grid item xs={6}>
+          <Grid container container spacing={2} ml={10} mt={6}  spacing={2} alignItems="center">
+          <Grid item xs={7} mr={5} className='firstDoughnut' >
           <OVerticalBarChart
             
-            data={VerticalBarChart3}
-            options={chartOptions.VerticalBarChart3}
+            data={VerticalBarChart2}
+            options={chartOptions.VerticalBarChart2}
           />
         </Grid>
-        <Grid item xs={6} >
-            <div>
-        <Table column={Table3.column} data={Table3.data} category={"Salary"} keys={parsedDataFormat["salary"]}/> 
-        </div>
+      <Grid item xs={4}  className='firstDoughnut'>
+        <Table column={Table2.column} data={Table2.data} category={"Placement Details"} keys={parsedDataFormat["placement_details"]}/>
+      </Grid>
+        </Grid>
+        <div class="headings" id={`stream`} >
+          <div className="sub">
+     { streamData.streamName.toUpperCase()}
+     </div>
+          </div>
+          <Grid container container ml={10} mt={6} spacing={2} alignItems="center">
+            <Grid item xs={7}   mr={5} className='firstDoughnut'>
+              <OVerticalBarChart
+                
+                data={VerticalBarChart3}
+                options={chartOptions.VerticalBarChart3}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Table column={Table3.column} data={Table3.data} category={"Salary"} keys={parsedDataFormat["salary"]}/> 
+            </Grid>
         </Grid>
         
         </>: null}
-        {/* {showVC && mode==="table"?
-        <>
-        <Grid item xs={6} >
-        <Table column={Table2.column} data={Table2.data} category={"Placement Details"} keys={parsedDataFormat["placement_details"]}/>
-        </Grid>
-        <Grid item xs={6}>
-        <Table column={Table1.column} data={Table1.data} category={"Student Details"} keys={parsedDataFormat["student_details"]}/>
-
-
-        </Grid>
-        </>: null} */}
   </Grid>
 </Box>
+
+
+
 
     )
 }

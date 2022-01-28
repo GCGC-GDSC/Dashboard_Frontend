@@ -43,7 +43,7 @@ function NavBar({user}) {
                 Logout
             </button> 
             </div>:
-            <NavLink className='navbar-link' activeStyle={selected}  to = '/'>
+            <NavLink className='navbar-link navbar-link-login' activeStyle={selected}  to = '/'>
                 Login
             </NavLink>}
             {/* <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>

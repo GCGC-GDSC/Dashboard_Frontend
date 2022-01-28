@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {firebase} from "../../backend/firebase.config"
-import {ReactComponent as Login} from "../../assets/login.svg"
+// import {ReactComponent as Login} from "../../assets/login.svg"
 import './Signin.styles.scss';
 function Signin() {
     const signoutfromapp = () =>{
@@ -19,7 +19,7 @@ function Signin() {
     }
     return (
         <div className='sign-in'>
-        <Login/>
+        {/* <Login/> */}
         <button type="button"  className="login-with-google-btn" onClick = {SiginiWithFirebase}>
         {/* <img  src="https://image.flaticon.com/icons/png/512/281/281764.png" alt="google"/> */}
         Sign in with Google
