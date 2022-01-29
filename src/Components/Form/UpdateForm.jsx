@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
 //give all the step names in this function
 function getSteps() {
   return [
-    "Basic information",
-    "Contact Information",
-    "Personal Information",
-    "Payment",
+    "Select Campus",
+    "Institute Information",
+    "Select UG or PG",
+    "Student Details",
   ];
 }
 
@@ -37,7 +37,7 @@ function getStepContent(step) {
             id="first-name"
             label="First Name"
             variant="outlined"
-            placeholder="Enter Your First Name"
+            placeholder="Campus Name"
             fullWidth
             margin="normal"
             name="firstName"
@@ -46,7 +46,7 @@ function getStepContent(step) {
             id="last-name"
             label="Last Name"
             variant="outlined"
-            placeholder="Enter Your Last Name"
+            placeholder="Enter Institute Name"
             fullWidth
             margin="normal"
             name="lastName"
@@ -55,7 +55,7 @@ function getStepContent(step) {
             id="nick-name"
             label="Nick Name"
             variant="outlined"
-            placeholder="Enter Your Nick Name"
+            placeholder="Enter UG or PG"
             fullWidth
             margin="normal"
             name="nickName"

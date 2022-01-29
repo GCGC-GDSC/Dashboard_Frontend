@@ -6,8 +6,8 @@ const Table = ({ data, column,category,keys }) => {
     <table className="container">
       <thead>
         <tr>
-          <th>{category}</th>
-          {column.map((item, index) => <TableHeadItem item={item} />)}
+          <th style={{fontSize:"1.4rem",color:"white"}}>{category}</th>
+          {column.map((item, index) => <TableHeadItem item={item.toUpperCase()} />)}
         </tr>
         
       </thead>

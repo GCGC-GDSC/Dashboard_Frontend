@@ -12,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import "./CampusWise.styles.scss";
+import ColorPallet from "../ColorAssets/colorPallet.js";
+
 const CampusNames = {
   vskp: "Visakhapatnam",
   hyd: "Hyderabad",
@@ -26,17 +28,7 @@ function CampusWise() {
   const [campusName, setCampusName] = useState("");
   const [showD2, setShowD2] = useState(false);
   const [showCharts, setShowCharts] = useState(false);
-  const VChartColors = [
-    "#115f9a",
-    "#1984c5",
-    "#22a7f0",
-    "#48b5c4",
-    "#76c68f",
-    "#a6d75b",
-    "#c9e52f",
-    "#d0ee11",
-    "#d0f400",
-  ];
+  const VChartColors = ColorPallet
 
 
   function TabPanel(props) {
@@ -87,7 +79,7 @@ function CampusWise() {
       rotation: Math.PI * 5,
       plugins: {
         legend: {
-          position: "bottom",
+          position: "left",
         },
       },
     },
@@ -100,7 +92,7 @@ function CampusWise() {
       rotation: Math.PI * 5,
       plugins: {
         legend: {
-          position: "bottom",
+          position: "right",
         },
       },
     },
@@ -130,28 +122,8 @@ function CampusWise() {
       {
         label: "Number of Institute",
         data: campusList.map((item) => item[1]),
-        backgroundColor: [
-          "#fd7f6f",
-          "#5ea1d2",
-          "#b2e061",
-          "#bd7ebe",
-          "#ffb55a",
-          "#ffee65",
-          "#beb9db",
-          "#fdcce5",
-          "#8bd3c7",
-        ],
-        borderColor: [
-          "#fd7f6f",
-          "#5ea1d2",
-          "#b2e061",
-          "#bd7ebe",
-          "#ffb55a",
-          "#ffee65",
-          "#beb9db",
-          "#fdcce5",
-          "#8bd3c7",
-        ],
+        backgroundColor:ColorPallet,
+        borderColor: ColorPallet,
         borderWidth: 1,
       },
     ],
@@ -165,28 +137,8 @@ function CampusWise() {
         {
           label: `Institutes in Campus`,
           data: instList.map((item) => 1),
-          backgroundColor: [
-            "#fd7f6f",
-            "#5ea1d2",
-            "#b2e061",
-            "#bd7ebe",
-            "#ffb55a",
-            "#ffee65",
-            "#beb9db",
-            "#fdcce5",
-            "#8bd3c7",
-          ],
-          borderColor: [
-            "#fd7f6f",
-            "#5ea1d2",
-            "#b2e061",
-            "#bd7ebe",
-            "#ffb55a",
-            "#ffee65",
-            "#beb9db",
-            "#fdcce5",
-            "#8bd3c7",
-          ],
+          backgroundColor: ColorPallet,
+          borderColor: ColorPallet,
           borderWidth: 2,
         },
       ],
@@ -236,29 +188,8 @@ function CampusWise() {
         {
           label: "Salary in LPA",
           data: arr,
-          backgroundColor: [
-            "#fd7f6f",
-            "#5ea1d2",
-            "#b2e061",
-            "#bd7ebe",
-            "#ffb55a",
-            "#ffee65",
-            "#beb9db",
-            "#fdcce5",
-            "#8bd3c7",
-          ]
-          ,
-          borderColor: [
-            "#fd7f6f",
-            "#5ea1d2",
-            "#b2e061",
-            "#bd7ebe",
-            "#ffb55a",
-            "#ffee65",
-            "#beb9db",
-            "#fdcce5",
-            "#8bd3c7",
-          ]
+          backgroundColor: ColorPallet,
+          borderColor:ColorPallet
           ,
           borderWidth: 2,
         },
@@ -346,29 +277,9 @@ function CampusWise() {
         {
           label: "Salary in LPA",
           data: arr,
-          backgroundColor: [
-          "#fd7f6f",
-          "#5ea1d2",
-          "#b2e061",
-          "#bd7ebe",
-          "#ffb55a",
-          "#ffee65",
-          "#beb9db",
-          "#fdcce5",
-          "#8bd3c7",
-        ]
+          backgroundColor: ColorPallet
           ,
-          borderColor: [
-          "#fd7f6f",
-          "#5ea1d2",
-          "#b2e061",
-          "#bd7ebe",
-          "#ffb55a",
-          "#ffee65",
-          "#beb9db",
-          "#fdcce5",
-          "#8bd3c7",
-        ]
+          borderColor: ColorPallet
           ,
           borderWidth: 2,
         },
@@ -435,104 +346,38 @@ function CampusWise() {
     getCampus();
   }, []);
   return (
+    <>
     <Box className="overall-layout">
-      <Grid container spacing={2} className="firstContainer">
-        <Grid item xs={5}>
+      <Grid container spacing={2} className="firstContainer" alignItems="center">
+        <Grid item xs={6} >
           <ODoughnutChart
             title={"Campus Wise Overview"}
             data={dataDoughnut}
             options={chartOptions.Doughnut}
           />
         </Grid>
-        {showD2 ? (
-          <Grid item xs={5}>
+        
+        
+      
+
+      {showD2 ? (
+        <>
+       
+          <Grid item xs={5.5}>
             <ODoughnutChart
               title={`${campusName} Institute Overview`}
               data={dataDoughnut2}
               options={chartOptions.Doughnut2}
             />
           </Grid>
+          </>
         ) : null}
-      </Grid>
-
-      {showCharts ? (
-        <Grid container spacing={5} className="secondSection">
-          <h1 className="gradHeading">UG+PG</h1>
-          <Grid container>
-            <Grid item xs={3.5} className="shadow">
-              <ODoughnutChart
-                title={`${instData.name.toUpperCase()} Student Details`}
-                data={DoughnutUGPGSD}
-                options={chartOptions.DoughnutUGPG}
-              />
-            </Grid>
-            <Grid item xs={3.5} className="shadow">
-              <ODoughnutChart
-                title={`${instData.name.toUpperCase()} Placement Details`}
-                data={DoughnutUGPGPD}
-                options={chartOptions.DoughnutUGPG}
-              />
-            </Grid>
-            <Grid item xs={5} className="shadow">
-              <OVerticalBarChart
-                title={`${instData.name.toUpperCase()} Salary Details`}
-                data={VerticalBarChartUGPG}
-                options={chartOptions.VerticalBarChart1}
-              />
-            </Grid>
-          </Grid>
         
-          <h1 className="gradHeading">Undergraduate</h1>
-          <Grid container>
-            <Grid item xs={3.5} className="shadow">
-              <ODoughnutChart
-                data={DoughnutUGSD}
-                options={chartOptions.DoughnutUGPG}
-              />
-            </Grid>
-            <Grid item xs={3.5} className="shadow">
-              <ODoughnutChart
-                data={DoughnutUGPD}
-                options={chartOptions.DoughnutUGPG}
-              />
-            </Grid>
-            <Grid item xs={5} className="shadow">
-              <OVerticalBarChart
-                data={VerticalBarChartUG}
-                options={chartOptions.VerticalBarChart1}
-              />
-            </Grid>
-          </Grid>
-         
-          <h1 className="gradHeading">PostGraduate</h1>
-          <Grid container>
-            <Grid item xs={3.5} className="shadow">
-              <ODoughnutChart
-                data={DoughnutPGSD}
-                options={chartOptions.DoughnutUGPG}
-              />
-            </Grid>
-            <Grid item xs={3.5} className="shadow">
-              <ODoughnutChart
-                data={DoughnutPGPD}
-                options={chartOptions.DoughnutUGPG}
-              />
-            </Grid>
-            <Grid item xs={5} className="shadow">
-              <OVerticalBarChart
-                data={VerticalBarChartPG}
-                options={chartOptions.VerticalBarChart1}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      ) : null}
-
-      <h1>The End</h1>
-
-      {/* {showCharts ? (
+      </Grid>
+    </Box>
+      {showCharts ? (
         <div>
-          <Box>
+          <Box mt={5}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <Tabs
                 value={value}
@@ -545,85 +390,100 @@ function CampusWise() {
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              <div className="row2">
-                <div>
+              <Grid container spacing={2} alignItems="center">
+                <Grid item xs={4}>
                   <ODoughnutChart
+                  isCampus={true}
                     title={`${instData.name.toUpperCase()} Student Details`}
                     data={DoughnutUGPGSD}
                     options={chartOptions.DoughnutUGPG}
                   />
-                </div>
-                <div>
+                </Grid>
+                <Grid item xs={4}>
                   <ODoughnutChart
+                  isCampus={true}
                     title={`${instData.name.toUpperCase()} Placement Details`}
                     data={DoughnutUGPGPD}
                     options={chartOptions.DoughnutUGPG}
                   />
-                </div>
-                <div className="overall_charts" id="c4">
+                </Grid>
+                <Grid item xs={4}>
                   <OVerticalBarChart
+                  isCampus={true}
                     title={`${instData.name.toUpperCase()} Salary Details`}
                     data={VerticalBarChartUGPG}
                     options={chartOptions.VerticalBarChart1}
                   />
-                </div>
-              </div>
+                </Grid>
+              
+              </Grid>
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <div className="row2">
-                <div>
+            <Grid container spacing={2} alignItems="center">
+                <Grid item xs={4}>
                   <ODoughnutChart
+                  isCampus={true}
+
                     title={`${instData.name.toUpperCase()} Student Details`}
                     data={DoughnutUGSD}
                     options={chartOptions.DoughnutUGPG}
                   />
-                </div>
-                <div>
+                </Grid>
+                <Grid item cs={4}>
                   <ODoughnutChart
+                  isCampus={true}
+
                     title={`${instData.name.toUpperCase()} Placement Details`}
                     data={DoughnutUGPD}
                     options={chartOptions.DoughnutUGPG}
                   />
-                </div>
-                <div className="overall_charts" id="c4">
+                </Grid>
+                <Grid item cs={4}>
                   <OVerticalBarChart
+                  isCampus={true}
+
                     title={`${instData.name.toUpperCase()} Salary Details`}
                     data={VerticalBarChartUG}
                     options={chartOptions.VerticalBarChart1}
                   />
-                </div>
-              </div>
+                </Grid>
+              </Grid>
             </TabPanel>
             <TabPanel value={value} index={2}>
-              <div className="row2">
-                <div>
+              <Grid container spacing={5} alignItems="center">
+                <Grid item xs={4}>
                   <ODoughnutChart
+                  isCampus={true}
+
                     title={`${instData.name.toUpperCase()} Student Details`}
                     data={DoughnutPGSD}
                     options={chartOptions.DoughnutUGPG}
                   />
-                </div>
-                <div>
+                </Grid>
+                <Grid item xs ={4}>
                   <ODoughnutChart
+                  isCampus={true}
+
                     title={`${instData.name.toUpperCase()} Placement Details`}
                     data={DoughnutPGPD}
                     options={chartOptions.DoughnutUGPG}
                   />
-                </div>
-                <div className="overall_charts" id="c4">
+                </Grid>
+                <Grid item xs={4}>
                   <OVerticalBarChart
+                  isCampus={true}
+
                     title={`${instData.name.toUpperCase()} Salary Details`}
                     data={VerticalBarChartPG}
                     options={chartOptions.VerticalBarChart1}
                   />
-                </div>
-              </div>
+                </Grid>
+              </Grid>
             </TabPanel>
           </Box>
         </div>
-      ) : null} */}
-    </Box>
-  );
-}
-
+      ) : null}
+      
+      </>
+  )}
 export default CampusWise;

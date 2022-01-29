@@ -1,10 +1,10 @@
 const InstituteStudentDataFormat = {
   placement_details: [
     "placed",
-    "total_multiple_offers",
-    "total_not_intrested_in_placments",
-    "total_offers",
     "total_students_eligible",
+    "total_offers",
+    "total_multiple_offers",
+    // "total_not_intrested_in_placments",
     "yet_to_place",
   ],
 
@@ -20,10 +20,10 @@ const InstituteStudentDataFormat = {
 export const parsedDataFormat = {
   placement_details: [
     "Placed",
-    "Multiple Offers",
-    "Not Intrested",
-    "Offers",
     "Eligible",
+    "Offers",
+    "Multiple Offers",
+    // "Not Intrested",
     "Yet To Place",
   ],
 

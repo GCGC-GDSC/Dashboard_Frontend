@@ -21,32 +21,38 @@
   justify-content: space-between;
   -webkit-box-shadow: 0 0 8px rgb(0, 0, 0);
   -moz-box-shadow: 0 0 8px rgb(0, 0, 0);
-  backdrop-filter: blur(8px);
-  // background: rgba(255, 255, 255, 0.226);
+  background-color: #861657;
+  background-image: linear-gradient(326deg, #861657 0%, #ffa69e 74%);
 
   &_links {
     display: flex;
-    margin-right: 2rem;
+    margin-right: 3rem;
     align-items: center;
     flex: 0.3;
   }
   &-link {
     padding: 0.3em;
-    color: rgb(168, 15, 15);
+    color: rgb(253, 253, 253);
     text-decoration: none;
     align-self: center;
     font-size: 1.2rem;
-    &-btn{
-      border:none;
+    &-login {
+      flex: 1;
+      display: flex;
+      justify-content: right;
+    }
+    &-btn {
+      border: none;
       border-radius: 10px;
-      outline:none;
+      outline: none;
       padding: 0.3em;
       color: rgb(255, 255, 255);
       text-decoration: none;
       align-self: center;
       font-size: 1.2rem;
-      background-color: rgb(168, 15, 15);;
+      background-color: transparent;
       font-weight: 300;
+      font-family: Montserrat, sans-serif;
     }
   }
   &_menu {
@@ -59,9 +65,14 @@
     flex: 0.3;
   }
   &_Header {
+    color: rgb(245, 244, 244);
+    display: flex;
+    justify-content: center;
     flex: 1;
     text-align: center;
+    align-items: flex-start;
     margin: auto;
+    margin-top: -10px;
   }
 }
 .navbar_icon img {

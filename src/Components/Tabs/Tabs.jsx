@@ -5,7 +5,6 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Overall from '../../Views/Overall/Overall';
-import Fetcher from '../Fetcher/Fetcher'
 import CampusWise from '../../Views/CampusWise/CampusWise';
 import GBStats from "../../Views/GBStats/GBStats"
 function TabPanel(props) {
