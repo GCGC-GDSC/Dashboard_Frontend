@@ -1,25 +1,10 @@
-Campus --- 
-1) get all campus names 
-/organization/campus/
-doughnut with the total number of institutes for each campus
-click on any campus
+- tables in gb stats
+- tables in campus wise
 
-2) doughnut with all the institutes in that campus 
 
-​/organization​/institute​/ 
-select any institutes
+- team page
+- admin pannel
 
-3) /students/{institute}
-using this bar charts
 
- --- Stream  
-1) get all streams 
-/organization/streams/
-display doughnut with all the contents in the streams
-
-2) 
-https://gcgc-dashboard.herokuapp.com/students/overall/{stream}
-
-using this fill the 
-three vertical charts with the data .... 
---------------------------------------------
+- overall headings
+- color pallet in object form with new colors
