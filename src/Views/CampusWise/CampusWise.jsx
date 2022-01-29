@@ -321,22 +321,28 @@ function CampusWise() {
     console.log(arr)
     return arr
   }
-  const TableData = {
-    "UG":{
-      column:[instData.name],
-      data :getTableData(code,category)
-    },
-    "PG":{
-      column:[instData.name],
-      data :getTableData(code,category)
-    },
-    "UGPG":{
-      column:[instData.name],
-      data :getTableData(code,category)
-    }
+
+  const TableData ={
+    column:[instData.name],
+    data :getTableData(code,category)
   }
-  console.log(TableData[gradType])
-  return TableData[gradType]
+  // const TableData = {
+  //   "UG":{
+  //     column:[instData.name],
+  //     data :getTableData(code,category)
+  //   },
+  //   "PG":{
+  //     column:[instData.name],
+  //     data :getTableData(code,category)
+  //   },
+  //   "UGPG":{
+  //     column:[instData.name],
+  //     data :getTableData(code,category)
+  //   }
+  // }
+  // console.log(TableData[gradType])
+  // return TableData[gradType]
+  return TableData
 }
 //  -------------- TABLES----------------
   const getDataInst = (instName) => {
@@ -430,6 +436,8 @@ function CampusWise() {
                 <Tab label="PG Data" {...a11yProps(2)} />
               </Tabs>
             </Box>
+
+            {/*  UGPG --- code 10 */}
             <TabPanel value={value} index={0}>
               <Grid container spacing={2} alignItems="center">
                 <Grid item xs={4}>
@@ -440,7 +448,6 @@ function CampusWise() {
                     options={chartOptions.DoughnutUGPG}
                   />
                 </Grid>
-                {console.log(instData)}
                 <Grid item xs={4} >
                   <Table column={TABLE_DATA(10,"UGPG","student_details").column} 
                   data={TABLE_DATA(10,"UGPG","student_details").data} 
@@ -482,7 +489,7 @@ function CampusWise() {
               </Grid>
             </TabPanel>
 
-
+            {/*  UG --- code 0 */}
             <TabPanel value={value} index={1}>
             <Grid container spacing={2} alignItems="center">
                 <Grid item xs={4}>
@@ -534,7 +541,7 @@ function CampusWise() {
               </Grid>
             </TabPanel>
 
-
+           {/*  PG --- code 1 */}
             <TabPanel value={value} index={2}>
             <Grid container spacing={2} alignItems="center">
                 <Grid item xs={4}>
