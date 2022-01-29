@@ -10,7 +10,7 @@ import objRef,{parsedDataFormat} from './APIKeys.js'
 import Table from "../../Components/Table/Table"
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import ColorPallet from "../ColorAssets/colorPallet.js";
+import ColorPallet ,{colors} from "../ColorAssets/colorPallet.js";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
@@ -29,7 +29,7 @@ function Overall() {
     const [showVC,setShowVC] = useState(false)
     // for the table
     const [tableData, setTableData] = useState([])
-    const VChartColors =ColorPallet
+    const VChartColors =colors
    
   
     const chartOptions = {
@@ -77,8 +77,8 @@ function Overall() {
     datasets: [{
         label: "Number of Students",
         data: [32490,23003,12034,45044,23034,22032], 
-        backgroundColor: ColorPallet,
-          borderColor:ColorPallet,
+        backgroundColor: streamList.map(item=>ColorPallet[item]),
+          borderColor:streamList.map(item=>ColorPallet[item]),
         borderWidth: 1,
         
         },],
@@ -180,6 +180,7 @@ function Overall() {
         axios.get('https://gcgc-dashboard.herokuapp.com/organization/streams/')
         .then(resp=>{
             var arr = _.get(resp,['data','result']).map(item=>item.name)
+            arr.sort()
             setStreamList(arr)
         })
     }
@@ -198,7 +199,7 @@ function Overall() {
       <ToggleButton value="table">Tables</ToggleButton>
     </ToggleButtonGroup> */}
   
-  <Grid container spacing={9}  className="firstItem" alignItems="center">
+  <Grid container spacing={9}  className="firstItem" alignItems="center" >
 
       <Grid item xs={6} className='firstDoughnut'>
 
@@ -220,6 +221,11 @@ function Overall() {
         <div class="headings" id={`stream`} >
           <div className="sub">
      { streamData.streamName.toUpperCase()}
+     </div>
+          </div>
+          <div class="headings" id={`stream`} >
+          <div className="sub">
+          Student Details
      </div>
           </div>
       <Grid container  spacing={2} ml={10} mt={6} marginTop="0px">
@@ -245,7 +251,7 @@ function Overall() {
         <>
            <div class="headings" id={`stream`} >
           <div className="sub">
-     { streamData.streamName.toUpperCase()}
+          Placement Details
      </div>
           </div>
           <Grid container container spacing={2} ml={10} mt={6}  spacing={2} alignItems="center">
@@ -262,7 +268,7 @@ function Overall() {
         </Grid>
         <div class="headings" id={`stream`} >
           <div className="sub">
-     { streamData.streamName.toUpperCase()}
+          Salary
      </div>
           </div>
           <Grid container container ml={10} mt={6} spacing={2} alignItems="center">

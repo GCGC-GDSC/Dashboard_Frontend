@@ -6,6 +6,11 @@ import _ from "lodash";
 import objRef,{parsedInstituteStudentDataFormatCampusWise} from "./APIKeys.js";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from "@mui/material/Typography";
+
 import "../CampusWise/CampusWise.styles.scss"
 function GBStats() {
   const [statsData,setStatsData] =useState([])
@@ -28,6 +33,43 @@ function GBStats() {
         }
       },
     },
+  };
+
+  // beshaq
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
+    };
+  }
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   const getStatsData = ()=>{
@@ -239,26 +281,38 @@ function GBStats() {
    getStatsData()
   },[])
   return(
-    <Box p={5} className='overall_box'>
+    <Box>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+              >
+                <Tab label="UG + PG Data" {...a11yProps(0)} />
+                <Tab label="UG Data" {...a11yProps(1)} />
+                <Tab label="PG Data" {...a11yProps(2)} />
+              </Tabs>
+              </Box>
       <Grid container spacing={5} >
+      <TabPanel value={value} index={0}>
           <h1 className="gradHeading">UG+PG</h1>
           {statsData && statsData["PG"] && statsData["UG"]?
           <Grid container>
-            <Grid item xs={3.5} className="shadow">
+            <Grid item xs={4} className="shadow">
               <ODoughnutChart
                 title={`Student Details`}
                 data={DoughnutUGPGSD}
                 options={chartOptions.DoughnutUGPG}
               />
             </Grid>
-            <Grid item xs={3.5} className="shadow">
+            <Grid item xs={4} className="shadow">
               <ODoughnutChart
                 title={`Placement Details`}
                 data={DoughnutUGPGPD}
                 options={chartOptions.DoughnutUGPG}
               />
             </Grid>
-            <Grid item xs={5} className="shadow">
+            <Grid item xs={4} className="shadow">
               <OVerticalBarChart
                 title={`Salary Details`}
                 data={VerticalBarChartUGPG}
@@ -266,52 +320,57 @@ function GBStats() {
               />
             </Grid>
           </Grid>:null}
-        
+          </TabPanel>
+          <TabPanel value={value} index={1}>
           <h1 className="gradHeading">Undergraduate</h1>
           {statsData && statsData["UG"]?
           <Grid container>
-            <Grid item xs={3.5} className="shadow">
+            <Grid item xs={4} className="shadow">
               <ODoughnutChart
                 data={DoughnutUGSD}
                 options={chartOptions.DoughnutUGPG}
               />
             </Grid>
-            <Grid item xs={3.5} className="shadow">
+            <Grid item xs={4} className="shadow">
               <ODoughnutChart
                 data={DoughnutUGPD}
                 options={chartOptions.DoughnutUGPG}
               />
             </Grid>
-            <Grid item xs={5} className="shadow">
+            <Grid item xs={4} className="shadow">
               <OVerticalBarChart
                 data={VerticalBarChartUG}
                 options={chartOptions.VerticalBarChart1}
               />
           </Grid>
             </Grid>:null}
+            </TabPanel>
+            <TabPanel value={value} index={2}>
          
           <h1 className="gradHeading">PostGraduate</h1>
           {statsData && statsData["PG"]?
           <Grid container>
-            <Grid item xs={3.5} className="shadow">
+            <Grid item xs={4} className="shadow">
               <ODoughnutChart
                 data={DoughnutPGSD}
                 options={chartOptions.DoughnutUGPG}
               />
             </Grid>
-            <Grid item xs={3.5} className="shadow">
+            <Grid item xs={4} className="shadow">
               <ODoughnutChart
                 data={DoughnutPGPD}
                 options={chartOptions.DoughnutUGPG}
               />
             </Grid>
-            <Grid item xs={5} className="shadow">
+            <Grid item xs={4} className="shadow">
               <OVerticalBarChart
                 data={VerticalBarChartPG}
                 options={chartOptions.VerticalBarChart1}
               />
             </Grid>
           </Grid>:null}
+          </TabPanel>
+
         </Grid>
     </Box>
   )
