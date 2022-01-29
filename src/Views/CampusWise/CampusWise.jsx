@@ -361,6 +361,8 @@ function CampusWise() {
       
 
       {showD2 ? (
+        <>
+       
           <Grid item xs={5.5}>
             <ODoughnutChart
               title={`${campusName} Institute Overview`}
@@ -368,13 +370,14 @@ function CampusWise() {
               options={chartOptions.Doughnut2}
             />
           </Grid>
+          </>
         ) : null}
         
       </Grid>
     </Box>
       {showCharts ? (
         <div>
-          <Box>
+          <Box mt={5}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <Tabs
                 value={value}
