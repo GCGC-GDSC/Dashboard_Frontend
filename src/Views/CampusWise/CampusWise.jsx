@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import "./CampusWise.styles.scss";
-import ColorPallet from "../ColorAssets/colorPallet.js";
+import ColorPallet,{colors} from "../ColorAssets/colorPallet.js";
 import Table from "../../Components/Table/Table"
 
 const CampusNames = {
@@ -29,7 +29,7 @@ function CampusWise() {
   const [campusName, setCampusName] = useState("");
   const [showD2, setShowD2] = useState(false);
   const [showCharts, setShowCharts] = useState(false);
-  const VChartColors = ColorPallet
+  const VChartColors = colors;
 
 
   function TabPanel(props) {
@@ -123,8 +123,8 @@ function CampusWise() {
       {
         label: "Number of Institute",
         data: campusList.map((item) => item[1]),
-        backgroundColor:ColorPallet,
-        borderColor: ColorPallet,
+        backgroundColor:colors,
+        borderColor: colors,
         borderWidth: 1,
       },
     ],
@@ -138,8 +138,8 @@ function CampusWise() {
         {
           label: `Institutes in Campus`,
           data: instList.map((item) => 1),
-          backgroundColor: ColorPallet,
-          borderColor: ColorPallet,
+          backgroundColor: colors,
+          borderColor: colors,
           borderWidth: 2,
         },
       ],
@@ -187,8 +187,8 @@ function CampusWise() {
       {
         label: "Salary in LPA",
         data: arr,
-        backgroundColor: ColorPallet,
-        borderColor:ColorPallet
+        backgroundColor: colors,
+        borderColor:colors
         ,
         borderWidth: 2,
       },
@@ -279,9 +279,9 @@ function CampusWise() {
         {
           label: "Salary in LPA",
           data: arr,
-          backgroundColor: ColorPallet
+          backgroundColor: colors
           ,
-          borderColor: ColorPallet
+          borderColor: colors
           ,
           borderWidth: 2,
         },
