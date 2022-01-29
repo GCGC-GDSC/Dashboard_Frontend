@@ -1,4 +1,4 @@
-const ColorPallet = [
+export const colors = [
   "#303F9F",
   "#CC5500",
   "#F9A825",
@@ -11,25 +11,14 @@ const ColorPallet = [
   "#9F3076",
   "#800080",
 ];
-// const ColorPallet = [
-//   "#FF2281",
-//   "#011FFD",
-//   "#652EC7",
-//   "#13CA91",
-//   "#FF8B8B",
-//   "#OJ7A9O",
-//   "#FEbB35",
-//   "#C24CF6",
-//   "#EFO888",
-//   "#CEOOOO",
-//   "#FFAAO1",
-//   "#3CB9FC",
-// ];
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-shuffleArray(ColorPallet);
+
+const ColorPallet = {
+  engineering: "rgb(0,176,240)",
+  management: "rgb(255,192,0)",
+  pharmacy: "rgb(255,0,0)",
+  sciences: "rgb(146,208,80)",
+  law: "rgb(123,123,123)",
+  architecture: "rgb(201,201,201)",
+};
+
 export default ColorPallet;

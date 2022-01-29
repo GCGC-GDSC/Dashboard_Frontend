@@ -17,7 +17,11 @@ th {
   text-align: left;
   color: rgba(255, 217, 0, 0.959);
 }
+
 thead th {
+  background-color: #506ce6;
+}
+thead th:nth-child(1) {
   background-color: #506ce6;
 }
 tbody tr:hover {
