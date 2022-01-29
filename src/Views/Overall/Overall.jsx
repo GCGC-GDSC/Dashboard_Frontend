@@ -220,7 +220,7 @@ function Overall() {
     return(
 <Box p={5} className='overall_box'>
                   {/* purrrrr */}
-                  <ToggleButtonGroup
+                  {/* <ToggleButtonGroup
       color="primary"
       value={mode}
       exclusive
@@ -228,7 +228,7 @@ function Overall() {
     >
       <ToggleButton value="chart">Charts</ToggleButton>
       <ToggleButton value="table">Tables</ToggleButton>
-    </ToggleButtonGroup>
+    </ToggleButtonGroup> */}
   
   <Grid container spacing={9} className="firstItem">
   
