@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from "@mui/material/Typography";
+import Table from "../../Components/Table/Table"
 
 import "../CampusWise/CampusWise.styles.scss"
 function GBStats() {
@@ -35,7 +36,6 @@ function GBStats() {
     },
   };
 
-  // beshaq
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -274,25 +274,47 @@ function GBStats() {
           ),
         };
       }
+       // Tables -------------------------------
+ const TABLE_DATA = (code,gradType,category)=>{
+  const getTableData = (code,category)=>{
+    const keys = objRef[category]
+    let arr = []
+    if(code !== 10)
+      {
+        for(let i = 0;i < keys.length;i++){
+          arr.push([statsData[gradType][category][keys[i]]])
+          }
+      }
+    else{
+      arr = combineArrays(keys,statsData["UG"][category],statsData["PG"][category],category).values
+      arr = arr.map(item=>[item])
+    }
+    console.log(arr)
+    return arr
+  }
 
-
-
+  const TableData ={
+    column:[`${gradType} Data`],
+    data :getTableData(code,category)
+  }
+  return TableData
+}
   useEffect(()=>{
    getStatsData()
   },[])
   return(
     <Box>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                aria-label="basic tabs example"
-              >
-                <Tab label="UG + PG Data" {...a11yProps(0)} />
-                <Tab label="UG Data" {...a11yProps(1)} />
-                <Tab label="PG Data" {...a11yProps(2)} />
-              </Tabs>
-              </Box>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+          >
+            <Tab label="UG + PG Data" {...a11yProps(0)} />
+            <Tab label="UG Data" {...a11yProps(1)} />
+            <Tab label="PG Data" {...a11yProps(2)} />
+          </Tabs>
+      </Box>
       <Grid container spacing={5} >
       <TabPanel value={value} index={0}>
           <h1 className="gradHeading">UG+PG</h1>
@@ -304,6 +326,10 @@ function GBStats() {
                 data={DoughnutUGPGSD}
                 options={chartOptions.DoughnutUGPG}
               />
+                <Table column={TABLE_DATA(10,"UGPG","student_details").column} 
+                  data={TABLE_DATA(10,"UGPG","student_details").data} 
+                  category={"Student Details"} 
+                  keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
             </Grid>
             <Grid item xs={4} className="shadow">
               <ODoughnutChart
@@ -311,6 +337,10 @@ function GBStats() {
                 data={DoughnutUGPGPD}
                 options={chartOptions.DoughnutUGPG}
               />
+               <Table column={TABLE_DATA(10,"UGPG","placement_details").column} 
+                  data={TABLE_DATA(10,"UGPG","placement_details").data} 
+                  category={"Placement Details"} 
+                  keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
             </Grid>
             <Grid item xs={4} className="shadow">
               <OVerticalBarChart
@@ -318,10 +348,15 @@ function GBStats() {
                 data={VerticalBarChartUGPG}
                 options={chartOptions.VerticalBarChart1}
               />
+               <Table column={TABLE_DATA(10,"UGPG","salary").column} 
+                  data={TABLE_DATA(10,"UGPG","salary").data} 
+                  category={"Salary"} 
+                  keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
             </Grid>
           </Grid>:null}
-          </TabPanel>
-          <TabPanel value={value} index={1}>
+      </TabPanel>
+
+      <TabPanel value={value} index={1}>
           <h1 className="gradHeading">Undergraduate</h1>
           {statsData && statsData["UG"]?
           <Grid container>
@@ -330,23 +365,35 @@ function GBStats() {
                 data={DoughnutUGSD}
                 options={chartOptions.DoughnutUGPG}
               />
+               <Table column={TABLE_DATA(0,"UG","student_details").column} 
+                  data={TABLE_DATA(0,"UG","student_details").data} 
+                  category={"Student Details"} 
+                  keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
             </Grid>
             <Grid item xs={4} className="shadow">
               <ODoughnutChart
                 data={DoughnutUGPD}
                 options={chartOptions.DoughnutUGPG}
               />
+                <Table column={TABLE_DATA(0,"UG","placement_details").column} 
+                  data={TABLE_DATA(0,"UG","placement_details").data} 
+                  category={"Placement Details"} 
+                  keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
             </Grid>
             <Grid item xs={4} className="shadow">
               <OVerticalBarChart
                 data={VerticalBarChartUG}
                 options={chartOptions.VerticalBarChart1}
               />
+               <Table column={TABLE_DATA(0,"UG","salary").column} 
+                  data={TABLE_DATA(0,"UG","salary").data} 
+                  category={"Salary"} 
+                  keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
           </Grid>
             </Grid>:null}
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-         
+      </TabPanel>
+      
+      <TabPanel value={value} index={2}>   
           <h1 className="gradHeading">PostGraduate</h1>
           {statsData && statsData["PG"]?
           <Grid container>
@@ -355,18 +402,30 @@ function GBStats() {
                 data={DoughnutPGSD}
                 options={chartOptions.DoughnutUGPG}
               />
+              <Table column={TABLE_DATA(1,"PG","student_details").column} 
+                data={TABLE_DATA(1,"PG","student_details").data} 
+                category={"Student Details"} 
+                keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
             </Grid>
             <Grid item xs={4} className="shadow">
               <ODoughnutChart
                 data={DoughnutPGPD}
                 options={chartOptions.DoughnutUGPG}
               />
+               <Table column={TABLE_DATA(1,"PG","placement_details").column} 
+                  data={TABLE_DATA(1,"PG","placement_details").data} 
+                  category={"Placement Details"} 
+                  keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
             </Grid>
             <Grid item xs={4} className="shadow">
               <OVerticalBarChart
                 data={VerticalBarChartPG}
                 options={chartOptions.VerticalBarChart1}
               />
+               <Table column={TABLE_DATA(1,"PG","salary").column} 
+                  data={TABLE_DATA(1,"PG","salary").data} 
+                  category={"Salary"} 
+                  keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
             </Grid>
           </Grid>:null}
           </TabPanel>
