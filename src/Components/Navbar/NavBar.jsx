@@ -46,9 +46,9 @@ function NavBar({user}) {
             <NavLink className='navbar-link navbar-link-login' activeStyle={selected}  to = '/'>
                 Login
             </NavLink>}
-            {/* <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
+            <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
                 Team
-            </NavLink> */}
+            </NavLink>
     
         </div>
 

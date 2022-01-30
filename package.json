@@ -29,6 +29,7 @@
     "react-responsive-carousel": "^3.2.22",
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
+    "react-social-icons": "^5.10.0",
     "react-tsparticles": "^1.37.1",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.11"

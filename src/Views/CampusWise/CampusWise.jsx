@@ -102,6 +102,12 @@ function CampusWise() {
         if (item[0]) {
         }
       },
+      rotation: Math.PI * 5,
+      plugins: {
+        legend: {
+          position: "left",
+        },
+      },
     },
     Doughnut4: {
       onClick: function (evt, item) {
@@ -113,6 +119,22 @@ function CampusWise() {
       onClick: function (evt, item) {
         if (item[0]) {
         }
+      },
+    },
+    DoughnutUG:{
+      rotation: Math.PI * 5,
+      plugins: {
+        legend: {
+          position: "left",
+        },
+      },
+    },
+    DoughnutPG:{
+      rotation: Math.PI * 5,
+      plugins: {
+        legend: {
+          position: "left",
+        },
       },
     },
   };
@@ -390,7 +412,7 @@ function CampusWise() {
     <>
     <Box className="overall-layout">
       <Grid container spacing={2} className="firstContainer" alignItems="center">
-        <Grid item xs={6} >
+        <Grid item xs={5.6} >
           <ODoughnutChart
             title={"Campus Wise Overview"}
             data={dataDoughnut}
@@ -404,7 +426,7 @@ function CampusWise() {
       {showD2 ? (
         <>
        
-          <Grid item xs={5.5}>
+          <Grid item xs={5.5} p={3} ml={5}>
             <ODoughnutChart
               title={`${campusName} Institute Overview`}
               data={dataDoughnut2}
@@ -418,30 +440,40 @@ function CampusWise() {
     </Box>
       {showCharts ? (
         <div>
-          <Box mt={5}>
+          <Box>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <Tabs
                 value={value}
                 onChange={handleChange}
                 aria-label="basic tabs example"
               >
-                <Tab label="UG + PG Data" {...a11yProps(0)} />
-                <Tab label="UG Data" {...a11yProps(1)} />
-                <Tab label="PG Data" {...a11yProps(2)} />
+                <Tab label="UG and PG" {...a11yProps(0)} />
+                <Tab label="UnderGraduate" {...a11yProps(1)} />
+                <Tab label="PostGraduate" {...a11yProps(2)} />
               </Tabs>
             </Box>
-            <TabPanel value={value} index={0}>
-              <Grid container spacing={2} alignItems="center">
-                <Grid item xs={4}>
+            <Grid container className="firstItem" alignItems="center">
+            <TabPanel value={value} index={0} style={{width:"100%"}}>
+              <Grid container spacing={9} alignItems="center" mt={2} >
+              <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${campusName}`}
+                </div>
+                </div>
+                <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${instData.name.toUpperCase()} Student Details`}
+                </div>
+                </div>
+                <Grid item xs={6} >
                   <ODoughnutChart
                   isCampus={true}
-                    title={`${instData.name.toUpperCase()} Student Details`}
+                    // title={`${instData.name.toUpperCase()} Student Details`}
                     data={DoughnutUGPGSD}
                     options={chartOptions.DoughnutUGPG}
                   />
                 </Grid>
-                {console.log(instData)}
-                <Grid item xs={4} >
+                <Grid item xs={6}>
                   <Table column={TABLE_DATA(10,"UGPG","student_details").column} 
                   data={TABLE_DATA(10,"UGPG","student_details").data} 
                   category={"Student Details"} 
@@ -449,15 +481,22 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center">
-              <Grid item xs={4}>
+              <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${instData.name.toUpperCase()} Placement Details`}
+
+                </div>
+                </div>
+              <Grid item xs={5} >
+                
                 <ODoughnutChart
                 isCampus={true}
-                  title={`${instData.name.toUpperCase()} Placement Details`}
+                  // title={`${instData.name.toUpperCase()} Placement Details`}
                   data={DoughnutUGPGPD}
                   options={chartOptions.DoughnutUGPG}
                 />
               </Grid>
-              <Grid item xs={4} >
+              <Grid item xs={5} ml={15}>
                   <Table column={TABLE_DATA(10,"UGPG","placement_details").column} 
                   data={TABLE_DATA(10,"UGPG","placement_details").data} 
                   category={"Placement Details"} 
@@ -465,15 +504,20 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center">
-                <Grid item xs={4}>
+              <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${instData.name.toUpperCase()} Salary Details`}
+                </div>
+                </div>
+                <Grid item xs={5} >
                   <OVerticalBarChart
                   isCampus={true}
-                    title={`${instData.name.toUpperCase()} Salary Details`}
+                    // title={`${instData.name.toUpperCase()} Salary Details`}
                     data={VerticalBarChartUGPG}
                     options={chartOptions.VerticalBarChart1}
                   />
                 </Grid>
-                <Grid item xs={4} >
+                <Grid item xs={5} ml={15}>
                   <Table column={TABLE_DATA(10,"UGPG","salary").column} 
                   data={TABLE_DATA(10,"UGPG","salary").data} 
                   category={"Salary"} 
@@ -483,17 +527,28 @@ function CampusWise() {
             </TabPanel>
 
 
-            <TabPanel value={value} index={1}>
-            <Grid container spacing={2} alignItems="center">
-                <Grid item xs={4}>
+            <TabPanel value={value} index={1} style={{width:"100%"}}>
+            <Grid container spacing={9} alignItems="center" mt={2}>
+              <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${campusName}`}
+                </div>
+                </div>
+                <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${instData.name.toUpperCase()} Student Details`}
+                </div>
+                </div>
+                <Grid item xs={6}>
+                
                   <ODoughnutChart
                   isCampus={true}
-                    title={`${instData.name.toUpperCase()} Student Details`}
+                    // title={`${instData.name.toUpperCase()} Student Details`}
                     data={DoughnutUGSD}
                     options={chartOptions.DoughnutUG}
                   />
                 </Grid>
-                <Grid item xs={4} >
+                <Grid item xs={5} >
                   <Table column={TABLE_DATA(0,"UG","student_details").column} 
                   data={TABLE_DATA(0,"UG","student_details").data} 
                   category={"Student Details"} 
@@ -501,15 +556,20 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center">
-              <Grid item xs={4}>
+              <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${instData.name.toUpperCase()} Placement Details`}
+                </div>
+                </div>
+              <Grid item xs={5}>
                 <ODoughnutChart
                 isCampus={true}
-                  title={`${instData.name.toUpperCase()} Placement Details`}
+                  // title={`${instData.name.toUpperCase()} Placement Details`}
                   data={DoughnutUGPD}
                   options={chartOptions.DoughnutUG}
                 />
               </Grid>
-              <Grid item xs={4} >
+              <Grid item xs={6} ml={9}>
                   <Table column={TABLE_DATA(0,"UG","placement_details").column} 
                   data={TABLE_DATA(0,"UG","placement_details").data} 
                   category={"Placement Details"} 
@@ -517,15 +577,20 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center">
-                <Grid item xs={4}>
+              <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${instData.name.toUpperCase()} Salary Details`}
+                </div>
+                </div>
+                <Grid item xs={6}>
                   <OVerticalBarChart
                   isCampus={true}
-                    title={`${instData.name.toUpperCase()} Salary Details`}
+                    // title={`${instData.name.toUpperCase()} Salary Details`}
                     data={VerticalBarChartUG}
                     options={chartOptions.VerticalBarChart1}
                   />
                 </Grid>
-                <Grid item xs={4} >
+                <Grid item xs={6} >
                   <Table column={TABLE_DATA(0,"UG","salary").column} 
                   data={TABLE_DATA(0,"UG","salary").data} 
                   category={"Salary"} 
@@ -535,17 +600,27 @@ function CampusWise() {
             </TabPanel>
 
 
-            <TabPanel value={value} index={2}>
-            <Grid container spacing={2} alignItems="center">
-                <Grid item xs={4}>
+            <TabPanel value={value} index={2} style={{width:"100%"}}>
+            <Grid container spacing={9} alignItems="center" mt={2}>
+              <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${campusName}`}
+                </div>
+                </div>
+                <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${instData.name.toUpperCase()} Student Details`}
+                </div>
+                </div>
+                <Grid item xs={6}>
                   <ODoughnutChart
                   isCampus={true}
-                    title={`${instData.name.toUpperCase()} Student Details`}
+                    // title={`${instData.name.toUpperCase()} Student Details`}
                     data={DoughnutPGSD}
                     options={chartOptions.DoughnutPG}
                   />
                 </Grid>
-                <Grid item xs={4} >
+                <Grid item xs={6} >
                   <Table column={TABLE_DATA(1,"PG","student_details").column} 
                   data={TABLE_DATA(1,"PG","student_details").data} 
                   category={"Student Details"} 
@@ -553,15 +628,20 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center">
-              <Grid item xs={4}>
+              <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${instData.name.toUpperCase()} Placement Details`}
+                </div>
+                </div>
+              <Grid item xs={5}>
                 <ODoughnutChart
                 isCampus={true}
-                  title={`${instData.name.toUpperCase()} Placement Details`}
+                  // title={`${instData.name.toUpperCase()} Placement Details`}
                   data={DoughnutPGPD}
                   options={chartOptions.DoughnutPG}
                 />
               </Grid>
-              <Grid item xs={4} >
+              <Grid item xs={5} ml={12}>
                   <Table column={TABLE_DATA(1,"PG","placement_details").column} 
                   data={TABLE_DATA(1,"PG","placement_details").data} 
                   category={"Placement Details"} 
@@ -569,15 +649,20 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center">
-                <Grid item xs={4}>
+              <div class="headings" id={`stream`} >
+                <div className="sub">
+                {`${instData.name.toUpperCase()} Salary Details`}
+                </div>
+                </div>
+                <Grid item xs={6}>
                   <OVerticalBarChart
                   isCampus={true}
-                    title={`${instData.name.toUpperCase()} Salary Details`}
+                    // title={`${instData.name.toUpperCase()} Salary Details`}
                     data={VerticalBarChartPG}
                     options={chartOptions.VerticalBarChart1}
                   />
                 </Grid>
-                <Grid item xs={4} >
+                <Grid item xs={6} >
                   <Table column={TABLE_DATA(1,"PG","salary").column} 
                   data={TABLE_DATA(1,"PG","salary").data} 
                   category={"Salary"} 
@@ -585,6 +670,7 @@ function CampusWise() {
                 </Grid>
               </Grid>
             </TabPanel>
+            </Grid>
           </Box>
         </div>
       ) : null}
