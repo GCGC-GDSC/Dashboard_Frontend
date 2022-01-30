@@ -343,22 +343,12 @@ function CampusWise() {
     console.log(arr)
     return arr
   }
-  const TableData = {
-    "UG":{
-      column:[instData.name],
-      data :getTableData(code,category)
-    },
-    "PG":{
-      column:[instData.name],
-      data :getTableData(code,category)
-    },
-    "UGPG":{
-      column:[instData.name],
-      data :getTableData(code,category)
-    }
+
+  const TableData ={
+    column:[instData.name],
+    data :getTableData(code,category)
   }
-  console.log(TableData[gradType])
-  return TableData[gradType]
+  return TableData
 }
 //  -------------- TABLES----------------
   const getDataInst = (instName) => {
