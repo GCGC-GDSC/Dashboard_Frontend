@@ -6,7 +6,6 @@ function Admin()
     <Box p={10}>
         
         I am Admin
-        o'relly
         <LinaerStepper/>
     </Box>
     )

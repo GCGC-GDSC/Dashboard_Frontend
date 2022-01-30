@@ -18,11 +18,12 @@ function Home({user}) {
     },[])
     return ( 
         <div className='homePage'>  
+        {user && user.displayName?
         <Snackbar
                 open={open}
                 onClose={handleClose}
                 message={`Welcome ${user.displayName}`}
-            />
+            />:null}
         <main className='main_section'>
             <BasicTabs/>
         </main>
