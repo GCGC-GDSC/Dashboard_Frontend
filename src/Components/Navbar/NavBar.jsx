@@ -28,7 +28,7 @@ function NavBar({user}) {
             <img src={gcgcLogo} alt=""  width={"153px"} height={"45px"} />
         </div>  
         <div className="navbar_Header">
-            <HeroText year={2022}/>
+            <h3>CAREER FULFILLMENT STATISTICS <span className="heading_year">2022</span></h3> 
         </div>
         <div className='navbar_links'>
             {user?
@@ -39,17 +39,22 @@ function NavBar({user}) {
             <NavLink className='navbar-link' activeStyle={selected}  to = '/admin'>
                 Admin
             </NavLink>
+            <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
+                Team
+            </NavLink>
             <button className='navbar-link-btn' onClick={signoutfromapp}>
                 Logout
             </button> 
             </div>:
-            <NavLink className='navbar-link navbar-link-login' activeStyle={selected}  to = '/'>
-                Login
-            </NavLink>}
-            <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
-                Team
-            </NavLink>
-    
+           <div className='navbar_links'>
+                <NavLink className='navbar-link navbar-link-login' activeStyle={selected}  to = '/'>
+                    Login
+                </NavLink>
+                <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
+                    Team
+                </NavLink>
+            </div>
+            }
         </div>
 
         </div>
