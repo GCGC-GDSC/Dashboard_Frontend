@@ -1,24 +1,28 @@
 import { SocialIcon } from 'react-social-icons';
-import "./ProfileCard.css"
-const ProfileCard = () => {
+import "./ProfileCard.scss"
+const ProfileCard = ({member}) => {
     return(
-        <div className="teamcontainer">
+        <div className="card-container">
             <div className="picture">
-                <img src="https://avatars.githubusercontent.com/u/54280958?v=4" alt="Team Memeber image should be here" />
+                <img src={member.picture}
+                 alt={`${member.name}'s picture`}/>
             </div>
             <div className="content">
-            <p className="name">Krishna Chaitanya</p>
-            <p className="role">FrontEnd Developer</p>
-            <p className="rollno">121910302022</p>
-            <p className="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti assumenda voluptatem pariatur a, dolores nesciunt sit eum eius corrupti error?</p>
-            <div className="icons">
-            <a href=''><SocialIcon url="https://twitter.com/jaketrent" style={{ height: 30, width: 30 }} /></a>
-            <a href=''><SocialIcon url="https://instagram.com/jaketrent" style={{ height: 30, width: 30 }} /></a>
-            <a href=''><SocialIcon url="https://linkedin.com/jaketrent" style={{ height: 30, width: 30 }} /></a>
-            <a href=''><SocialIcon url="https://github.com/jaketrent" style={{ height: 30, width: 30 }} /></a>
-
+                <div>
+                    <p className="name">{member.name}</p>
+                    <p className={`${member.role.toLowerCase()}`} >{member.role}</p>
+                    <p className="rollno">{member.rollnumber}</p>
+                    <p className="desc">
+                    {member.description}
+                    </p>
+                </div>
+                <div className="icons">
+                    <SocialIcon url={member.linkedin} style={{ height: 30, width: 30 }} />
+                    <SocialIcon url={member.github} style={{ height: 30, width: 30 }} />
+                    <SocialIcon url={member.website} style={{ height: 30, width: 30 }} />
+                    {/* <a href={member.name}><SocialIcon url={member.name} style={{ height: 30, width: 30 }} /></a> */}
+                </div>
             </div>
-        </div>
         </div>
     )
 }

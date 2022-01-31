@@ -431,7 +431,7 @@ function CampusWise() {
       {showCharts ? (
         <div>
           <Box>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }} mt={5}>
               <Tabs
                 value={value}
                 onChange={handleChange}

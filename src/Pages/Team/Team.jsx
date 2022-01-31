@@ -1,24 +1,37 @@
 import ProfileCard from "./profileCard"
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import {firebase} from 'firebase';
+import ParticlesComponent from "../../Components/Particles/ParticlesComponent"
+import {firestore} from "../../backend/firebase.config"
 import './Team.style.scss'
+import { useEffect, useState } from "react";
 const Team = () => {
-  
-firebase.collections("users").set({
-  name:"Krishna Chaitanya",
-  role:"FrontEnd",
-  rollnumber:"121910302022",
-  description:"cement se nikla gulab ithihass ek kitab har halka jawab sach hua mera kvaab wafadar kabardar hoshiyaar gully gang sabse hard parivar",
-})
-
+  const [members,setMembers] = useState([])
+  function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+    return array;
+  }
+  useEffect(()=>{
+    firestore.collection("members").get()
+    .then(resp=>{
+      const arr =[]
+       resp.docs.map(item=>arr.push(item.data()))
+       setMembers(shuffle(arr))
+    })
+  },[])
   return <>
+  <ParticlesComponent/>
   <div style={{marginTop:"100px"}}></div>
   <div className="profile-cards-container">
-      <ProfileCard/>
-      <ProfileCard/>
-      <ProfileCard/>
-      <ProfileCard/>
+    {members.map(member=>
+      <ProfileCard member={member} key={member.rollnumber}/>
+      )}
   </div>
   </>
 }

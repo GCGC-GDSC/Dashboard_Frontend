@@ -16,7 +16,7 @@ const HeroText = ({year}) => {
         <div className="heading" style={heading}>
         {/* <h1 style={myStyle}>GITAM CAREER GUIDANCE CENTRE</h1> */}
         {/* <h2>(GCGC)</h2>*/}
-        <h3>CAREER FULFILLMENT STATISTICS <span style={myStyle}>{year}</span></h3> 
+        <h3>CAREER FULFILLMENT STATISTICS <span style={myStyle}>2022</span></h3> 
         </div>
     )
 }

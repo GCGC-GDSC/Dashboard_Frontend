@@ -1,0 +1,75 @@
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 45%;
+  padding: 0px 5px 0px 0px;
+  margin: auto;
+  margin-top: 2rem;
+  min-width: 350px;
+  // min-height: 250px;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.14);
+  // border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.frontend {
+  color: green;
+}
+.backend {
+  color: brown;
+}
+.picture {
+  flex: 0.5;
+  img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    // box-shadow: 3px 3px 1px #ccc;
+    // -webkit-box-shadow: 3px 3px 1px #ccc;
+    // -moz-box-shadow: 3px 3px 1px #ccc;
+  }
+}
+
+.content {
+  display: flex;
+  margin-left: 10px;
+  flex: 0.5;
+  align-content: center;
+  justify-content: space-between;
+  min-width: 200px;
+}
+.content p {
+  margin: 0px;
+}
+.icons {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.icons a {
+  margin-right: 5px;
+}
+.name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+.role {
+  color: grey;
+}
+.desc {
+  color: grey;
+  font-size: small;
+  padding-top: 10px;
+}
+.rollno {
+  color: grey;
+  font-size: smaller;
+}
