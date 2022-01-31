@@ -9,6 +9,7 @@ import Snackbar from '@mui/material/Snackbar';
 import { UserContext } from '../../context/context';
 function Home() {
     const user = useContext(UserContext)
+    console.log(user)
     const [open, setOpen] = useState(false);
     const handleClose = () => {
         setOpen(false);
@@ -19,12 +20,11 @@ function Home() {
     },[])
     return ( 
         <div className='homePage'>  
-        {user && user.displayName?
         <Snackbar
                 open={open}
                 onClose={handleClose}
-                message={`Welcome ${user.displayName}`}
-            />:null}
+                message={`Welcome ${user.user.name}`}
+            />:
         <main className='main_section'>
             <BasicTabs/>
         </main>

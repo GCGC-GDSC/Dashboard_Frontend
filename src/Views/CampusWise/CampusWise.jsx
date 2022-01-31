@@ -446,13 +446,13 @@ function CampusWise() {
               <Grid container spacing={9} alignItems="center" mt={2} >
               <div class="headings" id={`stream`} >
                 <div className="sub">
-                {`${campusName}`}
+                {`${campusName}`} 
                 </div>
                 </div>
-                <div class="headings" id={`stream`} >
-                <div className="sub">
-                {`${instData.name.toUpperCase()} Student Details`}
-                </div>
+                <div class="headings" id={`stream`}  style={{marginTop:"20px",marginBottom:"-100px"}}>
+                  <div className="sub">
+                  {`${instData.name.toUpperCase()} Student Details`}
+                  </div>
                 </div>
                 <Grid item xs={6} >
                   <ODoughnutChart
