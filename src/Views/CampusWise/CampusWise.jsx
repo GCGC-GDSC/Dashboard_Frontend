@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ODoughnutChart from "../Overall/charts/ODoughnut";
 import OVerticalBarChart from "../Overall/charts/OVerticalBarChart";
 import _ from "lodash";
@@ -11,10 +11,12 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Snackbar from '@mui/material/Snackbar';
 import "./CampusWise.styles.scss";
 import ColorPallet,{colors} from "../ColorAssets/colorPallet.js";
 import Table from "../../Components/Table/Table"
-
+import SnackbarContent from '@mui/material/SnackbarContent';
+import { UserContext } from '../../context/context';
 const CampusNames = {
   vskp: "Visakhapatnam",
   hyd: "Hyderabad",
@@ -22,6 +24,8 @@ const CampusNames = {
 };
 
 function CampusWise() {
+  const user = useContext(UserContext)
+  const [userMultiAccess,setUserMultiAccess] = useState(false)
   const [campusData, setCampusData] = useState({});
   const [instData, setInstData] = useState([]);
   const [instList, setInstList] = useState([]);
@@ -30,8 +34,10 @@ function CampusWise() {
   const [showD2, setShowD2] = useState(false);
   const [showCharts, setShowCharts] = useState(false);
   const VChartColors = colors;
-
-
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+      setOpen(false);
+    };
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -73,8 +79,13 @@ function CampusWise() {
     Doughnut: {
       onClick: function (evt, item) {
         if (item[0]) {
-          // console.log('ask data for',campusList[item[0].index])
-          getData(campusList[item[0].index][0]);
+          // console.log('ask data for',campusList[item[0].index]) 
+          const itemIndex = item[0].index
+          if(userMultiAccess || campusList[itemIndex][0] === user.user.campus[0].name )
+              getData(campusList[itemIndex][0]);
+          else{
+            setOpen(true)
+          }
         }
       },
       rotation: Math.PI * 5,
@@ -355,7 +366,7 @@ function CampusWise() {
       .get(`https://gcgc-dashboard.herokuapp.com/students/${instName}`)
       .then((resp) => {
         var arr = _.get(resp, ["data", "result"]);
-        console.log({ name: instName, data: [...arr] });
+        // console.log({ name: instName, data: [...arr] });
         unstable_batchedUpdates(() => {
           setInstData({ name: instName, data: [...arr] });
           setShowCharts(true);
@@ -388,19 +399,40 @@ function CampusWise() {
         unstable_batchedUpdates(() => {
           setCampusList(arr);
           setCampusData(_.get(resp, ["data", "result"]));
+          // getData(user.user.campus[0].name)
         });
       });
   };
 
+  const checkMultiUser = () =>{
+    if(user.user.campus.length>1)
+      setUserMultiAccess(true)
 
+  }
 
   useEffect(() => {
     getCampus();
+    checkMultiUser()
+    // getData(user.user.campus.name)
   }, []);
   return (
     <>
+     <Snackbar
+        anchorOrigin={{ vertical:"top", horizontal:"right" }}
+        autoHideDuration={3000}
+        open={open}
+        onClose={handleClose}
+        message={`Sorry! You do not have access`}
+    >
+        <SnackbarContent style={{
+            backgroundColor:'orange',
+          }}
+          message={`Sorry! You do not have access`}
+        />
+      </Snackbar>
     <Box className="overall-layout">
       <Grid container spacing={2} className="firstContainer" alignItems="center">
+      {/* {userMultiAccess? */}
         <Grid item xs={5.6} >
           <ODoughnutChart
             title={"Campus Wise Overview"}
@@ -408,13 +440,8 @@ function CampusWise() {
             options={chartOptions.Doughnut}
           />
         </Grid>
-        
-        
-      
-
-      {showD2 ? (
+      {showD2? (
         <>
-       
           <Grid item xs={5.5} p={3} ml={5}>
             <ODoughnutChart
               title={`${campusName} Institute Overview`}

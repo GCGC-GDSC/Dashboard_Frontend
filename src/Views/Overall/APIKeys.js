@@ -1,14 +1,14 @@
 const InstituteStudentDataFormat = {
   placement_details: [
-    "placed",
     "total_students_eligible",
     "total_offers",
     "total_multiple_offers",
+    "placed",
     // "total_not_intrested_in_placments",
     "yet_to_place",
   ],
 
-  salary: ["average", "highest", "lowest"],
+  salary: ["highest", "lowest","average"],
   student_details: [
     "total_backlogs",
     "total_final_years",
@@ -19,15 +19,15 @@ const InstituteStudentDataFormat = {
 
 export const parsedDataFormat = {
   placement_details: [
-    "Placed",
     "Eligible",
     "Offers",
     "Multiple Offers",
+    "Placed",
     // "Not Intrested",
     "Yet To Place",
   ],
 
-  salary: ["Average", "Highest", "Lowest"],
+  salary: [ "Highest", "Lowest","Average"],
   student_details: [
     "Backlogs",
     "FinalYears",
@@ -37,3 +37,4 @@ export const parsedDataFormat = {
 };
 
 export default InstituteStudentDataFormat;
+// hs, back, defered placements,

@@ -315,7 +315,7 @@ function GBStats() {
   },[])
   return(
     <Box>
-      <Box sx={{ borderBottom: 1, borderColor: "divider", bgcolor: '#ececec' }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider", bgcolor: '#fff' }}>
           <Tabs
             value={value}
             onChange={handleChange}
@@ -335,9 +335,6 @@ function GBStats() {
           <Grid container spacing={2} alignItems="center">
             <Grid container alignItems="center" >
             <div class="headings" id={`stream`} >
-                <div className="sub">
-                UG and PG
-                </div>
                 </div>
                 <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
@@ -424,7 +421,7 @@ function GBStats() {
             </Grid>
             <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Student Details
+                Placement Details
                 </div>
                 </div>
             <Grid item xs={6} className="shadow">
@@ -441,7 +438,7 @@ function GBStats() {
             </Grid>
             <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Student Details
+                Salary
                 </div>
                 </div>
             <Grid item xs={6} className="shadow">
@@ -482,7 +479,7 @@ function GBStats() {
             </Grid>
             <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Student Details
+                Placement Details
                 </div>
                 </div>
                 <Grid item xs={6} className="shadow">
@@ -500,7 +497,7 @@ function GBStats() {
 </Grid>
             <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Student Details
+                Salary
                 </div>
                 </div>
                 <Grid item xs={6} className="shadow">

@@ -178,7 +178,7 @@ function Overall() {
         axios.get('https://gcgc-dashboard.herokuapp.com/organization/streams/')
         .then(resp=>{
             var arr = _.get(resp,['data','result']).map(item=>item.name)
-            arr.sort()
+            // arr.sort()
             setStreamList(arr)
         })
     }

@@ -21,10 +21,12 @@ function Home() {
     return ( 
         <div className='homePage'>  
         <Snackbar
-                open={open}
-                onClose={handleClose}
-                message={`Welcome ${user.user.name}`}
-            />:
+          anchorOrigin={{ vertical:"top", horizontal:"right" }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={`Welcome ${user.user.name}`}
+            />
         <main className='main_section'>
             <BasicTabs/>
         </main>
