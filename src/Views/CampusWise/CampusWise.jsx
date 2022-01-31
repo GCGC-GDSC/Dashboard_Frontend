@@ -435,6 +435,11 @@ function CampusWise() {
               <Tabs
                 value={value}
                 onChange={handleChange}
+                textColor="secondary"
+            indicatorColor="secondary"
+            aria-label="basic tabs example"
+            variant="fullWidth"
+            centered
                 aria-label="basic tabs example"
               >
                 <Tab label="UG and PG" {...a11yProps(0)} />
@@ -597,7 +602,7 @@ function CampusWise() {
                 {`${campusName}`}
                 </div>
                 </div>
-                <div class="headings" id={`stream`} >
+                <div class="headings cardtitles" id={`stream`}>
                 <div className="sub">
                 {`${instData.name.toUpperCase()} Student Details`}
                 </div>
@@ -618,7 +623,7 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center">
-              <div class="headings" id={`stream`} >
+              <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 {`${instData.name.toUpperCase()} Placement Details`}
                 </div>
@@ -639,7 +644,7 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center">
-              <div class="headings" id={`stream`} >
+              <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 {`${instData.name.toUpperCase()} Salary Details`}
                 </div>

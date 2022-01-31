@@ -21,11 +21,23 @@ function GBStats() {
         if (item[0]) {
         }
       },
+      rotation: Math.PI * 5,
+      plugins: {
+        legend: {
+          position: "left",
+        },
+      },
     },
     Doughnut4: {
       onClick: function (evt, item) {
         if (item[0]) {
         }
+      },
+    },
+    rotation: Math.PI * 5,
+    plugins: {
+      legend: {
+        position: "left",
       },
     },
     VerticalBarChart1: {
@@ -304,87 +316,142 @@ function GBStats() {
   },[])
   return(
     <Box>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider", bgcolor: '#ececec' }}>
           <Tabs
             value={value}
             onChange={handleChange}
+            textColor="secondary"
+            indicatorColor="secondary"
             aria-label="basic tabs example"
-          >
-            <Tab label="UG + PG Data" {...a11yProps(0)} />
-            <Tab label="UG Data" {...a11yProps(1)} />
-            <Tab label="PG Data" {...a11yProps(2)} />
+            variant="fullWidth"
+            centered>
+            <Tab label="UG AND PG" {...a11yProps(0)} />
+            <Tab label="Undergraduate" {...a11yProps(1)} />
+            <Tab label="Postgraduate" {...a11yProps(2)} />
           </Tabs>
       </Box>
-      <Grid container spacing={5} >
+      <Grid container className="firstItem" alignItems="center" >
       <TabPanel value={value} index={0}>
-          <h1 className="gradHeading">UG+PG</h1>
           {statsData && statsData["PG"] && statsData["UG"]?
-          <Grid container>
-            <Grid item xs={4} className="shadow">
+          <Grid container spacing={2} alignItems="center">
+            <Grid container alignItems="center" >
+            <div class="headings" id={`stream`} >
+                <div className="sub">
+                UG and PG
+                </div>
+                </div>
+                <div class="headings cardtitles" id={`stream`} >
+                <div className="sub">
+                Student Details
+                </div>
+                </div>
+            <Grid item xs={6} className="shadow" mr={12}>
               <ODoughnutChart
-                title={`Student Details`}
+                // title={`Student Details`}
                 data={DoughnutUGPGSD}
                 options={chartOptions.DoughnutUGPG}
               />
+             </Grid>
+              <Grid item xs={4} className="shadow">
                 <Table column={TABLE_DATA(10,"UGPG","student_details").column} 
                   data={TABLE_DATA(10,"UGPG","student_details").data} 
                   category={"Student Details"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
             </Grid>
-            <Grid item xs={4} className="shadow">
+            </Grid>
+            <Grid container alignItems="center" spacing={9} p={5}>
+            <div class="headings cardtitles" id={`stream`} >
+                <div className="sub">
+                Placement Details
+                </div>
+                </div>
+            <Grid item xs={6} className="shadow">
               <ODoughnutChart
-                title={`Placement Details`}
+                // title={`Placement Details`}
                 data={DoughnutUGPGPD}
                 options={chartOptions.DoughnutUGPG}
-              />
+              /></Grid>
+              <Grid item xs={6} className="shadow">
                <Table column={TABLE_DATA(10,"UGPG","placement_details").column} 
                   data={TABLE_DATA(10,"UGPG","placement_details").data} 
                   category={"Placement Details"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
             </Grid>
-            <Grid item xs={4} className="shadow">
+            </Grid>
+            <Grid container alignItems="center" spacing={9} p={7}>
+            <div class="headings cardtitles" id={`stream`} >
+                <div className="sub">
+                Salary
+                </div>
+                </div>
+            <Grid item xs={6} className="shadow">
               <OVerticalBarChart
-                title={`Salary Details`}
+                // title={`Salary Details`}
                 data={VerticalBarChartUGPG}
                 options={chartOptions.VerticalBarChart1}
               />
+              </Grid>
+            <Grid item xs={6} className="shadow">
                <Table column={TABLE_DATA(10,"UGPG","salary").column} 
                   data={TABLE_DATA(10,"UGPG","salary").data} 
                   category={"Salary"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
             </Grid>
+            </Grid>
+
           </Grid>:null}
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-          <h1 className="gradHeading">Undergraduate</h1>
+      
           {statsData && statsData["UG"]?
-          <Grid container>
-            <Grid item xs={4} className="shadow">
+          <Grid container alignItems="center" spacing={4}>
+            <div class="headings cardtitles" id={`stream`} >
+                <div className="sub">
+                Student Details
+                </div>
+                </div>
+            <Grid item xs={6} className="shadow">
               <ODoughnutChart
                 data={DoughnutUGSD}
                 options={chartOptions.DoughnutUGPG}
               />
+            </Grid>
+            <Grid item xs={6} className="shadow">
                <Table column={TABLE_DATA(0,"UG","student_details").column} 
                   data={TABLE_DATA(0,"UG","student_details").data} 
                   category={"Student Details"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
             </Grid>
-            <Grid item xs={4} className="shadow">
+            <div class="headings cardtitles" id={`stream`} >
+                <div className="sub">
+                Student Details
+                </div>
+                </div>
+            <Grid item xs={6} className="shadow">
               <ODoughnutChart
                 data={DoughnutUGPD}
                 options={chartOptions.DoughnutUGPG}
               />
+            </Grid>
+            <Grid item xs={6} className="shadow">
                 <Table column={TABLE_DATA(0,"UG","placement_details").column} 
                   data={TABLE_DATA(0,"UG","placement_details").data} 
                   category={"Placement Details"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
             </Grid>
-            <Grid item xs={4} className="shadow">
+            <div class="headings cardtitles" id={`stream`} >
+                <div className="sub">
+                Student Details
+                </div>
+                </div>
+            <Grid item xs={6} className="shadow">
               <OVerticalBarChart
                 data={VerticalBarChartUG}
                 options={chartOptions.VerticalBarChart1}
               />
+          </Grid>
+          <Grid item xs={6} className="shadow">
                <Table column={TABLE_DATA(0,"UG","salary").column} 
                   data={TABLE_DATA(0,"UG","salary").data} 
                   category={"Salary"} 
@@ -393,42 +460,65 @@ function GBStats() {
             </Grid>:null}
       </TabPanel>
       
-      <TabPanel value={value} index={2}>   
-          <h1 className="gradHeading">PostGraduate</h1>
-          {statsData && statsData["PG"]?
-          <Grid container>
-            <Grid item xs={4} className="shadow">
+      <TabPanel value={value} index={2}>
+      
+      {statsData && statsData["PG"]?
+          <Grid container alignItems="center" spacing={4}>
+            <div class="headings cardtitles" id={`stream`} >
+                <div className="sub">
+                Student Details
+                </div>
+                </div>
+                <Grid item xs={6} className="shadow">
               <ODoughnutChart
                 data={DoughnutPGSD}
                 options={chartOptions.DoughnutUGPG}
               />
+            </Grid>
+            <Grid item xs={6} className="shadow">
               <Table column={TABLE_DATA(1,"PG","student_details").column} 
                 data={TABLE_DATA(1,"PG","student_details").data} 
                 category={"Student Details"} 
                 keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
             </Grid>
-            <Grid item xs={4} className="shadow">
+            <div class="headings cardtitles" id={`stream`} >
+                <div className="sub">
+                Student Details
+                </div>
+                </div>
+                <Grid item xs={6} className="shadow">
               <ODoughnutChart
                 data={DoughnutPGPD}
                 options={chartOptions.DoughnutUGPG}
               />
-               <Table column={TABLE_DATA(1,"PG","placement_details").column} 
-                  data={TABLE_DATA(1,"PG","placement_details").data} 
-                  category={"Placement Details"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
             </Grid>
-            <Grid item xs={4} className="shadow">
+            <Grid item xs={6} className="shadow">
+
+<Table column={TABLE_DATA(1,"PG","placement_details").column} 
+   data={TABLE_DATA(1,"PG","placement_details").data} 
+   category={"Placement Details"} 
+   keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
+</Grid>
+            <div class="headings cardtitles" id={`stream`} >
+                <div className="sub">
+                Student Details
+                </div>
+                </div>
+                <Grid item xs={6} className="shadow">
               <OVerticalBarChart
                 data={VerticalBarChartPG}
                 options={chartOptions.VerticalBarChart1}
               />
-               <Table column={TABLE_DATA(1,"PG","salary").column} 
-                  data={TABLE_DATA(1,"PG","salary").data} 
-                  category={"Salary"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
             </Grid>
-          </Grid>:null}
-          </TabPanel>
+            <Grid item xs={6} className="shadow">
+
+<Table column={TABLE_DATA(1,"PG","salary").column} 
+   data={TABLE_DATA(1,"PG","salary").data} 
+   category={"Salary"} 
+   keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
+</Grid>
+            </Grid>:null}
+      </TabPanel>
 
         </Grid>
     </Box>
