@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import "./App.css";
 import "./App.css";
 import { UserContext } from './context/context';
+import axios from "axios"
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,7 +22,6 @@ const App = () => {
     userProfile
   ),[userProfile])
   firebase.auth().onAuthStateChanged((user) => {
-    // console.log(user)
     if (user) {
       setUserProfile(user);
       return setIsUserSignedIn(true);

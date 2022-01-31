@@ -340,7 +340,6 @@ function CampusWise() {
       arr = combineArrays(keys,instData.data[0][category],instData.data[1][category],category).values
       arr = arr.map(item=>[item])
     }
-    console.log(arr)
     return arr
   }
 

@@ -7,7 +7,6 @@ function OverallFetcher({stream,setData}) {
         if(stream.length>0)
         {axios.get(`${hostname}/students/overall/${stream}/`).then(resp=>{
             var responseData = _.get(resp,['data','result'])
-            console.log(responseData)
             setData(responseData)
         })}
     })

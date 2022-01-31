@@ -289,7 +289,6 @@ function GBStats() {
       arr = combineArrays(keys,statsData["UG"][category],statsData["PG"][category],category).values
       arr = arr.map(item=>[item])
     }
-    console.log(arr)
     return arr
   }
 

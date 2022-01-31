@@ -108,7 +108,7 @@ function Overall() {
                 const dataArray = insts.map((inst,index)=>{
                 return{
                     label:inst.toUpperCase(),
-                    data: combineArrays(keys,streamData[inst][0][0][category],streamData[inst][0][1][category],category).values ,
+                    data: combineArrays(keys,streamData[inst][0][0][category],streamData[inst][1][0][category],category).values ,
                     backgroundColor: VChartColors[index],
                     borderColor: VChartColors[index],
                     borderWidth: 2,
@@ -129,13 +129,11 @@ function Overall() {
             let keys  = objRef[category]
             const matrix = []
             insts.forEach(inst=>{
-                const data = combineArrays(keys,streamData[inst][0][0][category],streamData[inst][0][1][category],category).values
+                const data = combineArrays(keys,streamData[inst][0][0][category],streamData[inst][1][0][category],category).values
                 // console.log("data",data)
                 matrix.push(data)
             })
-            console.log("matrix",matrix)
            const tp =  tranpose(matrix)
-            console.log("Transpose of a matrix",tp);
             return tp
         }
         var VerticalBarChart1 ={
