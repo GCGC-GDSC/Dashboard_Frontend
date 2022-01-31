@@ -10,7 +10,7 @@ const ProfileCard = ({member}) => {
             <div className="content">
                 <div>
                     <p className="name">{member.name}</p>
-                    <p className="role">{member.role}</p>
+                    <p className={`${member.role.toLowerCase()}`} >{member.role}</p>
                     <p className="rollno">{member.rollnumber}</p>
                     <p className="desc">
                     {member.description}
@@ -19,7 +19,7 @@ const ProfileCard = ({member}) => {
                 <div className="icons">
                     <SocialIcon url={member.linkedin} style={{ height: 30, width: 30 }} />
                     <SocialIcon url={member.github} style={{ height: 30, width: 30 }} />
-                    <SocialIcon url={member.github} style={{ height: 30, width: 30 }} />
+                    <SocialIcon url={member.website} style={{ height: 30, width: 30 }} />
                     {/* <a href={member.name}><SocialIcon url={member.name} style={{ height: 30, width: 30 }} /></a> */}
                 </div>
             </div>

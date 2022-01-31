@@ -1,6 +1,7 @@
 import ProfileCard from "./profileCard"
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import ParticlesComponent from "../../Components/Particles/ParticlesComponent"
 import {firestore} from "../../backend/firebase.config"
 import './Team.style.scss'
 import { useEffect, useState } from "react";
@@ -25,6 +26,7 @@ const Team = () => {
     })
   },[])
   return <>
+  <ParticlesComponent/>
   <div style={{marginTop:"100px"}}></div>
   <div>
     <h3>

@@ -5,7 +5,7 @@ function Admin()
     return(
     <Box p={10}>
         
-        I am Admin
+        I am Battman
         <LinaerStepper/>
     </Box>
     )
