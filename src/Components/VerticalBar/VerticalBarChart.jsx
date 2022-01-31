@@ -4,7 +4,6 @@ import { Bar } from 'react-chartjs-2';
 
 
 const VerticalBar = ({campus,options}) => {
-  console.log('########',campus,campus[Object.keys(campus)[0]][0].under_campus_name)
   const getInstData = ()=>{
     const arr = []
     for(let inst in campus)

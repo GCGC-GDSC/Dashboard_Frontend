@@ -86,7 +86,6 @@ function Fetcher() {
   //options
   const optionsDoughnut = {
     onClick: function (evt, item) {
-      // console.log('@@@',item[0])
       var arr = showBC;
       arr[1] = true;
       if (item[0]) {

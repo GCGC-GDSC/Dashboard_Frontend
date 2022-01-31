@@ -133,9 +133,7 @@ function Overall() {
                 // console.log("data",data)
                 matrix.push(data)
             })
-            console.log("matrix",matrix)
            const tp =  tranpose(matrix)
-            console.log("Transpose of a matrix",tp);
             return tp
         }
         var VerticalBarChart1 ={
@@ -180,7 +178,7 @@ function Overall() {
         axios.get('https://gcgc-dashboard.herokuapp.com/organization/streams/')
         .then(resp=>{
             var arr = _.get(resp,['data','result']).map(item=>item.name)
-            arr.sort()
+            // arr.sort()
             setStreamList(arr)
         })
     }

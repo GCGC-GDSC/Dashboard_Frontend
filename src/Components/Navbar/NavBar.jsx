@@ -1,15 +1,23 @@
-import React from 'react'
+import React ,{useContext} from 'react'
 import {NavLink} from 'react-router-dom'
 import DarkShade from '../DarkShade/DarkShade.component'
 import './navbar.style.scss'
 import gcgcLogo from "../../Components/images/gcgclogo.png"
 import HeroText from "../HeroText/HeroText"
 import {firebase} from "../../backend/firebase.config"
+import { UserContext } from '../../context/context';
+import { useNavigate } from 'react-router-dom';
+
 function NavBar({user}) {
+    // const user = useContext(UserContext)
+    const navigate = useNavigate();
+    console.log(user)
     const signoutfromapp = () =>{
        const action =  window.confirm("Are you sure you want to signout !")
-       if (action)
-        firebase.auth().signOut()
+       if (action){
+        navigate('/')
+           firebase.auth().signOut()
+        }
     }
     const selected ={
         fontWeight:'bold',
@@ -31,7 +39,7 @@ function NavBar({user}) {
             <h3>CAREER FULFILLMENT STATISTICS <span className="heading_year">2022</span></h3> 
         </div>
         <div className='navbar_links'>
-            {user?
+            {user.isVerified?
             <div>
             <NavLink className='navbar-link' activeStyle={selected}  exact to = '/'>
                 Home
@@ -47,9 +55,9 @@ function NavBar({user}) {
             </button> 
             </div>:
            <div className='navbar_links'>
-                <NavLink className='navbar-link navbar-link-login' activeStyle={selected}  to = '/'>
+                {/* <NavLink className='navbar-link navbar-link-login' activeStyle={selected}  to = '/login'>
                     Login
-                </NavLink>
+                </NavLink> */}
                 <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
                     Team
                 </NavLink>

@@ -28,6 +28,11 @@ const Team = () => {
   return <>
   <ParticlesComponent/>
   <div style={{marginTop:"100px"}}></div>
+  <div>
+    <h3>
+      Meet the team
+    </h3>
+  </div>
   <div className="profile-cards-container">
     {members.map(member=>
       <ProfileCard member={member} key={member.rollnumber}/>

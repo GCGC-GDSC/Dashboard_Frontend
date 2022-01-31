@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import "./App.css";
 import "./App.css";
 import { UserContext } from './context/context';
+import axios from "axios"
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,16 +15,32 @@ import MediaCard from "./Pages/Team/Team";
 import Admin from "./Pages/Admin/Admin";
 import NavBar from "./Components/Navbar/NavBar";
 import { firebase } from "./backend/firebase.config";
+import { identity } from "lodash";
 const App = () => {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({});
+  const [verifiedUser,setVerifiedUser] = useState({user:{},isVerified:false})
+  useEffect(()=>{
+    const verifyUser = (user)=>{
+      axios.post(`https://gcgc-dashboard.herokuapp.com/accounts/verify/${user.email}`)
+      .then(resp=>{
+        console.log(resp)
+        if(resp.data.status!='error')  
+        setVerifiedUser({user:resp.data.result, isVerified:true});
+        else setVerifiedUser({user:{},isVerified:false})
+      })  
+    }
+    if(isUserSignedIn && userProfile && userProfile.email)
+      verifyUser(userProfile)
+    else setVerifiedUser({user:{},isVerified:false})
+  },[userProfile,isUserSignedIn])
   const providerValue = useMemo( () => (
-    userProfile
-  ),[userProfile])
+    verifiedUser
+  ),[verifiedUser])
   firebase.auth().onAuthStateChanged((user) => {
-    // console.log(user)
+    // console.log("user",user)
     if (user) {
-      setUserProfile(user);
+      setUserProfile(user)
       return setIsUserSignedIn(true);
     } else {
       // setUserProfile({});
@@ -33,8 +50,8 @@ const App = () => {
   return (
     <div className="app">
       <Router>
-        <NavBar user={userProfile} />
-        {isUserSignedIn ? (
+        <NavBar user={verifiedUser} />
+        {isUserSignedIn && verifiedUser.isVerified ? (
           <UserContext.Provider value={providerValue}>
           <Routes>
             <Route exact path="/" element={<Home />} />

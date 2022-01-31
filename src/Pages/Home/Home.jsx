@@ -1,4 +1,4 @@
-import React, { useEffect ,useState} from 'react'
+import React, { useEffect ,useState,useContext} from 'react'
 import "./Home.scss"
 // import HeroText from "../../Components/HeroText/HeroText"
 import Aos from "aos"
@@ -6,8 +6,10 @@ import "aos/dist/aos.css"
 import Footer from '../../Components/Footer/Footer'
 import BasicTabs from "../../Components/Tabs/Tabs"
 import Snackbar from '@mui/material/Snackbar';
-
-function Home({user}) {
+import { UserContext } from '../../context/context';
+function Home() {
+    const user = useContext(UserContext)
+    console.log(user)
     const [open, setOpen] = useState(false);
     const handleClose = () => {
         setOpen(false);
@@ -18,12 +20,13 @@ function Home({user}) {
     },[])
     return ( 
         <div className='homePage'>  
-        {user && user.displayName?
         <Snackbar
-                open={open}
-                onClose={handleClose}
-                message={`Welcome ${user.displayName}`}
-            />:null}
+          anchorOrigin={{ vertical:"bottom", horizontal:"left" }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={`Welcome ${user.user.name}`}
+            />
         <main className='main_section'>
             <BasicTabs/>
         </main>
