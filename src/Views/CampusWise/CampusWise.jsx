@@ -401,8 +401,8 @@ function CampusWise() {
   return (
     <>
     <Box className="overall-layout">
-      <Grid container spacing={2} className="firstContainer" alignItems="center">
-        <Grid item xs={5.6} >
+      <Grid container  className="firstContainer" alignItems="center">
+        <Grid item xs={5.6}>
           <ODoughnutChart
             title={"Campus Wise Overview"}
             data={dataDoughnut}
