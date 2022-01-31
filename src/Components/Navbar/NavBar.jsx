@@ -1,11 +1,13 @@
-import React from 'react'
+import React ,{useContext} from 'react'
 import {NavLink} from 'react-router-dom'
 import DarkShade from '../DarkShade/DarkShade.component'
 import './navbar.style.scss'
 import gcgcLogo from "../../Components/images/gcgclogo.png"
 import HeroText from "../HeroText/HeroText"
 import {firebase} from "../../backend/firebase.config"
-function NavBar({user}) {
+import { UserContext } from '../../context/context';
+function NavBar() {
+    const user = useContext(UserContext)
     const signoutfromapp = () =>{
        const action =  window.confirm("Are you sure you want to signout !")
        if (action)

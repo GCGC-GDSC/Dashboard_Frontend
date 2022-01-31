@@ -18,10 +18,17 @@ import { firebase } from "./backend/firebase.config";
 const App = () => {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({});
+  // const verifyUser = (user)=>{
+  //     axios.post(`https://gcgc-dashboard.herokuapp.com/accounts/verify/${user.email}`)
+  //     .then(resp=>{
+  //       console.log(resp)
+  //     })
+  // }
   const providerValue = useMemo( () => (
     userProfile
   ),[userProfile])
   firebase.auth().onAuthStateChanged((user) => {
+    // console.log("user",user)
     if (user) {
       setUserProfile(user);
       return setIsUserSignedIn(true);
