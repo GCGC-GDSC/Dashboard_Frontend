@@ -418,7 +418,7 @@ function CampusWise() {
   return (
     <>
      <Snackbar
-        anchorOrigin={{ vertical:"top", horizontal:"right" }}
+        anchorOrigin={{ vertical:"bottom", horizontal:"left" }}
         autoHideDuration={3000}
         open={open}
         onClose={handleClose}
@@ -431,9 +431,9 @@ function CampusWise() {
         />
       </Snackbar>
     <Box className="overall-layout">
-      <Grid container spacing={2} className="firstContainer" alignItems="center">
+      <Grid container spacing={2} className="firstContainer" alignItems="center" >
       {/* {userMultiAccess? */}
-        <Grid item xs={5.6} >
+        <Grid item xs={5.6} style={{marginTop:"-80px"}}>
           <ODoughnutChart
             title={"Campus Wise Overview"}
             data={dataDoughnut}
@@ -442,7 +442,7 @@ function CampusWise() {
         </Grid>
       {showD2? (
         <>
-          <Grid item xs={5.5} p={3} ml={5}>
+          <Grid item xs={5.5} p={3} ml={5}  style={{marginTop:"-80px"}}>
             <ODoughnutChart
               title={`${campusName} Institute Overview`}
               data={dataDoughnut2}
@@ -475,7 +475,7 @@ function CampusWise() {
             </Box>
             <Grid container className="firstItem" alignItems="center">
             <TabPanel value={value} index={0} style={{width:"100%"}}>
-              <Grid container spacing={9} alignItems="center" mt={2} >
+              <Grid container spacing={9} alignItems="center" justifyContent="space-around" mt={2} >
               <div class="headings" id={`stream`} >
                 <div className="sub">
                 {`${campusName}`} 
@@ -501,7 +501,7 @@ function CampusWise() {
                   keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} alignItems="center">
+              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
                 {`${instData.name.toUpperCase()} Placement Details`}
@@ -524,7 +524,7 @@ function CampusWise() {
                   keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} alignItems="center">
+              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
                 {`${instData.name.toUpperCase()} Salary Details`}
@@ -549,7 +549,7 @@ function CampusWise() {
 
 
             <TabPanel value={value} index={1} style={{width:"100%"}}>
-            <Grid container spacing={9} alignItems="center" mt={2}>
+            <Grid container spacing={9} alignItems="center" justifyContent="space-around" mt={2}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
                 {`${campusName}`}
@@ -576,7 +576,7 @@ function CampusWise() {
                   keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} alignItems="center">
+              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
                 {`${instData.name.toUpperCase()} Placement Details`}
@@ -597,7 +597,7 @@ function CampusWise() {
                   keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} alignItems="center">
+              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
                 {`${instData.name.toUpperCase()} Salary Details`}
@@ -622,7 +622,7 @@ function CampusWise() {
 
 
             <TabPanel value={value} index={2} style={{width:"100%"}}>
-            <Grid container spacing={9} alignItems="center" mt={2}>
+            <Grid container spacing={9} alignItems="center"  justifyContent="space-around" mt={2}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
                 {`${campusName}`}
@@ -648,7 +648,7 @@ function CampusWise() {
                   keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} alignItems="center">
+              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 {`${instData.name.toUpperCase()} Placement Details`}
@@ -669,8 +669,8 @@ function CampusWise() {
                   keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} alignItems="center">
-              <div class="headings cardtitles" id={`stream`} >
+              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
+              <div class="headings" id={`stream`} >
                 <div className="sub">
                 {`${instData.name.toUpperCase()} Salary Details`}
                 </div>

@@ -21,7 +21,7 @@ function Home() {
     return ( 
         <div className='homePage'>  
         <Snackbar
-          anchorOrigin={{ vertical:"top", horizontal:"right" }}
+          anchorOrigin={{ vertical:"bottom", horizontal:"left" }}
         open={open}
         autoHideDuration={3000}
         onClose={handleClose}

@@ -30,8 +30,10 @@ const App = () => {
         else setVerifiedUser({user:{},isVerified:false})
       })  
     }
-    verifyUser(userProfile)
-  },[userProfile])
+    if(isUserSignedIn && userProfile && userProfile.email)
+      verifyUser(userProfile)
+    else setVerifiedUser({user:{},isVerified:false})
+  },[userProfile,isUserSignedIn])
   const providerValue = useMemo( () => (
     verifiedUser
   ),[verifiedUser])
