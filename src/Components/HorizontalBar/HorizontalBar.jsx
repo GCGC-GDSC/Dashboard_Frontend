@@ -27,7 +27,6 @@ const HorizontalBarChart = ({data,inst}) => {
   const instName = inst.under_institute_name
   const campusNameDir = {'blr':'Bengaluru','vskp':'Visakhapatnam','hyd':'Hyderabad'}
 
-  console.log(data,inst)
   return (
   <div>
     <h1>{campusNameDir[campusName]}</h1>

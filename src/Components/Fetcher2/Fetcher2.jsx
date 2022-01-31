@@ -65,8 +65,6 @@ const getCompanyList = () => {
     setDictState(dict)
     setFilterState(dict)
     // ---------------------------------------
-    console.log("😉😉😉😉");
-    console.log(filterState);
 
 
   
@@ -78,7 +76,6 @@ const filterCards = event => {
   const value = event.target.value.toLowerCase();
   // console.log(value)
   const filteredUsers = dictState.filter(comp=>{ 
-    console.log(value,comp.name_of_the_company)
     return comp.name_of_the_company.toLowerCase().includes(value)
   });
   // console.log("😭😭😭",filteredUsers);
