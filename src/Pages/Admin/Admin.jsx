@@ -31,7 +31,6 @@ function Admin() {
     setEdit(true)
   }
   const ariaLabel = { "aria-label": "description" };
-  console.log(user);
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === "campus") setCampus(value);
@@ -41,7 +40,7 @@ function Admin() {
   return (
     <Box p={10}>
       <div className="form-container">
-
+        <div className="mainInput">
         {/* campus input */}
         <FormControl
           variant="standard"
@@ -112,11 +111,12 @@ function Admin() {
         onClick={initiateEdit }>
           EDIT
         </Button>
+        </div>
 
         {edit?
         <div>
-          <h1>{parsedStudentDetailsRef[campus.name]}</h1>
-          <h1>{institute.name.toUpperCase()}</h1>
+          <h4>{parsedStudentDetailsRef[campus.name]}</h4>
+          <h4>{institute.name.toUpperCase()}</h4>
           <h6>{grad}</h6>
         </div>:null
 }
