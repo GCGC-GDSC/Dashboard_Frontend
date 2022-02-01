@@ -16,6 +16,10 @@ import axios from 'axios';
 import "./Admin.styles.scss";
 import {ReactComponent as FormSelect } from "../../assets/formSelect.svg"
 import studentDetailsRef,{parsedStudentDetailsRef} from './StudentDetailsFormObj'
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import GolfCourseIcon from '@mui/icons-material/GolfCourse';
+import SchoolIcon from '@mui/icons-material/School';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 function Admin() {
   const user = useContext(UserContext);
   const [campus, setCampus] = useState(user.user.campus[0]);
@@ -120,10 +124,10 @@ function Admin() {
         </div>
 
         {edit?
-        <div>
-          <h4>{parsedStudentDetailsRef[campus.name]}</h4>
-          <h4>{institute.name.toUpperCase()}</h4>
-          <h6>{grad}</h6>
+        <div className="formInformation">
+          <AccountBalanceIcon  color="primary"/><h4>{parsedStudentDetailsRef[campus.name]} <ArrowRightIcon/></h4>
+          <GolfCourseIcon color="primary"/><h4>{institute.name.toUpperCase()} <ArrowRightIcon/></h4>
+          <SchoolIcon color="primary"/> <h4>{grad}</h4>
         </div>:null
 }
         <Box
@@ -136,8 +140,8 @@ function Admin() {
         >
             
               {edit&& instituteData && instituteData["under_campus_name"]?
-            <div>
-              <table className="formTable">
+            <div  className="formTable">
+              <table>
               {
                 studentDetailsRef.map(key=>
                   <tr>
