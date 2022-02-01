@@ -13,8 +13,13 @@ function Admin() {
   const user = useContext(UserContext);
   const [campus, setCampus] = useState(user.user.campus[0]);
   const [institute, setInstitute] = useState("");
+  const [studentDetails, setStudentDetails] = useState({})
   const [grad, setGrad] = useState("");
-  console.log(user);
+  const [edit,setEdit] = useState(false)
+
+  const initiateEdit = ()=>{
+    setEdit(true)
+  }
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === "campus") setCampus(value);
@@ -24,6 +29,8 @@ function Admin() {
   return (
     <Box p={10}>
       <div className="form-container">
+
+        {/* campus input */}
         <FormControl
           variant="standard"
           sx={{ m: 1, minWidth: 120 }}
@@ -43,6 +50,8 @@ function Admin() {
             ))}
           </Select>
         </FormControl>
+
+        {/* institute input */}
         <FormControl
           variant="standard"
           sx={{ m: 1, minWidth: 120 }}
@@ -65,7 +74,7 @@ function Admin() {
             )}
           </Select>
         </FormControl>
-
+            {/* grad type as input */}
         <FormControl
           variant="standard"
           sx={{ m: 1, minWidth: 120 }}

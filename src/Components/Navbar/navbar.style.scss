@@ -91,3 +91,33 @@
     display: none;
   }
 }
+.modal_buttons_container{
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 20px;
+  &-btn{
+    &-yes{
+      background-color: rgb(233, 73, 73);
+    padding:4px 10px;
+    border:none;
+    outline: none;
+    padding:10px;
+    border-radius:8px;
+    font-weight: 700;
+    color:white;
+    }
+    &-no{
+    color:white;
+
+      padding:4px 10px;
+      border:none;
+      outline: none;
+      padding:10px;
+    font-weight: 700;
+      border-radius:8px;
+      background-color: rgba(102, 104, 105, 0.986);
+    }
+   
+  }
+}
