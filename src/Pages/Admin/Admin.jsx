@@ -9,17 +9,20 @@ import FormGroup from "@mui/material/FormGroup";
 import Select from "@mui/material/Select";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import Input from "@mui/material/Input";
+import "./Admin.styles.scss";
 function Admin() {
   const user = useContext(UserContext);
   const [campus, setCampus] = useState(user.user.campus[0]);
   const [institute, setInstitute] = useState("");
   const [grad, setGrad] = useState("");
+  const ariaLabel = { "aria-label": "description" };
   console.log(user);
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === "campus") setCampus(value);
     else if (name === "institute") setInstitute(value);
-    else if (name === "grad") setGrad(value)
+    else if (name === "grad") setGrad(value);
   };
   return (
     <Box p={10}>
@@ -82,9 +85,112 @@ function Admin() {
           >
             <MenuItem value={"Undergraduate"}>Undergraduate</MenuItem>
             <MenuItem value={"Postgraduate"}>Postgraduate</MenuItem>
-
           </Select>
         </FormControl>
+        <Box
+          component="form"
+          sx={{
+            "& > :not(style)": { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+          className="secondBox"
+        >
+            
+          <Input
+            placeholder="total_students
+"
+            value={grad}
+            label="Enter this and that field"
+            name="grad"
+            onChange={handleChange}
+            inputProps={ariaLabel}
+          />
+          <Input
+            placeholder="total_students
+"
+            value={grad}
+            label="grad"
+            name="grad"
+            onChange={handleChange}
+            inputProps={ariaLabel}
+          />
+          <Input
+            placeholder="total_higher_study_and_pay_crt
+"
+            value={grad}
+            label="grad"
+            name="grad"
+            onChange={handleChange}
+            inputProps={ariaLabel}
+          />
+          <Input
+            placeholder="total_opted_for_higher_studies_only
+"
+            value={grad}
+            label="grad"
+            name="grad"
+            onChange={handleChange}
+            inputProps={ariaLabel}
+          />
+          <Input
+            placeholder="total_not_intrested_in_placment
+"
+            value={grad}
+            label="grad"
+            name="grad"
+            onChange={handleChange}
+            inputProps={ariaLabel}
+          />
+          <Input
+            placeholder="Placeholder"
+            value={grad}
+            label="grad"
+            name="grad"
+            onChange={handleChange}
+            inputProps={ariaLabel}
+          />
+          <Input
+            placeholder="Placeholder"
+            value={grad}
+            label="grad"
+            name="grad"
+            onChange={handleChange}
+            inputProps={ariaLabel}
+          />
+          <Input
+            placeholder="Placeholder"
+            value={grad}
+            label="grad"
+            name="grad"
+            onChange={handleChange}
+            inputProps={ariaLabel}
+          />
+          <Input
+            placeholder="Placeholder"
+            value={grad}
+            label="grad"
+            name="grad"
+            onChange={handleChange}
+            inputProps={ariaLabel}
+          />
+          <Input
+            placeholder="Placeholder"
+            value={grad}
+            label="grad"
+            name="grad"
+            onChange={handleChange}
+            inputProps={ariaLabel}
+          />
+          <Input
+            placeholder="Placeholder"
+            value={grad}
+            label="grad"
+            name="grad"
+            onChange={handleChange}
+            inputProps={ariaLabel}
+          />
+        </Box>
       </div>
     </Box>
   );
