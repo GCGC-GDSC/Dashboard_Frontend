@@ -14,6 +14,7 @@ import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import "./Admin.styles.scss";
+import {ReactComponent as FormSelect } from "../../assets/formSelect.svg"
 import studentDetailsRef,{parsedStudentDetailsRef} from './StudentDetailsFormObj'
 function Admin() {
   const user = useContext(UserContext);
@@ -30,9 +31,14 @@ function Admin() {
     })
     setEdit(true)
   }
+
+  const updateInDataBase =()=>{
+
+  }
   const ariaLabel = { "aria-label": "description" };
   console.log(user);
   const handleChange = (event) => {
+    setEdit(false)
     const { name, value } = event.target;
     if (name === "campus") setCampus(value);
     else if (name === "institute") setInstitute(value);
@@ -129,6 +135,7 @@ function Admin() {
           className="secondBox"
         >
             
+              {edit&& instituteData && instituteData["under_campus_name"]?
             <div>
               <table>
               {
@@ -143,7 +150,10 @@ function Admin() {
 
                   <Input
                     placeholder={key}
-                    value={instituteData[key]}
+                    value={
+                          key==="under_campus_name"?parsedStudentDetailsRef[instituteData[key]]:
+                          key==="under_institute_name"?instituteData[key].toUpperCase():
+                        instituteData[key]}
                     label="Enter this and that field"
                     name={key}
                     onChange={handleChange}
@@ -155,7 +165,18 @@ function Admin() {
           }
         </table>
             </div>
+            : 
+            <div>
+              <h2> Fill in all options and press on Edit to lock in your options</h2>
+              <FormSelect/>
+            </div>
+} 
         </Box>
+        {/* <div>
+          <button onClick={updateInDataBase}>
+            Update in Database
+          </button>
+          </div> */}
       </div>
     </Box>
   );
