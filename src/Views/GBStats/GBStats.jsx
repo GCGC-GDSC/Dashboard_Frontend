@@ -11,7 +11,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from "@mui/material/Typography";
 import Table from "../../Components/Table/Table"
-
+import {colors} from "../ColorAssets/colorPallet"
 import "../CampusWise/CampusWise.styles.scss"
 function GBStats() {
   const [statsData,setStatsData] =useState([])
@@ -133,29 +133,9 @@ function GBStats() {
       {
         label: "Salary in LPA",
         data: arr,
-        backgroundColor: [
-          "#fd7f6f",
-          "#5ea1d2",
-          "#b2e061",
-          "#bd7ebe",
-          "#ffb55a",
-          "#ffee65",
-          "#beb9db",
-          "#fdcce5",
-          "#8bd3c7",
-        ]
+        backgroundColor: colors
         ,
-        borderColor: [
-          "#fd7f6f",
-          "#5ea1d2",
-          "#b2e061",
-          "#bd7ebe",
-          "#ffb55a",
-          "#ffee65",
-          "#beb9db",
-          "#fdcce5",
-          "#8bd3c7",
-        ]
+        borderColor: colors
         ,
         borderWidth: 2,
       },
@@ -191,29 +171,9 @@ function GBStats() {
         {
           label: "Salary in LPA",
           data: arr,
-          backgroundColor: [
-          "#fd7f6f",
-          "#5ea1d2",
-          "#b2e061",
-          "#bd7ebe",
-          "#ffb55a",
-          "#ffee65",
-          "#beb9db",
-          "#fdcce5",
-          "#8bd3c7",
-        ]
+          backgroundColor: colors
           ,
-          borderColor: [
-          "#fd7f6f",
-          "#5ea1d2",
-          "#b2e061",
-          "#bd7ebe",
-          "#ffb55a",
-          "#ffee65",
-          "#beb9db",
-          "#fdcce5",
-          "#8bd3c7",
-        ]
+          borderColor: colors
           ,
           borderWidth: 2,
         },

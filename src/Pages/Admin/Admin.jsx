@@ -23,7 +23,6 @@ function Admin() {
   };
   return (
     <Box p={10}>
-      {console.log(campus)}
       <div className="form-container">
         <FormControl
           variant="standard"
@@ -81,8 +80,8 @@ function Admin() {
             name="grad"
             onChange={handleChange}
           >
-            <MenuItem value={grad}>Undergraduate</MenuItem>
-            <MenuItem value={grad}>Postgraduate</MenuItem>
+            <MenuItem value={"Undergraduate"}>Undergraduate</MenuItem>
+            <MenuItem value={"Postgraduate"}>Postgraduate</MenuItem>
 
           </Select>
         </FormControl>
