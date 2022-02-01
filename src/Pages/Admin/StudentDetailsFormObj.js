@@ -1,7 +1,7 @@
 const studentDetailsRef = [
-  "under_campus_name",
-  "under_institute_name",
-  "is_ug",
+  // "under_campus_name",
+  // "under_institute_name",
+  // "is_ug",
   "total_students",
   "total_final_years",
   "total_higher_study_and_pay_crt",
