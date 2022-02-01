@@ -20,10 +20,7 @@ function Signin() {
     return (
 
         <div className='sign-in'>
-        <img  src="https://www.gitam.edu/assets/images/campus/visakhapatnam-campus-image.jpg" alt="google"/>
-
         <Login/>
-
         <button type="button"  className="login-with-google-btn" onClick = {SiginiWithFirebase}>
         Sign in with Google
         </button>

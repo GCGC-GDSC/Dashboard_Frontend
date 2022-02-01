@@ -22,7 +22,7 @@ const App = () => {
   const [verifiedUser,setVerifiedUser] = useState({user:{},isVerified:false})
   useEffect(()=>{
     const verifyUser = (user)=>{
-      axios.post(`https://gcgc-dashboard.herokuapp.com/accounts/verify/${user.email}`)
+      axios.post(`https://gcgc-dashboard.herokuapp.com/account/verify/${user.email}`)
       .then(resp=>{
         console.log(resp)
         if(resp.data.status!='error')  
@@ -50,9 +50,10 @@ const App = () => {
   return (
     <div className="app">
       <Router>
-        <NavBar user={verifiedUser} />
+        {/* <NavBar user={verifiedUser} /> */}
         {isUserSignedIn && verifiedUser.isVerified ? (
           <UserContext.Provider value={providerValue}>
+            <NavBar user={verifiedUser} />
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/admin" element={<Admin />} />

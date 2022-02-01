@@ -25,10 +25,10 @@ const Team = () => {
        setMembers(shuffle(arr))
     })
   },[])
-  return <>
-  <ParticlesComponent/>
-  <div style={{marginTop:"100px"}}></div>
-  <div>
+  return <div className="teamsPage">
+  <ParticlesComponent className="teamsParticle"/>
+  {/* <div style={{marginTop:"100px"}}></div> */}
+  <div className="team-header">
     <h3>
       Meet the team
     </h3>
@@ -38,6 +38,6 @@ const Team = () => {
       <ProfileCard member={member} key={member.rollnumber}/>
       )}
   </div>
-  </>
+  </div>
 }
 export default Team;

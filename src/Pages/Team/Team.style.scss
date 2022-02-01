@@ -1,7 +1,27 @@
 .profile-cards-container{
     width: 80%;
     margin: auto;
+    margin-top: 100px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.team-header{
+    h3{
+        margin-top: 4rem;
+        margin-top: 0px;
+        padding-top: 0px;
+    }
+    margin: auto;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.teamsPage{
+  background: linear-gradient(0.50turn, #56a2c2, #def3ce, #f69d3c);
+  height: 112vh;
+}
+.teamsParticle{
+    max-height: 98vh;
+  background: linear-gradient(0.50turn, #56a2c2, #def3ce, #f69d3c);
+
 }
