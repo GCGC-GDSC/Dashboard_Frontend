@@ -98,6 +98,7 @@ function CampusWise() {
     Doughnut2: {
       onClick: function (evt, item) {
         if (item[0]) {
+          // window.alert("you have clicked :",instList[item[0].index])
           getDataInst(instList[item[0].index]);
         }
       },
@@ -363,7 +364,7 @@ function CampusWise() {
 //  -------------- TABLES----------------
   const getDataInst = (instName) => {
     axios
-      .get(`https://gcgc-dashboard.herokuapp.com/students/${instName}`)
+      .get(`https://gcgc-dashboard.herokuapp.com/students/inst/${instName}`)
       .then((resp) => {
         var arr = _.get(resp, ["data", "result"]);
         // console.log({ name: instName, data: [...arr] });
@@ -442,7 +443,7 @@ function CampusWise() {
         </Grid>
       {showD2? (
         <>
-          <Grid item xs={5.5} p={3} ml={5}  style={{marginTop:"-80px"}}>
+          <Grid item xs={5.4} p={3} ml={5}  style={{marginTop:"-60px"}}>
             <ODoughnutChart
               title={`${campusName} Institute Overview`}
               data={dataDoughnut2}

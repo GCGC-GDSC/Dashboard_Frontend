@@ -1,7 +1,7 @@
 const studentDetailsRef = [
-  "under_campus_name",
-  "under_institute_name",
-  "is_ug",   
+  // "under_campus_name",
+  // "under_institute_name",
+  // "is_ug",   
   "total_students",
   "total_final_years",
   "total_higher_study_and_pay_crt","total_not_intrested_in_placments","total_backlogs",
@@ -25,7 +25,7 @@ export const parsedStudentDetailsRef = {
   "average_salary" :"What is the average salary",
   "lowest_salary":"What is the Lowest Salary",
   "vskp":"Visakhapatnam",
-  "blr":"Bangaluru",
+  "blr":"Bengaluru",
   "hyd":"Hyderabad"
 }
 
