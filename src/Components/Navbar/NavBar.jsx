@@ -28,11 +28,8 @@ function NavBar({user}) {
         p: 4,
       };
     const signoutfromapp = () =>{
-       const action =  window.confirm("Are you sure you want to signout !")
-       if (action){
         navigate('/')
            firebase.auth().signOut()
-        }
     }
     const selected ={
         fontWeight:'bold',
