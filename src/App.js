@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "./App.css";
 import "./App.css";
-import { UserContext } from './context/context';
-import axios from "axios"
+import { UserContext } from "./context/context";
+import axios from "axios";
 import {
   BrowserRouter as Router,
   Routes,
@@ -40,7 +40,7 @@ const App = () => {
   firebase.auth().onAuthStateChanged((user) => {
     // console.log("user",user)
     if (user) {
-      setUserProfile(user)
+      setUserProfile(user);
       return setIsUserSignedIn(true);
     } else {
       // setUserProfile({});
@@ -63,6 +63,7 @@ const App = () => {
         ) : (
           <Routes>
             <Route path="/" element={<Login />} />
+
             <Route path="/team" element={<MediaCard />} />
           </Routes>
         )}
