@@ -61,6 +61,7 @@ function NavBar({user}) {
                 <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
                     Team
                 </NavLink>
+                
             </div>
             }
         </div>

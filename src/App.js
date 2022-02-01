@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "./App.css";
 import "./App.css";
-import { UserContext } from './context/context';
-import axios from "axios"
+import { UserContext } from "./context/context";
+import axios from "axios";
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,28 +19,32 @@ import { identity } from "lodash";
 const App = () => {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({});
-  const [verifiedUser,setVerifiedUser] = useState({user:{},isVerified:false})
-  useEffect(()=>{
-    const verifyUser = (user)=>{
-      axios.post(`https://gcgc-dashboard.herokuapp.com/accounts/verify/${user.email}`)
-      .then(resp=>{
-        console.log(resp)
-        if(resp.data.status!='error')  
-        setVerifiedUser({user:resp.data.result, isVerified:true});
-        else setVerifiedUser({user:{},isVerified:false})
-      })  
-    }
-    if(isUserSignedIn && userProfile && userProfile.email)
-      verifyUser(userProfile)
-    else setVerifiedUser({user:{},isVerified:false})
-  },[userProfile,isUserSignedIn])
-  const providerValue = useMemo( () => (
-    verifiedUser
-  ),[verifiedUser])
+  const [verifiedUser, setVerifiedUser] = useState({
+    user: {},
+    isVerified: false,
+  });
+  useEffect(() => {
+    const verifyUser = (user) => {
+      axios
+        .post(
+          `https://gcgc-dashboard.herokuapp.com/account/verify/${user.email}`
+        )
+        .then((resp) => {
+          console.log(resp);
+          if (resp.data.status != "error")
+            setVerifiedUser({ user: resp.data.result, isVerified: true });
+          else setVerifiedUser({ user: {}, isVerified: false });
+        });
+    };
+    if (isUserSignedIn && userProfile && userProfile.email)
+      verifyUser(userProfile);
+    else setVerifiedUser({ user: {}, isVerified: false });
+  }, [userProfile, isUserSignedIn]);
+  const providerValue = useMemo(() => verifiedUser, [verifiedUser]);
   firebase.auth().onAuthStateChanged((user) => {
     // console.log("user",user)
     if (user) {
-      setUserProfile(user)
+      setUserProfile(user);
       return setIsUserSignedIn(true);
     } else {
       // setUserProfile({});
@@ -53,15 +57,16 @@ const App = () => {
         <NavBar user={verifiedUser} />
         {isUserSignedIn && verifiedUser.isVerified ? (
           <UserContext.Provider value={providerValue}>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/team" element={<MediaCard />} />
-          </Routes>
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/team" element={<MediaCard />} />
+            </Routes>
           </UserContext.Provider>
         ) : (
           <Routes>
             <Route path="/" element={<Login />} />
+
             <Route path="/team" element={<MediaCard />} />
           </Routes>
         )}
