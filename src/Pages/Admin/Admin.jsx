@@ -10,7 +10,11 @@ import Select from "@mui/material/Select";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Input from "@mui/material/Input";
+import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
+import axios from 'axios';
 import "./Admin.styles.scss";
+import studentDetailsRef,{parsedStudentDetailsRef} from './StudentDetailsFormObj'
 function Admin() {
   const user = useContext(UserContext);
   const [campus, setCampus] = useState(user.user.campus[0]);
@@ -18,8 +22,12 @@ function Admin() {
   const [studentDetails, setStudentDetails] = useState({})
   const [grad, setGrad] = useState("");
   const [edit,setEdit] = useState(false)
-
+  const [instituteData,setInstituteData] = useState({})
   const initiateEdit = ()=>{
+    axios.get(`https://gcgc-dashboard.herokuapp.com/students/select/${institute.name}/${grad}`)
+    .then(resp=>{
+      setInstituteData(resp.data.result[0])
+    })
     setEdit(true)
   }
   const ariaLabel = { "aria-label": "description" };
@@ -50,7 +58,7 @@ function Admin() {
             onChange={handleChange}
           >
             {user.user.campus.map((campusName) => (
-              <MenuItem value={campusName}>{campusName.name}</MenuItem>
+              <MenuItem value={campusName}>{parsedStudentDetailsRef[campusName.name]}</MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -73,7 +81,7 @@ function Admin() {
           >
             {user.user.institute.map((instName) =>
               campus.name === instName.campus ? (
-                <MenuItem value={instName}>{instName.name}</MenuItem>
+                <MenuItem value={instName}>{instName.name.toUpperCase()}</MenuItem>
               ) : null
             )}
           </Select>
@@ -93,12 +101,26 @@ function Admin() {
             name="grad"
             onChange={handleChange}
           >
-            <MenuItem value={"Undergraduate"}>Undergraduate</MenuItem>
-            <MenuItem value={"Postgraduate"}>Postgraduate</MenuItem>
+            <MenuItem value={"ug"}>Undergraduate</MenuItem>
+            <MenuItem value={"pg"}>Postgraduate</MenuItem>
           </Select>
         </FormControl>
+
+        {/* edit button icons */}
+        <Button variant="outlined" startIcon={<EditIcon />} 
+        disabled={!(campus && institute && grad)}
+        onClick={initiateEdit }>
+          EDIT
+        </Button>
+
+        {edit?
+        <div>
+          <h1>{parsedStudentDetailsRef[campus.name]}</h1>
+          <h1>{institute.name.toUpperCase()}</h1>
+          <h6>{grad}</h6>
+        </div>:null
+}
         <Box
-          component="form"
           sx={{
             "& > :not(style)": { m: 1 },
           }}
@@ -107,99 +129,32 @@ function Admin() {
           className="secondBox"
         >
             
-          <Input
-            placeholder="total_students
-"
-            value={grad}
-            label="Enter this and that field"
-            name="grad"
-            onChange={handleChange}
-            inputProps={ariaLabel}
-          />
-          <Input
-            placeholder="total_students
-"
-            value={grad}
-            label="grad"
-            name="grad"
-            onChange={handleChange}
-            inputProps={ariaLabel}
-          />
-          <Input
-            placeholder="total_higher_study_and_pay_crt
-"
-            value={grad}
-            label="grad"
-            name="grad"
-            onChange={handleChange}
-            inputProps={ariaLabel}
-          />
-          <Input
-            placeholder="total_opted_for_higher_studies_only
-"
-            value={grad}
-            label="grad"
-            name="grad"
-            onChange={handleChange}
-            inputProps={ariaLabel}
-          />
-          <Input
-            placeholder="total_not_intrested_in_placment
-"
-            value={grad}
-            label="grad"
-            name="grad"
-            onChange={handleChange}
-            inputProps={ariaLabel}
-          />
-          <Input
-            placeholder="Placeholder"
-            value={grad}
-            label="grad"
-            name="grad"
-            onChange={handleChange}
-            inputProps={ariaLabel}
-          />
-          <Input
-            placeholder="Placeholder"
-            value={grad}
-            label="grad"
-            name="grad"
-            onChange={handleChange}
-            inputProps={ariaLabel}
-          />
-          <Input
-            placeholder="Placeholder"
-            value={grad}
-            label="grad"
-            name="grad"
-            onChange={handleChange}
-            inputProps={ariaLabel}
-          />
-          <Input
-            placeholder="Placeholder"
-            value={grad}
-            label="grad"
-            name="grad"
-            onChange={handleChange}
-            inputProps={ariaLabel}
-          />
-          <Input
-            placeholder="Placeholder"
-            value={grad}
-            label="grad"
-            name="grad"
-            onChange={handleChange}
-            inputProps={ariaLabel}
-          />
-          <Input
-            placeholder="Placeholder"
-            value={grad}
-            label="grad"
-            name="grad"
-            onChange={handleChange}
-            inputProps={ariaLabel}
-          />
+            <div>
+              <table>
+              {
+                studentDetailsRef.map(key=>
+                  <tr>
+                    <td>
+                    <label>
+                      {parsedStudentDetailsRef[key]} :
+                    </label>
+                    </td>
+                    <td>
+
+                  <Input
+                    placeholder={key}
+                    value={instituteData[key]}
+                    label="Enter this and that field"
+                    name={key}
+                    onChange={handleChange}
+                    inputProps={ariaLabel}
+                    />
+                    </td>
+                  </tr>
+            )
+          }
+        </table>
+            </div>
         </Box>
       </div>
     </Box>
