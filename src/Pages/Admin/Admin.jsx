@@ -16,12 +16,15 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {ReactComponent as FormSelect } from "../../assets/formSelect.svg"
-import studentDetailsRef,{parsedStudentDetailsRef} from './StudentDetailsFormObj'
+import studentDetailsRef,{parsedStudentDetailsRef,DBUpdateKeys} from './StudentDetailsFormObj'
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import GolfCourseIcon from '@mui/icons-material/GolfCourse';
 import SchoolIcon from '@mui/icons-material/School';
 import SendIcon from '@mui/icons-material/Send';
+import { unstable_batchedUpdates } from "react-dom";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import Backdrop from '@mui/material/Backdrop';
+import Fade from '@mui/material/Fade';
 import "./Admin.styles.scss";
 function Admin() {
   const user = useContext(UserContext);
@@ -32,13 +35,52 @@ function Admin() {
   const [grad, setGrad] = useState("");
   const [edit,setEdit] = useState(false)
   const [instituteData,setInstituteData] = useState({})
+  const [dataObject,setDataObject] = useState({})
+  const [open, setOpen] = useState(false);
+  const [openPreview, setOpenPreview] = useState(false);
+
+  const [confirmUpdate, setConfirmUpdate] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const style = {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 400,
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      borderRadius:'10px',
+      boxShadow: 24,
+      p: 4,
+    };
+    const stylePreview = {
+      position: 'absolute',
+      fontSize:"12px",
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: '60%',
+      maxHeight:"70vh",
+      overflow:"auto",
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      borderRadius:'10px',
+      boxShadow: 24,
+      p: 4,
+    };
   const initiateEdit = ()=>{
     axios.get(`https://gcgc-dashboard.herokuapp.com/students/select/${institute.name}/${grad}`)
     .then(resp=>{
-      setInstituteData(resp.data.result[0])
+      unstable_batchedUpdates(()=>{
+        setInstituteData(resp.data.result[0])
+        setDataObject(resp.data.result[0])
+      })
     })
     setEdit(true)
   }
+
+
   const downloadExcel  = ()=>{
     // window.alert("downloading excel")
     handleClose()
@@ -57,10 +99,38 @@ function Admin() {
     })
   }
   const updateInDataBase =()=>{
+    setConfirmUpdate(false)
+      let flag = false
       const dataToSend = {}
-      axios.patch(`https://gcgc-dashboard.herokuapp.com/students/update/${user.user.eid}/${instituteData.id}`,dataToSend).then((resp)=>{
-        console.log(resp)
+      DBUpdateKeys.forEach((key)=>{
+        dataToSend[key] = dataObject[key]
+        if(dataToSend[key] === undefined || dataToSend[key] === "") flag = true
       })
+      if(flag){
+        window.alert("Values can not contain null values")
+      }
+      else{
+        axios.patch(`https://gcgc-dashboard.herokuapp.com/students/update/${user.user.eid}/${instituteData.id}`,dataToSend)
+        .then(resp=>{
+          // update the dataObject 
+          if(resp.data.status.toLowerCase() === "ok")
+         { 
+           axios.get(`https://gcgc-dashboard.herokuapp.com/students/select/${institute.name}/${grad}`)
+                .then(resp=>{
+                  unstable_batchedUpdates(()=>{
+                    console.log(resp)
+                    setDataObject(resp.data.result[0])
+                    setOpenPreview(true)
+                  })
+                })
+          }
+          else{
+            window.alert("data  couldnot be updated")
+          }
+          // setDataObject()
+          // show modal
+        })
+      }
   }
   const ariaLabel = { "aria-label": "description" };
 
@@ -68,21 +138,12 @@ const handleChangeCampus = (event)=>{
   const {name,value} = event.target
   setViewCampus(value)
 }
-const [open, setOpen] = useState(false);
-const handleOpen = () => setOpen(true);
-const handleClose = () => setOpen(false);
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    borderRadius:'10px',
-    boxShadow: 24,
-    p: 4,
-  };
+
+const handleChangeTableInput = (event) =>{
+  const {name,value} = event.target
+  setDataObject({...dataObject,[name]:value})
+}
+
   const handleChange = (event) => {
     setEdit(false)
     const { name, value } = event.target;
@@ -93,6 +154,66 @@ const style = {
   return (
     <Box p={10}>
       <div className="form-container">
+        {/* Preview Modal */}
+        <Modal
+             aria-labelledby="modal-modal-title"
+             aria-describedby="modal-modal-description"
+            open={openPreview}
+            onClose={()=>setOpenPreview(false)}
+            
+          >
+              <Box sx={stylePreview} style={{backgroundColor: "#eec0c6",
+              backgroundImage: "linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%)"
+              }}>
+                  <Typography id="transition-modal-title" textAlign="center" variant="h6" component="h2">
+                    Preview Mode
+                  </Typography>
+                  <div>
+                    <span style={{position:"absolute",top:"10px", right:"10px",fontSize:"18px",cursor:"pointer"}}
+                    onClick={()=>setOpenPreview(false)}
+                    >
+                      X
+                    </span>
+                  </div>
+                <hr></hr>
+                <table style={{width:"70%",backgroundColor:"white"}}>
+                  
+              {
+                studentDetailsRef.map(key=>
+                  <tr>
+                    <td>
+                    <label>
+                      {parsedStudentDetailsRef[key]} :
+                    </label>
+                    </td>
+                    <td>
+                    <FormControl
+                        variant="standard"
+                        sx={{ m: 1, minWidth: 90 }}
+                        style={{ width: "100px"}}
+                      >
+                  <Input
+                    placeholder={key}
+                    disabled = "true"
+                    value={
+                          key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]]:
+                          key==="under_institute_name"?dataObject[key].toUpperCase():
+                        dataObject[key]}
+                    label="Enter this and that field"
+                    name={key}
+                    style={{fontSize:"12px"}}
+                    onChange={handleChangeTableInput}
+                    inputProps={ariaLabel}
+                    />
+                    </FormControl>
+                    </td>
+                  </tr>
+            )
+          }
+                </table>
+              </Box>
+        </Modal> 
+        {/* download confirmation modal */}
         <Modal
           open={open}
           onClose={handleClose}
@@ -119,17 +240,43 @@ const style = {
                   </Typography>
               </Box>
         </Modal>
-      <div> 
+        {edit ?
+        <Modal
+          open={confirmUpdate}
+          onClose={()=>setConfirmUpdate(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+              <Box sx={style}>
+                  <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Confirmation
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      Are you sure you want to update the data for {parsedStudentDetailsRef[campus.name]} - {institute.name.toUpperCase()} ?
+                  </Typography>
+                  <div className='modal_buttons_container'>
+                      <button className='modal_buttons_container-btn-yes' onClick={updateInDataBase}>
+                          Yes
+                      </button>
+                      <button  className='modal_buttons_container-btn-no' onClick={()=>setConfirmUpdate(false)}>
+                          No
+                      </button>
+                  </div>
+              </Box>
+        </Modal>:null}
+
+
+        <div> 
           <FormControl
             variant="standard"
             sx={{ m: 1, minWidth: 120 }}
-            style={{ width: "200px" }}
+            style={{ width: "160px" }}
           >
             <InputLabel>View Data as Excel Sheet</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={viewCampus}
+              value={campus}
               label="viewCampus"
               name="viewCampus"
               onChange={handleChangeCampus}
@@ -144,8 +291,8 @@ const style = {
         {/* campus input */}
         <FormControl
           variant="standard"
-          sx={{ m: 1, minWidth: 120 }}
-          style={{ width: "200px" }}
+          sx={{ m: 1, minWidth: 100 }}
+          style={{ width: "160px" }}
         >
           <InputLabel> Campus </InputLabel>
           <Select
@@ -165,8 +312,8 @@ const style = {
         {/* institute input */}
         <FormControl
           variant="standard"
-          sx={{ m: 1, minWidth: 120 }}
-          style={{ width: "200px" }}
+          sx={{ m: 1, minWidth: 80 }}
+          style={{ width: "90px" }}
         >
           {/* institute name */}
           <InputLabel> Institute </InputLabel>
@@ -189,7 +336,7 @@ const style = {
         <FormControl
           variant="standard"
           sx={{ m: 1, minWidth: 120 }}
-          style={{ width: "200px" }}
+          style={{ width: "160px" }}
         >
           <InputLabel> Graduation Type </InputLabel>
           <Select
@@ -229,9 +376,10 @@ const style = {
           className="secondBox"
         >
             
-              {edit&& instituteData && instituteData["under_campus_name"]?
+              {edit&& dataObject && dataObject["under_campus_name"]?
             <div  className="formTable">
               <table>
+                
               {
                 studentDetailsRef.map(key=>
                   <tr>
@@ -241,24 +389,30 @@ const style = {
                     </label>
                     </td>
                     <td>
-
+                    <FormControl
+                        variant="standard"
+                        sx={{ m: 1, minWidth: 90 }}
+                        style={{ width: "100px" }}
+                      >
                   <Input
                     placeholder={key}
+                    required
                     value={
-                          key==="under_campus_name"?parsedStudentDetailsRef[instituteData[key]]:
-                          key==="under_institute_name"?instituteData[key].toUpperCase():
-                        instituteData[key]}
+                          key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]]:
+                          key==="under_institute_name"?dataObject[key].toUpperCase():
+                        dataObject[key]}
                     label="Enter this and that field"
                     name={key}
-                    // onChange={handleChangeINP}
+                    onChange={handleChangeTableInput}
                     inputProps={ariaLabel}
                     />
+                    </FormControl>
                     </td>
                   </tr>
             )
           }
         </table>
-        <Button variant="contained" endIcon={<SendIcon />}>
+        <Button variant="contained" endIcon={<SendIcon />} onClick={()=>setConfirmUpdate(true)}>
             Update
         </Button>
             </div>

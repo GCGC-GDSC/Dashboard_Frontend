@@ -476,6 +476,7 @@ function CampusWise() {
             </Box>
             <Grid container className="firstItem" alignItems="center">
             <TabPanel value={value} index={0} style={{width:"100%"}}>
+              
               <Grid container spacing={9} alignItems="center" justifyContent="space-around" mt={2} >
               <div class="headings" id={`stream`} >
                 <div className="sub">
