@@ -1,0 +1,20 @@
+.logs-component{
+    background-color: rgb(236, 233, 233);
+    width:80%;
+    margin: auto;
+    max-height: 200px;
+    overflow: auto;
+    padding:0.7em;
+}
+.Log{
+    font-size: 12px;
+    font-weight: normal;
+
+}
+.Log >span{
+    font-size: 12px;
+    font-weight: normal;
+}
+.campus_path{
+    font-weight: bold;
+}
