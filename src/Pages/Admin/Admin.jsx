@@ -125,7 +125,7 @@ const style = {
             sx={{ m: 1, minWidth: 120 }}
             style={{ width: "200px" }}
           >
-            <InputLabel>View Data as Excel Sheet</InputLabel>
+            <InputLabel>Download Data as Excel Sheet</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -133,6 +133,8 @@ const style = {
               label="viewCampus"
               name="viewCampus"
               onChange={handleChangeCampus}
+              variant="standard"
+
             >
               {user.user.campus.map((campusName) => (
                 <MenuItem value={campusName} onClick={handleOpen}>{parsedStudentDetailsRef[campusName.name]}</MenuItem>
@@ -252,6 +254,7 @@ const style = {
                     name={key}
                     // onChange={handleChangeINP}
                     inputProps={ariaLabel}
+                    size="small"
                     />
                     </td>
                   </tr>
