@@ -445,8 +445,13 @@ function CampusWise() {
       {showD2? (
         <>
           <Grid item xs={5.4} p={3} ml={5}  style={{marginTop:"-60px"}}>
+          <div class="headings campusWiseSecondDoughnutChart" id={`stream`} >
+                <div className="sub">
+          {`${campusName} Institute Overview`}
+                </div>
+                </div>
             <ODoughnutChart
-              title={`${campusName} Institute Overview`}
+              // title={`${campusName} Institute Overview`}
               data={dataDoughnut2}
               options={chartOptions.Doughnut2}
             />
@@ -606,7 +611,7 @@ function CampusWise() {
                 {`${instData.name.toUpperCase()} Salary Details`}
                 </div>
                 </div>
-                <Grid item xs={6}>
+                <Grid item xs={5}>
                   <OVerticalBarChart
                   isCampus={true}
                     // title={`${instData.name.toUpperCase()} Salary Details`}
@@ -614,7 +619,7 @@ function CampusWise() {
                     options={chartOptions.VerticalBarChart1}
                   />
                 </Grid>
-                <Grid item xs={6} >
+                <Grid item xs={5} >
                   <Table column={TABLE_DATA(0,"UG","salary").column} 
                   data={TABLE_DATA(0,"UG","salary").data} 
                   category={"Salary"} 
@@ -665,7 +670,7 @@ function CampusWise() {
                   options={chartOptions.DoughnutPG}
                 />
               </Grid>
-              <Grid item xs={5} ml={12}>
+              <Grid item xs={6} ml={10}>
                   <Table column={TABLE_DATA(1,"PG","placement_details").column} 
                   data={TABLE_DATA(1,"PG","placement_details").data} 
                   category={"Placement Details"} 

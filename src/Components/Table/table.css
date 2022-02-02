@@ -25,8 +25,7 @@ thead th:nth-child(1) {
   background-color: #506ce6;
 }
 tbody tr:hover {
-  background-color: #2a2a72;
-  background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+  background-color: grey;
 }
 tbody td {
   position: relative;
