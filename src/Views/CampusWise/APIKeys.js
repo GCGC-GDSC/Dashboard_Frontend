@@ -1,7 +1,14 @@
 const InstituteStudentDataFormatCampusWise = {
-  placement_details: ["placed", "yet_to_place"],
+  placement_details: [
+    "total_students_eligible",
+    "total_offers",
+    "total_multiple_offers",
+    "placed",
+    // "total_not_intrested_in_placments",
+    "yet_to_place",
+  ],
 
-  salary: ["average", "highest", "lowest"],
+  salary: ["highest", "lowest", "average"],
   student_details: [
     "total_backlogs",
     "total_final_years",
@@ -11,9 +18,16 @@ const InstituteStudentDataFormatCampusWise = {
 };
 
 export const parsedInstituteStudentDataFormatCampusWise = {
-  placement_details: ["Placed", "Yet To Place"],
+  placement_details: [
+    "Eligible",
+    "Offers",
+    "Multiple Offers",
+    "Placed",
+    // "Not Intrested",
+    "Yet To Place",
+  ],
 
-  salary: ["Average", "Highest", "Lowest"],
+  salary: ["Highest", "Lowest", "Average"],
   student_details: [
     "Backlogs",
     "Final Years",
