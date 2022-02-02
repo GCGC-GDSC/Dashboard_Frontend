@@ -25,7 +25,7 @@ const Team = () => {
        setMembers(shuffle(arr))
     })
   },[])
-  return <div className="teamsPage">
+  return<> <div className="teamsPage">
   <ParticlesComponent className="teamsParticle"/>
   {/* <div style={{marginTop:"100px"}}></div> */}
   <div className="team-header">
@@ -39,5 +39,9 @@ const Team = () => {
       )}
   </div>
   </div>
+  <div className="teachUsed">
+    
+  </div>
+  </>
 }
 export default Team;

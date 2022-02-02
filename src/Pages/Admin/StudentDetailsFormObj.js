@@ -1,13 +1,17 @@
 const studentDetailsRef = [
   // "under_campus_name",
   // "under_institute_name",
-  // "is_ug",   
+  // "is_ug",
   "total_students",
   "total_final_years",
-  "total_higher_study_and_pay_crt","total_not_intrested_in_placments","total_backlogs",
-  "total_offers","total_multiple_offers","highest_salary"
-  ,"average_salary" ,"lowest_salary"
- 
+  "total_higher_study_and_pay_crt",
+  "total_not_intrested_in_placments",
+  "total_backlogs",
+  "total_offers",
+  "total_multiple_offers",
+  "highest_salary",
+  "average_salary",
+  "lowest_salary",
 ];
 export const DBUpdateKeys = [
     "total_students",

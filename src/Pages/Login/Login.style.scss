@@ -1,24 +1,39 @@
+.logo {
+  display: flex;
+  justify-content: space-between;
+  background-color: #56a2c2;
+}
+.logo img {
+  margin: 5px;
+  width: 160px;
+  height: 60px;
+  object-fit: contain;
+}
+.dsc img {
+  width: 200px;
+  height: 90px;
+}
 .login {
   display: flex;
   flex-direction: row;
-  background: linear-gradient(0.50turn, #56a2c2, #def3ce, #f69d3c);
+  background: linear-gradient(0.5turn, #56a2c2, #def3ce, #f69d3c);
   width: 100%;
   height: 100vh;
   margin: auto;
   // border-radius: 15px;
   padding: 1em;
-  &-header{
+  &-header {
     // background-color: mediumorchid;
-    color:black;
+    color: black;
     width: 80%;
     padding: 50px;
     font-weight: 700;
-    flex:0.8;
+    flex: 0.8;
     justify-content: center;
     font-size: 1.6rem;
     align-items: center;
-    margin-top:5rem;
-    &-buttons{
+    margin-top: 2rem;
+    &-buttons {
       width: fit-content;
       margin: auto;
       border-radius: 10px;
@@ -28,18 +43,17 @@
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
       border: 1px solid rgba(255, 255, 255, 0.3);
-
     }
     // margin: auto;
-    p{
+    p {
       width: 80%;
       margin: auto;
-      font-size: 1.2rem ;
+      font-size: 1.2rem;
     }
   }
   &-container {
     text-align: center;
-    flex:0.5;
+    flex: 0.5;
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -86,7 +100,7 @@ $button-active-blue: #1669f2;
     background: $button-active-blue;
   }
 }
-.meetTeam-btns{
+.meetTeam-btns {
   display: flex;
   min-width: fit-content;
   align-items: center;

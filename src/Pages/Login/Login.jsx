@@ -4,8 +4,22 @@ import './Login.style.scss'
 import {NavLink} from 'react-router-dom'
 import Fab from '@mui/material/Fab';
 import GroupsIcon from '@mui/icons-material/Groups';
+import gcgcLogo from "../../Components/images/gcgclogo.png"
+import dsc from "../../assets/DSC.png"
+
 function login() {
     return (
+        <>
+        <div className='logo'>
+        <div>
+            <img src="https://www.gitam.edu/assets/images/GITAM-logo.png" alt="This is gitam logo" />
+            <img src={gcgcLogo} alt="GCGC logo should be here" />
+            </div>
+            <div className='dsc'>
+            <img src={dsc} alt="" />
+            </div>
+            
+        </div>
         <div className='login'>
             <div className='login-header'>
                <h3>
@@ -33,6 +47,7 @@ function login() {
             </div>
            
         </div>
+        </>
     )
 }
 export default login

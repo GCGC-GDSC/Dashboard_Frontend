@@ -272,7 +272,7 @@ const handleChangeTableInput = (event) =>{
             sx={{ m: 1, minWidth: 120 }}
             style={{ width: "160px" }}
           >
-            <InputLabel>View Data as Excel Sheet</InputLabel>
+            <InputLabel>Download Data as Excel Sheet</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -280,6 +280,8 @@ const handleChangeTableInput = (event) =>{
               label="viewCampus"
               name="viewCampus"
               onChange={handleChangeCampus}
+              variant="standard"
+
             >
               {user.user.campus.map((campusName) => (
                 <MenuItem value={campusName} onClick={handleOpen}>{parsedStudentDetailsRef[campusName.name]}</MenuItem>
@@ -405,6 +407,7 @@ const handleChangeTableInput = (event) =>{
                     name={key}
                     onChange={handleChangeTableInput}
                     inputProps={ariaLabel}
+                    size="small"
                     />
                     </FormControl>
                     </td>

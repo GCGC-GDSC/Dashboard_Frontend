@@ -17,6 +17,7 @@ import ColorPallet,{colors} from "../ColorAssets/colorPallet.js";
 import Table from "../../Components/Table/Table"
 import SnackbarContent from '@mui/material/SnackbarContent';
 import { UserContext } from '../../context/context';
+
 const CampusNames = {
   vskp: "Visakhapatnam",
   hyd: "Hyderabad",
