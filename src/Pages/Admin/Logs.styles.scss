@@ -1,20 +1,31 @@
-.logs-component{
-    background-color: rgb(236, 233, 233);
-    width:80%;
-    margin: auto;
-    max-height: 200px;
-    overflow: auto;
-    padding:0.7em;
+.logs-component {
+  background-image: linear-gradient(
+    to top,
+    #f3e7e9 0%,
+    #e3eeff 99%,
+    #e3eeff 100%
+  );
+  width: 80%;
+  margin: auto;
+  max-height: 200px;
+  overflow: auto;
+  padding: 0.7em;
 }
-.Log{
-    font-size: 12px;
-    font-weight: normal;
-
+.Log {
+  font-size: 12px;
+  font-weight: normal;
+  padding: 5px;
 }
+<<<<<<< HEAD
 .Log > span{
     font-size: 12px;
     font-weight: normal;
+=======
+.Log > span {
+  font-size: 12px;
+  font-weight: normal;
 }
-.campus_path{
-    font-weight: bold;
+.campus_path {
+  font-weight: bold;
+>>>>>>> 0f92acca6ef9b3d6ca6e46ab7e65448a66a4c6e6
 }

@@ -25,7 +25,7 @@ import { unstable_batchedUpdates } from "react-dom";
 import Logs from "./Logs.component"
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Backdrop from '@mui/material/Backdrop';
-import Fade from '@mui/material/Fade';
+import UpgradeIcon from '@mui/icons-material/Upgrade';
 import "./Admin.styles.scss";
 function Admin() {
   const user = useContext(UserContext);
@@ -125,7 +125,7 @@ function Admin() {
             fetchLogs()
           }
           else{
-            window.alert("data  couldnot be updated")
+            window.alert("data could not be updated")
           }
           // setDataObject()
           // show modal
@@ -151,6 +151,12 @@ const handleChangeTableInput = (event) =>{
     else if (name === "institute") setInstitute(value);
     else if (name === "grad") setGrad(value);
   };
+  const previewStyle = {
+    background: "#D3CCE3", 
+background: "-webkit-linear-gradient(to right, #E9E4F0, #D3CCE3)",  
+background:" linear-gradient(to right, #E9E4F0, #D3CCE3)", 
+
+  }
 
   const fetchLogs = ()=>{
     axios.get("https://gcgc-dashboard.herokuapp.com/students/logs")
@@ -172,9 +178,7 @@ const handleChangeTableInput = (event) =>{
             onClose={()=>setOpenPreview(false)}
             
           >
-              <Box sx={stylePreview} style={{backgroundColor: "#eec0c6",
-              backgroundImage: "linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%)"
-              }}>
+              <Box sx={stylePreview} style={previewStyle}>
                   <Typography id="transition-modal-title" textAlign="center" variant="h6" component="h2">
                     Preview Mode
                   </Typography>
@@ -190,7 +194,7 @@ const handleChangeTableInput = (event) =>{
               {
                 DBPreviewKeys.map(key=>
                   <tr>
-                    <td>
+                    <td> 
                     <label>
                       {parsedStudentDetailsRef[key] ? parsedStudentDetailsRef[key]: key} :
                     </label>
@@ -205,10 +209,9 @@ const handleChangeTableInput = (event) =>{
                     placeholder={key}
                     disabled = "true"
                     value={
-                          key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]] :
-                          // key==="under_institute_name"?dataObject[key].toUpperCase()         :
-                        dataObject[key]
-                      }
+                          key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]]:
+                          key==="under_institute_name"?dataObject[key]: //.toUpperCase was here
+                        dataObject[key]}
                     label="Enter this and that field"
                     name={key}
                     style={{fontSize:"12px"}}
@@ -427,7 +430,7 @@ const handleChangeTableInput = (event) =>{
             )
           }
         </table>
-        <Button variant="contained" endIcon={<SendIcon />} onClick={()=>setConfirmUpdate(true)}>
+        <Button variant="contained" endIcon={<UpgradeIcon />} onClick={()=>setConfirmUpdate(true)} className="updateButton">
             Update
         </Button>
             </div>
@@ -441,7 +444,7 @@ const handleChangeTableInput = (event) =>{
         </Box>
         <hr></hr>
         <div className="Logs-container">
-          <h4>Logs</h4>
+          <h2>Logs</h2>
           <Logs logs={logs}/>
         </div>
       </div>
