@@ -25,14 +25,7 @@ const style = {
     boxShadow: 24,
     p: 4,
   };
-// experiment  --end
-// console.log(company);
-// const showChartpopup = () => {
-//     // console.log("make a vertical chart popup");
-//     // console.log(company,"🤬🤬🤬",companySet);
-  
-//     setFlag((prev)=>!prev)
-// }
+
     return( <>
         <Modal
           open={open}

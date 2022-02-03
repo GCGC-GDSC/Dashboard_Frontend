@@ -15,7 +15,6 @@ import MediaCard from "./Pages/Team/Team";
 import Admin from "./Pages/Admin/Admin";
 import NavBar from "./Components/Navbar/NavBar";
 import { firebase } from "./backend/firebase.config";
-import { identity } from "lodash";
 const App = () => {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({});
@@ -24,7 +23,6 @@ const App = () => {
     const verifyUser = (user)=>{
       axios.post(`https://gcgc-dashboard.herokuapp.com/account/verify/${user.email}`)
       .then(resp=>{
-        console.log(resp)
         if(resp.data.status!='error')  
         setVerifiedUser({user:resp.data.result, isVerified:true});
         else setVerifiedUser({user:{},isVerified:false})
@@ -38,7 +36,6 @@ const App = () => {
     verifiedUser
   ),[verifiedUser])
   firebase.auth().onAuthStateChanged((user) => {
-    // console.log("user",user)
     if (user) {
       setUserProfile(user);
       return setIsUserSignedIn(true);

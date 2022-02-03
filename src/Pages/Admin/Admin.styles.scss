@@ -29,3 +29,28 @@ table {
   width: 30%;
   margin-left: 35%;
 }
+.Logs-container {
+  border-radius: 5px;
+}
+.Logs-container {
+  h2 {
+    width: 80%;
+    margin: auto;
+    text-decoration: underline;
+  }
+  background-image: linear-gradient(
+    to top,
+    #f3e7e9 0%,
+    #e3eeff 99%,
+    #e3eeff 100%
+  );
+}
+
+tr {
+  margin-top: 5px;
+  padding-top: 5px;
+  height: 10px;
+}
+.modal_buttons_container-btn-yes:hover {
+  cursor: pointer;
+}

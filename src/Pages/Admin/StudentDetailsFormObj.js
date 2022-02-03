@@ -28,7 +28,28 @@ export const DBUpdateKeys = [
     "average_salary", 
     "lowest_salary"
   ]
-
+export const DBPreviewKeys = [
+  "under_institute_name",
+  "under_campus_name",
+  "total_students",
+  "total_final_years",
+  "total_higher_study_and_pay_crt",
+  "total_opted_for_higher_studies_only",
+  "total_not_intrested_in_placments",
+  "total_backlogs_opted_for_placements",
+  "total_backlogs_opted_for_higherstudies",
+  "total_backlogs_opted_for_other_career_options",
+  "total_backlogs",
+  "total_students_eligible",
+  "total_offers",
+  "total_multiple_offers",
+  "total_placed",
+  "total_yet_to_place",
+  "highest_salary",
+  "average_salary",
+  "lowest_salary",
+  "is_ug"
+]
 export const parsedStudentDetailsRef = {
   "under_campus_name":"Campus Name",
   "under_institute_name":"Select the Institute",
@@ -43,9 +64,10 @@ export const parsedStudentDetailsRef = {
   "highest_salary":"What is the Highest Salary",
   "average_salary" :"What is the average salary",
   "lowest_salary":"What is the Lowest Salary",
-  "vskp":"Visakhapatnam",
-  "blr":"Bengaluru",
-  "hyd":"Hyderabad"
+  "vskp":"CGC Visakhapatnam",
+  "blr":"CGC Bengaluru",
+  "hyd":"CGC Hyderabad",
+  "overall":"GCGC Overall"
 }
 
 export default studentDetailsRef;

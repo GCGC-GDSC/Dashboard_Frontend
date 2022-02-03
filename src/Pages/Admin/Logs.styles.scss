@@ -1,0 +1,25 @@
+.logs-component {
+  background-image: linear-gradient(
+    to top,
+    #f3e7e9 0%,
+    #e3eeff 99%,
+    #e3eeff 100%
+  );
+  width: 80%;
+  margin: auto;
+  max-height: 200px;
+  overflow: auto;
+  padding: 0.7em;
+}
+.Log {
+  font-size: 12px;
+  font-weight: normal;
+  padding: 5px;
+}
+.Log > span {
+  font-size: 12px;
+  font-weight: normal;
+}
+.campus_path {
+  font-weight: bold;
+}

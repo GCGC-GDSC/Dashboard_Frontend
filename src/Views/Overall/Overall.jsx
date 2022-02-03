@@ -87,7 +87,6 @@ function Overall() {
      {
         const combineArrays = (k,a1,a2,category) =>{
             const arr = []
-            // console.log(a1,a2)
             if(category === "salary"){
                 for(let i =0;i <k.length;i++)
                 {
@@ -130,7 +129,6 @@ function Overall() {
             const matrix = []
             insts.forEach(inst=>{
                 const data = combineArrays(keys,streamData[inst][0][0][category],streamData[inst][1][0][category],category).values
-                // console.log("data",data)
                 matrix.push(data)
             })
            const tp =  tranpose(matrix)

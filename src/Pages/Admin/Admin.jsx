@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LinaerStepper from "../../Components/Form/UpdateForm";
 import { UserContext } from "../../context/context";
 import InputLabel from "@mui/material/InputLabel";
@@ -16,12 +16,13 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {ReactComponent as FormSelect } from "../../assets/formSelect.svg"
-import studentDetailsRef,{parsedStudentDetailsRef,DBUpdateKeys} from './StudentDetailsFormObj'
+import studentDetailsRef,{parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys} from './StudentDetailsFormObj'
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import GolfCourseIcon from '@mui/icons-material/GolfCourse';
 import SchoolIcon from '@mui/icons-material/School';
 import SendIcon from '@mui/icons-material/Send';
 import { unstable_batchedUpdates } from "react-dom";
+import Logs from "./Logs.component"
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Backdrop from '@mui/material/Backdrop';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
@@ -38,7 +39,7 @@ function Admin() {
   const [dataObject,setDataObject] = useState({})
   const [open, setOpen] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
-
+  const [logs,setLogs] = useState([])
   const [confirmUpdate, setConfirmUpdate] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -89,7 +90,6 @@ function Admin() {
       responseType: 'blob', // important
   })
     .then(response=>{
-      console.log(response)
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
@@ -118,14 +118,14 @@ function Admin() {
            axios.get(`https://gcgc-dashboard.herokuapp.com/students/select/${institute.name}/${grad}`)
                 .then(resp=>{
                   unstable_batchedUpdates(()=>{
-                    console.log(resp)
                     setDataObject(resp.data.result[0])
                     setOpenPreview(true)
                   })
                 })
+            fetchLogs()
           }
           else{
-            window.alert("data  couldnot be updated")
+            window.alert("data could not be updated")
           }
           // setDataObject()
           // show modal
@@ -157,6 +157,16 @@ background: "-webkit-linear-gradient(to right, #E9E4F0, #D3CCE3)",
 background:" linear-gradient(to right, #E9E4F0, #D3CCE3)", 
 
   }
+
+  const fetchLogs = ()=>{
+    axios.get("https://gcgc-dashboard.herokuapp.com/students/logs")
+    .then(resp=>{
+        setLogs(resp.data.result)
+    })
+  }
+  useEffect(()=>{
+   fetchLogs()
+  },[])
   return (
     <Box p={10}>
       <div className="form-container">
@@ -183,25 +193,25 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                 <table style={{width:"70%",backgroundColor:"white"}}>
                   
               {
-                studentDetailsRef.map(key=>
+                DBPreviewKeys.map(key=>
                   <tr>
                     <td> 
                     <label>
-                      {parsedStudentDetailsRef[key]} :
+                      {parsedStudentDetailsRef[key] ? parsedStudentDetailsRef[key]: key} :
                     </label>
                     </td>
                     <td>
                     <FormControl
                         variant="standard"
                         sx={{ m: 1, minWidth: 90 }}
-                        style={{ width: "100px"}}
+                        style={{ width: "120px"}}
                       >
                   <Input
                     placeholder={key}
                     disabled = "true"
                     value={
                           key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]]:
-                          key==="under_institute_name"?dataObject[key].toUpperCase():
+                          key==="under_institute_name"?dataObject[key]: //.toUpperCase was here
                         dataObject[key]}
                     label="Enter this and that field"
                     name={key}
@@ -239,8 +249,13 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                           No
                       </button>
                   </div>
-                  <Typography id="modal-modal-description" style={{fontSize:"8px"}} sx={{ mt: 2 }}>
-                      (Your file will be downloaded shortly)
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      <p  style={{fontSize:"12px"}}>
+                      <b>Note:</b> Please enable editing option in the downloaded Excel Sheet to view all columns
+                      <p  style={{fontSize:"10px"}}>
+                        (Your file will be downloaded soon)
+                      </p>
+                      </p>
                   </Typography>
               </Box>
         </Modal>
@@ -268,15 +283,14 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                   </div>
               </Box>
         </Modal>:null}
-
-
+        
         <div> 
           <FormControl
             variant="standard"
             sx={{ m: 1, minWidth: 120 }}
             style={{ width: "160px" }}
           >
-            <InputLabel>Download Data as Excel Sheet</InputLabel>
+            <InputLabel>Download CF Statistics</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -290,6 +304,8 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
               {user.user.campus.map((campusName) => (
                 <MenuItem value={campusName} onClick={handleOpen}>{parsedStudentDetailsRef[campusName.name]}</MenuItem>
               ))}
+              {user.user.campus.length>1?<MenuItem value={{name:"overall"}} onClick={handleOpen}>GCGC Overall</MenuItem>
+              :null}
             </Select>
           </FormControl>
         </div>
@@ -314,7 +330,6 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
             ))}
           </Select>
         </FormControl>
-
         {/* institute input */}
         <FormControl
           variant="standard"
@@ -338,7 +353,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
             )}
           </Select>
         </FormControl>
-            {/* grad type as input */}
+        {/* grad type as input */}
         <FormControl
           variant="standard"
           sx={{ m: 1, minWidth: 120 }}
@@ -357,7 +372,6 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
             <MenuItem value={"pg"}>Postgraduate</MenuItem>
           </Select>
         </FormControl>
-
         {/* edit button icons */}
         <Button variant="outlined" startIcon={<EditIcon />} 
         disabled={!(campus && institute && grad)}
@@ -365,7 +379,6 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
           EDIT
         </Button>
         </div>
-
         {edit?
         <div className="formInformation">
           <AccountBalanceIcon  color="primary"/><h4>{parsedStudentDetailsRef[campus.name]} <ArrowRightIcon/></h4>
@@ -431,7 +444,11 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
 } 
         
         </Box>
-
+        <hr></hr>
+        <div className="Logs-container">
+          <h2>Logs</h2>
+          <Logs logs={logs}/>
+        </div>
       </div>
     </Box>
   );

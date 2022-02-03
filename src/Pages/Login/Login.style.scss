@@ -18,7 +18,7 @@
   flex-direction: row;
   background: linear-gradient(0.5turn, #56a2c2, #def3ce, #f69d3c);
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   margin: auto;
   // border-radius: 15px;
   padding: 1em;
@@ -32,7 +32,7 @@
     justify-content: center;
     font-size: 1.6rem;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: 1rem;
     &-buttons {
       width: fit-content;
       margin: auto;
