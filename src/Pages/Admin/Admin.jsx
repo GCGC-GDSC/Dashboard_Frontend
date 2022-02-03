@@ -398,7 +398,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
               <table>
                 
               {
-                studentDetailsRef.map(key=>
+                DBPreviewKeys.map(key=>
                   <tr>
                     <td>
                     <label>
@@ -414,6 +414,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                   <Input
                     placeholder={key}
                     required
+                    disabled= {!(DBUpdateKeys.includes(key))}
                     value={
                           key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]]:
                           key==="under_institute_name"?dataObject[key].toUpperCase():
