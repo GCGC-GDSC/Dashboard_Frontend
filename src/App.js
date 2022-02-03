@@ -15,13 +15,14 @@ import MediaCard from "./Pages/Team/Team";
 import Admin from "./Pages/Admin/Admin";
 import NavBar from "./Components/Navbar/NavBar";
 import { firebase } from "./backend/firebase.config";
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 const App = () => {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({});
   const [verifiedUser,setVerifiedUser] = useState({user:{},isVerified:false})
   useEffect(()=>{
     const verifyUser = (user)=>{
-      axios.post(`https://gcgc-dashboard.herokuapp.com/account/verify/${user.email}`)
+      axios.post(`${REACT_APP_API_URL}account/verify/${user.email}`)
       .then(resp=>{
         if(resp.data.status!='error')  
         setVerifiedUser({user:resp.data.result, isVerified:true});
