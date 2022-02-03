@@ -20,12 +20,17 @@ import studentDetailsRef,{parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys} fr
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import GolfCourseIcon from '@mui/icons-material/GolfCourse';
 import SchoolIcon from '@mui/icons-material/School';
-import SendIcon from '@mui/icons-material/Send';
 import { unstable_batchedUpdates } from "react-dom";
 import Logs from "./Logs.component"
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Backdrop from '@mui/material/Backdrop';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
+// accordian
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import "./Admin.styles.scss";
 function Admin() {
   const user = useContext(UserContext);
@@ -432,7 +437,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
             )
           }
         </table>
-        <Button variant="contained" endIcon={<UpgradeIcon />} onClick={()=>setConfirmUpdate(true)} className="updateButton">
+        <Button variant="contained" endIcon={<UpgradeIcon style={{ fontSize: 30 }}/>} onClick={()=>setConfirmUpdate(true)} className="updateButton">
             Update
         </Button>
             </div>
@@ -446,8 +451,20 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
         </Box>
         <hr></hr>
         <div className="Logs-container">
-          <h2>Logs</h2>
+        <Accordion className="accordian">
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>LOGS</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
           <Logs logs={logs}/>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
         </div>
       </div>
     </Box>
