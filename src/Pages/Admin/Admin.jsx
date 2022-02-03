@@ -34,6 +34,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import "./Admin.styles.scss";
 import { keyBy } from "lodash";
 import { NearMeSharp } from "@mui/icons-material";
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function Admin() {
   const user = useContext(UserContext);
   const [campus, setCampus] = useState(user.user.campus[0]);
@@ -78,7 +79,7 @@ function Admin() {
       p: 4,
     };
   const initiateEdit = ()=>{
-    axios.get(`https://gcgc-dashboard.herokuapp.com/students/select/${institute.name}/${grad}`)
+    axios.get(`${REACT_APP_API_URL}students/select/${institute.name}/${grad}`)
     .then(resp=>{
       unstable_batchedUpdates(()=>{
         setInstituteData(resp.data.result[0])
@@ -92,7 +93,7 @@ function Admin() {
   const downloadExcel  = ()=>{
     // window.alert("downloading excel")
     handleClose()
-    axios.get(`https://gcgc-dashboard.herokuapp.com/students/download/${viewCampus.name}`,{
+    axios.get(`${REACT_APP_API_URL}students/download/${viewCampus.name}`,{
       method: 'GET',
       responseType: 'blob', // important
   })
@@ -117,7 +118,7 @@ function Admin() {
         window.alert("Inputs can not contain null values")
       }
       else{
-        axios.patch(`https://gcgc-dashboard.herokuapp.com/students/update/${user.user.eid}/${instituteData.id}`,dataToSend)
+        axios.patch(`${REACT_APP_API_URL}students/update/${user.user.eid}/${instituteData.id}`,dataToSend)
         .then(resp=>{
           // update the dataObject 
           if(resp.data.status.toLowerCase() === "ok")
@@ -192,7 +193,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
   }
 
   const fetchLogs = ()=>{
-    axios.get("https://gcgc-dashboard.herokuapp.com/students/logs")
+    axios.get(`${REACT_APP_API_URL}students/logs`)
     .then(resp=>{
         setLogs(resp.data.result)
     })

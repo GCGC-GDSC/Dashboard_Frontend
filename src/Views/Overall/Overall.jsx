@@ -13,6 +13,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ColorPallet ,{colors} from "../ColorAssets/colorPallet.js";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 
 function Overall() {
@@ -173,7 +174,7 @@ function Overall() {
         })
     }
     const getStreams = ()=>{
-        axios.get('https://gcgc-dashboard.herokuapp.com/organization/streams/')
+        axios.get(`${REACT_APP_API_URL}organization/streams/`)
         .then(resp=>{
             var arr = _.get(resp,['data','result']).map(item=>item.name)
             // arr.sort()

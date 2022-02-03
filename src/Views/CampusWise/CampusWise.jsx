@@ -18,6 +18,7 @@ import Table from "../../Components/Table/Table"
 import SnackbarContent from '@mui/material/SnackbarContent';
 import { UserContext } from '../../context/context';
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 const CampusNames = {
   vskp: "Visakhapatnam",
   hyd: "Hyderabad",
@@ -364,7 +365,7 @@ function CampusWise() {
 //  -------------- TABLES----------------
   const getDataInst = (instName) => {
     axios
-      .get(`https://gcgc-dashboard.herokuapp.com/students/inst/${instName}`)
+      .get(`${REACT_APP_API_URL}students/inst/${instName}`)
       .then((resp) => {
         var arr = _.get(resp, ["data", "result"]);
         unstable_batchedUpdates(() => {
@@ -389,7 +390,7 @@ function CampusWise() {
   };
   const getCampus = () => {
     axios
-      .get("https://gcgc-dashboard.herokuapp.com/organization/campus/")
+      .get(`${REACT_APP_API_URL}organization/campus/`)
       .then((resp) => {
         var arr = _.get(resp, ["data", "result"]).map((item) => [
           item.name,

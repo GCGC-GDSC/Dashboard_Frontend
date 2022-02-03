@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Table from "../../Components/Table/Table"
 import {colors} from "../ColorAssets/colorPallet"
 import "../CampusWise/CampusWise.styles.scss"
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function GBStats() {
   const [statsData,setStatsData] =useState([])
   const chartOptions = {
@@ -85,7 +86,7 @@ function GBStats() {
   };
 
   const getStatsData = ()=>{
-    axios.get("https://gcgc-dashboard.herokuapp.com/students/gbstats/")
+    axios.get(`${REACT_APP_API_URL}students/gbstats/`)
     .then(resp=>{
       setStatsData(_.get(resp,["data",'result']))
     })
