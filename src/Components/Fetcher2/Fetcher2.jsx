@@ -20,12 +20,9 @@ const getCompanyList = () => {
   let companySet = new Set() 
   let dict = [];
     const { vskp, blr, hyd } = result;
-    // console.log(vskp);
-    // console.log(blr);
-    // console.log(hyd);
+
     for (let inst in vskp) {
       let institute = vskp[inst];
-      // console.log(institute.length);
 
       for(let i=0;i<institute[0].length;i++){
       companySet.add(institute[0][i].name_of_the_company)
@@ -37,7 +34,6 @@ const getCompanyList = () => {
     }
     for (let inst in blr) {
       let institute = blr[inst];
-      // console.log(institute.length);
       for(let i=0;i<institute[0].length;i++){
         companySet.add(institute[0][i].name_of_the_company)
         dict.push({
@@ -48,8 +44,6 @@ const getCompanyList = () => {
     }
     for (let inst in hyd) {
       let institute = hyd[inst];
-      // console.log(institute.length);
-
       for(let i=0;i<institute[0].length;i++){
         companySet.add(institute[0][i].name_of_the_company)
         dict.push({
@@ -59,7 +53,6 @@ const getCompanyList = () => {
       });}
     }
 
-    // console.log(companySet);
     // ----------------------------------- batch updates
     setCompanySetState(companySet)
     setDictState(dict)
@@ -74,11 +67,9 @@ const getCompanyList = () => {
 
 const filterCards = event => {
   const value = event.target.value.toLowerCase();
-  // console.log(value)
   const filteredUsers = dictState.filter(comp=>{ 
     return comp.name_of_the_company.toLowerCase().includes(value)
   });
-  // console.log("😭😭😭",filteredUsers);
   setFilterState(filteredUsers);
 }
 useEffect(() => {
@@ -88,15 +79,7 @@ useEffect(() => {
     <>
     <BasicTabs/>
     <div className="App">
-      {/* {console.log('rendered')}
-      <h1>Company Cards</h1>
-      <input className="search-box" onChange={filterCards} placeholder="Search..."/>
-      <div className="cards-container">
-       { filterState.map((company, index) =>
-          <Card key={`company-${index}`} index={index} company={company} />
-        )}
       
-      </div> */}
     </div>
     </>
   );

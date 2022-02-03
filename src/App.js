@@ -23,7 +23,6 @@ const App = () => {
     const verifyUser = (user)=>{
       axios.post(`https://gcgc-dashboard.herokuapp.com/account/verify/${user.email}`)
       .then(resp=>{
-        console.log(resp)
         if(resp.data.status!='error')  
         setVerifiedUser({user:resp.data.result, isVerified:true});
         else setVerifiedUser({user:{},isVerified:false})
@@ -37,7 +36,6 @@ const App = () => {
     verifiedUser
   ),[verifiedUser])
   firebase.auth().onAuthStateChanged((user) => {
-    // console.log("user",user)
     if (user) {
       setUserProfile(user);
       return setIsUserSignedIn(true);

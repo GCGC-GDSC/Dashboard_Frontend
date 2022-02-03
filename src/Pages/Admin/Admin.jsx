@@ -16,7 +16,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {ReactComponent as FormSelect } from "../../assets/formSelect.svg"
-import studentDetailsRef,{parsedStudentDetailsRef,DBUpdateKeys} from './StudentDetailsFormObj'
+import studentDetailsRef,{parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys} from './StudentDetailsFormObj'
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import GolfCourseIcon from '@mui/icons-material/GolfCourse';
 import SchoolIcon from '@mui/icons-material/School';
@@ -90,7 +90,6 @@ function Admin() {
       responseType: 'blob', // important
   })
     .then(response=>{
-      console.log(response)
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
@@ -119,7 +118,6 @@ function Admin() {
            axios.get(`https://gcgc-dashboard.herokuapp.com/students/select/${institute.name}/${grad}`)
                 .then(resp=>{
                   unstable_batchedUpdates(()=>{
-                    console.log(resp)
                     setDataObject(resp.data.result[0])
                     setOpenPreview(true)
                   })
@@ -191,18 +189,18 @@ const handleChangeTableInput = (event) =>{
                 <table style={{width:"70%",backgroundColor:"white"}}>
                   
               {
-                studentDetailsRef.map(key=>
+                DBPreviewKeys.map(key=>
                   <tr>
                     <td>
                     <label>
-                      {parsedStudentDetailsRef[key]} :
+                      {parsedStudentDetailsRef[key] ? parsedStudentDetailsRef[key]: key} :
                     </label>
                     </td>
                     <td>
                     <FormControl
                         variant="standard"
                         sx={{ m: 1, minWidth: 90 }}
-                        style={{ width: "100px"}}
+                        style={{ width: "120px"}}
                       >
                   <Input
                     placeholder={key}
@@ -288,7 +286,7 @@ const handleChangeTableInput = (event) =>{
             sx={{ m: 1, minWidth: 120 }}
             style={{ width: "160px" }}
           >
-            <InputLabel>Download Data as Excel Sheet</InputLabel>
+            <InputLabel>Download CF Statistics</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -302,6 +300,8 @@ const handleChangeTableInput = (event) =>{
               {user.user.campus.map((campusName) => (
                 <MenuItem value={campusName} onClick={handleOpen}>{parsedStudentDetailsRef[campusName.name]}</MenuItem>
               ))}
+              {user.user.campus.length>1?<MenuItem value={{name:"overall"}} onClick={handleOpen}>GCGC Overall</MenuItem>
+              :null}
             </Select>
           </FormControl>
         </div>

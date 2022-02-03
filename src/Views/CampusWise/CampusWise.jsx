@@ -80,7 +80,6 @@ function CampusWise() {
     Doughnut: {
       onClick: function (evt, item) {
         if (item[0]) {
-          // console.log('ask data for',campusList[item[0].index]) 
           const itemIndex = item[0].index
           if(userMultiAccess || campusList[itemIndex][0] === user.user.campus[0].name )
               getData(campusList[itemIndex][0]);
@@ -368,7 +367,6 @@ function CampusWise() {
       .get(`https://gcgc-dashboard.herokuapp.com/students/inst/${instName}`)
       .then((resp) => {
         var arr = _.get(resp, ["data", "result"]);
-        // console.log({ name: instName, data: [...arr] });
         unstable_batchedUpdates(() => {
           setInstData({ name: instName, data: [...arr] });
           setShowCharts(true);
@@ -397,11 +395,9 @@ function CampusWise() {
           item.name,
           item.inst_count,
         ]);
-        // console.log(arr)
         unstable_batchedUpdates(() => {
           setCampusList(arr);
           setCampusData(_.get(resp, ["data", "result"]));
-          // getData(user.user.campus[0].name)
         });
       });
   };

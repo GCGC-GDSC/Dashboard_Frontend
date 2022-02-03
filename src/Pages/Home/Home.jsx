@@ -9,7 +9,6 @@ import Snackbar from '@mui/material/Snackbar';
 import { UserContext } from '../../context/context';
 function Home() {
     const user = useContext(UserContext)
-    console.log(user)
     const [open, setOpen] = useState(false);
     const handleClose = () => {
         setOpen(false);

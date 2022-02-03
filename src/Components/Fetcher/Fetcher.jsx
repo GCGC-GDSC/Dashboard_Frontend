@@ -415,7 +415,6 @@ function Fetcher() {
   }, []);
   return (
     <div className="fetcher-container">
-      {console.log(showBC, "bc states")}
       <div className="fetcher">
         <div className="fetcher_carousel-container">
           <div className="breadCrumps">

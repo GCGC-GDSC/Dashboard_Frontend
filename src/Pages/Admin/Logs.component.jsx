@@ -7,7 +7,6 @@ function Logs({logs}){
             {
             logs.map(log=>
                 <div className='Log' dangerouslySetInnerHTML={{__html: log }}>
-                    {console.log(log)}
                 </div>    
             )
             }
