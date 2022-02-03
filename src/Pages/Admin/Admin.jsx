@@ -186,8 +186,7 @@ const handleChangeTableInput = (event) =>{
                     </span>
                   </div>
                 <hr></hr>
-                <table style={{width:"70%",backgroundColor:"white"}}>
-                  
+                <table style={{width:"70%",backgroundColor:"white"}}>         
               {
                 DBPreviewKeys.map(key=>
                   <tr>
@@ -206,9 +205,10 @@ const handleChangeTableInput = (event) =>{
                     placeholder={key}
                     disabled = "true"
                     value={
-                          key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]]:
-                          key==="under_institute_name"?dataObject[key].toUpperCase():
-                        dataObject[key]}
+                          key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]] :
+                          // key==="under_institute_name"?dataObject[key].toUpperCase()         :
+                        dataObject[key]
+                      }
                     label="Enter this and that field"
                     name={key}
                     style={{fontSize:"12px"}}
@@ -262,7 +262,7 @@ const handleChangeTableInput = (event) =>{
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-              <Box sx={style}>
+          <Box sx={style}>
                   <Typography id="modal-modal-title" variant="h6" component="h2">
                   Confirmation
                   </Typography>
@@ -277,15 +277,14 @@ const handleChangeTableInput = (event) =>{
                           No
                       </button>
                   </div>
-              </Box>
+          </Box>
         </Modal>:null}
         
         <div> 
           <FormControl
             variant="standard"
             sx={{ m: 1, minWidth: 120 }}
-            style={{ width: "160px" }}
-          >
+            style={{ width: "160px" }}>
             <InputLabel>Download CF Statistics</InputLabel>
             <Select
               labelId="demo-simple-select-label"
