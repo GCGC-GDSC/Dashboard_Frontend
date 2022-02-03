@@ -14,10 +14,18 @@
   align-items: center;
   margin: 30px;
 }
-
-.formTable table{
-  width:50%;
+table {
+  background-color: aliceblue;
 }
-  .formTable table tr{
-    height: 2rem;
-  }
+
+.formTable table {
+  width: 50%;
+}
+.formTable table tr {
+  height: 2rem;
+}
+
+.formTable button {
+  width: 30%;
+  margin-left: 35%;
+}

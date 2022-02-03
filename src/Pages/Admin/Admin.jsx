@@ -24,7 +24,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { unstable_batchedUpdates } from "react-dom";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Backdrop from '@mui/material/Backdrop';
-import Fade from '@mui/material/Fade';
+import UpgradeIcon from '@mui/icons-material/Upgrade';
 import "./Admin.styles.scss";
 function Admin() {
   const user = useContext(UserContext);
@@ -151,6 +151,12 @@ const handleChangeTableInput = (event) =>{
     else if (name === "institute") setInstitute(value);
     else if (name === "grad") setGrad(value);
   };
+  const previewStyle = {
+    background: "#D3CCE3", 
+background: "-webkit-linear-gradient(to right, #E9E4F0, #D3CCE3)",  
+background:" linear-gradient(to right, #E9E4F0, #D3CCE3)", 
+
+  }
   return (
     <Box p={10}>
       <div className="form-container">
@@ -162,9 +168,7 @@ const handleChangeTableInput = (event) =>{
             onClose={()=>setOpenPreview(false)}
             
           >
-              <Box sx={stylePreview} style={{backgroundColor: "#eec0c6",
-              backgroundImage: "linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%)"
-              }}>
+              <Box sx={stylePreview} style={previewStyle}>
                   <Typography id="transition-modal-title" textAlign="center" variant="h6" component="h2">
                     Preview Mode
                   </Typography>
@@ -181,7 +185,7 @@ const handleChangeTableInput = (event) =>{
               {
                 studentDetailsRef.map(key=>
                   <tr>
-                    <td>
+                    <td> 
                     <label>
                       {parsedStudentDetailsRef[key]} :
                     </label>
@@ -415,7 +419,7 @@ const handleChangeTableInput = (event) =>{
             )
           }
         </table>
-        <Button variant="contained" endIcon={<SendIcon />} onClick={()=>setConfirmUpdate(true)}>
+        <Button variant="contained" endIcon={<UpgradeIcon />} onClick={()=>setConfirmUpdate(true)} className="updateButton">
             Update
         </Button>
             </div>
