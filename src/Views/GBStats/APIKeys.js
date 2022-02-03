@@ -11,10 +11,11 @@ const InstituteStudentDataFormatCampusWise = {
   salary: ["highest", "lowest", "average"],
 
   student_details: [
+    "total_students",
+    "total_higher_study_and_pay_crt",
+    "total_opted_for_higher_studies_only",
     "total_backlogs",
     "total_final_years",
-    "total_higher_study_and_pay_crt",
-    "total_students",
   ],
 };
 
@@ -31,10 +32,11 @@ export const parsedInstituteStudentDataFormatCampusWise = {
   salary: ["Highest", "Lowest", "Average"],
 
   student_details: [
-    "Backlogs",
-    "Final Years",
-    "HigherStudy and PayCRT",
     "TotalStudents",
+    "Deferred Placements",
+    "No Response",
+    "Backlogs",
+    "FinalYears",
   ],
 };
 export default InstituteStudentDataFormatCampusWise;
