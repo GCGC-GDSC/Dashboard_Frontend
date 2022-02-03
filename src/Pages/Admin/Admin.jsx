@@ -32,6 +32,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import "./Admin.styles.scss";
+import { keyBy } from "lodash";
+import { NearMeSharp } from "@mui/icons-material";
 function Admin() {
   const user = useContext(UserContext);
   const [campus, setCampus] = useState(user.user.campus[0]);
@@ -112,21 +114,18 @@ function Admin() {
         if(dataToSend[key] === undefined || dataToSend[key] === "") flag = true
       })
       if(flag){
-        window.alert("Values can not contain null values")
+        window.alert("Inputs can not contain null values")
       }
       else{
         axios.patch(`https://gcgc-dashboard.herokuapp.com/students/update/${user.user.eid}/${instituteData.id}`,dataToSend)
         .then(resp=>{
           // update the dataObject 
           if(resp.data.status.toLowerCase() === "ok")
-         { 
-           axios.get(`https://gcgc-dashboard.herokuapp.com/students/select/${institute.name}/${grad}`)
-                .then(resp=>{
-                  unstable_batchedUpdates(()=>{
-                    setDataObject(resp.data.result[0])
-                    setOpenPreview(true)
-                  })
-                })
+          { 
+            unstable_batchedUpdates(()=>{
+              setDataObject(resp.data.result)
+              setOpenPreview(true)
+            })
             fetchLogs()
           }
           else{
@@ -143,10 +142,39 @@ const handleChangeCampus = (event)=>{
   const {name,value} = event.target
   setViewCampus(value)
 }
+// --------update form ...
+const checkDependentValueUpdates = (kvp)=>{
+  const {name,value} = kvp
+  console.log("i have object",dataObject);
+  const newRefObj = dataObject ;
+  newRefObj[name] = value ;
+  const newDataObj = {};
+  newDataObj["total_backlogs"] = 0;
+  ["total_backlogs_opted_for_placements",
+  "total_backlogs_opted_for_higherstudies",
+  "total_backlogs_opted_for_other_career_options"].forEach(key =>{
+    newDataObj["total_backlogs"] += parseInt(newRefObj[key]);
+  })
 
+  newDataObj["total_students_eligible"]  = newRefObj["total_final_years"] ;
+
+  ["total_higher_study_and_pay_crt", 
+  "total_opted_for_higher_studies_only",
+  "total_not_intrested_in_placments",
+  "total_backlogs_opted_for_placements"].forEach(key=>{
+  newDataObj["total_students_eligible"] -= parseInt(newRefObj[key]);
+  })
+
+  newDataObj["total_placed"] = newRefObj["total_offers"] - newRefObj["total_multiple_offers"];
+
+  newDataObj["total_yet_to_place"] = newRefObj["total_students_eligible"] - newRefObj["total_placed"];    
+
+  setDataObject({...newRefObj,...newDataObj})
+}
 const handleChangeTableInput = (event) =>{
   const {name,value} = event.target
   setDataObject({...dataObject,[name]:value})
+  checkDependentValueUpdates(event.target)
 }
 
   const handleChange = (event) => {
@@ -180,8 +208,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
              aria-labelledby="modal-modal-title"
              aria-describedby="modal-modal-description"
             open={openPreview}
-            onClose={()=>setOpenPreview(false)}
-            
+            onClose={()=>setOpenPreview(false)} 
           >
               <Box sx={stylePreview} style={previewStyle}>
                   <Typography id="transition-modal-title" textAlign="center" variant="h6" component="h2">
@@ -195,15 +222,14 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                     </span>
                   </div>
                 <hr></hr>
-                <table style={{width:"70%",backgroundColor:"white"}}>
-                  
+                <table style={{width:"70%",backgroundColor:"white"}}>         
               {
                 DBPreviewKeys.map(key=>
                   <tr>
                     <td> 
-                    <label>
-                      {parsedStudentDetailsRef[key] ? parsedStudentDetailsRef[key]: key} :
-                    </label>
+                      <label>
+                        {parsedStudentDetailsRef[key] ? parsedStudentDetailsRef[key]: key} :
+                      </label>
                     </td>
                     <td>
                     <FormControl
@@ -271,7 +297,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-              <Box sx={style}>
+          <Box sx={style}>
                   <Typography id="modal-modal-title" variant="h6" component="h2">
                   Confirmation
                   </Typography>
@@ -286,15 +312,14 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                           No
                       </button>
                   </div>
-              </Box>
+          </Box>
         </Modal>:null}
         
         <div> 
           <FormControl
             variant="standard"
             sx={{ m: 1, minWidth: 120 }}
-            style={{ width: "160px" }}
-          >
+            style={{ width: "160px" }}>
             <InputLabel>Download CF Statistics</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -405,7 +430,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
               <table>
                 
               {
-                studentDetailsRef.map(key=>
+                DBPreviewKeys.map(key=>
                   <tr>
                     <td>
                     <label>
@@ -415,16 +440,20 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                     <td>
                     <FormControl
                         variant="standard"
-                        sx={{ m: 1, minWidth: 90 }}
-                        style={{ width: "100px" }}
+                        sx={{ m: 1, minWidth: 120 }}
+                        style={{ width: "130px" }}
                       >
                   <Input
                     placeholder={key}
                     required
+                    type="number"
+                    onWheel={(e) => e.target.blur()}
+                    disabled= {!(DBUpdateKeys.includes(key))}
                     value={
                           key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]]:
                           key==="under_institute_name"?dataObject[key].toUpperCase():
-                        dataObject[key]}
+                          dataObject[key]
+                      }
                     label="Enter this and that field"
                     name={key}
                     onChange={handleChangeTableInput}
