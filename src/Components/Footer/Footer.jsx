@@ -1,20 +1,6 @@
-// import React from "react"
-
-// const Footer = () => {
-//     const myStyle = {
-//         height: "50px",
-//         backgroundColor:"whitesmoke",
-//         marginTop:"10rem"
-//     }
-//     return (
-//         <div style={myStyle}>
-
-//         </div>
-//     )
-// }
-// export default Footer;
 import React from "react"
 import "./Footer.style.scss"
+import footerLogo from "../../assets/DSC.png"
 const Footer = () => {
   const handleChange=(e)=>{
     const color = e.target.value
@@ -22,7 +8,9 @@ const Footer = () => {
   }
     return (
       <div className="FooterStyle">
+
         <div className="container">
+          <img src={footerLogo} alt="footer dsc logo"/>
           
             <ul>
               
