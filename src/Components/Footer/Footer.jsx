@@ -8,6 +8,7 @@ const Footer = () => {
   }
     return (
       <div className="FooterStyle">
+
         <div className="container">
             <ul>
               
