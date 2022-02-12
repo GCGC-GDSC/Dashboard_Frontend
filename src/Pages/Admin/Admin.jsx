@@ -49,6 +49,7 @@ function Admin() {
   const [openPreview, setOpenPreview] = useState(false);
   const [logs,setLogs] = useState([])
   const [confirmUpdate, setConfirmUpdate] = useState(false);
+  
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const style = {
@@ -79,7 +80,11 @@ function Admin() {
       p: 4,
     };
   const initiateEdit = ()=>{
-    axios.get(`${REACT_APP_API_URL}students/select/${institute.name}/${grad}`)
+    axios.get(`${REACT_APP_API_URL}students/select/${institute.name}/${grad}`,{
+      headers: {
+        'Authorization': `Token ${user.user.token.key}`
+      }
+    })
     .then(resp=>{
       unstable_batchedUpdates(()=>{
         setInstituteData(resp.data.result[0])
@@ -94,6 +99,10 @@ function Admin() {
     // window.alert("downloading excel")
     handleClose()
     axios.get(`${REACT_APP_API_URL}students/download/${viewCampus.name}`,{
+      headers: {
+        'Authorization': `Token ${user.user.token.key}`
+      }
+    },{
       method: 'GET',
       responseType: 'blob', // important
   })
@@ -118,7 +127,11 @@ function Admin() {
         window.alert("Inputs can not contain null values")
       }
       else{
-        axios.patch(`${REACT_APP_API_URL}students/update/${user.user.eid}/${instituteData.id}`,dataToSend)
+        axios.patch(`${REACT_APP_API_URL}students/update/${user.user.eid}/${instituteData.id}`,{
+          headers: {
+            'Authorization': `Token ${user.user.token.key}`
+          }
+        },dataToSend)
         .then(resp=>{
           // update the dataObject 
           if(resp.data.status.toLowerCase() === "ok")
@@ -193,7 +206,11 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
   }
 
   const fetchLogs = ()=>{
-    axios.get(`${REACT_APP_API_URL}students/logs`)
+    axios.get(`${REACT_APP_API_URL}students/logs`,{
+      headers: {
+        'Authorization': `Token ${user.user.token.key}`
+      }
+    })
     .then(resp=>{
         setLogs(resp.data.result)
     })
@@ -325,7 +342,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={campus}
+              value={viewCampus}
               label="viewCampus"
               name="viewCampus"
               onChange={handleChangeCampus}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useContext,useEffect, useState,useRef } from 'react';
 import ODoughnutChart from './charts/ODoughnut';
 import axios from 'axios';
 import OVerticalBarChart from './charts/OVerticalBarChart';
@@ -6,28 +6,33 @@ import './Overall.styles.scss'
 import OverallFetcher from './OverallFetcher.component';
 import { unstable_batchedUpdates } from 'react-dom';
 import _ from 'lodash';
-import objRef,{parsedDataFormat} from './APIKeys.js'
+import objRef,{parsedDataFormat,streamToInstCount} from './APIKeys.js'
 import Table from "../../Components/Table/Table"
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ColorPallet ,{colors} from "../ColorAssets/colorPallet.js";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { UserContext } from "../../context/context";
+
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 
 function Overall() {
-
+  
+  const user = useContext(UserContext);
   function tranpose(matrix) {
     return _.zip(...matrix);
   }
 
   const headingRef = useRef()
 //   skrr end
-    const hostname = 'https://gcgc-dashboard.herokuapp.com'
+    // const hostname = 'https://gcgc-dashboard.herokuapp.com'
     const [streamData,setStreamData] = useState({})
     const [streamList,setStreamList] = useState([])
     const [showVC,setShowVC] = useState(false)
+    //for the main doughtnut in overall section-- this is to display the number of inst per campus
+    const [instPerCampus,setInstPerCampus] = useState([10,20,30,40,50,60])
     // for the table
     const [tableData, setTableData] = useState([])
     const VChartColors =colors
@@ -77,9 +82,9 @@ function Overall() {
     labels: streamList.map(item=>item[0].toUpperCase()+item.slice(1,item.length)),
     datasets: [{
         label: "Number of Students",
-        data: [32490,23003,12034,45044,23034,22032], 
-        backgroundColor: streamList.map(item=>ColorPallet[item]),
-          borderColor:streamList.map(item=>ColorPallet[item]),
+        data: streamList.map(item=>streamToInstCount[item.toLowerCase()]), 
+        backgroundColor: streamList.map(item=>ColorPallet[item.toLowerCase()]),
+          borderColor:streamList.map(item=>ColorPallet[item.toLowerCase()]),
         borderWidth: 1,
         
         },],
@@ -104,7 +109,7 @@ function Overall() {
         }
         
         const getDataForVC = (keys,category) => {
-            const insts = streamData.institutes
+            const insts = streamData.institutes  
                 const dataArray = insts.map((inst,index)=>{
                 return{
                     label:inst.toUpperCase(),
@@ -163,7 +168,11 @@ function Overall() {
                 }
     }
     const getData = (stream)=>{
-      axios.get(`${hostname}/students/overall/${stream}/`).then(resp=>{
+      axios.get(`${REACT_APP_API_URL}students/overall/${stream}/`,{
+        headers: {
+          'Authorization': `Token ${user.user.token.key}`
+        }
+      }).then(resp=>{
         var responseData = _.get(resp,['data','result'])
         headingRef.current.click()
         unstable_batchedUpdates(()=>{
@@ -174,15 +183,27 @@ function Overall() {
         })
     }
     const getStreams = ()=>{
-        axios.get(`${REACT_APP_API_URL}organization/streams/`)
+        axios.get(`${REACT_APP_API_URL}organization/streams/`,{
+          headers: {
+            'Authorization': `Token ${user.user.token.key}`
+          }
+        })
         .then(resp=>{
             var arr = _.get(resp,['data','result']).map(item=>item.name)
             // arr.sort()
             setStreamList(arr)
         })
     }
+    // const getInstituteCountPerCampus = () => {
+    //   axios.get(`${REACT_APP_API_URL}organization/campus/`)
+    //   .then((resp) => {
+    //     var instCountPerCampus = _.get(resp,['data','result']).map(item => item.inst_count)
+    //     setInstPerCampus(instCountPerCampus)
+    //   })
+    // }
     useEffect(()=>{
         getStreams()
+
     },[])
 
     
@@ -203,7 +224,7 @@ function Overall() {
       <Grid item xs={6} className='firstDoughnut'>
 
         <ODoughnutChart
-          title={"University Overview"}
+          title={"University overview of _____"}
           data={dataDoughnut}
           options={chartOptions.Doughnut}
         />

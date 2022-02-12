@@ -37,4 +37,5 @@ export const parsedInstituteStudentDataFormatCampusWise = {
     "FinalYears",
   ],
 };
+
 export default InstituteStudentDataFormatCampusWise;

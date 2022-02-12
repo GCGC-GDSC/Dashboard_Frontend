@@ -15,27 +15,30 @@ import MediaCard from "./Pages/Team/Team";
 import Admin from "./Pages/Admin/Admin";
 import NavBar from "./Components/Navbar/NavBar";
 import { firebase } from "./backend/firebase.config";
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 const App = () => {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({});
-  const [verifiedUser,setVerifiedUser] = useState({user:{},isVerified:false})
-  useEffect(()=>{
-    const verifyUser = (user)=>{
-      axios.post(`${REACT_APP_API_URL}account/verify/${user.email}`)
-      .then(resp=>{
-        if(resp.data.status!='error')  
-        setVerifiedUser({user:resp.data.result, isVerified:true});
-        else setVerifiedUser({user:{},isVerified:false})
-      })  
-    }
-    if(isUserSignedIn && userProfile && userProfile.email)
-      verifyUser(userProfile)
-    else setVerifiedUser({user:{},isVerified:false})
-  },[userProfile,isUserSignedIn])
-  const providerValue = useMemo( () => (
-    verifiedUser
-  ),[verifiedUser])
+  const [verifiedUser, setVerifiedUser] = useState({
+    user: {},
+    isVerified: false,
+  });
+  useEffect(() => {
+    const verifyUser = (user) => {
+      axios
+        .post(`${REACT_APP_API_URL}account/verify/${user.email}`)
+        .then((resp) => {
+          console.log(resp.data.result);
+          if (resp.data.status != "error")
+            setVerifiedUser({ user: resp.data.result, isVerified: true });
+          else setVerifiedUser({ user: {}, isVerified: false });
+        });
+    };
+    if (isUserSignedIn && userProfile && userProfile.email)
+      verifyUser(userProfile);
+    else setVerifiedUser({ user: {}, isVerified: false });
+  }, [userProfile, isUserSignedIn]);
+  const providerValue = useMemo(() => verifiedUser, [verifiedUser]);
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       setUserProfile(user);
@@ -52,11 +55,11 @@ const App = () => {
         {isUserSignedIn && verifiedUser.isVerified ? (
           <UserContext.Provider value={providerValue}>
             <NavBar user={verifiedUser} />
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/team" element={<MediaCard />} />
-          </Routes>
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/team" element={<MediaCard />} />
+            </Routes>
           </UserContext.Provider>
         ) : (
           <Routes>
