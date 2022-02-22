@@ -288,7 +288,7 @@ function Overall() {
         </Grid>
         <div class="headings" id={`stream`} >
           <div className="sub">
-          Salary
+          Package Details
      </div>
           </div>
           <Grid container container ml={10} mt={6} spacing={2} alignItems="center">
@@ -299,8 +299,13 @@ function Overall() {
                 options={chartOptions.VerticalBarChart3}
               />
             </Grid>
+<<<<<<< HEAD
             <Grid item xs={4} className="table-container">
               <Table  column={Table3.column} data={Table3.data} category={"Salary"} keys={parsedDataFormat["salary"]}/> 
+=======
+            <Grid item xs={4}>
+              <Table column={Table3.column} data={Table3.data} category={"Package(LPA)"} keys={parsedDataFormat["salary"]}/> 
+>>>>>>> 7356c9e7d6c51eb2ac4716522e229c6a0b6d622b
             </Grid>
         </Grid>
         

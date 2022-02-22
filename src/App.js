@@ -4,6 +4,7 @@ import "./App.css";
 import { UserContext } from "./context/context";
 import RestrictedView from "./Views/RestrivctedView/RestrictedView";
 import axios from "axios";
+import { useMediaQuery } from 'react-responsive'
 import {
   BrowserRouter as Router,
   Routes,
@@ -24,6 +25,11 @@ const App = () => {
     user: {},
     isVerified: false,
   });
+
+  const detectMediaSize = useMediaQuery({
+    query: '(max-width: 1020px)'
+  })
+
   useEffect(() => {
     const verifyUser = (user) => {
       axios
@@ -37,8 +43,10 @@ const App = () => {
     };
     if (isUserSignedIn && userProfile && userProfile.email)
       verifyUser(userProfile);
-    else setVerifiedUser({ user: {}, isVerified: false });
+    else setVerifiedUser({ user: {}, isVerified: false,userRestrictedScreen:detectMediaSize });
   }, [userProfile, isUserSignedIn]);
+
+
   const providerValue = useMemo(() => verifiedUser, [verifiedUser]);
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -52,25 +60,33 @@ const App = () => {
   return (
     <div className="app">
       <Router>
-        {/* <NavBar user={verifiedUser} /> */}
-        {isUserSignedIn && verifiedUser.isVerified ? (
+        {/*  user signed and using large screen */}
+        {isUserSignedIn && verifiedUser.isVerified  &&! detectMediaSize ? (
           <UserContext.Provider value={providerValue}>
             <NavBar user={verifiedUser} />
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/team" element={<MediaCard />} />
-              <Route path="/restrict" element={<RestrictedView />} />
             </Routes>
           </UserContext.Provider>
-        ) : (
+          //  user signed in and useing small screen
+        ) : isUserSignedIn && verifiedUser.isVerified  && detectMediaSize ?
+        <UserContext.Provider value={providerValue}>
+        <NavBar user={verifiedUser} />
+        <Routes>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/team" element={<MediaCard />} />        
+          <Route exact path="/" element={<RestrictedView/>  }  />
+          </Routes>
+          </UserContext.Provider>
+          // user not signed in ... !
+          :(
           <Routes>
             <Route path="/" element={<Login />} />
-
             <Route path="/team" element={<MediaCard />} />
-          </Routes>
-        )}
-      </Router>
+          </Routes>)}
+      </Router> 
     </div>
   );
 };

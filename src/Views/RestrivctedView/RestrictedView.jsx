@@ -5,7 +5,7 @@ const RestrictedView = () => {
         <>
         <div className="restrictcontainer">
             <p>
-            Sorry. This Website can only be viewed in laptop screen
+            Sorry. This view can only be viewed in laptop screen only.
             </p>
             <div className="restrictimage">
         <Restrict/>

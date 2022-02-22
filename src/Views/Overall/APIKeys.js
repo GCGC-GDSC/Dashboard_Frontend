@@ -25,8 +25,8 @@ export const parsedDataFormat = {
     "Offers",
     "Multiple Offers",
     "Placed",
-    // "Not Intrested",
-    "Yet To Place",
+    // "Not Intrested", 
+    "Yet to be Placed",
   ],
 
   salary: ["Highest", "Lowest", "Average"],
