@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import "./App.css";
 import "./App.css";
 import { UserContext } from "./context/context";
+import RestrictedView from "./Views/RestrivctedView/RestrictedView";
 import axios from "axios";
 import {
   BrowserRouter as Router,
@@ -59,6 +60,7 @@ const App = () => {
               <Route exact path="/" element={<Home />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/team" element={<MediaCard />} />
+              <Route path="/restrict" element={<RestrictedView />} />
             </Routes>
           </UserContext.Provider>
         ) : (

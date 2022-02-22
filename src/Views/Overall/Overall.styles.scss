@@ -29,3 +29,8 @@
   display: inline;
   border-bottom: 3px solid #f9dd94;
 }
+@media screen and (max-width: 1024px) {
+  .firstDoughnut {
+    transform: scaleX(0.8);
+  }
+}

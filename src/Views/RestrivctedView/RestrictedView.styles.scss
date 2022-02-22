@@ -1,0 +1,19 @@
+.restrictcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  //   margin-top: 40%;
+}
+.restrictcontainer p {
+    font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10%;
+}
+.restrictimage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 50%;
+}
