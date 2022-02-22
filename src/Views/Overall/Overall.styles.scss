@@ -18,6 +18,7 @@
   padding-left: 0px !important;
   padding-top: 1rem !important;
 }
+
 .headings {
   width: 100%;
   text-align: center;
@@ -32,5 +33,9 @@
 @media screen and (max-width: 1024px) {
   .firstDoughnut {
     transform: scaleX(0.8);
+  }
+  .table-container {
+    transform: scaleX(0.9);
+    font-size: 12px;
   }
 }

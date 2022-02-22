@@ -127,7 +127,7 @@ function Admin() {
         window.alert("Inputs can not contain null values")
       }
       else{
-        axios.patch(`${REACT_APP_API_URL}students/update/${user.user.eid}/${instituteData.id}`,{
+        axios.patch(`${REACT_APP_API_URL}students/update/${instituteData.id}`,{
           headers: {
             'Authorization': `Token ${user.user.token.key}`
           }
@@ -320,7 +320,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                   Confirmation
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      Are you sure you want to update the data for {parsedStudentDetailsRef[campus.name]} - {institute.name.toUpperCase()} ?
+                      Are you sure you want to update the data for {parsedStudentDetailsRef[campus.name]} - {institute.name} ?
                   </Typography>
                   <div className='modal_buttons_container'>
                       <button className='modal_buttons_container-btn-yes' onClick={updateInDataBase}>
@@ -396,7 +396,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
           >
             {user.user.institute.map((instName) =>
               campus.name === instName.campus ? (
-                <MenuItem value={instName}>{instName.name.toUpperCase()}</MenuItem>
+                <MenuItem value={instName}>{instName.name}</MenuItem>
               ) : null
             )}
           </Select>
@@ -430,8 +430,8 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
         {edit?
         <div className="formInformation">
           <AccountBalanceIcon  color="primary"/><h4>{parsedStudentDetailsRef[campus.name]} <ArrowRightIcon/></h4>
-          <GolfCourseIcon color="primary"/><h4>{institute.name.toUpperCase()} <ArrowRightIcon/></h4>
-          <SchoolIcon color="primary"/> <h4>{grad.toUpperCase()}</h4>
+          <GolfCourseIcon color="primary"/><h4>{institute.name} <ArrowRightIcon/></h4>
+          <SchoolIcon color="primary"/> <h4>{grad}</h4>
         </div>:null
 }
         <Box
@@ -469,7 +469,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                     disabled= {!(DBUpdateKeys.includes(key))}
                     value={
                           key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]]:
-                          key==="under_institute_name"?dataObject[key].toUpperCase():
+                          key==="under_institute_name"?dataObject[key]:
                           dataObject[key]
                       }
                     label="Enter this and that field"

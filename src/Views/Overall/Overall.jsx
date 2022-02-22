@@ -79,7 +79,7 @@ function Overall() {
         }
     }
     const dataDoughnut ={
-    labels: streamList.map(item=>item[0].toUpperCase()+item.slice(1,item.length)),
+    labels: streamList.map(item=>item[0]+item.slice(1,item.length)),
     datasets: [{
         label: "Number of Students",
         data: streamList.map(item=>streamToInstCount[item.toLowerCase()]), 
@@ -112,7 +112,7 @@ function Overall() {
             const insts = streamData.institutes  
                 const dataArray = insts.map((inst,index)=>{
                 return{
-                    label:inst.toUpperCase(),
+                    label:inst,
                     data: combineArrays(keys,streamData[inst][0][0][category],streamData[inst][1][0][category],category).values ,
                     backgroundColor: VChartColors[index],
                     borderColor: VChartColors[index],
@@ -240,7 +240,7 @@ function Overall() {
           <>
         <div class="headings" id={`stream`} >
           <div className="sub">
-     { streamData.streamName.toUpperCase()}
+     { streamData.streamName}
      </div>
           </div>
           <div class="headings" id={`stream`} >
@@ -257,8 +257,8 @@ function Overall() {
             options={chartOptions.VerticalBarChart1}
           />
         </Grid>
-        <Grid item xs={4} >
-        <Table column={Table1.column} data={Table1.data} category={"Student Details"} keys={parsedDataFormat["student_details"]}/>
+        <Grid item xs={4} className="table-container">
+        <Table  column={Table1.column} data={Table1.data} category={"Student Details"} keys={parsedDataFormat["student_details"]}/>
 
 
         </Grid>
@@ -282,8 +282,8 @@ function Overall() {
             options={chartOptions.VerticalBarChart2}
           />
         </Grid>
-      <Grid item xs={4}  className='firstDoughnut'>
-        <Table column={Table2.column} data={Table2.data} category={"Placement Details"} keys={parsedDataFormat["placement_details"]}/>
+      <Grid item xs={4}  className="table-container">
+        <Table  column={Table2.column} data={Table2.data} category={"Placement Details"} keys={parsedDataFormat["placement_details"]}/>
       </Grid>
         </Grid>
         <div class="headings" id={`stream`} >
@@ -299,8 +299,8 @@ function Overall() {
                 options={chartOptions.VerticalBarChart3}
               />
             </Grid>
-            <Grid item xs={4}>
-              <Table column={Table3.column} data={Table3.data} category={"Salary"} keys={parsedDataFormat["salary"]}/> 
+            <Grid item xs={4} className="table-container">
+              <Table  column={Table3.column} data={Table3.data} category={"Salary"} keys={parsedDataFormat["salary"]}/> 
             </Grid>
         </Grid>
         
