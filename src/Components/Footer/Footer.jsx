@@ -13,15 +13,13 @@ const Footer = () => {
             <ul>
               
               <li>
-          <img src={DSCLogo} />
+          <img src={DSCLogo} width="300" />
                 {/* <a href="#">GDSC</a> */}
               </li>
               <li>
                 <a href="/team">Web-Dev Team</a>
               </li>
-              <li>
-                <a href="#">2021</a>
-              </li>
+             
             </ul>
         </div>
       </div>

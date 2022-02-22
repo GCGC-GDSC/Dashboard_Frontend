@@ -267,7 +267,7 @@ function Overall() {
         </Grid>
         <div class="headings" id={`stream`} >
           <div className="sub">
-          Salary
+          Package Details
      </div>
           </div>
           <Grid container container ml={10} mt={6} spacing={2} alignItems="center">
@@ -279,7 +279,7 @@ function Overall() {
               />
             </Grid>
             <Grid item xs={4}>
-              <Table column={Table3.column} data={Table3.data} category={"Salary"} keys={parsedDataFormat["salary"]}/> 
+              <Table column={Table3.column} data={Table3.data} category={"Package(LPA)"} keys={parsedDataFormat["salary"]}/> 
             </Grid>
         </Grid>
         

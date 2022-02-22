@@ -11,10 +11,12 @@ const InstituteStudentDataFormat = {
   salary: ["highest", "lowest","average"],
   student_details: [
     "total_students",
-    "total_higher_study_and_pay_crt",
-    "total_opted_for_higher_studies_only",
+    "total_not_intrested_in_placments",
     "total_backlogs",
-    "total_final_years",
+    "total_opted_for_higher_studies_only",
+    "total_higher_study_and_pay_crt",
+    // "total_final_years",
+    "total_students_eligible"
   ],
 };
 
@@ -25,16 +27,18 @@ export const parsedDataFormat = {
     "Multiple Offers",
     "Placed",
     // "Not Intrested", 
-    "Yet To Place",
+    "Yet to be Placed",
   ],
 
   salary: [ "Highest", "Lowest","Average"],
   student_details: [
-    "TotalStudents",
-    "Deferred Placements",
-    "No Response",
+    "Total Students",
+    "Other Career Options",
     "Backlogs",
-    "FinalYears",
+    "Yet to Decide",
+    "Deferred Placements",
+    "Placements",
+    // "FinalYears",
   ],
 };
 
