@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext,useEffect, useState } from "react";
 import ODoughnutChart from "../Overall/charts/ODoughnut";
 import OVerticalBarChart from "../Overall/charts/OVerticalBarChart";
 import _ from "lodash";
@@ -13,8 +13,10 @@ import Typography from "@mui/material/Typography";
 import Table from "../../Components/Table/Table"
 import {colors} from "../ColorAssets/colorPallet"
 import "../CampusWise/CampusWise.styles.scss"
+import { UserContext } from "../../context/context";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function GBStats() {
+const user = useContext(UserContext);
   const [statsData,setStatsData] =useState([])
   const chartOptions = {
     DoughnutUGPG: {
@@ -86,7 +88,11 @@ function GBStats() {
   };
 
   const getStatsData = ()=>{
-    axios.get(`${REACT_APP_API_URL}students/gbstats/`)
+    axios.get(`${REACT_APP_API_URL}students/gbstats/`,{
+      headers: {
+        'Authorization': `Token ${user.user.token.key}`
+      }
+    })
     .then(resp=>{
       setStatsData(_.get(resp,["data",'result']))
     })

@@ -8,7 +8,7 @@ const InstituteStudentDataFormat = {
     "yet_to_place",
   ],
 
-  salary: ["highest", "lowest","average"],
+  salary: ["highest", "lowest", "average"],
   student_details: [
     "total_students",
     "total_not_intrested_in_placments",
@@ -30,7 +30,7 @@ export const parsedDataFormat = {
     "Yet to be Placed",
   ],
 
-  salary: [ "Highest", "Lowest","Average"],
+  salary: ["Highest", "Lowest", "Average"],
   student_details: [
     "Total Students",
     "Other Career Options",
@@ -41,6 +41,15 @@ export const parsedDataFormat = {
     // "FinalYears",
   ],
 };
-
+export const streamToInstCount = {
+  engineering: 3,
+  management: 3,
+  pharmacy: 3,
+  science: 3,
+  law: 3,
+  architecture: 3,
+  nursing: 3,
+  humanities: 3,
+};
 export default InstituteStudentDataFormat;
 // hs, back, defered placements,

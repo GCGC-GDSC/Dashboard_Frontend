@@ -365,7 +365,11 @@ function CampusWise() {
 //  -------------- TABLES----------------
   const getDataInst = (instName) => {
     axios
-      .get(`${REACT_APP_API_URL}students/inst/${instName}`)
+      .get(`${REACT_APP_API_URL}students/inst/${instName}`,{
+        headers: {
+          'Authorization': `Token ${user.user.token.key}`
+        }
+      })
       .then((resp) => {
         var arr = _.get(resp, ["data", "result"]);
         unstable_batchedUpdates(() => {
@@ -390,7 +394,11 @@ function CampusWise() {
   };
   const getCampus = () => {
     axios
-      .get(`${REACT_APP_API_URL}organization/campus/`)
+      .get(`${REACT_APP_API_URL}organization/campus/`,{
+        headers: {
+          'Authorization': `Token ${user.user.token.key}`
+        }
+      })
       .then((resp) => {
         var arr = _.get(resp, ["data", "result"]).map((item) => [
           item.name,

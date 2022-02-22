@@ -18,7 +18,8 @@ function Home() {
         if(user)setOpen(true)
     },[])
     return ( 
-        <div className='homePage'>  
+        
+        <div className='homePage'> 
         <Snackbar
           anchorOrigin={{ vertical:"bottom", horizontal:"left" }}
         open={open}
@@ -26,6 +27,9 @@ function Home() {
         onClose={handleClose}
         message={`Welcome ${user.user.name}`}
             />
+        {console.log("***************")} 
+        {console.log(user)}
+
         <main className='main_section'>
             <BasicTabs/>
         </main>

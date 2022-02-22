@@ -13,12 +13,14 @@ export const colors = [
 ];
 
 const ColorPallet = {
-  engineering: "rgb(0,128,255)",
-  management: "rgb(255,200,0)",
-  pharmacy: "rgb(204,0,0)",
-  sciences: "rgb(0,204,0)",
+  engineering: "rgba(33,150,243,1)",
+  management: "rgba(255,193,7,1)",
+  pharmacy: "rgba(219,60,48,1)",
+  science: "rgba(76,175,80,1)",
   law: "rgb(123,123,123)",
   architecture: "rgb(201,201,201)",
+  nursing: "rgb(106, 90, 205)",
+  humanities: "rgb(238, 130, 238)",
 };
 
 export default ColorPallet;
