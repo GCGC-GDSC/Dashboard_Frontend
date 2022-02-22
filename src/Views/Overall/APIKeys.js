@@ -11,12 +11,11 @@ const InstituteStudentDataFormat = {
   salary: ["highest", "lowest", "average"],
   student_details: [
     "total_students",
-    "total_not_intrested_in_placments",
-    "total_backlogs",
     "total_opted_for_higher_studies_only",
+    "total_backlogs",
+    "total_not_intrested_in_placments",
     "total_higher_study_and_pay_crt",
-    // "total_final_years",
-    "total_students_eligible"
+    "total_students_eligible",
   ],
 };
 
@@ -32,13 +31,12 @@ export const parsedDataFormat = {
 
   salary: ["Highest", "Lowest", "Average"],
   student_details: [
-    "Total Students",
-    "Other Career Options",
+    "TotalStudents",
+    "Higher Studies",
     "Backlogs",
-    "Yet to Decide",
+    "No Response",
     "Deferred Placements",
-    "Placements",
-    // "FinalYears",
+    "Eligible For Placements",
   ],
 };
 export const streamToInstCount = {
