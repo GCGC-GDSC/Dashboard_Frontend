@@ -16,7 +16,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {ReactComponent as FormSelect } from "../../assets/formSelect.svg"
-import studentDetailsRef,{parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys} from './StudentDetailsFormObj'
+import studentDetailsRef,{parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys,instMap} from './StudentDetailsFormObj'
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import GolfCourseIcon from '@mui/icons-material/GolfCourse';
 import SchoolIcon from '@mui/icons-material/School';
@@ -100,40 +100,49 @@ function Admin() {
     handleClose()
     axios.get(`${REACT_APP_API_URL}students/download/${viewCampus.name}`,{
       headers: {
-        'Authorization': `Token ${user.user.token.key}`
-      }
-    },{
-      method: 'GET',
-      responseType: 'blob', // important
-  })
+        'Authorization': `Token ${user.user.token.key}`,
+        'content-type': 'application/msexcel' ,
+      },
+      "responseType" :"blob"
+    }
+    )
     .then(response=>{
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', `${parsedStudentDetailsRef[viewCampus.name]} Career Fulfillment Statistics.xlsx`);
       document.body.appendChild(link);
+      console.log(link  )  
       link.click();
-    })
+  })
   }
   const updateInDataBase =()=>{
     setConfirmUpdate(false)
+    const dataToSend = {}
+    DBUpdateKeys.forEach((key)=>{
+      dataToSend[key] = dataObject[key]
+      if(dataToSend[key] === undefined || dataToSend[key] === "") flag = true
+    })
+    var config = {
+      method: 'patch',
+      url: `${REACT_APP_API_URL}students/update/${instituteData.id}`,
+      headers: { 
+        'Authorization': 'Token f92ddf16b1eecf86c7c7698f60a2a62187774970', 
+        'Content-Type': 'application/json'
+      },
+      data:dataToSend
+    };
+    
       let flag = false
-      const dataToSend = {}
-      DBUpdateKeys.forEach((key)=>{
-        dataToSend[key] = dataObject[key]
-        if(dataToSend[key] === undefined || dataToSend[key] === "") flag = true
-      })
       if(flag){
         window.alert("Inputs can not contain null values")
       }
       else{
-        axios.patch(`${REACT_APP_API_URL}students/update/${instituteData.id}`,{
-          headers: {
-            'Authorization': `Token ${user.user.token.key}`
-          }
-        },dataToSend)
+        console.log("sending api req")
+        axios(config)
         .then(resp=>{
           // update the dataObject 
+          console.log(resp)
           if(resp.data.status.toLowerCase() === "ok")
           { 
             unstable_batchedUpdates(()=>{
@@ -149,6 +158,7 @@ function Admin() {
           // show modal
         })
       }
+      return;
   }
   const ariaLabel = { "aria-label": "description" };
 
@@ -320,7 +330,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                   Confirmation
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      Are you sure you want to update the data for {parsedStudentDetailsRef[campus.name]} - {institute.name} ?
+                      Are you sure you want to update the data for {parsedStudentDetailsRef[campus.name]} - {instMap[institute.name.toLowerCase()]} ?
                   </Typography>
                   <div className='modal_buttons_container'>
                       <button className='modal_buttons_container-btn-yes' onClick={updateInDataBase}>
@@ -396,7 +406,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
           >
             {user.user.institute.map((instName) =>
               campus.name === instName.campus ? (
-                <MenuItem value={instName}>{instName.name}</MenuItem>
+                <MenuItem value={instName}>{instMap[instName.name.toLowerCase()]}</MenuItem>
               ) : null
             )}
           </Select>
@@ -430,7 +440,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
         {edit?
         <div className="formInformation">
           <AccountBalanceIcon  color="primary"/><h4>{parsedStudentDetailsRef[campus.name]} <ArrowRightIcon/></h4>
-          <GolfCourseIcon color="primary"/><h4>{institute.name} <ArrowRightIcon/></h4>
+          <GolfCourseIcon color="primary"/><h4>{instMap[institute.name.toLowerCase()]}<ArrowRightIcon/></h4>
           <SchoolIcon color="primary"/> <h4>{grad}</h4>
         </div>:null
 }

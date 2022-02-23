@@ -78,5 +78,22 @@ export const parsedStudentDetailsRef = {
   "hyd":"CGC Hyderabad",
   "overall":"GCGC Overall"
 }
+export const instMap = {
+  'git': 'GIT',
+  'gim': 'GIM',
+  'gis': 'GIS',
+  'gsoa': 'GSoA',
+  'gin': 'GIN',
+  'gip': 'GIP',
+  'gsol': 'GSoL',
+  'gsgs': 'GSGS',
+  'soth': 'SoTH',
+  'hbs': 'HBS',
+  'soph': 'SoPH',
+  'sosh': 'SoSH',
+  'sotb': 'SoTB',
+  'sosp': 'SoSP',
+  'gsbb': 'GSBB',
+}
 
 export default studentDetailsRef;
