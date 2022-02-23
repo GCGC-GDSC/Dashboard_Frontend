@@ -16,7 +16,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {ReactComponent as FormSelect } from "../../assets/formSelect.svg"
-import studentDetailsRef,{parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys} from './StudentDetailsFormObj'
+import studentDetailsRef,{parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys,instMap} from './StudentDetailsFormObj'
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import GolfCourseIcon from '@mui/icons-material/GolfCourse';
 import SchoolIcon from '@mui/icons-material/School';
@@ -330,7 +330,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                   Confirmation
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      Are you sure you want to update the data for {parsedStudentDetailsRef[campus.name]} - {institute.name} ?
+                      Are you sure you want to update the data for {parsedStudentDetailsRef[campus.name]} - {instMap[institute.name.toLowerCase()]} ?
                   </Typography>
                   <div className='modal_buttons_container'>
                       <button className='modal_buttons_container-btn-yes' onClick={updateInDataBase}>
@@ -406,7 +406,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
           >
             {user.user.institute.map((instName) =>
               campus.name === instName.campus ? (
-                <MenuItem value={instName}>{instName.name}</MenuItem>
+                <MenuItem value={instName}>{instMap[instName.name.toLowerCase()]}</MenuItem>
               ) : null
             )}
           </Select>
@@ -440,7 +440,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
         {edit?
         <div className="formInformation">
           <AccountBalanceIcon  color="primary"/><h4>{parsedStudentDetailsRef[campus.name]} <ArrowRightIcon/></h4>
-          <GolfCourseIcon color="primary"/><h4>{institute.name} <ArrowRightIcon/></h4>
+          <GolfCourseIcon color="primary"/><h4>{instMap[institute.name.toLowerCase()]}<ArrowRightIcon/></h4>
           <SchoolIcon color="primary"/> <h4>{grad}</h4>
         </div>:null
 }

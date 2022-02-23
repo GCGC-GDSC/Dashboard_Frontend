@@ -78,7 +78,7 @@ export const parsedStudentDetailsRef = {
   "hyd":"CGC Hyderabad",
   "overall":"GCGC Overall"
 }
-const map = {
+export const instMap = {
   'git': 'GIT',
   'gim': 'GIM',
   'gis': 'GIS',
