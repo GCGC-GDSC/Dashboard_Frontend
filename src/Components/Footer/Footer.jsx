@@ -6,19 +6,15 @@ const Footer = () => {
       <div className="FooterStyle">
 
         <div className="footercontainer">
-            <ul>
-              
-              <li>
+            
               <div className="dsclogo">
               <img src={DSCLogo} />
-              <span>This WebApp is developed by WEB DEV TEAM of GDSC</span>
               </div>
-              </li>
-              <li>
-                <a href="/team">Web-Dev Team</a>
-              </li>
-              
-            </ul>
+             <div className="rightSide">
+              <span>This WebApp is developed by WEB DEV TEAM of GDSC</span>
+              <span>Copyright Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla, laborum.</span>
+              </div>
+
         </div>
       </div>
     );
