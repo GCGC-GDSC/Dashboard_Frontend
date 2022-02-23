@@ -127,7 +127,7 @@ function Admin() {
       method: 'patch',
       url: `${REACT_APP_API_URL}students/update/${instituteData.id}`,
       headers: { 
-        'Authorization': 'Token f92ddf16b1eecf86c7c7698f60a2a62187774970', 
+        'Authorization': `Token ${user.user.token.key}`, 
         'Content-Type': 'application/json'
       },
       data:dataToSend
