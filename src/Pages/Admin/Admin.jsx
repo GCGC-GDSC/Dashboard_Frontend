@@ -100,40 +100,49 @@ function Admin() {
     handleClose()
     axios.get(`${REACT_APP_API_URL}students/download/${viewCampus.name}`,{
       headers: {
-        'Authorization': `Token ${user.user.token.key}`
-      }
-    },{
-      method: 'GET',
-      responseType: 'blob', // important
-  })
+        'Authorization': `Token ${user.user.token.key}`,
+        'content-type': 'application/msexcel' ,
+      },
+      "responseType" :"blob"
+    }
+    )
     .then(response=>{
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', `${parsedStudentDetailsRef[viewCampus.name]} Career Fulfillment Statistics.xlsx`);
       document.body.appendChild(link);
+      console.log(link  )  
       link.click();
-    })
+  })
   }
   const updateInDataBase =()=>{
     setConfirmUpdate(false)
+    const dataToSend = {}
+    DBUpdateKeys.forEach((key)=>{
+      dataToSend[key] = dataObject[key]
+      if(dataToSend[key] === undefined || dataToSend[key] === "") flag = true
+    })
+    var config = {
+      method: 'patch',
+      url: `${REACT_APP_API_URL}students/update/${instituteData.id}`,
+      headers: { 
+        'Authorization': 'Token f92ddf16b1eecf86c7c7698f60a2a62187774970', 
+        'Content-Type': 'application/json'
+      },
+      data:dataToSend
+    };
+    
       let flag = false
-      const dataToSend = {}
-      DBUpdateKeys.forEach((key)=>{
-        dataToSend[key] = dataObject[key]
-        if(dataToSend[key] === undefined || dataToSend[key] === "") flag = true
-      })
       if(flag){
         window.alert("Inputs can not contain null values")
       }
       else{
-        axios.patch(`${REACT_APP_API_URL}students/update/${instituteData.id}`,{
-          headers: {
-            'Authorization': `Token ${user.user.token.key}`
-          }
-        },dataToSend)
+        console.log("sending api req")
+        axios(config)
         .then(resp=>{
           // update the dataObject 
+          console.log(resp)
           if(resp.data.status.toLowerCase() === "ok")
           { 
             unstable_batchedUpdates(()=>{
@@ -149,6 +158,7 @@ function Admin() {
           // show modal
         })
       }
+      return;
   }
   const ariaLabel = { "aria-label": "description" };
 
