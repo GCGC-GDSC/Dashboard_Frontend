@@ -14,7 +14,7 @@ import ColorPallet ,{colors} from "../ColorAssets/colorPallet.js";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { UserContext } from "../../context/context";
-
+import {instMap} from "../../Pages/Admin/StudentDetailsFormObj"
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 
@@ -112,7 +112,7 @@ function Overall() {
             const insts = streamData.institutes  
                 const dataArray = insts.map((inst,index)=>{
                 return{
-                    label:inst,
+                    label:instMap[inst.toLowerCase()],
                     data: combineArrays(keys,streamData[inst][0][0][category],streamData[inst][1][0][category],category).values ,
                     backgroundColor: VChartColors[index],
                     borderColor: VChartColors[index],

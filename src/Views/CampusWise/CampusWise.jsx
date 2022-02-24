@@ -17,6 +17,7 @@ import ColorPallet,{colors} from "../ColorAssets/colorPallet.js";
 import Table from "../../Components/Table/Table"
 import SnackbarContent from '@mui/material/SnackbarContent';
 import { UserContext } from '../../context/context';
+import {instMap} from "../../Pages/Admin/StudentDetailsFormObj"
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 const CampusNames = {
@@ -168,7 +169,7 @@ function CampusWise() {
   //  data for the Institutions in campus doughnut
   if (showD2) {
     var dataDoughnut2 = {
-      labels: instList.map((item) => item),
+      labels: instList.map((item) => instMap[item.toLowerCase()]),
       datasets: [
         {
           label: `Institutes in Campus`,
@@ -357,7 +358,7 @@ function CampusWise() {
   }
 
   const TableData ={
-    column:[instData.name],
+    column:[instMap[instData.name.toLowerCase()]],
     data :getTableData(code,category)
   }
   return TableData
@@ -496,7 +497,7 @@ function CampusWise() {
                 </div>
                 <div class="headings" id={`stream`}  style={{marginTop:"20px",marginBottom:"-100px"}}>
                   <div className="sub">
-                  {`${instData.name} Student Details`}
+                  {`${instMap[instData.name.toLowerCase()]} Student Details`}
                   </div>
                 </div>
                 <Grid item xs={6} >
