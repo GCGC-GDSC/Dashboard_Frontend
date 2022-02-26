@@ -17,6 +17,7 @@ import ColorPallet,{colors} from "../ColorAssets/colorPallet.js";
 import Table from "../../Components/Table/Table"
 import SnackbarContent from '@mui/material/SnackbarContent';
 import { UserContext } from '../../context/context';
+import {instMap} from "../../Pages/Admin/StudentDetailsFormObj"
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 const CampusNames = {
@@ -168,7 +169,7 @@ function CampusWise() {
   //  data for the Institutions in campus doughnut
   if (showD2) {
     var dataDoughnut2 = {
-      labels: instList.map((item) => item),
+      labels: instList.map((item) => instMap[item]),
       datasets: [
         {
           label: `Institutes in Campus`,
@@ -353,11 +354,12 @@ function CampusWise() {
       arr = combineArrays(keys,instData.data[0][category],instData.data[1][category],category).values
       arr = arr.map(item=>[item])
     }
+    console.log("🤑🤑🤑",arr);
     return arr
   }
 
   const TableData ={
-    column:[instData.name],
+    column:[instMap[instData.name]],
     data :getTableData(code,category)
   }
   return TableData
@@ -440,7 +442,7 @@ function CampusWise() {
     <Box className="overall-layout">
       <Grid container spacing={2} className="firstContainer" alignItems="center" >
       {/* {userMultiAccess? */}
-        <Grid item xs={5.6} style={{marginTop:"-80px"}}>
+        <Grid item xs={5.7} style={{marginTop:"-80px"}}>
           <ODoughnutChart
             title={"Campus Wise Overview"}
             data={dataDoughnut}
@@ -449,7 +451,7 @@ function CampusWise() {
         </Grid>
       {showD2? (
         <>
-          <Grid item xs={5.4} p={3} ml={5}  style={{marginTop:"-60px"}}>
+          <Grid item xs={5.5} p={3} ml={5}  style={{marginTop:"-60px"}}>
           <div class="headings campusWiseSecondDoughnutChart" id={`stream`} >
                 <div className="sub">
           {`${campusName} Institute Overview`}
@@ -496,7 +498,7 @@ function CampusWise() {
                 </div>
                 <div class="headings" id={`stream`}  style={{marginTop:"20px",marginBottom:"-100px"}}>
                   <div className="sub">
-                  {`${instData.name} Student Details`}
+                  {`${instMap[instData.name]} Student Details`}
                   </div>
                 </div>
                 <Grid item xs={6} >
@@ -517,7 +519,7 @@ function CampusWise() {
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
-                {`${instData.name} Placement Details`}
+                {`${instMap[instData.name]} Placement Details`}
 
                 </div>
                 </div>
@@ -540,13 +542,13 @@ function CampusWise() {
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
-                {`${instData.name} Salary Details`}
+                {`${instMap[instData.name]} Package Details`}
                 </div>
                 </div>
                 <Grid item xs={5} >
                   <OVerticalBarChart
                   isCampus={true}
-                    // title={`${instData.name} Salary Details`}
+                    // title={`${instData.name} Package Details`}
                     data={VerticalBarChartUGPG}
                     options={chartOptions.VerticalBarChart1}
                   />
@@ -613,13 +615,13 @@ function CampusWise() {
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
-                {`${instData.name} Salary Details`}
+                {`${instData.name} Package Details`}
                 </div>
                 </div>
                 <Grid item xs={5}>
                   <OVerticalBarChart
                   isCampus={true}
-                    // title={`${instData.name} Salary Details`}
+                    // title={`${instData.name} Package Details`}
                     data={VerticalBarChartUG}
                     options={chartOptions.VerticalBarChart1}
                   />
@@ -685,13 +687,13 @@ function CampusWise() {
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
-                {`${instData.name} Salary Details`}
+                {`${instData.name} Package Details`}
                 </div>
                 </div>
                 <Grid item xs={6}>
                   <OVerticalBarChart
                   isCampus={true}
-                    // title={`${instData.name} Salary Details`}
+                    // title={`${instData.name} Package Details`}
                     data={VerticalBarChartPG}
                     options={chartOptions.VerticalBarChart1}
                   />

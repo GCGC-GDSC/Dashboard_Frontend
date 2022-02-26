@@ -55,9 +55,9 @@ function NavBar({user}) {
             <NavLink className='navbar-link' activeStyle={selected}  to = '/admin'>
                 Admin
             </NavLink>
-            {/* <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
+            <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
                 Team
-            </NavLink> */}
+            </NavLink>
             <button className='navbar-link-btn' onClick={handleOpen}>
                 Logout
             </button> 
