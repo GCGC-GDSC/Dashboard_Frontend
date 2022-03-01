@@ -25,7 +25,7 @@ export const parsedDataFormat = {
     "Offers",
     "Multiple Offers",
     "Placed",
-    // "Not Intrested", 
+    // "Not Intrested",
     "Yet to be Placed",
   ],
 
@@ -34,7 +34,7 @@ export const parsedDataFormat = {
     "TotalStudents",
     "Higher Studies",
     "Backlogs",
-    "No Response",
+    "Yet To Decide",
     "Deferred Placements",
     "Eligible For Placements",
   ],

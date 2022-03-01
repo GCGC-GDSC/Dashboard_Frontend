@@ -7,7 +7,6 @@ const InstituteStudentDataFormatCampusWise = {
     // "total_not_intrested_in_placments",
     "yet_to_place",
   ],
-
   salary: ["highest", "lowest", "average"],
   student_details: [
     "total_students",
@@ -32,7 +31,12 @@ export const parsedInstituteStudentDataFormatCampusWise = {
   salary: ["Highest", "Lowest", "Average"],
   student_details: [
     "TotalStudents",
+<<<<<<< HEAD
     "Higher Studies",
+=======
+    "Deferred Placements",
+    "Yet To Decide",
+>>>>>>> 2df2566384631ed572f2212dfa129ef7499baab8
     "Backlogs",
     "No Response",
     "Deferred Placements",

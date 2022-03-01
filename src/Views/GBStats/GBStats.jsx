@@ -316,7 +316,7 @@ const user = useContext(UserContext);
               />
              </Grid>
               <Grid item xs={4} className="shadow">
-                <Table column={TABLE_DATA(10,"UGPG","student_details").column} 
+                <Table column={TABLE_DATA(10,"UG & PG","student_details").column} 
                   data={TABLE_DATA(10,"UGPG","student_details").data} 
                   category={"Student Details"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
@@ -335,7 +335,7 @@ const user = useContext(UserContext);
                 options={chartOptions.DoughnutUGPG}
               /></Grid>
               <Grid item xs={6} className="shadow">
-               <Table column={TABLE_DATA(10,"UGPG","placement_details").column} 
+               <Table column={TABLE_DATA(10,"UG & PG","placement_details").column} 
                   data={TABLE_DATA(10,"UGPG","placement_details").data} 
                   category={"Placement Details"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
@@ -355,7 +355,7 @@ const user = useContext(UserContext);
               />
               </Grid>
             <Grid item xs={6} className="shadow">
-               <Table column={TABLE_DATA(10,"UGPG","salary").column} 
+               <Table column={TABLE_DATA(10,"UG & PG","salary").column} 
                   data={TABLE_DATA(10,"UGPG","salary").data} 
                   category={"Salary"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>

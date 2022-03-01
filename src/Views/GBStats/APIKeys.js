@@ -34,7 +34,7 @@ export const parsedInstituteStudentDataFormatCampusWise = {
   student_details: [
     "TotalStudents",
     "Deferred Placements",
-    "No Response",
+    "Yet To Decide",
     "Backlogs",
     "FinalYears",
   ],
