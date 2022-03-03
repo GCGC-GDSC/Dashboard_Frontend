@@ -112,7 +112,6 @@ function Admin() {
       link.href = url;
       link.setAttribute('download', `${parsedStudentDetailsRef[viewCampus.name]} Career Fulfillment Statistics.xlsx`);
       document.body.appendChild(link);
-      console.log(link  )  
       link.click();
   })
   }
@@ -138,11 +137,9 @@ function Admin() {
         window.alert("Inputs can not contain null values")
       }
       else{
-        console.log("sending api req")
         axios(config)
         .then(resp=>{
           // update the dataObject 
-          console.log(resp)
           if(resp.data.status.toLowerCase() === "ok")
           { 
             unstable_batchedUpdates(()=>{
@@ -169,7 +166,6 @@ const handleChangeCampus = (event)=>{
 // --------update form ...
 const checkDependentValueUpdates = (kvp)=>{
   const {name,value} = kvp
-  console.log("i have object",dataObject);
   const newRefObj = dataObject ;
   newRefObj[name] = value ;
   const newDataObj = {};
@@ -272,7 +268,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
                           key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]]:
                           key==="under_institute_name"?dataObject[key]: //.toUpperCase was here
                         dataObject[key]}
-                    label="Enter this and that field"
+                    label="Enter this field"
                     name={key}
                     style={{fontSize:"12px"}}
                     onChange={handleChangeTableInput}
@@ -441,7 +437,7 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
         <div className="formInformation">
           <AccountBalanceIcon  color="primary"/><h4>{parsedStudentDetailsRef[campus.name]} <ArrowRightIcon/></h4>
           <GolfCourseIcon color="primary"/><h4>{instMap[institute.name.toLowerCase()]}<ArrowRightIcon/></h4>
-          <SchoolIcon color="primary"/> <h4>{grad}</h4>
+          <SchoolIcon color="primary"/> <h4>{grad.toUpperCase()}</h4>
         </div>:null
 }
         <Box

@@ -27,9 +27,6 @@ function Home() {
         onClose={handleClose}
         message={`Welcome ${user.user.name}`}
             />
-        {console.log("***************")} 
-        {console.log(user)}
-
         <main className='main_section'>
             <BasicTabs/>
         </main>

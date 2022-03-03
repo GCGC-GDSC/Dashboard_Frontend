@@ -11,7 +11,7 @@ const Footer = () => {
               <img src={DSCLogo} />
               </div>
              <div className="rightSide">
-              <span>This WebApp is developed by WEB DEV TEAM of GDSC</span>
+              <span>This Website is developed by Web Dev Team - GDSC</span>
               <span>Copyright Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla, laborum.</span>
               </div>
 

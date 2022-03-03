@@ -21,8 +21,8 @@ const InstituteStudentDataFormat = {
 
 export const parsedDataFormat = {
   placement_details: [
-    "Eligible",
-    "Offers",
+    "Eligible For Placements",
+    "Total Offers",
     "Multiple Offers",
     "Placed",
     // "Not Intrested",
@@ -31,7 +31,7 @@ export const parsedDataFormat = {
 
   salary: ["Highest", "Lowest", "Average"],
   student_details: [
-    "TotalStudents",
+    "Total Students",
     "Higher Studies",
     "Backlogs",
     "Yet To Decide",

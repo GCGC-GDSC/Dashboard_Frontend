@@ -17,7 +17,7 @@ const Table = ({ data, column,category,keys }) => {
             <td>
               {keys[index]}
             </td>
-            { data[index].map(item=> <td>{item}</td> )}
+            { data[index].map(item=> <td>{category ==="Package(LPA)"?item.toFixed(2):item} </td> )}
             </tr> )
         }
       </tbody>

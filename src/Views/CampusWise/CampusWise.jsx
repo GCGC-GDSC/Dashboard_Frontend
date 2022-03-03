@@ -169,11 +169,7 @@ function CampusWise() {
   //  data for the Institutions in campus doughnut
   if (showD2) {
     var dataDoughnut2 = {
-<<<<<<< HEAD
-      labels: instList.map((item) => instMap[item.toLowerCase()]),
-=======
       labels: instList.map((item) => instMap[item]),
->>>>>>> 2df2566384631ed572f2212dfa129ef7499baab8
       datasets: [
         {
           label: `Institutes in Campus`,
@@ -358,16 +354,11 @@ function CampusWise() {
       arr = combineArrays(keys,instData.data[0][category],instData.data[1][category],category).values
       arr = arr.map(item=>[item])
     }
-    console.log("🤑🤑🤑",arr);
     return arr
   }
 
   const TableData ={
-<<<<<<< HEAD
-    column:[instMap[instData.name.toLowerCase()]],
-=======
     column:[instMap[instData.name]],
->>>>>>> 2df2566384631ed572f2212dfa129ef7499baab8
     data :getTableData(code,category)
   }
   return TableData
@@ -506,11 +497,7 @@ function CampusWise() {
                 </div>
                 <div class="headings" id={`stream`}  style={{marginTop:"20px",marginBottom:"-100px"}}>
                   <div className="sub">
-<<<<<<< HEAD
-                  {`${instMap[instData.name.toLowerCase()]} Student Details`}
-=======
                   {`${instMap[instData.name]} Student Details`}
->>>>>>> 2df2566384631ed572f2212dfa129ef7499baab8
                   </div>
                 </div>
                 <Grid item xs={6} >
@@ -568,7 +555,7 @@ function CampusWise() {
                 <Grid item xs={5} ml={15}>
                   <Table column={TABLE_DATA(10,"UGPG","salary").column} 
                   data={TABLE_DATA(10,"UGPG","salary").data} 
-                  category={"Salary"} 
+                  category={"Package(LPA)"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
                 </Grid>
               </Grid>
@@ -584,7 +571,7 @@ function CampusWise() {
                 </div>
                 <div class="headings" id={`stream`} >
                 <div className="sub">
-                {`${instData.name} Student Details`}
+                {`${instMap[instData.name]} Student Details`}
                 </div>
                 </div>
                 <Grid item xs={6}>
@@ -606,7 +593,7 @@ function CampusWise() {
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
-                {`${instData.name} Placement Details`}
+                {`${instMap[instData.name]} Placement Details`}
                 </div>
                 </div>
               <Grid item xs={5}>
@@ -627,7 +614,7 @@ function CampusWise() {
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
-                {`${instData.name} Package Details`}
+                {`${instMap[instData.name]} Package Details`}
                 </div>
                 </div>
                 <Grid item xs={5}>
@@ -641,7 +628,7 @@ function CampusWise() {
                 <Grid item xs={5} >
                   <Table column={TABLE_DATA(0,"UG","salary").column} 
                   data={TABLE_DATA(0,"UG","salary").data} 
-                  category={"Salary"} 
+                  category={"Package(LPA)"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
                 </Grid>
               </Grid>
@@ -657,7 +644,7 @@ function CampusWise() {
                 </div>
                 <div class="headings cardtitles" id={`stream`}>
                 <div className="sub">
-                {`${instData.name} Student Details`}
+                {`${instMap[instData.name]} Student Details`}
                 </div>
                 </div>
                 <Grid item xs={6}>
@@ -678,7 +665,7 @@ function CampusWise() {
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                {`${instData.name} Placement Details`}
+                {`${instMap[instData.name]} Placement Details`}
                 </div>
                 </div>
               <Grid item xs={5}>
@@ -699,7 +686,7 @@ function CampusWise() {
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
               <div class="headings" id={`stream`} >
                 <div className="sub">
-                {`${instData.name} Package Details`}
+                {`${instMap[instData.name]} Package Details`}
                 </div>
                 </div>
                 <Grid item xs={6}>
@@ -713,7 +700,7 @@ function CampusWise() {
                 <Grid item xs={6} >
                   <Table column={TABLE_DATA(1,"PG","salary").column} 
                   data={TABLE_DATA(1,"PG","salary").data} 
-                  category={"Salary"} 
+                  category={"Package(LPA)"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
                 </Grid>
               </Grid>

@@ -344,7 +344,7 @@ const user = useContext(UserContext);
             <Grid container alignItems="center" spacing={9} p={7}>
             <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Salary
+                Package Details
                 </div>
                 </div>
             <Grid item xs={6} className="shadow">
@@ -357,7 +357,7 @@ const user = useContext(UserContext);
             <Grid item xs={6} className="shadow">
                <Table column={TABLE_DATA(10,"UG & PG","salary").column} 
                   data={TABLE_DATA(10,"UGPG","salary").data} 
-                  category={"Salary"} 
+                  category={"Package(LPA)"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
             </Grid>
             </Grid>
@@ -405,7 +405,7 @@ const user = useContext(UserContext);
             </Grid>
             <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Salary
+                Package Details
                 </div>
                 </div>
             <Grid item xs={6} className="shadow">
@@ -417,7 +417,7 @@ const user = useContext(UserContext);
           <Grid item xs={6} className="shadow">
                <Table column={TABLE_DATA(0,"UG","salary").column} 
                   data={TABLE_DATA(0,"UG","salary").data} 
-                  category={"Salary"} 
+                  category={"Package(LPA)"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
           </Grid>
             </Grid>:null}
@@ -464,7 +464,7 @@ const user = useContext(UserContext);
 </Grid>
             <div class="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Salary
+                Package Details
                 </div>
                 </div>
                 <Grid item xs={6} className="shadow">
@@ -477,7 +477,7 @@ const user = useContext(UserContext);
 
 <Table column={TABLE_DATA(1,"PG","salary").column} 
    data={TABLE_DATA(1,"PG","salary").data} 
-   category={"Salary"} 
+   category={"Package(LPA)"} 
    keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
 </Grid>
             </Grid>:null}

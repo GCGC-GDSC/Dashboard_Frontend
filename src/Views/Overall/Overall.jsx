@@ -36,8 +36,6 @@ function Overall() {
     // for the table
     const [tableData, setTableData] = useState([])
     const VChartColors =colors
-   
-  
     const chartOptions = {
         Doughnut : {
             onClick: function (evt, item) {
@@ -74,8 +72,7 @@ function Overall() {
                 if (item[0]) {
 
                 }
-              },
-            
+              },  
         }
     }
     const dataDoughnut ={
@@ -106,8 +103,7 @@ function Overall() {
                 }
             }
             return {keys:k,values:arr}
-        }
-        
+        }   
         const getDataForVC = (keys,category) => {
             const insts = streamData.institutes  
                 const dataArray = insts.map((inst,index)=>{
@@ -179,7 +175,6 @@ function Overall() {
           setStreamData({...responseData,institutes:[...Object.keys(responseData)],streamName:stream})
           setShowVC(true)
         })
-
         })
     }
     const getStreams = ()=>{

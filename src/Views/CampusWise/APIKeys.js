@@ -20,25 +20,20 @@ const InstituteStudentDataFormatCampusWise = {
 
 export const parsedInstituteStudentDataFormatCampusWise = {
   placement_details: [
-    "Eligible",
-    "Offers",
+    "Eligible For Placements",
+    "Total Offers",
     "Multiple Offers",
     "Placed",
     // "Not Intrested",
-    "Yet To Place",
+    "Yet To Be Place",
   ],
 
   salary: ["Highest", "Lowest", "Average"],
   student_details: [
-    "TotalStudents",
-<<<<<<< HEAD
+    "Total Students",
     "Higher Studies",
-=======
-    "Deferred Placements",
-    "Yet To Decide",
->>>>>>> 2df2566384631ed572f2212dfa129ef7499baab8
     "Backlogs",
-    "No Response",
+    "Yet To Decide",
     "Deferred Placements",
     "Eligible For Placements",
   ],

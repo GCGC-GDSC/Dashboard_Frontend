@@ -8,7 +8,6 @@ import { useMediaQuery } from 'react-responsive'
 import {
   BrowserRouter as Router,
   Routes,
-  Navigate,
   Route,
 } from "react-router-dom";
 import Home from "./Pages/Home/Home";
@@ -35,8 +34,7 @@ const App = () => {
       axios
         .post(`${REACT_APP_API_URL}account/verify/${user.email}`)
         .then((resp) => {
-          console.log(resp.data.result);
-          if (resp.data.status != "error")
+          if (resp.data.status !== "error")
             setVerifiedUser({ user: resp.data.result, isVerified: true });
           else setVerifiedUser({ user: {}, isVerified: false });
         });
