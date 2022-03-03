@@ -5,7 +5,7 @@ const ProfileCard = ({member}) => {
         <div className="card-container">
             <div className="picture">
                 <img src={member.picture}
-                 alt={`${member.name}'s picture`}/>
+                 alt={`${member.name}'s_picture`}/>
             </div>
             <div className="content">
                 <div>

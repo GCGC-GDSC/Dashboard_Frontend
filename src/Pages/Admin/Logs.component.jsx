@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from "axios"
+import React from 'react';
 import "./Logs.styles.scss"
 function Logs({logs}){
     return(
@@ -7,7 +6,6 @@ function Logs({logs}){
             {
             logs.map(log=>
                 <div className='Log' dangerouslySetInnerHTML={{__html: log }}>
-                    
                 </div>    
             )
             }

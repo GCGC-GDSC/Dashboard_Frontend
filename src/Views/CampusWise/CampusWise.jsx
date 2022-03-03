@@ -13,7 +13,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Snackbar from '@mui/material/Snackbar';
 import "./CampusWise.styles.scss";
-import ColorPallet,{colors} from "../ColorAssets/colorPallet.js";
+import {colors} from "../ColorAssets/colorPallet.js";
 import Table from "../../Components/Table/Table"
 import SnackbarContent from '@mui/material/SnackbarContent';
 import { UserContext } from '../../context/context';
@@ -36,7 +36,6 @@ function CampusWise() {
   const [campusName, setCampusName] = useState("");
   const [showD2, setShowD2] = useState(false);
   const [showCharts, setShowCharts] = useState(false);
-  const VChartColors = colors;
   const [open, setOpen] = useState(false);
   const handleClose = () => {
       setOpen(false);
@@ -197,7 +196,7 @@ function CampusWise() {
   //  -------------------------------------------------DC ----------
   const getDataForDC = (graduate, keys, category) => {
     var arr = [];
-    if (graduate == "UGPG") {
+    if (graduate === "UGPG") {
       const combinedObj = combineArrays(
         keys,
         instData.data[0][category],
@@ -289,7 +288,7 @@ function CampusWise() {
     //  ---------------VC-------------------------------------------VC ----------
     const getDataForVC = (graduate, keys, category) => {
       var arr = [];
-      if (graduate == "UGPG") {
+      if (graduate === "UGPG") {
         const combinedObj = combineArrays(
           keys,
           instData.data[0][category],
@@ -393,36 +392,36 @@ function CampusWise() {
       setShowD2(true);
     });
   };
-  const getCampus = () => {
-    axios
-      .get(`${REACT_APP_API_URL}organization/campus/`,{
-        headers: {
-          'Authorization': `Token ${user.user.token.key}`
-        }
-      })
-      .then((resp) => {
-        var arr = _.get(resp, ["data", "result"]).map((item) => [
-          item.name,
-          item.inst_count,
-        ]);
-        unstable_batchedUpdates(() => {
-          setCampusList(arr);
-          setCampusData(_.get(resp, ["data", "result"]));
-        });
-      });
-  };
-
-  const checkMultiUser = () =>{
-    if(user.user.campus.length>1)
-      setUserMultiAccess(true)
-
-  }
+  
+  
 
   useEffect(() => {
-    getCampus();
+    const getCampus = () => {
+      axios
+        .get(`${REACT_APP_API_URL}organization/campus/`,{
+          headers: {
+            'Authorization': `Token ${user.user.token.key}`
+          }
+        })
+        .then((resp) => {
+          var arr = _.get(resp, ["data", "result"]).map((item) => [
+            item.name,
+            item.inst_count,
+          ]);
+          unstable_batchedUpdates(() => {
+            setCampusList(arr);
+            setCampusData(_.get(resp, ["data", "result"]));
+          });
+        });
+    };
+    const checkMultiUser = () =>{
+      if(user.user.campus.length>1)
+        setUserMultiAccess(true)
+    }
     checkMultiUser()
+    getCampus();
     // getData(user.user.campus.name)
-  }, []);
+  }, [user]);
   return (
     <>
      <Snackbar
@@ -451,7 +450,7 @@ function CampusWise() {
       {showD2? (
         <>
           <Grid item xs={5.5} p={3} ml={5}  style={{marginTop:"-60px"}}>
-          <div class="headings campusWiseSecondDoughnutChart" id={`stream`} >
+          <div className="headings campusWiseSecondDoughnutChart" id={`stream`} >
                 <div className="sub">
           {`${campusName} Institute Overview`}
                 </div>
@@ -476,7 +475,6 @@ function CampusWise() {
                 onChange={handleChange}
                 textColor="secondary"
             indicatorColor="secondary"
-            aria-label="basic tabs example"
             variant="fullWidth"
             centered
                 aria-label="basic tabs example"
@@ -490,12 +488,12 @@ function CampusWise() {
             <TabPanel value={value} index={0} style={{width:"100%"}}>
               
               <Grid container spacing={9} alignItems="center" justifyContent="space-around" mt={2} >
-              <div class="headings" id={`stream`} >
+              <div className="headings" id={`stream`} >
                 <div className="sub">
                 {`${campusName}`} 
                 </div>
                 </div>
-                <div class="headings" id={`stream`}  style={{marginTop:"20px",marginBottom:"-100px"}}>
+                <div className="headings" id={`stream`}  style={{marginTop:"20px",marginBottom:"-100px"}}>
                   <div className="sub">
                   {`${instMap[instData.name]} Student Details`}
                   </div>
@@ -516,7 +514,7 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div class="headings" id={`stream`} >
+              <div className="headings" id={`stream`} >
                 <div className="sub">
                 {`${instMap[instData.name]} Placement Details`}
 
@@ -539,7 +537,7 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div class="headings" id={`stream`} >
+              <div className="headings" id={`stream`} >
                 <div className="sub">
                 {`${instMap[instData.name]} Package Details`}
                 </div>
@@ -564,12 +562,12 @@ function CampusWise() {
 
             <TabPanel value={value} index={1} style={{width:"100%"}}>
             <Grid container spacing={9} alignItems="center" justifyContent="space-around" mt={2}>
-              <div class="headings" id={`stream`} >
+              <div className="headings" id={`stream`} >
                 <div className="sub">
                 {`${campusName}`}
                 </div>
                 </div>
-                <div class="headings" id={`stream`} >
+                <div className="headings" id={`stream`} >
                 <div className="sub">
                 {`${instMap[instData.name]} Student Details`}
                 </div>
@@ -591,7 +589,7 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div class="headings" id={`stream`} >
+              <div className="headings" id={`stream`} >
                 <div className="sub">
                 {`${instMap[instData.name]} Placement Details`}
                 </div>
@@ -612,7 +610,7 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div class="headings" id={`stream`} >
+              <div className="headings" id={`stream`} >
                 <div className="sub">
                 {`${instMap[instData.name]} Package Details`}
                 </div>
@@ -637,12 +635,12 @@ function CampusWise() {
 
             <TabPanel value={value} index={2} style={{width:"100%"}}>
             <Grid container spacing={9} alignItems="center"  justifyContent="space-around" mt={2}>
-              <div class="headings" id={`stream`} >
+              <div className="headings" id={`stream`} >
                 <div className="sub">
                 {`${campusName}`}
                 </div>
                 </div>
-                <div class="headings cardtitles" id={`stream`}>
+                <div className="headings cardtitles" id={`stream`}>
                 <div className="sub">
                 {`${instMap[instData.name]} Student Details`}
                 </div>
@@ -663,7 +661,7 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div class="headings cardtitles" id={`stream`} >
+              <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 {`${instMap[instData.name]} Placement Details`}
                 </div>
@@ -684,7 +682,7 @@ function CampusWise() {
                 </Grid>
               </Grid>
               <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div class="headings" id={`stream`} >
+              <div className="headings" id={`stream`} >
                 <div className="sub">
                 {`${instMap[instData.name]} Package Details`}
                 </div>

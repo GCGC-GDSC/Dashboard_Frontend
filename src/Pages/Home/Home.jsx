@@ -1,7 +1,7 @@
 import React, { useEffect ,useState,useContext} from 'react'
 import "./Home.scss"
 // import HeroText from "../../Components/HeroText/HeroText"
-import Aos from "aos"
+// import Aos from "aos"
 import "aos/dist/aos.css"
 import Footer from '../../Components/Footer/Footer'
 import BasicTabs from "../../Components/Tabs/Tabs"
@@ -14,9 +14,9 @@ function Home() {
         setOpen(false);
       };
     useEffect(() => {
-        Aos.init({})
+        // Aos.init({})
         if(user)setOpen(true)
-    },[])
+    },[user])
     return ( 
         
         <div className='homePage'> 

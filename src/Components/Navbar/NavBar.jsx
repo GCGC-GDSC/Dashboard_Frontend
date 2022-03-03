@@ -1,14 +1,11 @@
-import React ,{useContext,useState} from 'react'
+import React ,{useState} from 'react'
 import {NavLink} from 'react-router-dom'
-import DarkShade from '../DarkShade/DarkShade.component'
 import './navbar.style.scss'
 import gcgcLogo from "../../Components/images/gcgclogo.png"
-import HeroText from "../HeroText/HeroText"
 import {firebase} from "../../backend/firebase.config"
 import { useNavigate } from 'react-router-dom';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 function NavBar({user}) {
     const [open, setOpen] = useState(false);
@@ -39,9 +36,9 @@ function NavBar({user}) {
     <div className = 'navbar'>
         <div className='navbar_icon' style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
             <a href='https://www.gitam.edu/gitam-at-glance'>
-                <img src='https://www.gitam.edu/assets/images/GITAM-logo.png' width="140"></img>
+                <img src='https://www.gitam.edu/assets/images/GITAM-logo.png' alt="GITAM" width="140"></img>
                 </a>
-            <img src={gcgcLogo} alt=""  width={"153px"} height={"45px"} />
+            <img src={gcgcLogo} alt="GCGC"  width={"153px"} height={"45px"} />
         </div>  
         <div className="navbar_Header">
             <h3>CAREER FULFILLMENT STATISTICS <span className="heading_year">2022</span></h3> 
@@ -61,17 +58,7 @@ function NavBar({user}) {
             <button className='navbar-link-btn' onClick={handleOpen}>
                 Logout
             </button> 
-            </div>:
-           <div className='navbar_links'>
-                {/* <NavLink className='navbar-link navbar-link-login' activeStyle={selected}  to = '/login'>
-                    Login
-                </NavLink> */}
-                {/* <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
-                    Team
-                </NavLink> */}
-                
-            </div>
-            }
+            </div>:null}
         </div>
         <Modal
         open={open}

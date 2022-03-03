@@ -1,6 +1,4 @@
 import ProfileCard from "./profileCard"
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import ParticlesComponent from "../../Components/Particles/ParticlesComponent"
 import {firestore} from "../../backend/firebase.config"
 import './Team.style.scss'
@@ -9,7 +7,7 @@ const Team = () => {
   const [members,setMembers] = useState([])
   function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
-    while (currentIndex != 0) {
+    while (currentIndex !== 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
       [array[currentIndex], array[randomIndex]] = [

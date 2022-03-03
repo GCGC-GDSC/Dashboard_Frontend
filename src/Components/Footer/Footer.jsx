@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="footercontainer">
             
               <div className="dsclogo">
-              <img src={DSCLogo} />
+              <img src={DSCLogo} alt="GDSC"/>
               </div>
              <div className="rightSide">
               <span>This Website is developed by Web Dev Team - GDSC</span>

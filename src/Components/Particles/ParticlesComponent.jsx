@@ -2,13 +2,8 @@ import React from 'react'
 import Particles from "react-tsparticles";
 import './particles.style.scss'
 // **********
-import particlesConfig from "./particlesConfig"
 const ParticlesComponent = () => {
-  const particlesInit = (main) => {
-  };
 
-  const particlesLoaded = (container) => {
-  };
   return (
     <Particles
       params={{

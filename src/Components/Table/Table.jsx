@@ -1,5 +1,4 @@
 import './table.css'
-import { instMap } from '../../Pages/Admin/StudentDetailsFormObj'
 const Table = ({ data, column,category,keys }) => {
   return (
     <>

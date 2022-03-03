@@ -3,13 +3,10 @@ import ODoughnutChart from './charts/ODoughnut';
 import axios from 'axios';
 import OVerticalBarChart from './charts/OVerticalBarChart';
 import './Overall.styles.scss'
-import OverallFetcher from './OverallFetcher.component';
 import { unstable_batchedUpdates } from 'react-dom';
 import _ from 'lodash';
 import objRef,{parsedDataFormat,streamToInstCount} from './APIKeys.js'
 import Table from "../../Components/Table/Table"
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ColorPallet ,{colors} from "../ColorAssets/colorPallet.js";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -32,9 +29,7 @@ function Overall() {
     const [streamList,setStreamList] = useState([])
     const [showVC,setShowVC] = useState(false)
     //for the main doughtnut in overall section-- this is to display the number of inst per campus
-    const [instPerCampus,setInstPerCampus] = useState([10,20,30,40,50,60])
     // for the table
-    const [tableData, setTableData] = useState([])
     const VChartColors =colors
     const chartOptions = {
         Doughnut : {
@@ -117,14 +112,14 @@ function Overall() {
                 })
             return dataArray
         }
-        const returnDataAsString = (obj,objName)=>{
-            let str = ""
-            let keys  = objRef[objName]
-            for(let i=0;i<keys.length;i++){
-                str += obj[keys[i]]
-            }
-            return str
-        }
+        // const returnDataAsString = (obj,objName)=>{
+        //     let str = ""
+        //     let keys  = objRef[objName]
+        //     for(let i=0;i<keys.length;i++){
+        //         str += obj[keys[i]]
+        //     }
+        //     return str
+        // }
         const getTableData = (category)=>{
             const insts = streamData.institutes;
             let keys  = objRef[category]
@@ -177,7 +172,17 @@ function Overall() {
         })
         })
     }
-    const getStreams = ()=>{
+  
+    // const getInstituteCountPerCampus = () => {
+    //   axios.get(`${REACT_APP_API_URL}organization/campus/`)
+    //   .then((resp) => {
+    //     var instCountPerCampus = _.get(resp,['data','result']).map(item => item.inst_count)
+    //     setInstPerCampus(instCountPerCampus)
+    //   })
+    // }
+    
+    useEffect(()=>{
+      const getStreams = ()=>{
         axios.get(`${REACT_APP_API_URL}organization/streams/`,{
           headers: {
             'Authorization': `Token ${user.user.token.key}`
@@ -188,18 +193,10 @@ function Overall() {
             // arr.sort()
             setStreamList(arr)
         })
-    }
-    // const getInstituteCountPerCampus = () => {
-    //   axios.get(`${REACT_APP_API_URL}organization/campus/`)
-    //   .then((resp) => {
-    //     var instCountPerCampus = _.get(resp,['data','result']).map(item => item.inst_count)
-    //     setInstPerCampus(instCountPerCampus)
-    //   })
-    // }
-    useEffect(()=>{
-        getStreams()
+    }  
+      getStreams()
 
-    },[])
+    },[user ])
 
     
     return(
@@ -233,12 +230,12 @@ function Overall() {
       
       {showVC ? (      
           <>
-        <div class="headings" id={`stream`} >
+        <div className="headings" id={`stream`} >
           <div className="sub">
      { streamData.streamName}
      </div>
           </div>
-          <div class="headings" id={`stream`} >
+          <div className="headings" id={`stream`} >
           <div className="sub">
           Student Details
      </div>
@@ -264,12 +261,12 @@ function Overall() {
       ) : null}
     {showVC?
         <>
-           <div class="headings" id={`stream`} >
+           <div className="headings" id={`stream`} >
           <div className="sub">
           Placement Details
      </div>
           </div>
-          <Grid container container spacing={2} ml={10} mt={6}  spacing={2} alignItems="center">
+          <Grid container  ml={10} mt={6}  spacing={2} alignItems="center">
           <Grid item xs={7} mr={5} className='firstDoughnut' >
           <OVerticalBarChart
             
@@ -281,12 +278,12 @@ function Overall() {
         <Table  column={Table2.column} data={Table2.data} category={"Placement Details"} keys={parsedDataFormat["placement_details"]}/>
       </Grid>
         </Grid>
-        <div class="headings" id={`stream`} >
+        <div className="headings" id={`stream`} >
           <div className="sub">
           Package Details
      </div>
           </div>
-          <Grid container container ml={10} mt={6} spacing={2} alignItems="center">
+          <Grid container  ml={10} mt={6} spacing={2} alignItems="center">
             <Grid item xs={7}   mr={5} className='firstDoughnut'>
               <OVerticalBarChart
                 

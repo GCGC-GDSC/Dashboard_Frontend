@@ -1,14 +1,10 @@
 import Box from "@mui/material/Box";
 import React, { useContext, useEffect, useState } from "react";
-import LinaerStepper from "../../Components/Form/UpdateForm";
 import { UserContext } from "../../context/context";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import FormGroup from "@mui/material/FormGroup";
 import Select from "@mui/material/Select";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Input from "@mui/material/Input";
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
@@ -16,14 +12,13 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {ReactComponent as FormSelect } from "../../assets/formSelect.svg"
-import studentDetailsRef,{parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys,instMap} from './StudentDetailsFormObj'
+import {parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys,instMap} from './StudentDetailsFormObj'
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import GolfCourseIcon from '@mui/icons-material/GolfCourse';
 import SchoolIcon from '@mui/icons-material/School';
 import { unstable_batchedUpdates } from "react-dom";
 import Logs from "./Logs.component"
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import Backdrop from '@mui/material/Backdrop';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 // accordian
 import Accordion from '@mui/material/Accordion';
@@ -32,15 +27,12 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import "./Admin.styles.scss";
-import { keyBy } from "lodash";
-import { NearMeSharp } from "@mui/icons-material";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function Admin() {
   const user = useContext(UserContext);
   const [campus, setCampus] = useState(user.user.campus[0]);
   const [viewCampus, setViewCampus] = useState(user.user.campus[0]);
   const [institute, setInstitute] = useState("");
-  const [studentDetails, setStudentDetails] = useState({})
   const [grad, setGrad] = useState("");
   const [edit,setEdit] = useState(false)
   const [instituteData,setInstituteData] = useState({})
@@ -122,6 +114,7 @@ function Admin() {
       dataToSend[key] = dataObject[key]
       if(dataToSend[key] === undefined || dataToSend[key] === "") flag = true
     })
+    console.log(dataToSend)
     var config = {
       method: 'patch',
       url: `${REACT_APP_API_URL}students/update/${instituteData.id}`,
@@ -160,7 +153,7 @@ function Admin() {
   const ariaLabel = { "aria-label": "description" };
 
 const handleChangeCampus = (event)=>{
-  const {name,value} = event.target
+  const {value} = event.target
   setViewCampus(value)
 }
 // --------update form ...
@@ -205,10 +198,9 @@ const handleChangeTableInput = (event) =>{
     else if (name === "grad") setGrad(value);
   };
   const previewStyle = {
-    background: "#D3CCE3", 
-background: "-webkit-linear-gradient(to right, #E9E4F0, #D3CCE3)",  
-background:" linear-gradient(to right, #E9E4F0, #D3CCE3)", 
-
+    // background: "#D3CCE3", 
+    // background: "-webkit-linear-gradient(to right, #E9E4F0, #D3CCE3)",  
+    background:" linear-gradient(to right, #E9E4F0, #D3CCE3)", 
   }
 
   const fetchLogs = ()=>{
@@ -222,8 +214,18 @@ background:" linear-gradient(to right, #E9E4F0, #D3CCE3)",
     })
   }
   useEffect(()=>{
+    const fetchLogs = ()=>{
+      axios.get(`${REACT_APP_API_URL}students/logs`,{
+        headers: {
+          'Authorization': `Token ${user.user.token.key}`
+        }
+      })
+      .then(resp=>{
+          setLogs(resp.data.result)
+      })
+    }
    fetchLogs()
-  },[])
+  },[user])
   return (
     <Box p={10}>
       <div className="form-container">

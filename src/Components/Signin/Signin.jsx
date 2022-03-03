@@ -1,12 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {firebase} from "../../backend/firebase.config"
 import {ReactComponent as Login} from "../../assets/login.svg"
 import './Signin.styles.scss';
 function Signin() {
-    const signoutfromapp = () =>{
-        firebase.auth().signOut()
-    }
- 
     const SiginiWithFirebase =() =>{
         const google_provider = new firebase.auth.GoogleAuthProvider()
         firebase.auth().signInWithPopup(google_provider)

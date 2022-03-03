@@ -87,16 +87,7 @@ const user = useContext(UserContext);
     setValue(newValue);
   };
 
-  const getStatsData = ()=>{
-    axios.get(`${REACT_APP_API_URL}students/gbstats/`,{
-      headers: {
-        'Authorization': `Token ${user.user.token.key}`
-      }
-    })
-    .then(resp=>{
-      setStatsData(_.get(resp,["data",'result']))
-    })
-  }
+  
 
   const combineArrays = (k, a1, a2, category) => {
     const arr = [];
@@ -114,7 +105,7 @@ const user = useContext(UserContext);
   //  -------------------------------------------------DC ----------
   const getDataForDC = (graduate, keys, category) => {
     var arr = [];
-    if (graduate == "UGPG") {
+    if (graduate === "UGPG") {
       const combinedObj = combineArrays(
         keys,
         statsData["UG"][category],
@@ -152,7 +143,7 @@ const user = useContext(UserContext);
 
     const getDataForVC = (graduate, keys, category) => {
       var arr = [];
-      if (graduate == "UGPG") {
+      if (graduate === "UGPG") {
         const combinedObj = combineArrays(
           keys,
           statsData["PG"][category],
@@ -278,8 +269,18 @@ const user = useContext(UserContext);
   return TableData
 }
   useEffect(()=>{
-   getStatsData()
-  },[])
+   const getStatsData = ()=>{
+    axios.get(`${REACT_APP_API_URL}students/gbstats/`,{
+      headers: {
+        'Authorization': `Token ${user.user.token.key}`
+      }
+    })
+    .then(resp=>{
+      setStatsData(_.get(resp,["data",'result']))
+    })
+  }
+  getStatsData()
+  },[user])
   return(
     <Box>
       <Box sx={{ borderBottom: 1, borderColor: "divider", bgcolor: '#fff' }}>
@@ -301,9 +302,9 @@ const user = useContext(UserContext);
           {statsData && statsData["PG"] && statsData["UG"]?
           <Grid container spacing={2} alignItems="center">
             <Grid container alignItems="center" >
-            <div class="headings" id={`stream`} >
+            <div className="headings" id={`stream`} >
                 </div>
-                <div class="headings cardtitles" id={`stream`} >
+                <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 Student Details
                 </div>
@@ -323,7 +324,7 @@ const user = useContext(UserContext);
             </Grid>
             </Grid>
             <Grid container alignItems="center" spacing={9} p={5}>
-            <div class="headings cardtitles" id={`stream`} >
+            <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 Placement Details
                 </div>
@@ -342,7 +343,7 @@ const user = useContext(UserContext);
             </Grid>
             </Grid>
             <Grid container alignItems="center" spacing={9} p={7}>
-            <div class="headings cardtitles" id={`stream`} >
+            <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 Package Details
                 </div>
@@ -369,7 +370,7 @@ const user = useContext(UserContext);
       
           {statsData && statsData["UG"]?
           <Grid container alignItems="center" spacing={4}>
-            <div class="headings cardtitles" id={`stream`} >
+            <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 Student Details
                 </div>
@@ -386,7 +387,7 @@ const user = useContext(UserContext);
                   category={"Student Details"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
             </Grid>
-            <div class="headings cardtitles" id={`stream`} >
+            <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 Placement Details
                 </div>
@@ -403,7 +404,7 @@ const user = useContext(UserContext);
                   category={"Placement Details"} 
                   keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
             </Grid>
-            <div class="headings cardtitles" id={`stream`} >
+            <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 Package Details
                 </div>
@@ -427,7 +428,7 @@ const user = useContext(UserContext);
       
       {statsData && statsData["PG"]?
           <Grid container alignItems="center" spacing={4}>
-            <div class="headings cardtitles" id={`stream`} >
+            <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 Student Details
                 </div>
@@ -444,7 +445,7 @@ const user = useContext(UserContext);
                 category={"Student Details"} 
                 keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
             </Grid>
-            <div class="headings cardtitles" id={`stream`} >
+            <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 Placement Details
                 </div>
@@ -462,7 +463,7 @@ const user = useContext(UserContext);
    category={"Placement Details"} 
    keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
 </Grid>
-            <div class="headings cardtitles" id={`stream`} >
+            <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
                 Package Details
                 </div>

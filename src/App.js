@@ -42,7 +42,8 @@ const App = () => {
     if (isUserSignedIn && userProfile && userProfile.email)
       verifyUser(userProfile);
     else setVerifiedUser({ user: {}, isVerified: false,userRestrictedScreen:detectMediaSize });
-  }, [userProfile, isUserSignedIn]);
+
+  }, [userProfile, isUserSignedIn,detectMediaSize]);
 
 
   const providerValue = useMemo(() => verifiedUser, [verifiedUser]);
