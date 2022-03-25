@@ -116,7 +116,7 @@ function Admin() {
     })
     console.log(dataToSend)
     var config = {
-      method: 'patch',
+      method: 'put',
       url: `${REACT_APP_API_URL}students/update/${instituteData.id}`,
       headers: { 
         'Authorization': `Token ${user.user.token.key}`, 
@@ -402,6 +402,7 @@ const handleChangeTableInput = (event) =>{
             name="institute"
             onChange={handleChange}
           >
+            {console.log(user)}
             {user.user.institute.map((instName) =>
               campus.name === instName.campus ? (
                 <MenuItem value={instName}>{instMap[instName.name.toLowerCase()]}</MenuItem>

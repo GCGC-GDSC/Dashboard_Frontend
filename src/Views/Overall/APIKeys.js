@@ -10,7 +10,7 @@ const InstituteStudentDataFormat = {
 
   salary: ["highest", "lowest", "average"],
   student_details: [
-    "total_students",
+    "total_final_years",
     "total_opted_for_higher_studies_only",
     "total_backlogs",
     "total_not_intrested_in_placments",
@@ -42,12 +42,12 @@ export const parsedDataFormat = {
 export const streamToInstCount = {
   engineering: 3,
   management: 3,
-  pharmacy: 3,
+  pharmacy: 2,
   science: 3,
-  law: 3,
-  architecture: 3,
-  nursing: 3,
-  humanities: 3,
+  law: 1,
+  architecture: 1,
+  nursing: 2,
+  humanities: 1,
 };
 export default InstituteStudentDataFormat;
 // hs, back, defered placements,

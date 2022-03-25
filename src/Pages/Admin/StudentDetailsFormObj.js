@@ -50,7 +50,6 @@ export const DBPreviewKeys = [ //31
   "lowest_salary",
   // "is_ug" ,
 ]
-
 // 
 export const parsedStudentDetailsRef = {
   "under_campus_name":"Campus Name",
@@ -94,6 +93,7 @@ export const instMap = {
   'sotb': 'SoTB',
   'sosp': 'SoSP',
   'gsbb': 'GSBB',
+  'sosb':"SoSB  "
 }
 
 export default studentDetailsRef;

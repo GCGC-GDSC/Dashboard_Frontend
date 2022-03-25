@@ -86,10 +86,17 @@ function Overall() {
         const combineArrays = (k,a1,a2,category) =>{
             const arr = []
             if(category === "salary"){
-                for(let i =0;i <k.length;i++)
-                {
-                    arr.push(Math.max(a1[k[i]] ,a2[k[i]] ) )
-                }
+
+              console.log('-->',k,a1,a2,category);
+                arr.push(Math.max(a1[k[0]] ,a2[k[0]] ) );
+                arr.push(Math.min(a1[k[1]] ,a2[k[1]] ) )
+                arr.push((a1[k[2]] + a2[k[2]] ) / 2 )
+
+
+                // for(let i =0;i <k.length;i++)
+                // {
+                //     arr.push(Math.max(a1[k[i]] ,a2[k[i]] ) )
+                // }
             }
             else{
                 for(let i =0;i <k.length;i++)
@@ -216,7 +223,7 @@ function Overall() {
       <Grid item xs={6} className='firstDoughnut'>
 
         <ODoughnutChart
-          title={"University overview of _____"}
+          title={"University overview "}
           data={dataDoughnut}
           options={chartOptions.Doughnut}
         />
