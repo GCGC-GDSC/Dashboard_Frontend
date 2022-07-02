@@ -11,8 +11,8 @@ const Footer = () => {
               <img src={DSCLogo} alt="GDSC"/>
               </div>
              <div className="rightSide">
-              <span>This Website is developed by Web Dev Team - GDSC</span>
-              <span>Copyright Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla, laborum.</span>
+              <span>Click on the section of the card for which you require the information</span>
+              <span>Copyright 2022</span>
               </div>
 
         </div>
