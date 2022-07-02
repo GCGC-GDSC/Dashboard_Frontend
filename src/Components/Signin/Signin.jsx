@@ -15,7 +15,7 @@ function Signin() {
     }
     return (
 
-        <div className='sign-in'>
+    <div className='sign-in'>
         <Login/>
         <button type="button"  className="login-with-google-btn" onClick = {SiginiWithFirebase}>
         Sign in with Google

@@ -8,7 +8,7 @@ import dsc from "../../assets/DSC.png"
 
 function login() {
     return (
-        <>
+        <div className="loginPageMain">
         <div className='logo'>
         <div>
             <img src="https://www.gitam.edu/assets/images/GITAM-logo.png" alt="This is gitam logo" />
@@ -21,11 +21,19 @@ function login() {
         </div>
         <div className='login'>
             <div className='login-header'>
-               <h3>
-                   Welcome to CAREER FULFILLMENT STATISTICS 2022
-               </h3>
+               <h2>
+                   Welcome to CAREER FULFILLMENT STATISTICS 
+               </h2>
+               <h2>2022 🎓</h2>
                <p>
-               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+               This website is  created to make the Career Fulfillment Statistics accessible
+and easy to analyze.
+It includes tabular data and a visual representation of the
+data in interactive charts and drawings. Data may be seen on
+the website in three ways: campus-wide, overall, and governing
+body statistics. The apex team has access to the admin panel, which allows
+them to edit data and download it in the form of an excel file
+for further use..
                </p>
                <div className='login-header-buttons'>
                         <div className='meetTeam-btns'>
@@ -34,7 +42,7 @@ function login() {
                                         Meet the team
                             </span>
                             </NavLink>
-                            <span style={{color:"black"}}>
+                            <span style={{color:"black", marginLeft:"2px"}}>
                                 <GroupsIcon fontSize="large"/>
                             </span>
                         </div>
@@ -46,7 +54,7 @@ function login() {
             </div>
            
         </div>
-        </>
+        </div>
     )
 }
 export default login
