@@ -1,3 +1,8 @@
+.mentorCards{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .profile-cards-container{
     width: 80%;
     margin: auto;
@@ -6,22 +11,16 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
-.team-header{
-    h3{
-        margin-top: 4rem;
-        margin-top: 0px;
-        padding-top: 0px;
-    }
-    margin: auto;
-    text-align: center;
-    font-size: 1.5rem;
+.team-header h3{
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 1.5rem;
 }
 .teamsPage{
-  background: #ECE9E6;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  height: 112vh;
+  background: #D3CCE3;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 100%;
 }
 .teamsParticle{
     max-height: 98vh;

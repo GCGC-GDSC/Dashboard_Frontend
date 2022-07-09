@@ -1,4 +1,5 @@
 import ProfileCard from "./profileCard"
+import MentorProfileCard from "./MentorProfileCard.jsx"
 import ParticlesComponent from "../../Components/Particles/ParticlesComponent"
 import {firestore} from "../../backend/firebase.config"
 import './Team.style.scss'
@@ -26,6 +27,33 @@ const Team = () => {
   return<> <div className="teamsPage">
   <ParticlesComponent className="teamsParticle"/>
   {/* <div style={{marginTop:"100px"}}></div> */}
+  <div className="team-header">
+    <h3>
+      Mentors
+    </h3>
+  </div>
+  <div className="mentorCards">
+  <MentorProfileCard
+				name="Cdr Gurumoorthy Gangadharan(Retd)"
+        picture="https://sicgcgc.gitam.edu/images/images/gurumoorthy.jpg"
+        role="Guide and mentor"
+        description="Assistant Dean, Career Services
+        &
+        Head, GCGC"
+        linkedin="https://www.linkedin.com/in/gurumoorthy-gangadharan-6821a410a/"
+			/>
+  <MentorProfileCard
+				name="Vikas B"
+        picture="https://media-exp1.licdn.com/dms/image/C5603AQG5M1-Yvr2LXQ/profile-displayphoto-shrink_800_800/0/1647499890525?e=1662595200&v=beta&t=VRrVT6jVvCNoP7cqtUiZ4GU6tLiNliQNHy1n0B8CwXo"
+        role="Guide and mentor"
+        description="Deputy Director, Technology/Tools/Platforms, GCGC
+        &
+        Assistant Professor, CSE"
+        linkedin="https://www.linkedin.com/in/vikas-b-6a4476171/"
+			/>
+
+  </div>
+
   <div className="team-header">
     <h3>
       Meet the team

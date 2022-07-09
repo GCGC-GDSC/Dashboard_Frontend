@@ -1,5 +1,6 @@
 import React, { useEffect ,useState,useContext} from 'react'
 import "./Home.scss"
+import Modal from '../../Components/Modal/Modal'
 // import HeroText from "../../Components/HeroText/HeroText"
 // import Aos from "aos"
 import "aos/dist/aos.css"
@@ -10,16 +11,31 @@ import { UserContext } from '../../context/context';
 function Home() {
     const user = useContext(UserContext)
     const [open, setOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(true);
+    const [firstTime,setFirstTime] = useState(false)
+    
     const handleClose = () => {
         setOpen(false);
       };
+    const tryingThis = () => {
+        if (sessionStorage.getItem('firstTime')){
+            setFirstTime(false)
+        }
+        else{
+            sessionStorage.setItem('firstTime',true)
+            setFirstTime(true)
+        }
+        
+    }
     useEffect(() => {
-        // Aos.init({})
         if(user)setOpen(true)
+        tryingThis()
+
     },[user])
     return ( 
         
         <div className='homePage'> 
+        {  firstTime && modalOpen  ? <Modal setOpenModal={setModalOpen} /> : null}
         <Snackbar
           anchorOrigin={{ vertical:"bottom", horizontal:"left" }}
         open={open}
@@ -30,6 +46,8 @@ function Home() {
         <main className='main_section'>
             <BasicTabs/>
         </main>
+        
+        
             <Footer/>
         </div>
     )
