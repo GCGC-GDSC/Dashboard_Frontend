@@ -6,6 +6,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Input from "@mui/material/Input";
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import Modal from '@mui/material/Modal';
@@ -34,6 +36,8 @@ function Admin() {
   const [viewCampus, setViewCampus] = useState(user.user.campus[0]);
   const [institute, setInstitute] = useState("");
   const [grad, setGrad] = useState("");
+  const [isCourseType,setIsCourseType] = useState('Institute Only');
+  const [course, setCourse] = useState("");
   const [edit,setEdit] = useState(false)
   const [instituteData,setInstituteData] = useState({})
   const [dataObject,setDataObject] = useState({})
@@ -44,6 +48,7 @@ function Admin() {
   
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const courseList = ["CSE","Mech","CSBS","Civil","ECE","EEE"]
   const style = {
       position: 'absolute',
       top: '50%',
@@ -196,6 +201,8 @@ const handleChangeTableInput = (event) =>{
     if (name === "campus") setCampus(value);
     else if (name === "institute") setInstitute(value);
     else if (name === "grad") setGrad(value);
+    else if (name === "course") setCourse(value)
+    else if (name === 'courseType') setIsCourseType(value)
   };
   const previewStyle = {
     // background: "#D3CCE3", 
@@ -371,6 +378,25 @@ const handleChangeTableInput = (event) =>{
           sx={{ m: 1, minWidth: 100 }}
           style={{ width: "160px" }}
         >
+          <InputLabel> View </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={isCourseType}
+            label="courseType"
+            name="courseType"
+            onChange={handleChange}
+          >
+              <MenuItem value="Institute Only">Institute Only</MenuItem>
+              <MenuItem value="Branchwise View">Branchwise View</MenuItem>
+
+          </Select>
+        </FormControl>
+        <FormControl
+          variant="standard"
+          sx={{ m: 1, minWidth: 100 }}
+          style={{ width: "160px" }}
+        >
           <InputLabel> Campus </InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -409,6 +435,32 @@ const handleChangeTableInput = (event) =>{
             )}
           </Select>
         </FormControl>
+        {
+        isCourseType != "Institute Only" &&    
+        <FormControl
+        variant="standard"
+        sx={{ m: 1, minWidth: 80 }}
+        style={{ width: "90px" }}
+      >
+        {/* course name */}
+        <InputLabel> Course </InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={course}
+          label="course"
+          name="course"
+          onChange={handleChange}
+        >
+          {/* {console.log(user)} */}
+          {/* {user.user.institute.map((instName) => */}
+           {
+            courseList.map(courseName=>
+            <MenuItem value={courseName}>{courseName}</MenuItem>)
+            }
+        </Select>
+      </FormControl>
+        }
         {/* grad type as input */}
         <FormControl
           variant="standard"
@@ -429,11 +481,17 @@ const handleChangeTableInput = (event) =>{
           </Select>
         </FormControl>
         {/* edit button icons */}
+        <FormControl
+          variant="standard"
+          sx={{ m: 0, minWidth: 80 }}
+          style={{ width: "80px" }}
+        >
         <Button variant="outlined" startIcon={<EditIcon />} 
-        disabled={!(campus && institute && grad)}
+        disabled={isCourseType==="Institute Only"?!(campus && institute && grad):!(campus && institute && grad && course)}
         onClick={initiateEdit }>
           EDIT
         </Button>
+        </FormControl>
         </div>
         {edit?
         <div className="formInformation">
