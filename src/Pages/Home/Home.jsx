@@ -1,6 +1,5 @@
 import React, { useEffect ,useState,useContext} from 'react'
 import "./Home.scss"
-import Modal from '../../Components/Modal/Modal'
 // import HeroText from "../../Components/HeroText/HeroText"
 // import Aos from "aos"
 import "aos/dist/aos.css"
@@ -8,8 +7,10 @@ import Footer from '../../Components/Footer/Footer'
 import BasicTabs from "../../Components/Tabs/Tabs"
 import Snackbar from '@mui/material/Snackbar';
 import { UserContext } from '../../context/context';
+import ModalC from '../../Components/Modal/Modal'
 function Home() {
     const user = useContext(UserContext)
+
     const [open, setOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(true);
     const [firstTime,setFirstTime] = useState(false)
@@ -35,7 +36,10 @@ function Home() {
     return ( 
         
         <div className='homePage'> 
-        {  firstTime && modalOpen  ? <Modal setOpenModal={setModalOpen} /> : null}
+        {  firstTime && modalOpen  ? 
+        <ModalC setOpenModal={setModalOpen} modalOpen={modalOpen} /> 
+        : null}
+ 
         <Snackbar
           anchorOrigin={{ vertical:"bottom", horizontal:"left" }}
         open={open}

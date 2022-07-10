@@ -202,7 +202,6 @@ const handleChangeTableInput = (event) =>{
     // background: "-webkit-linear-gradient(to right, #E9E4F0, #D3CCE3)",  
     background:" linear-gradient(to right, #E9E4F0, #D3CCE3)", 
   }
-
   const fetchLogs = ()=>{
     axios.get(`${REACT_APP_API_URL}students/logs`,{
       headers: {
