@@ -182,10 +182,12 @@ const checkDependentValueUpdates = (kvp)=>{
   "total_backlogs_opted_for_placements"].forEach(key=>{
   newDataObj["total_students_eligible"] -= parseInt(newRefObj[key]);
   })
+ 
+  //swaped
+  newDataObj["total_yet_to_place"] = newRefObj["total_students_eligible"] - (newRefObj["total_offers"] - newRefObj["total_multiple_offers"]);    
 
   newDataObj["total_placed"] = newRefObj["total_offers"] - newRefObj["total_multiple_offers"];
 
-  newDataObj["total_yet_to_place"] = newRefObj["total_students_eligible"] - newRefObj["total_placed"];    
 
   setDataObject({...newRefObj,...newDataObj})
 }
