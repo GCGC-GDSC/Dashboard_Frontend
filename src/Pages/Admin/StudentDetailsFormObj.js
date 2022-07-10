@@ -47,8 +47,15 @@ export const DBPreviewKeys = [
   "total_placed", // 44 - 45
   "total_yet_to_place", // 43 - 46
   "highest_salary",
-  "average_salary",
   "lowest_salary",
+  "average_salary",
+
+  // @ -- ask
+  "self_percent_opted_hs_final",
+  "self_percent_back_final",
+ "self_percent_eligible_final",
+  "self_percent_yet_to_place_eligible"
+  // @
   // "is_ug" ,
 ];
 //
@@ -80,6 +87,10 @@ export const parsedStudentDetailsRef = {
   highest_salary: "What is the Highest Salary",
   lowest_salary: "What is the Lowest Salary",
   average_salary: "What is the average salary",
+  self_percent_opted_hs_final : "percentage of students opted for HS (higher studies) to the total number of final years.",
+  self_percent_back_final:"percentage of students having backlogs to the number of students in final years.",
+  self_percent_eligible_final:"precentage of students eligibale for and requirung placements to the total number of students in final years  ",
+  self_percent_yet_to_place_eligible:"percentage of students yet to be placed out of eligible students requirung placements",
   vskp: "CGC Visakhapatnam",
   blr: "CGC Bengaluru",
   hyd: "CGC Hyderabad",

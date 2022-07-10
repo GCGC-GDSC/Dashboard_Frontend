@@ -83,11 +83,22 @@ function Admin() {
       }
     })
     .then(resp=>{
+      let dataObj = resp.data.result[0]
+      // console.log(dataObj)
+      const newDataObj = {}
+      newDataObj["self_percent_opted_hs_final"] = (dataObj["total_opted_for_higher_studies_only"] / dataObj["total_final_years"]) * 100
+      newDataObj["self_percent_back_final"] = (dataObj["total_backlogs"] / dataObj["total_final_years"]) * 100
+      newDataObj["self_percent_eligible_final"] = (dataObj["total_students_eligible"] / dataObj["total_final_years"]) * 100
+      newDataObj["self_percent_yet_to_place_eligible"] = (dataObj["total_yet_to_place"] / dataObj["total_students_eligible"]) * 100
+      dataObj = {...dataObj,... newDataObj}
+      console.log(dataObj)
       unstable_batchedUpdates(()=>{
-        setInstituteData(resp.data.result[0])
-        setDataObject(resp.data.result[0])
+        setInstituteData(dataObj)
+        setDataObject(dataObj)
+        // checkDependentValueUpdates(resp.data.result[0])
       })
     })
+  
     setEdit(true)
   }
 
@@ -166,30 +177,33 @@ const checkDependentValueUpdates = (kvp)=>{
   const {name,value} = kvp
   const newRefObj = dataObject ;
   newRefObj[name] = value ;
-  const newDataObj = {};
-  newDataObj["total_backlogs"] = 0;
+  // const newDataObj = {};
+  newRefObj["total_backlogs"] = 0;
   ["total_backlogs_opted_for_placements",
   "total_backlogs_opted_for_higherstudies",
   "total_backlogs_opted_for_other_career_options"].forEach(key =>{
-    newDataObj["total_backlogs"] += parseInt(newRefObj[key]);
+    newRefObj["total_backlogs"] += parseInt(newRefObj[key]);
   })
 
-  newDataObj["total_students_eligible"]  = newRefObj["total_final_years"] ;
+  newRefObj["total_students_eligible"]  = newRefObj["total_final_years"] ;
 
   ["total_higher_study_and_pay_crt", 
   "total_opted_for_higher_studies_only",
   "total_not_intrested_in_placments",
   "total_backlogs_opted_for_placements"].forEach(key=>{
-  newDataObj["total_students_eligible"] -= parseInt(newRefObj[key]);
+  newRefObj["total_students_eligible"] -= parseInt(newRefObj[key]);
   })
  
   //swaped
-  newDataObj["total_yet_to_place"] = newRefObj["total_students_eligible"] - (newRefObj["total_offers"] - newRefObj["total_multiple_offers"]);    
+  newRefObj["total_yet_to_place"] = newRefObj["total_students_eligible"] - (newRefObj["total_offers"] - newRefObj["total_multiple_offers"]);    
 
-  newDataObj["total_placed"] = newRefObj["total_offers"] - newRefObj["total_multiple_offers"];
+  newRefObj["total_placed"] = newRefObj["total_offers"] - newRefObj["total_multiple_offers"];
+  newRefObj["self_percent_opted_hs_final"] = (newRefObj["total_opted_for_higher_studies_only"] / newRefObj["total_final_years"]) * 100
+  newRefObj["self_percent_back_final"] = (newRefObj["total_backlogs"] / newRefObj["total_final_years"]) * 100
+  newRefObj["self_percent_eligible_final"] = (newRefObj["total_students_eligible"] / newRefObj["total_final_years"]) * 100
+  newRefObj["self_percent_yet_to_place_eligible"] = (newRefObj["total_yet_to_place"] / newRefObj["total_students_eligible"]) * 100
 
-
-  setDataObject({...newRefObj,...newDataObj})
+  setDataObject({...newRefObj})
 }
 const handleChangeTableInput = (event) =>{
   const {name,value} = event.target

@@ -76,6 +76,11 @@ function CampusWise() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+const [valueOuter, setValueOuter] = useState(0);
+
+const handleChangeOuter = (event, newValue) => {
+  setValueOuter(newValue);
+};
 
   const chartOptions = {
     Doughnut: {
@@ -468,242 +473,263 @@ function CampusWise() {
     </Box>
       {showCharts ? (
         <div>
-          <Box>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }} mt={5}>
-              <Tabs
-                value={value}
-                onChange={handleChange}
+           <Box sx={{ borderBottom: 1, borderColor: "divider" }} mt={5}>
+             <Box sx={{ borderBottom: 1, borderColor: "divider" }} mt={5}>
+               <Tabs
+                value={valueOuter}
+                onChange={handleChangeOuter}
                 textColor="secondary"
-            indicatorColor="secondary"
-            variant="fullWidth"
-            centered
-                aria-label="basic tabs example"
-              >
-                <Tab label="UG and PG" {...a11yProps(0)} />
-                <Tab label="UnderGraduate" {...a11yProps(1)} />
-                <Tab label="PostGraduate" {...a11yProps(2)} />
-              </Tabs>
-            </Box>
-            <Grid container className="firstItem" alignItems="center">
-            <TabPanel value={value} index={0} style={{width:"100%"}}>
-              
-              <Grid container spacing={9} alignItems="center" justifyContent="space-around" mt={2} >
-              <div className="headings" id={`stream`} >
-                <div className="sub">
-                {`${campusName}`} 
-                </div>
-                </div>
-                <div className="headings" id={`stream`}  style={{marginTop:"20px",marginBottom:"-100px"}}>
-                  <div className="sub">
-                  {`${instMap[instData.name]} Student Details`}
-                  </div>
-                </div>
-                <Grid item xs={6} >
-                  <ODoughnutChart
-                  isCampus={true}
-                    // title={`${instData.name} Student Details`}
-                    data={DoughnutUGPGSD}
-                    options={chartOptions.DoughnutUGPG}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <Table column={TABLE_DATA(10,"UGPG","student_details").column} 
-                  data={TABLE_DATA(10,"UGPG","student_details").data} 
-                  category={"Student Details"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div className="headings" id={`stream`} >
-                <div className="sub">
-                {`${instMap[instData.name]} Placement Details`}
+                indicatorColor="secondary"
+                variant="fullWidth"
+                centered
+                    aria-label="basic tabs example"
+                  >
+                    <Tab label="Institute Only" {...a11yProps(0)} />
+                    <Tab label="Branchwise View" {...a11yProps(1)} />
+                  </Tabs>
+               </Box>
+              <TabPanel value={valueOuter} index={0} style={{width:"100%"}}>
+                <Box>
+                  <Box sx={{ borderBottom: 1, borderColor: "divider" }} mt={5}>
+                    <Tabs
+                      value={value}
+                      onChange={handleChange}
+                      textColor="secondary"
+                  indicatorColor="secondary"
+                  variant="fullWidth"
+                  centered
+                      aria-label="basic tabs example"
+                    >
+                      <Tab label="UG and PG" {...a11yProps(0)} />
+                      <Tab label="UnderGraduate" {...a11yProps(1)} />
+                      <Tab label="PostGraduate" {...a11yProps(2)} />
+                    </Tabs>
+                  </Box>
+                  <Grid container className="firstItem" alignItems="center">
+                  <TabPanel value={value} index={0} style={{width:"100%"}}>
+                    
+                    <Grid container spacing={9} alignItems="center" justifyContent="space-around" mt={2} >
+                    <div className="headings" id={`stream`} >
+                      <div className="sub">
+                      {`${campusName}`} 
+                      </div>
+                      </div>
+                      <div className="headings" id={`stream`}  style={{marginTop:"20px",marginBottom:"-100px"}}>
+                        <div className="sub">
+                        {`${instMap[instData.name]} Student Details`}
+                        </div>
+                      </div>
+                      <Grid item xs={6} >
+                        <ODoughnutChart
+                        isCampus={true}
+                          // title={`${instData.name} Student Details`}
+                          data={DoughnutUGPGSD}
+                          options={chartOptions.DoughnutUGPG}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Table column={TABLE_DATA(10,"UGPG","student_details").column} 
+                        data={TABLE_DATA(10,"UGPG","student_details").data} 
+                        category={"Student Details"} 
+                        keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
+                    <div className="headings" id={`stream`} >
+                      <div className="sub">
+                      {`${instMap[instData.name]} Placement Details`}
 
-                </div>
-                </div>
-              <Grid item xs={5} >
-                
-                <ODoughnutChart
-                isCampus={true}
-                  // title={`${instData.name} Placement Details`}
-                  data={DoughnutUGPGPD}
-                  options={chartOptions.DoughnutUGPG}
-                />
-              </Grid>
-              <Grid item xs={5} ml={15}>
-                  <Table column={TABLE_DATA(10,"UGPG","placement_details").column} 
-                  data={TABLE_DATA(10,"UGPG","placement_details").data} 
-                  category={"Placement Details"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div className="headings" id={`stream`} >
-                <div className="sub">
-                {`${instMap[instData.name]} Package Details`}
-                </div>
-                </div>
-                <Grid item xs={5} >
-                  <OVerticalBarChart
-                  isCampus={true}
-                    // title={`${instData.name} Package Details`}
-                    data={VerticalBarChartUGPG}
-                    options={chartOptions.VerticalBarChart1}
-                  />
-                </Grid>
-                <Grid item xs={5} ml={15}>
-                  <Table column={TABLE_DATA(10,"UGPG","salary").column} 
-                  data={TABLE_DATA(10,"UGPG","salary").data} 
-                  category={"Package(LPA)"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
-                </Grid>
-              </Grid>
-            </TabPanel>
-
-
-            <TabPanel value={value} index={1} style={{width:"100%"}}>
-            <Grid container spacing={9} alignItems="center" justifyContent="space-around" mt={2}>
-              <div className="headings" id={`stream`} >
-                <div className="sub">
-                {`${campusName}`}
-                </div>
-                </div>
-                <div className="headings" id={`stream`} >
-                <div className="sub">
-                {`${instMap[instData.name]} Student Details`}
-                </div>
-                </div>
-                <Grid item xs={6}>
-                
-                  <ODoughnutChart
-                  isCampus={true}
-                    // title={`${instData.name} Student Details`}
-                    data={DoughnutUGSD}
-                    options={chartOptions.DoughnutUG}
-                  />
-                </Grid>
-                <Grid item xs={5} >
-                  <Table column={TABLE_DATA(0,"UG","student_details").column} 
-                  data={TABLE_DATA(0,"UG","student_details").data} 
-                  category={"Student Details"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div className="headings" id={`stream`} >
-                <div className="sub">
-                {`${instMap[instData.name]} Placement Details`}
-                </div>
-                </div>
-              <Grid item xs={5}>
-                <ODoughnutChart
-                isCampus={true}
-                  // title={`${instData.name} Placement Details`}
-                  data={DoughnutUGPD}
-                  options={chartOptions.DoughnutUG}
-                />
-              </Grid>
-              <Grid item xs={6} ml={9}>
-                  <Table column={TABLE_DATA(0,"UG","placement_details").column} 
-                  data={TABLE_DATA(0,"UG","placement_details").data} 
-                  category={"Placement Details"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div className="headings" id={`stream`} >
-                <div className="sub">
-                {`${instMap[instData.name]} Package Details`}
-                </div>
-                </div>
-                <Grid item xs={5}>
-                  <OVerticalBarChart
-                  isCampus={true}
-                    // title={`${instData.name} Package Details`}
-                    data={VerticalBarChartUG}
-                    options={chartOptions.VerticalBarChart1}
-                  />
-                </Grid>
-                <Grid item xs={5} >
-                  <Table column={TABLE_DATA(0,"UG","salary").column} 
-                  data={TABLE_DATA(0,"UG","salary").data} 
-                  category={"Package(LPA)"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
-                </Grid>
-              </Grid>
-            </TabPanel>
+                      </div>
+                      </div>
+                    <Grid item xs={5} >
+                      
+                      <ODoughnutChart
+                      isCampus={true}
+                        // title={`${instData.name} Placement Details`}
+                        data={DoughnutUGPGPD}
+                        options={chartOptions.DoughnutUGPG}
+                      />
+                    </Grid>
+                    <Grid item xs={5} ml={15}>
+                        <Table column={TABLE_DATA(10,"UGPG","placement_details").column} 
+                        data={TABLE_DATA(10,"UGPG","placement_details").data} 
+                        category={"Placement Details"} 
+                        keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
+                    <div className="headings" id={`stream`} >
+                      <div className="sub">
+                      {`${instMap[instData.name]} Package Details`}
+                      </div>
+                      </div>
+                      <Grid item xs={5} >
+                        <OVerticalBarChart
+                        isCampus={true}
+                          // title={`${instData.name} Package Details`}
+                          data={VerticalBarChartUGPG}
+                          options={chartOptions.VerticalBarChart1}
+                        />
+                      </Grid>
+                      <Grid item xs={5} ml={15}>
+                        <Table column={TABLE_DATA(10,"UGPG","salary").column} 
+                        data={TABLE_DATA(10,"UGPG","salary").data} 
+                        category={"Package(LPA)"} 
+                        keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
+                      </Grid>
+                    </Grid>
+                  </TabPanel>
 
 
-            <TabPanel value={value} index={2} style={{width:"100%"}}>
-            <Grid container spacing={9} alignItems="center"  justifyContent="space-around" mt={2}>
-              <div className="headings" id={`stream`} >
-                <div className="sub">
-                {`${campusName}`}
-                </div>
-                </div>
-                <div className="headings cardtitles" id={`stream`}>
-                <div className="sub">
-                {`${instMap[instData.name]} Student Details`}
-                </div>
-                </div>
-                <Grid item xs={6}>
-                  <ODoughnutChart
-                  isCampus={true}
-                    // title={`${instData.name} Student Details`}
-                    data={DoughnutPGSD}
-                    options={chartOptions.DoughnutPG}
-                  />
-                </Grid>
-                <Grid item xs={6} >
-                  <Table column={TABLE_DATA(1,"PG","student_details").column} 
-                  data={TABLE_DATA(1,"PG","student_details").data} 
-                  category={"Student Details"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div className="headings cardtitles" id={`stream`} >
-                <div className="sub">
-                {`${instMap[instData.name]} Placement Details`}
-                </div>
-                </div>
-              <Grid item xs={5}>
-                <ODoughnutChart
-                isCampus={true}
-                  // title={`${instData.name} Placement Details`}
-                  data={DoughnutPGPD}
-                  options={chartOptions.DoughnutPG}
-                />
-              </Grid>
-              <Grid item xs={6} ml={10}>
-                  <Table column={TABLE_DATA(1,"PG","placement_details").column} 
-                  data={TABLE_DATA(1,"PG","placement_details").data} 
-                  category={"Placement Details"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
-                </Grid>
-              </Grid>
-              <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
-              <div className="headings" id={`stream`} >
-                <div className="sub">
-                {`${instMap[instData.name]} Package Details`}
-                </div>
-                </div>
-                <Grid item xs={6}>
-                  <OVerticalBarChart
-                  isCampus={true}
-                    // title={`${instData.name} Package Details`}
-                    data={VerticalBarChartPG}
-                    options={chartOptions.VerticalBarChart1}
-                  />
-                </Grid>
-                <Grid item xs={6} >
-                  <Table column={TABLE_DATA(1,"PG","salary").column} 
-                  data={TABLE_DATA(1,"PG","salary").data} 
-                  category={"Package(LPA)"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
-                </Grid>
-              </Grid>
-            </TabPanel>
-            </Grid>
+                  <TabPanel value={value} index={1} style={{width:"100%"}}>
+                  <Grid container spacing={9} alignItems="center" justifyContent="space-around" mt={2}>
+                    <div className="headings" id={`stream`} >
+                      <div className="sub">
+                      {`${campusName}`}
+                      </div>
+                      </div>
+                      <div className="headings" id={`stream`} >
+                      <div className="sub">
+                      {`${instMap[instData.name]} Student Details`}
+                      </div>
+                      </div>
+                      <Grid item xs={6}>
+                      
+                        <ODoughnutChart
+                        isCampus={true}
+                          // title={`${instData.name} Student Details`}
+                          data={DoughnutUGSD}
+                          options={chartOptions.DoughnutUG}
+                        />
+                      </Grid>
+                      <Grid item xs={5} >
+                        <Table column={TABLE_DATA(0,"UG","student_details").column} 
+                        data={TABLE_DATA(0,"UG","student_details").data} 
+                        category={"Student Details"} 
+                        keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
+                    <div className="headings" id={`stream`} >
+                      <div className="sub">
+                      {`${instMap[instData.name]} Placement Details`}
+                      </div>
+                      </div>
+                    <Grid item xs={5}>
+                      <ODoughnutChart
+                      isCampus={true}
+                        // title={`${instData.name} Placement Details`}
+                        data={DoughnutUGPD}
+                        options={chartOptions.DoughnutUG}
+                      />
+                    </Grid>
+                    <Grid item xs={6} ml={9}>
+                        <Table column={TABLE_DATA(0,"UG","placement_details").column} 
+                        data={TABLE_DATA(0,"UG","placement_details").data} 
+                        category={"Placement Details"} 
+                        keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
+                    <div className="headings" id={`stream`} >
+                      <div className="sub">
+                      {`${instMap[instData.name]} Package Details`}
+                      </div>
+                      </div>
+                      <Grid item xs={5}>
+                        <OVerticalBarChart
+                        isCampus={true}
+                          // title={`${instData.name} Package Details`}
+                          data={VerticalBarChartUG}
+                          options={chartOptions.VerticalBarChart1}
+                        />
+                      </Grid>
+                      <Grid item xs={5} >
+                        <Table column={TABLE_DATA(0,"UG","salary").column} 
+                        data={TABLE_DATA(0,"UG","salary").data} 
+                        category={"Package(LPA)"} 
+                        keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
+                      </Grid>
+                    </Grid>
+                  </TabPanel>
+
+
+                  <TabPanel value={value} index={2} style={{width:"100%"}}>
+                  <Grid container spacing={9} alignItems="center"  justifyContent="space-around" mt={2}>
+                    <div className="headings" id={`stream`} >
+                      <div className="sub">
+                      {`${campusName}`}
+                      </div>
+                      </div>
+                      <div className="headings cardtitles" id={`stream`}>
+                      <div className="sub">
+                      {`${instMap[instData.name]} Student Details`}
+                      </div>
+                      </div>
+                      <Grid item xs={6}>
+                        <ODoughnutChart
+                        isCampus={true}
+                          // title={`${instData.name} Student Details`}
+                          data={DoughnutPGSD}
+                          options={chartOptions.DoughnutPG}
+                        />
+                      </Grid>
+                      <Grid item xs={6} >
+                        <Table column={TABLE_DATA(1,"PG","student_details").column} 
+                        data={TABLE_DATA(1,"PG","student_details").data} 
+                        category={"Student Details"} 
+                        keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
+                    <div className="headings cardtitles" id={`stream`} >
+                      <div className="sub">
+                      {`${instMap[instData.name]} Placement Details`}
+                      </div>
+                      </div>
+                    <Grid item xs={5}>
+                      <ODoughnutChart
+                      isCampus={true}
+                        // title={`${instData.name} Placement Details`}
+                        data={DoughnutPGPD}
+                        options={chartOptions.DoughnutPG}
+                      />
+                    </Grid>
+                    <Grid item xs={6} ml={10}>
+                        <Table column={TABLE_DATA(1,"PG","placement_details").column} 
+                        data={TABLE_DATA(1,"PG","placement_details").data} 
+                        category={"Placement Details"} 
+                        keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
+                    <div className="headings" id={`stream`} >
+                      <div className="sub">
+                      {`${instMap[instData.name]} Package Details`}
+                      </div>
+                      </div>
+                      <Grid item xs={6}>
+                        <OVerticalBarChart
+                        isCampus={true}
+                          // title={`${instData.name} Package Details`}
+                          data={VerticalBarChartPG}
+                          options={chartOptions.VerticalBarChart1}
+                        />
+                      </Grid>
+                      <Grid item xs={6} >
+                        <Table column={TABLE_DATA(1,"PG","salary").column} 
+                        data={TABLE_DATA(1,"PG","salary").data} 
+                        category={"Package(LPA)"} 
+                        keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
+                      </Grid>
+                    </Grid>
+                  </TabPanel>
+                  </Grid>
+                </Box>
+              </TabPanel>
+              <TabPanel value={value} index={1} style={{width:"100%"}}>
+               Branch wise 
+               </TabPanel>
           </Box>
         </div>
       ) : null}

@@ -10,4 +10,20 @@
 - color pallet in object form with new colors
 
 
+(total_opted_for_higher_studies_only / total_final_years )*100 
+value : percentage of students opted for HS (higher studies) to the total number of final years.
+
+Formula 2:
+percentage of students having backlogs to the number of students in final years = (total number of backlogs / total number of final years)*100
+value : percentage of students having backlogs to the number of students in final years.
+
+Formula 3:
+% of students eligibale for and requirung placements to the total number of students in final years  =  (number of students eligibale for requirung placements / total_final_years)*100
+
+Formula 4:
+% of students yet to be placed out of eligible students requirung placements = (no of students yet to placed / no of students eligibale for requirung placements)*100
+
+Formula 5:
+max sal
+min sal
 
