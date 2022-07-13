@@ -1,85 +1,26 @@
-.modalBackground {
-    width: 100vw;
-    height: 100vh;
-    background-image:linear-gradient(to top, #b8d3f0 , #FFFFFF);
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modalContainer {
-    width: 500px;
-    height: 300px;
-    border-radius: 12px;
-    /* background-color: white; */
-    /* From https://css.glass */
-/* From https://css.glass */
-background: rgba(255, 255, 255, 0.2);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    display: flex;
-    flex-direction: column;
-    padding: 25px;
-  }
-  
-  .modalContainer .title {
-    display: inline-block;
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .titleCloseBtn {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .titleCloseBtn button {
-    background-color: transparent;
-    border: none;
-    font-size: 25px;
-    cursor: pointer;
-  }
-  
-  .modalContainer .body {
-    flex: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.7rem;
-    text-align: center;
-  }
-  
-  .modalContainer .footer {
-    flex: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modalContainer .footer button {
-    width: 150px;
-    height: 45px;
-    margin: 10px;
-    border: none;
-    background-color: cornflowerblue;
-    color: white;
-    border-radius: 8px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  #cancelBtn {
-    background-color: crimson;
-  }
+.title{
+  text-align: center;
+  /* color: maroon; */
+  /* font-family: "Montserrat", sans-serif; */
+}
+.modalContentSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
 
-  .body2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+}
+.item{
+  display: flex;
+  justify-content:space-between;
+  padding: 2rem;
+  align-items: center;
+  flex-direction: column;
+}
+.item p{
+  font-style: italic;
+}
+.countup{
+  margin-top: 1rem;
+  font-size: xx-large;
+}
