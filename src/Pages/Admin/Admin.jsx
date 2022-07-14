@@ -86,10 +86,10 @@ function Admin() {
       let dataObj = resp.data.result[0]
       // console.log(dataObj)
       const newDataObj = {}
-      newDataObj["self_percent_opted_hs_final"] = (dataObj["total_opted_for_higher_studies_only"] / dataObj["total_final_years"]) * 100
-      newDataObj["self_percent_back_final"] = (dataObj["total_backlogs"] / dataObj["total_final_years"]) * 100
-      newDataObj["self_percent_eligible_final"] = (dataObj["total_students_eligible"] / dataObj["total_final_years"]) * 100
-      newDataObj["self_percent_yet_to_place_eligible"] = (dataObj["total_yet_to_place"] / dataObj["total_students_eligible"]) * 100
+      newDataObj["self_percent_opted_hs_final"] = ((dataObj["total_opted_for_higher_studies_only"] / dataObj["total_final_years"]) * 100).toFixed(2)
+      newDataObj["self_percent_back_final"] = ((dataObj["total_backlogs"] / dataObj["total_final_years"]) * 100).toFixed(2)
+      newDataObj["self_percent_eligible_final"] = ((dataObj["total_students_eligible"] / dataObj["total_final_years"]) * 100).toFixed(2)
+      newDataObj["self_percent_yet_to_place_eligible"] = ((dataObj["total_yet_to_place"] / dataObj["total_students_eligible"]) * 100).toFixed(2)
       dataObj = {...dataObj,... newDataObj}
       console.log(dataObj)
       unstable_batchedUpdates(()=>{
