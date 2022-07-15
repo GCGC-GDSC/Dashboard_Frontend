@@ -68,6 +68,7 @@ const App = () => {
               <Route path="/admin" element={<Admin />} />
               <Route path="/team" element={<MediaCard />} />
               <Route path="/highlights" element={<Highlights />} />
+              <Route path="/compare" element={<Highlights />} />
             </Routes>
           </UserContext.Provider>
         ) : //  user signed in and useing small screen
@@ -79,6 +80,8 @@ const App = () => {
               <Route path="/team" element={<MediaCard />} />
               <Route exact path="/" element={<RestrictedView />} />
               <Route path="/highlights" element={<Highlights />} />
+              <Route path="/compare" element={<Highlights />} />
+
             </Routes>
           </UserContext.Provider>
         ) : (
