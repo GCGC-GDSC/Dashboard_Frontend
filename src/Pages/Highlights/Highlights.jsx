@@ -1,5 +1,5 @@
 import React from 'react'
-import HighlightsCard from "../HighlightsCard/HighlightsCard"
+import HighlightsCard from "../../Components/HighlightsCard/HighlightsCard"
 import "./HighlightsStyles.css"
 const Highlights = () => {
     return (

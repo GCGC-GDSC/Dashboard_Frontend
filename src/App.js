@@ -12,7 +12,7 @@ import MediaCard from "./Pages/Team/Team";
 import Admin from "./Pages/Admin/Admin";
 import NavBar from "./Components/Navbar/NavBar";
 import { firebase } from "./backend/firebase.config";
-import Highlights from "./Components/Highlights/Highlights";
+import Highlights from "./Pages/Highlights/Highlights";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 const App = () => {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
