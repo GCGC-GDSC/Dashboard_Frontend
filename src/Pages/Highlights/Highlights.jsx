@@ -11,8 +11,6 @@ const Highlights = () => {
         <HighlightsCard/>
         <HighlightsCard/>
 
-
-
         </div>
 
     );
