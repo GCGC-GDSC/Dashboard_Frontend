@@ -5,6 +5,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { ThemeProvider} from '@mui/material/styles'
+import theme1 from "../../MuiThemes/themes"
 import Input from "@mui/material/Input";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -249,7 +251,7 @@ const handleChangeTableInput = (event) =>{
    fetchLogs()
   },[user])
   return (
-    <Box p={10}>
+    <Box px={10}>
       <div className="form-container">
         {/* Preview Modal */}
         <Modal
@@ -502,11 +504,13 @@ const handleChangeTableInput = (event) =>{
           sx={{ m: 0, minWidth: 80 }}
           style={{ width: "80px" }}
         >
-        <Button variant="outlined" startIcon={<EditIcon />} 
-        disabled={isCourseType==="Institute Only"?!(campus && institute && grad):!(campus && institute && grad && course)}
-        onClick={initiateEdit }>
-          EDIT
-        </Button>
+          <ThemeProvider theme={theme1}>
+          <Button variant="outlined" startIcon={<EditIcon />} 
+          disabled={isCourseType==="Institute Only"?!(campus && institute && grad):!(campus && institute && grad && course)}
+          onClick={initiateEdit }>
+            EDIT
+          </Button>
+        </ThemeProvider>
         </FormControl>
         </div>
         {edit?
@@ -566,9 +570,11 @@ const handleChangeTableInput = (event) =>{
             )
           }
         </table>
+        <ThemeProvider theme={theme1}>
         <Button variant="contained" endIcon={<UpgradeIcon style={{ fontSize: 30 }}/>} onClick={()=>setConfirmUpdate(true)} className="updateButton">
             Update
         </Button>
+        </ThemeProvider>
             </div>
             : 
             <div style={{opacity:"0.7",margin:"auto",marginTop:"30px",display:"flex",justifyContent:"center", flexDirection:"column",alignItems:"center"}}>
