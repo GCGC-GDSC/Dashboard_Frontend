@@ -25,9 +25,10 @@
 
   &_links {
     display: flex;
-    margin-right: 3rem;
+    // margin-right: 3rem;
     align-items: center;
-    justify-content: right;
+    justify-content: right
+    ;
     flex: 0.4;
   }
   &-link {

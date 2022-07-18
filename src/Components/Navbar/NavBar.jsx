@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import TemporaryDrawer from './Drawer'
+import { ThemeProvider } from '@emotion/react'
+import theme1 from '../../MuiThemes/themes'
 function NavBar({user}) {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -43,22 +46,22 @@ function NavBar({user}) {
         <div className="navbar_Header">
             <h3>CAREER FULFILLMENT STATISTICS <span className="heading_year">2022</span></h3> 
         </div>
-        <div className='navbar_links'>
-            {user.isVerified?
-            <div>
+        <div>
+            {user.isVerified&&
+            <div className='navbar_links'>
             <NavLink className='navbar-link' activeStyle={selected}  exact to = '/'>
                 Home
             </NavLink>
             <NavLink className='navbar-link' activeStyle={selected}  to = '/admin'>
                 Admin
             </NavLink>
-            <NavLink className='navbar-link' activeStyle={selected}  to = '/team'>
-                Team
+            <NavLink className='navbar-link' activeStyle={selected}  to = '/compare'>
+                Compare
             </NavLink>
-            <button className='navbar-link-btn' onClick={handleOpen}>
-                Logout
-            </button> 
-            </div>:null}
+            <ThemeProvider theme={theme1}>
+            <TemporaryDrawer  color="white"/>
+            </ThemeProvider>
+            </div>}
         </div>
         <Modal
         open={open}
