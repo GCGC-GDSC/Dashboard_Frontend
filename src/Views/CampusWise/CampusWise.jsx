@@ -173,7 +173,7 @@ const handleChangeOuter = (event, newValue) => {
   //  data for the Institutions in campus doughnut
   if (showD2) {
     var dataDoughnut2 = {
-      labels: instList.map((item) => instMap[item]),
+      labels: instList.map((item) => instMap[ item]),
       datasets: [
         {
           label: `Institutes in Campus`,

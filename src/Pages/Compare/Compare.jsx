@@ -40,7 +40,7 @@ function Compare() {
   const handleCompare =()=>{
     // api call.....
     console.log(year1,year2,course,gradType)
-    axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${course}`,{
+    axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${course.toLowerCase()}/${gradType.toLowerCase()}}`,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
       }

@@ -446,7 +446,7 @@ const handleChangeTableInput = (event) =>{
             {console.log(user)}
             {user.user.institute.map((instName) =>
               campus.name === instName.campus ? (
-                <MenuItem value={instName}>{instMap[instName.name.toLowerCase()]}</MenuItem>
+                <MenuItem value={instName}>{instName.name.toLowerCase()}</MenuItem>
               ) : null
             )}
           </Select>
