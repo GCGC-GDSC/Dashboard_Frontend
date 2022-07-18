@@ -18,6 +18,11 @@ import Table from "../../Components/Table/Table"
 import SnackbarContent from '@mui/material/SnackbarContent';
 import { UserContext } from '../../context/context';
 import {instMap} from "../../Pages/Admin/StudentDetailsFormObj"
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 const CampusNames = {
@@ -40,6 +45,13 @@ function CampusWise() {
   const handleClose = () => {
       setOpen(false);
     };
+
+      const [year, setYear] = useState(2022);
+      const yearsList = [2022,2023,2024,2025]
+
+  const handleChange2 = (event) => {
+    setYear(event.target.value);
+  };
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -104,7 +116,7 @@ const handleChangeOuter = (event, newValue) => {
     Doughnut2: {
       onClick: function (evt, item) {
         if (item[0]) {
-          // window.alert("you have clicked :",instList[item[0].index])
+          window.alert("you have clicked :",instList[item[0].index])
           getDataInst(instList[item[0].index]);
         }
       },
@@ -173,7 +185,7 @@ const handleChangeOuter = (event, newValue) => {
   //  data for the Institutions in campus doughnut
   if (showD2) {
     var dataDoughnut2 = {
-      labels: instList.map((item) => instMap[item]),
+      labels: instList.map((item) => item),
       datasets: [
         {
           label: `Institutes in Campus`,
@@ -370,7 +382,7 @@ const handleChangeOuter = (event, newValue) => {
 //  -------------- TABLES----------------
   const getDataInst = (instName) => {
     axios
-      .get(`${REACT_APP_API_URL}students/inst/${instName}`,{
+      .get(`${REACT_APP_API_URL}${year}/students/inst/${instName}`,{
         headers: {
           'Authorization': `Token ${user.user.token.key}`
         }
@@ -443,9 +455,25 @@ const handleChangeOuter = (event, newValue) => {
         />
       </Snackbar>
     <Box className="overall-layout">
+    <FormControl sx={{ m: 1, minWidth: 100 }} style={{position:"absolute"}}>
+        <InputLabel id="demo-simple-select-helper-label">Year</InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={year}
+          label="Year"
+          onChange={handleChange2}
+        >
+         {yearsList.map((year) => 
+            <MenuItem value={year}>{year}</MenuItem>
+          )}
+        </Select>
+        <FormHelperText>see the stats.</FormHelperText>
+      </FormControl>
       <Grid container spacing={2} className="firstContainer" alignItems="center" >
       {/* {userMultiAccess? */}
         <Grid item xs={5.7} style={{marginTop:"-80px"}}>
+          
           <ODoughnutChart
             title={"Campus Wise Overview"}
             data={dataDoughnut}

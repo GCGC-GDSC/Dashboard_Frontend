@@ -12,7 +12,13 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { UserContext } from "../../context/context";
 import {instMap} from "../../Pages/Admin/StudentDetailsFormObj"
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+
 
 
 function Overall() {
@@ -22,6 +28,13 @@ function Overall() {
     return _.zip(...matrix);
   }
 
+  const [year, setYear] = useState(2022);
+  const yearsList = [2022,2023,2024,2025]
+
+
+  const handleChange = (event) => {
+    setYear(event.target.value);
+  };
   const headingRef = useRef()
 //   skrr end
     // const hostname = 'https://gcgc-dashboard.herokuapp.com'
@@ -166,7 +179,7 @@ function Overall() {
                 }
     }
     const getData = (stream)=>{
-      axios.get(`${REACT_APP_API_URL}students/overall/${stream}/`,{
+      axios.get(`${REACT_APP_API_URL}${year}/students/overall/${stream}/`,{
         headers: {
           'Authorization': `Token ${user.user.token.key}`
         }
@@ -187,6 +200,7 @@ function Overall() {
     //     setInstPerCampus(instCountPerCampus)
     //   })
     // }
+
     
     useEffect(()=>{
       const getStreams = ()=>{
@@ -203,7 +217,7 @@ function Overall() {
     }  
       getStreams()
 
-    },[user ])
+    },[user,year ])
 
     
     return(
@@ -217,6 +231,22 @@ function Overall() {
       <ToggleButton value="chart">Charts</ToggleButton>
       <ToggleButton value="table">Tables</ToggleButton>
     </ToggleButtonGroup> */}
+    
+    <FormControl sx={{ m: 1, minWidth: 100 }} style={{position:"absolute"}}>
+        <InputLabel id="demo-simple-select-helper-label">Year</InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={year}
+          label="Year"
+          onChange={handleChange}
+        >
+          {yearsList.map((year) => 
+            <MenuItem value={year}>{year}</MenuItem>
+          )}
+        </Select>
+        <FormHelperText>Select </FormHelperText>
+      </FormControl>
   
   <Grid container spacing={9}  className="firstItem" alignItems="center" >
 
