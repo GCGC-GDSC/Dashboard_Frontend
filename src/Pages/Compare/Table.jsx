@@ -1,9 +1,12 @@
 // import { Key } from '@mui/icons-material'
 import './table.css'
 const Table = ({ data,keys }) => {
-  const parsedValues=(key)=>{
-    // return ["Number of Companies","Number of students Placed","Highest Package","Number of off campus placements"]
-    return key
+  console.log(data)
+  const parsedValues = {
+    'total_offers':"Number of total offers",
+    'total_multiple_offers':"Numbers of multiple offers",
+    'highest_salary':"Highest Salary",
+    'average_salary':"Average Salary"
   }
   return (
     <>
@@ -26,7 +29,7 @@ const Table = ({ data,keys }) => {
         {
           keys.map((key,index) => <tr> 
             <td>
-              {parsedValues(key)}
+              {parsedValues[key]}
               </td>     
               <td className={data.year1[key]>data.year2[key]?'green':''}>
               {data.year1[key]}

@@ -1,7 +1,5 @@
 import React, { useEffect ,useState,useContext} from 'react'
 import "./Home.scss"
-// import HeroText from "../../Components/HeroText/HeroText"
-// import Aos from "aos"
 import "aos/dist/aos.css"
 import Footer from '../../Components/Footer/Footer'
 import BasicTabs from "../../Components/Tabs/Tabs"
@@ -14,7 +12,6 @@ function Home() {
     const [open, setOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(true);
     const [firstTime,setFirstTime] = useState(false)
-    
     const handleClose = () => {
         setOpen(false);
       };

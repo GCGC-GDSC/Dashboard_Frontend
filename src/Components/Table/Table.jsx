@@ -6,7 +6,7 @@ const Table = ({ data, column,category,keys }) => {
       <thead>
         <tr>
           <th style={{color:"white",textAlign:"center"}}>{category}</th>
-          {column.map((item, index) => <th style={{color:"white",textAlign:"center"}}>{item}</th>)}
+          {column.map((item, index) => <th style={{color:"white",textAlign:"center"}}>{item.toUpperCase()}</th>)}
         </tr>
         
       </thead>
