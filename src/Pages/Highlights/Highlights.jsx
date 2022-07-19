@@ -4,7 +4,7 @@ import "./HighlightsStyles.css"
 const Highlights = () => {
     return (
         <div className='highlightsPageParent'>
-        <h1>Highlights component</h1>
+        <h1>Highlights</h1>
         <HighlightsCard/>
         <HighlightsCard/>
         <HighlightsCard/>

@@ -44,7 +44,6 @@ function Compare() {
         'Authorization': `Token ${user.user.token.key}`
       }
     })
-    .then(resp=>console.log(resp))
     const obj1 = {
       name:year1,
       companies:"140",
