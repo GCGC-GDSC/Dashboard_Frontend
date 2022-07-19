@@ -123,7 +123,7 @@ function Overall() {
             const insts = streamData.institutes  
                 const dataArray = insts.map((inst,index)=>{
                 return{
-                    label:instMap[inst.toLowerCase()],
+                    label:inst.toUpperCase(),
                     data: combineArrays(keys,streamData[inst][0][0][category],streamData[inst][1][0][category],category).values ,
                     backgroundColor: VChartColors[index],
                     borderColor: VChartColors[index],
@@ -179,7 +179,7 @@ function Overall() {
                 }
     }
     const getData = (stream)=>{
-      axios.get(`${REACT_APP_API_URL}${year}/students/overall/${stream}/`,{
+      axios.get(`${REACT_APP_API_URL}students/${year}/overall/${stream}`,{
         headers: {
           'Authorization': `Token ${user.user.token.key}`
         }
@@ -204,7 +204,7 @@ function Overall() {
     
     useEffect(()=>{
       const getStreams = ()=>{
-        axios.get(`${REACT_APP_API_URL}organization/streams/`,{
+        axios.get(`${REACT_APP_API_URL}organization/streams`,{
           headers: {
             'Authorization': `Token ${user.user.token.key}`
           }

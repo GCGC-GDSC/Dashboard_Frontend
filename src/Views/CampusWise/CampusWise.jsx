@@ -189,7 +189,7 @@ const handleChangeOuter = (event, newValue) => {
   //  data for the Institutions in campus doughnut
   if (showD2) {
     var dataDoughnut2 = {
-      labels: instList.map((item) => item),
+      labels: instList.map((item) => item.toUpperCase()),
       datasets: [
         {
           label: `Institutes in Campus`,
@@ -378,7 +378,7 @@ const handleChangeOuter = (event, newValue) => {
   }
 
   const TableData ={
-    column:[instMap[instData.name]],
+    column:[instData.name.toUpperCase()],
     data :getTableData(code,category)
   }
   return TableData
@@ -386,7 +386,7 @@ const handleChangeOuter = (event, newValue) => {
 //  -------------- TABLES----------------
   const getDataInst = (instName) => {
     axios
-      .get(`${REACT_APP_API_URL}${year}/students/inst/${instName}/${CampusNamesToCode[campusName]}`,{
+      .get(`${REACT_APP_API_URL}students/${year}/inst/${instName}/${CampusNamesToCode[campusName]}`,{
       headers: {
           'Authorization': `Token ${user.user.token.key}`
         }
@@ -419,7 +419,7 @@ const handleChangeOuter = (event, newValue) => {
   useEffect(() => {
     const getCampus = () => {
       axios
-        .get(`${REACT_APP_API_URL}organization/campus/`,{
+        .get(`${REACT_APP_API_URL}organization/campus`,{
           headers: {
             'Authorization': `Token ${user.user.token.key}`
           }
@@ -548,7 +548,7 @@ const handleChangeOuter = (event, newValue) => {
                       </div>
                       <div className="headings" id={`stream`}  style={{marginTop:"20px",marginBottom:"-100px"}}>
                         <div className="sub">
-                        {`${instMap[instData.name]} Student Details`}
+                        {`${instData.name.toUpperCase() } Student Details`}
                         </div>
                       </div>
                       <Grid item xs={6} >
@@ -569,7 +569,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instMap[instData.name]} Placement Details`}
+                      {`${instData.name.toUpperCase()} Placement Details`}
 
                       </div>
                       </div>
@@ -592,7 +592,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instMap[instData.name]} Package Details`}
+                      {`${instData.name.toUpperCase()} Package Details`}
                       </div>
                       </div>
                       <Grid item xs={5} >
@@ -622,7 +622,7 @@ const handleChangeOuter = (event, newValue) => {
                       </div>
                       <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instMap[instData.name]} Student Details`}
+                      {`${instData.name.toUpperCase()} Student Details`}
                       </div>
                       </div>
                       <Grid item xs={6}>
@@ -644,7 +644,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instMap[instData.name]} Placement Details`}
+                      {`${instData.name.toUpperCase()} Placement Details`}
                       </div>
                       </div>
                     <Grid item xs={5}>
@@ -665,7 +665,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instMap[instData.name]} Package Details`}
+                      {`${instData.name.toUpperCase()} Package Details`}
                       </div>
                       </div>
                       <Grid item xs={5}>
@@ -695,7 +695,7 @@ const handleChangeOuter = (event, newValue) => {
                       </div>
                       <div className="headings cardtitles" id={`stream`}>
                       <div className="sub">
-                      {`${instMap[instData.name]} Student Details`}
+                      {`${instData.name.toUpperCase()} Student Details`}
                       </div>
                       </div>
                       <Grid item xs={6}>
@@ -716,7 +716,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings cardtitles" id={`stream`} >
                       <div className="sub">
-                      {`${instMap[instData.name]} Placement Details`}
+                      {`${instData.name.toUpperCase()} Placement Details`}
                       </div>
                       </div>
                     <Grid item xs={5}>
@@ -737,7 +737,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instMap[instData.name]} Package Details`}
+                      {`${instData.name.toUpperCase() } Package Details`}
                       </div>
                       </div>
                       <Grid item xs={6}>
