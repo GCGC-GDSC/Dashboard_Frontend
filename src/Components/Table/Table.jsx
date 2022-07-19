@@ -2,11 +2,11 @@ import './table.css'
 const Table = ({ data, column,category,keys }) => {
   return (
     <>
-    <table className="container">
+    <table className="container" border='1' >
       <thead>
         <tr>
-          <th style={{color:"white"}}>{category}</th>
-          {column.map((item, index) => <TableHeadItem item={item} />)}
+          <th style={{color:"white",textAlign:"center"}}>{category}</th>
+          {column.map((item, index) => <th style={{color:"white",textAlign:"center"}}>{item}</th>)}
         </tr>
         
       </thead>
