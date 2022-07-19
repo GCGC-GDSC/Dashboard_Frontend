@@ -14,7 +14,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {ReactComponent as FormSelect } from "../../assets/formSelect.svg"
-import {parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys,instMap} from './StudentDetailsFormObj'
+import {parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys,instMap,DBDisabledKeys} from './StudentDetailsFormObj'
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import GolfCourseIcon from '@mui/icons-material/GolfCourse';
 import SchoolIcon from '@mui/icons-material/School';
@@ -35,6 +35,7 @@ function Admin() {
   const [campus, setCampus] = useState(user.user.campus[0]);
   const [viewCampus, setViewCampus] = useState(user.user.campus[0]);
   const [institute, setInstitute] = useState("");
+  const [year, setYear] = useState(2022);
   const [grad, setGrad] = useState("");
   const [isCourseType,setIsCourseType] = useState('Institute Only');
   const [course, setCourse] = useState("");
@@ -77,14 +78,13 @@ function Admin() {
       p: 4,
     };
   const initiateEdit = ()=>{
-    axios.get(`${REACT_APP_API_URL}students/select/${institute.name}/${grad}`,{
+    axios.get(`${REACT_APP_API_URL}students/${year}/select/${institute.name}/${grad}/${viewCampus.name}`,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
       }
     })
     .then(resp=>{
       let dataObj = resp.data.result[0]
-      // console.log(dataObj)
       const newDataObj = {}
       newDataObj["self_percent_opted_hs_final"] = ((dataObj["total_opted_for_higher_studies_only"] / dataObj["total_final_years"]) * 100).toFixed(2)
       newDataObj["self_percent_back_final"] = ((dataObj["total_backlogs"] / dataObj["total_final_years"]) * 100).toFixed(2)
@@ -95,7 +95,6 @@ function Admin() {
       unstable_batchedUpdates(()=>{
         setInstituteData(dataObj)
         setDataObject(dataObj)
-        // checkDependentValueUpdates(resp.data.result[0])
       })
     })
   
@@ -104,24 +103,24 @@ function Admin() {
 
 
   const downloadExcel  = ()=>{
-    // window.alert("downloading excel")
     handleClose()
-    axios.get(`${REACT_APP_API_URL}students/download/${viewCampus.name}`,{
-      headers: {
-        'Authorization': `Token ${user.user.token.key}`,
-        'content-type': 'application/msexcel' ,
-      },
-      "responseType" :"blob"
-    }
-    )
-    .then(response=>{
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `${parsedStudentDetailsRef[viewCampus.name]} Career Fulfillment Statistics.xlsx`);
-      document.body.appendChild(link);
-      link.click();
-  })
+    alert("functionality currently not available")
+  //   axios.get(`${REACT_APP_API_URL}students/${year}/download/${viewCampus.name}`,{
+  //     headers: {
+  //       'Authorization': `Token ${user.user.token.key}`,
+  //       'content-type': 'application/msexcel' ,
+  //     },
+  //     "responseType" :"blob"
+  //   }
+  //   )
+  //   .then(response=>{
+  //     const url = window.URL.createObjectURL(new Blob([response.data]));
+  //     const link = document.createElement('a');
+  //     link.href = url;
+  //     link.setAttribute('download', `${parsedStudentDetailsRef[viewCampus.name]} Career Fulfillment Statistics.xlsx`);
+  //     document.body.appendChild(link);
+  //     link.click();
+  // })
   }
   const updateInDataBase =()=>{
     setConfirmUpdate(false)
@@ -133,7 +132,7 @@ function Admin() {
     console.log(dataToSend)
     var config = {
       method: 'put',
-      url: `${REACT_APP_API_URL}students/update/${instituteData.id}`,
+      url: `${REACT_APP_API_URL}students/${year}/update/${instituteData.id}`,
       headers: { 
         'Authorization': `Token ${user.user.token.key}`, 
         'Content-Type': 'application/json'
@@ -190,7 +189,8 @@ const checkDependentValueUpdates = (kvp)=>{
   ["total_higher_study_and_pay_crt", 
   "total_opted_for_higher_studies_only",
   "total_not_intrested_in_placments",
-  "total_backlogs_opted_for_placements"].forEach(key=>{
+  "total_backlogs_opted_for_placements"].forEach(key=>
+    {
   newRefObj["total_students_eligible"] -= parseInt(newRefObj[key]);
   })
  
@@ -198,10 +198,11 @@ const checkDependentValueUpdates = (kvp)=>{
   newRefObj["total_yet_to_place"] = newRefObj["total_students_eligible"] - (newRefObj["total_offers"] - newRefObj["total_multiple_offers"]);    
 
   newRefObj["total_placed"] = newRefObj["total_offers"] - newRefObj["total_multiple_offers"];
-  newRefObj["self_percent_opted_hs_final"] = (newRefObj["total_opted_for_higher_studies_only"] / newRefObj["total_final_years"]) * 100
-  newRefObj["self_percent_back_final"] = (newRefObj["total_backlogs"] / newRefObj["total_final_years"]) * 100
-  newRefObj["self_percent_eligible_final"] = (newRefObj["total_students_eligible"] / newRefObj["total_final_years"]) * 100
-  newRefObj["self_percent_yet_to_place_eligible"] = (newRefObj["total_yet_to_place"] / newRefObj["total_students_eligible"]) * 100
+  
+  newRefObj["self_percent_opted_hs_final"] = ((newRefObj["total_opted_for_higher_studies_only"] / newRefObj["total_final_years"]) * 100).toFixed(2)
+  newRefObj["self_percent_back_final"] = ((newRefObj["total_backlogs"] / newRefObj["total_final_years"]) * 100).toFixed(2)
+  newRefObj["self_percent_eligible_final"] = ((newRefObj["total_students_eligible"] / newRefObj["total_final_years"]) * 100).toFixed(2)
+  newRefObj["self_percent_yet_to_place_eligible"] = ((newRefObj["total_yet_to_place"] / newRefObj["total_students_eligible"]) * 100).toFixed(2)
 
   setDataObject({...newRefObj})
 }
@@ -219,6 +220,8 @@ const handleChangeTableInput = (event) =>{
     else if (name === "grad") setGrad(value);
     else if (name === "course") setCourse(value)
     else if (name === 'courseType') setIsCourseType(value)
+    else if (name === 'year') setYear(value)
+
   };
   const previewStyle = {
     // background: "#D3CCE3", 
@@ -236,16 +239,16 @@ const handleChangeTableInput = (event) =>{
     })
   }
   useEffect(()=>{
-    const fetchLogs = ()=>{
-      axios.get(`${REACT_APP_API_URL}students/logs`,{
-        headers: {
-          'Authorization': `Token ${user.user.token.key}`
-        }
-      })
-      .then(resp=>{
-          setLogs(resp.data.result)
-      })
-    }
+    // const fetchLogs = ()=>{
+    //   axios.get(`${REACT_APP_API_URL}students/logs`,{
+    //     headers: {
+    //       'Authorization': `Token ${user.user.token.key}`
+    //     }
+    //   })
+    //   .then(resp=>{
+    //       setLogs(resp.data.result)
+    //   })
+    // }
    fetchLogs()
   },[user])
   return (
@@ -388,6 +391,27 @@ const handleChangeTableInput = (event) =>{
           </FormControl>
         </div>
         <div className="mainInput">
+          {/* year select  */}
+          <FormControl
+          variant="standard"
+          sx={{ m: 1, minWidth: 80 }}
+          style={{ width: "80px" }}
+        >
+          <InputLabel> Year </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={year}
+            label="year"
+            name="year"
+            onChange={handleChange}
+          >
+              <MenuItem value="2020">2020</MenuItem>
+              <MenuItem value="2021">2021</MenuItem>
+              <MenuItem value="2022">2022</MenuItem>
+              <MenuItem value="2023">2023</MenuItem>
+          </Select>
+        </FormControl>
         {/* campus input */}
         <FormControl
           variant="standard"
@@ -532,7 +556,7 @@ const handleChangeTableInput = (event) =>{
               <table>
                 
               {
-                DBPreviewKeys.map(key=>
+                DBUpdateKeys.map(key=>
                   <tr>
                     <td>
                     <label>
@@ -550,7 +574,7 @@ const handleChangeTableInput = (event) =>{
                     required
                     type="number"
                     onWheel={(e) => e.target.blur()}
-                    disabled= {!(DBUpdateKeys.includes(key))}
+                    disabled= {(DBDisabledKeys.includes(key))}
                     value={
                           key==="under_campus_name"?parsedStudentDetailsRef[dataObject[key]]:
                           key==="under_institute_name"?dataObject[key]:
@@ -594,7 +618,7 @@ const handleChangeTableInput = (event) =>{
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-          <Logs logs={logs}/>
+          {/* <Logs logs={logs}/> */}
           </Typography>
         </AccordionDetails>
       </Accordion>

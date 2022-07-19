@@ -30,7 +30,11 @@ const CampusNames = {
   hyd: "Hyderabad",
   blr: "Bengaluru",
 };
-
+const CampusNamesToCode = {
+  "Visakhapatnam":"vskp",
+  "Hyderabad":"hyd",
+  "Bengaluru":"blr",
+};
 function CampusWise() {
   const user = useContext(UserContext)
   const [userMultiAccess,setUserMultiAccess] = useState(false)
@@ -116,7 +120,7 @@ const handleChangeOuter = (event, newValue) => {
     Doughnut2: {
       onClick: function (evt, item) {
         if (item[0]) {
-          window.alert("you have clicked :",instList[item[0].index])
+          console.log("you have clicked :",instList[item[0].index])
           getDataInst(instList[item[0].index]);
         }
       },
@@ -382,8 +386,8 @@ const handleChangeOuter = (event, newValue) => {
 //  -------------- TABLES----------------
   const getDataInst = (instName) => {
     axios
-      .get(`${REACT_APP_API_URL}${year}/students/inst/${instName}`,{
-        headers: {
+      .get(`${REACT_APP_API_URL}${year}/students/inst/${instName}/${CampusNamesToCode[campusName]}`,{
+      headers: {
           'Authorization': `Token ${user.user.token.key}`
         }
       })

@@ -13,6 +13,17 @@ const studentDetailsRef = [
   "average_salary",
   "lowest_salary",
 ];
+
+export const DBDisabledKeys = [
+  "self_percent_opted_hs_final",
+  "self_percent_back_final",
+ "self_percent_eligible_final",
+  "self_percent_yet_to_place_eligible",
+  "total_students_eligible",
+  "total_backlogs",
+  "total_placed",
+  "total_yet_to_place"
+]
 export const DBUpdateKeys = [
   "total_students",
   "total_final_years",
@@ -22,11 +33,20 @@ export const DBUpdateKeys = [
   "total_backlogs_opted_for_placements",
   "total_backlogs_opted_for_higherstudies",
   "total_backlogs_opted_for_other_career_options",
+  "total_backlogs", // 39 + 40 + 41
+  "total_students_eligible", // 35-37-36-38-39
   "total_offers",
   "total_multiple_offers",
+  "total_placed", // 44 - 45
+  "total_yet_to_place", // 43 - 46
   "highest_salary",
-  "average_salary",
   "lowest_salary",
+  "average_salary",
+//   // @ -- ask
+  "self_percent_opted_hs_final",
+  "self_percent_back_final",
+ "self_percent_eligible_final",
+  "self_percent_yet_to_place_eligible",
 ];
 export const DBPreviewKeys = [
   //31
@@ -50,13 +70,11 @@ export const DBPreviewKeys = [
   "lowest_salary",
   "average_salary",
 
-  // @ -- ask
-  "self_percent_opted_hs_final",
-  "self_percent_back_final",
- "self_percent_eligible_final",
-  "self_percent_yet_to_place_eligible"
-  // @
-  // "is_ug" ,
+  'Percentage_of_students_eligible_for_and_requiring_placement',
+'Percentage_of_students_having_backlogs_to_the_total_number_of_students',
+'Percentage_of_students_opted_HS_to_the_total_number',
+'Percentage_of_students_placed_out_of_eligible_students',
+'Percentage_of_students_yet_to_be_placed_out_of_eligible_students'
 ];
 //
 export const parsedStudentDetailsRef = {
@@ -87,9 +105,14 @@ export const parsedStudentDetailsRef = {
   highest_salary: "What is the Highest Salary",
   lowest_salary: "What is the Lowest Salary",
   average_salary: "What is the average salary",
+  Percentage_of_students_eligible_for_and_requiring_placement:'Precentage of students eligible for and requirung placements to the total number of students in final years',
+  Percentage_of_students_having_backlogs_to_the_total_number_of_students:'Percentage of students having backlogs to the number of students in final years.',
+  Percentage_of_students_opted_HS_to_the_total_number:'Percentage of students opted for HS (higher studies) to the total number of final years.',
+  Percentage_of_students_placed_out_of_eligible_students:'Percentage of students yet to be placed out of eligible students requirung placements',
+  Percentage_of_students_yet_to_be_placed_out_of_eligible_students:'Percentage of students yet to be placed out of the total number of elgible students.',
   self_percent_opted_hs_final : "Percentage of students opted for HS (higher studies) to the total number of final years.",
   self_percent_back_final:"Percentage of students having backlogs to the number of students in final years.",
-  self_percent_eligible_final:"Precentage of students eligibale for and requirung placements to the total number of students in final years  ",
+  self_percent_eligible_final:"Precentage of students eligible for and requirung placements to the total number of students in final years  ",
   self_percent_yet_to_place_eligible:"Percentage of students yet to be placed out of eligible students requirung placements",
   vskp: "CGC Visakhapatnam",
   blr: "CGC Bengaluru",
