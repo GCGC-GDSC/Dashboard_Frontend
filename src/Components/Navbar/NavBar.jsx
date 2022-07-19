@@ -59,7 +59,7 @@ function NavBar({user}) {
                 Compare
             </NavLink>
             <ThemeProvider theme={theme1}>
-            <TemporaryDrawer  color="white"/>
+            <TemporaryDrawer  color="white" signout={signoutfromapp}/>
             </ThemeProvider>
             </div>}
         </div>
