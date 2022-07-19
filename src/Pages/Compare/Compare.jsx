@@ -34,33 +34,31 @@ function Compare() {
     else if (name === "gradType") setGradType(value);
 
   };
-  const parsedValues=(arr)=>{
-    return ["Number of Companies","Number of students Placed","Highest Package","Number of off campus placements"]
-  }
+    // const parsedValues=(arr)=>{
+    //   return ["Number of Companies","Number of students Placed","Highest Package","Number of off campus placements"]
+    // }
   const handleCompare =()=>{
     // api call.....
+   
     axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${course.toLowerCase()}/${gradType.toLowerCase()}}`,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
       }
     })
-    const obj1 = {
-      name:year1,
-      companies:"140",
-      placed:"1400",
-      highestPackage:"15",
-      off:"120",
-     }
-     const obj2 = { 
-        name:year2,
-         companies:"240",
-         placed:"1100",
-         highestPackage:"35",
-         off:"10",
-        }
-    const data = {"year1":obj1,"year2":obj2}
-    setComparision(true)
-    setYearData(data)
+    .then(resp=>{
+      let obj1={}
+      let obj2 = {}
+      obj1 = resp.data.result[year1]
+      obj2 = resp.data.result[year2]
+      obj1.name = year1
+      obj2.name = year2 
+      const data = {"year1":obj1,"year2":obj2}
+      // console.log(data)
+      setYearData(data)
+      setComparision(true)
+    })
+   
+    
   }
   return (
     <Box flexgrow={1} className='compare'>
@@ -164,7 +162,7 @@ function Compare() {
               <Grid container className="year_data">
               <Table 
                   data={yearData}
-                  keys={['companies','placed','highestPackage','off']}
+                  keys={['total_offers','total_multiple_offers','highest_salary','average_salary']}
                     />
             </Grid>}
         </Grid>

@@ -34,7 +34,10 @@ const App = () => {
         .then((resp) => {
           if (resp.data.status !== "error")
             setVerifiedUser({ user: resp.data.result, isVerified: true });
-          else setVerifiedUser({ user: {}, isVerified: false });
+          else 
+          {
+            setVerifiedUser({ user: {}, isVerified: false });
+          }
         });
     };
     if (isUserSignedIn && userProfile && userProfile.email)

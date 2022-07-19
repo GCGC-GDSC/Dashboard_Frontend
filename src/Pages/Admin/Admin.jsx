@@ -14,7 +14,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {ReactComponent as FormSelect } from "../../assets/formSelect.svg"
-import {parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys,instMap,DBDisabledKeys} from './StudentDetailsFormObj'
+import {parsedStudentDetailsRef,DBUpdateKeys,DBPreviewKeys,DBDisabledKeys} from './StudentDetailsFormObj'
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import GolfCourseIcon from '@mui/icons-material/GolfCourse';
 import SchoolIcon from '@mui/icons-material/School';
@@ -26,7 +26,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import EventNoteIcon from '@mui/icons-material/EventNote';
 import "./Admin.styles.scss";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function Admin() {
@@ -43,7 +44,7 @@ function Admin() {
   const [dataObject,setDataObject] = useState({})
   const [open, setOpen] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
-  const [logs,setLogs] = useState([])
+  // const [logs,setLogs] = useState([])
   const [confirmUpdate, setConfirmUpdate] = useState(false);
   
   const handleOpen = () => setOpen(true);
@@ -89,7 +90,7 @@ function Admin() {
       newDataObj["self_percent_back_final"] = ((dataObj["total_backlogs"] / dataObj["total_final_years"]) * 100).toFixed(2)
       newDataObj["self_percent_eligible_final"] = ((dataObj["total_students_eligible"] / dataObj["total_final_years"]) * 100).toFixed(2)
       newDataObj["self_percent_yet_to_place_eligible"] = ((dataObj["total_yet_to_place"] / dataObj["total_students_eligible"]) * 100).toFixed(2)
-      dataObj = {...dataObj,... newDataObj}
+      dataObj = {...dataObj,...newDataObj}
       unstable_batchedUpdates(()=>{
         setInstituteData(dataObj)
         setDataObject(dataObj)
@@ -151,7 +152,7 @@ function Admin() {
               setDataObject(resp.data.result)
               setOpenPreview(true)
             })
-            fetchLogs()
+            // fetchLogs()
           }
           else{
             window.alert("data could not be updated")
@@ -225,16 +226,16 @@ const handleChangeTableInput = (event) =>{
     // background: "-webkit-linear-gradient(to right, #E9E4F0, #D3CCE3)",  
     background:" linear-gradient(to right, #E9E4F0, #D3CCE3)", 
   }
-  const fetchLogs = ()=>{
-    axios.get(`${REACT_APP_API_URL}students/logs`,{
-      headers: {
-        'Authorization': `Token ${user.user.token.key}`
-      }
-    })
-    .then(resp=>{
-        setLogs(resp.data.result)
-    })
-  }
+  // const fetchLogs = ()=>{
+  //   axios.get(`${REACT_APP_API_URL}students/logs`,{
+  //     headers: {
+  //       'Authorization': `Token ${user.user.token.key}`
+  //     }
+  //   })
+  //   .then(resp=>{
+  //       setLogs(resp.data.result)
+  //   })
+  // }
   useEffect(()=>{
     // const fetchLogs = ()=>{
     //   axios.get(`${REACT_APP_API_URL}students/logs`,{
@@ -246,7 +247,7 @@ const handleChangeTableInput = (event) =>{
     //       setLogs(resp.data.result)
     //   })
     // }
-   fetchLogs()
+  //  fetchLogs()
   },[user])
   return (
     <Box px={10}>
@@ -533,6 +534,8 @@ const handleChangeTableInput = (event) =>{
         </div>
         {edit?
         <div className="formInformation">
+          <EventNoteIcon color="primary"/><h4>{year} <ArrowRightIcon/></h4>
+          <BookmarkAddIcon color="primary"/><h4>{institute}<ArrowRightIcon/></h4>
           <AccountBalanceIcon  color="primary"/><h4>{parsedStudentDetailsRef[campus.name]} <ArrowRightIcon/></h4>
           <GolfCourseIcon color="primary"/><h4>{institute.name.toUpperCase()}<ArrowRightIcon/></h4>
           <SchoolIcon color="primary"/> <h4>{grad.toUpperCase()}</h4>
