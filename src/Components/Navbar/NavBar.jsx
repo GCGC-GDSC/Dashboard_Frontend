@@ -12,7 +12,7 @@ import { ThemeProvider } from '@emotion/react'
 import theme1 from '../../MuiThemes/themes'
 function NavBar({user}) {
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
+    // const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const navigate = useNavigate();
     const style = {

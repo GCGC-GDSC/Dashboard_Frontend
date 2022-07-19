@@ -11,7 +11,6 @@ import ColorPallet ,{colors} from "../ColorAssets/colorPallet.js";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { UserContext } from "../../context/context";
-import {instMap} from "../../Pages/Admin/StudentDetailsFormObj"
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -100,7 +99,6 @@ function Overall() {
             const arr = []
             if(category === "salary"){
 
-              console.log('-->',k,a1,a2,category);
                 arr.push(Math.max(a1[k[0]] ,a2[k[0]] ) );
                 arr.push(Math.min(a1[k[1]] ,a2[k[1]] ) )
                 arr.push((a1[k[2]] + a2[k[2]] ) / 2 )

@@ -25,6 +25,5 @@ const Table = ({ data, column,category,keys }) => {
   )
 }
 
-const TableHeadItem = ({ item }) => <th>{item}</th>
 
 export default Table

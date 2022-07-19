@@ -19,7 +19,6 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import GolfCourseIcon from '@mui/icons-material/GolfCourse';
 import SchoolIcon from '@mui/icons-material/School';
 import { unstable_batchedUpdates } from "react-dom";
-import Logs from "./Logs.component"
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 // accordian
@@ -91,7 +90,6 @@ function Admin() {
       newDataObj["self_percent_eligible_final"] = ((dataObj["total_students_eligible"] / dataObj["total_final_years"]) * 100).toFixed(2)
       newDataObj["self_percent_yet_to_place_eligible"] = ((dataObj["total_yet_to_place"] / dataObj["total_students_eligible"]) * 100).toFixed(2)
       dataObj = {...dataObj,... newDataObj}
-      console.log(dataObj)
       unstable_batchedUpdates(()=>{
         setInstituteData(dataObj)
         setDataObject(dataObj)
@@ -129,7 +127,6 @@ function Admin() {
       dataToSend[key] = dataObject[key]
       if(dataToSend[key] === undefined || dataToSend[key] === "") flag = true
     })
-    console.log(dataToSend)
     var config = {
       method: 'put',
       url: `${REACT_APP_API_URL}students/${year}/update/${instituteData.id}`,
@@ -467,7 +464,6 @@ const handleChangeTableInput = (event) =>{
             name="institute"
             onChange={handleChange}
           >
-            {console.log(user)}
             {user.user.institute.map((instName) =>
               campus.name === instName.campus ? (
                 <MenuItem value={instName}>{instName.name.toUpperCase()}</MenuItem>
@@ -476,7 +472,7 @@ const handleChangeTableInput = (event) =>{
           </Select>
         </FormControl>
         {
-        isCourseType != "Institute Only" &&    
+        isCourseType !== "Institute Only" &&    
         <FormControl
         variant="standard"
         sx={{ m: 1, minWidth: 80 }}

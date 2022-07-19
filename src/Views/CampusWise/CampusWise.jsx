@@ -17,7 +17,6 @@ import {colors} from "../ColorAssets/colorPallet.js";
 import Table from "../../Components/Table/Table"
 import SnackbarContent from '@mui/material/SnackbarContent';
 import { UserContext } from '../../context/context';
-import {instMap} from "../../Pages/Admin/StudentDetailsFormObj"
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -120,7 +119,6 @@ const handleChangeOuter = (event, newValue) => {
     Doughnut2: {
       onClick: function (evt, item) {
         if (item[0]) {
-          console.log("you have clicked :",instList[item[0].index])
           getDataInst(instList[item[0].index]);
         }
       },
