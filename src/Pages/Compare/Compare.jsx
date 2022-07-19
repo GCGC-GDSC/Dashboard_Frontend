@@ -34,9 +34,9 @@ function Compare() {
     else if (name === "gradType") setGradType(value);
 
   };
-  const parsedValues=(arr)=>{
-    return ["Number of Companies","Number of students Placed","Highest Package","Number of off campus placements"]
-  }
+  // const parsedValues=(arr)=>{
+  //   return ["Number of Companies","Number of students Placed","Highest Package","Number of off campus placements"]
+  // }
   const handleCompare =()=>{
     // api call.....
     axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${course.toLowerCase()}/${gradType.toLowerCase()}}`,{

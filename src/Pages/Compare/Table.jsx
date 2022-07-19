@@ -1,4 +1,4 @@
-import { Key } from '@mui/icons-material'
+// import { Key } from '@mui/icons-material'
 import './table.css'
 const Table = ({ data,keys }) => {
   const parsedValues=(key)=>{
@@ -43,6 +43,5 @@ const Table = ({ data,keys }) => {
   )
 }
 
-const TableHeadItem = ({ item }) => <th>{item}</th>
 
 export default Table

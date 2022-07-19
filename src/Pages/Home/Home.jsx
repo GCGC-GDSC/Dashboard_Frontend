@@ -36,7 +36,7 @@ function Home() {
     return ( 
         
         <div className='homePage'> 
-        { true ? 
+        { firstTime ? 
         <ModalC setOpenModal={setModalOpen} modalOpen={modalOpen} /> 
         : null}
  
