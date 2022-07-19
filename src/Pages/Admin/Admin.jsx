@@ -26,8 +26,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
-import EventNoteIcon from '@mui/icons-material/EventNote';
+
 import "./Admin.styles.scss";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function Admin() {
@@ -534,8 +533,6 @@ const handleChangeTableInput = (event) =>{
         </div>
         {edit?
         <div className="formInformation">
-          <EventNoteIcon color="primary"/><h4>{year} <ArrowRightIcon/></h4>
-          <BookmarkAddIcon color="primary"/><h4>{institute}<ArrowRightIcon/></h4>
           <AccountBalanceIcon  color="primary"/><h4>{parsedStudentDetailsRef[campus.name]} <ArrowRightIcon/></h4>
           <GolfCourseIcon color="primary"/><h4>{institute.name.toUpperCase()}<ArrowRightIcon/></h4>
           <SchoolIcon color="primary"/> <h4>{grad.toUpperCase()}</h4>
