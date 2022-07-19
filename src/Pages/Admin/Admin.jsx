@@ -353,7 +353,7 @@ const handleChangeTableInput = (event) =>{
                   Confirmation
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      Are you sure you want to update the data for {parsedStudentDetailsRef[campus.name]} - {instMap[institute.name.toLowerCase()]} ?
+                      Are you sure you want to update the data for {parsedStudentDetailsRef[campus.name]} - {institute.name.toUpperCase()} ?
                   </Typography>
                   <div className='modal_buttons_container'>
                       <button className='modal_buttons_container-btn-yes' onClick={updateInDataBase}>
@@ -470,7 +470,7 @@ const handleChangeTableInput = (event) =>{
             {console.log(user)}
             {user.user.institute.map((instName) =>
               campus.name === instName.campus ? (
-                <MenuItem value={instName}>{instName.name.toLowerCase()}</MenuItem>
+                <MenuItem value={instName}>{instName.name.toUpperCase()}</MenuItem>
               ) : null
             )}
           </Select>
@@ -538,7 +538,7 @@ const handleChangeTableInput = (event) =>{
         {edit?
         <div className="formInformation">
           <AccountBalanceIcon  color="primary"/><h4>{parsedStudentDetailsRef[campus.name]} <ArrowRightIcon/></h4>
-          <GolfCourseIcon color="primary"/><h4>{instMap[institute.name.toLowerCase()]}<ArrowRightIcon/></h4>
+          <GolfCourseIcon color="primary"/><h4>{institute.name.toUpperCase()}<ArrowRightIcon/></h4>
           <SchoolIcon color="primary"/> <h4>{grad.toUpperCase()}</h4>
         </div>:null
 }
