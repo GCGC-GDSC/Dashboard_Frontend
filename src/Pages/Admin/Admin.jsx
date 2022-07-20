@@ -77,7 +77,7 @@ function Admin() {
       p: 4,
     };
   const initiateEdit = ()=>{
-    axios.get(`${REACT_APP_API_URL}students/${year}/select/null/${institute.name}/${grad}/${viewCampus.name}`,{
+    axios.get(`${REACT_APP_API_URL}students/${year}/select/null/${institute.name}/${grad}/${campus.name}`,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
       }
