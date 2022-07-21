@@ -21,6 +21,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import { unstable_batchedUpdates } from "react-dom";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
+
 // accordian
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -78,7 +79,7 @@ function Admin() {
     };
   const initiateEdit = ()=>{
     axios.get(`${REACT_APP_API_URL}students/${year}/select/null/${institute.name}/${grad}/${campus.name}`,{
-      headers: {
+      headers: {  
         'Authorization': `Token ${user.user.token.key}`
       }
     })

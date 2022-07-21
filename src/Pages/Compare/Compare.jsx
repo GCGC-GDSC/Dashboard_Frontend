@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { UserContext } from "../../context/context";
@@ -18,12 +18,14 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function Compare() {
   const user = useContext(UserContext);
   const compareYears= [2019,2020,2021,2022,2023]
+  const campusList = user.user.campus 
+  const [courseList,setCourseList] =  useState([]);
   const gradTypeList= ["UG","PG"];
-  const courseList = ["CSE","Mech","CSBS","Civil","ECE","EEE"]
-  const [year1, setYear1] = useState(null);
-  const [year2, setYear2] = useState(null);
+  const [year1, setYear1] = useState(2019);
+  const [campus, setCampus] = useState(campusList[0]);
+  const [year2, setYear2] = useState(2020);
   const [course,setCourse] = useState(null);
-  const [gradType,setGradType] = useState(null);
+  const [gradType,setGradType] = useState("ug");
   const [yearData, setYearData] = useState(null);
   const [comparision,setComparision] = useState(false)
   const handleChange = (event) => {
@@ -32,7 +34,7 @@ function Compare() {
     else if (name === "year2") setYear2(value);
     else if (name === "course") setCourse(value);
     else if (name === "gradType") setGradType(value);
-
+    else if (name === 'campus') setCampus(value)
   };
     // const parsedValues=(arr)=>{
     //   return ["Number of Companies","Number of students Placed","Highest Package","Number of off campus placements"]
@@ -57,9 +59,16 @@ function Compare() {
       setYearData(data)
       setComparision(true)
     })
-   
-    
   }
+  const loadCourses = ()=>{
+    axios.get('https://gcgc-dashboard.herokuapp.com/organization/courses')
+    .then(resp=>{
+      setCourseList(resp.data.result)
+    })
+  }
+  // useEffect(() => {
+  //     loadCourses()
+  // }, [courseList,campusList]);
   return (
     <Box flexgrow={1} className='compare'>
         <Grid container px={4} className='year_container'>
@@ -80,13 +89,30 @@ function Compare() {
                   >
                     {compareYears.map(year=> <MenuItem value={year}>{year}</MenuItem>)
                     }
-
                   </Select>
                 </FormControl>
               </Grid>
               <Grid xs={12} md={4} >
                 <Grid>
                 <FormControl
+                  variant="standard"
+                  sx={{ m: 1, minWidth: 100 }}
+                  style={{ width: "100px" }}>
+                  <InputLabel> Campus</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={campus}
+                    label="campus"
+                    name="campus"
+                    onChange={handleChange}
+                  >
+                    {campusList.map(campusName=> <MenuItem value={campusName}>{campusName}</MenuItem>)
+                    }
+
+                  </Select>
+                </FormControl>
+                {/* <FormControl
                   variant="standard"
                   sx={{ m: 1, minWidth: 100 }}
                   style={{ width: "100px" }}>
@@ -99,11 +125,11 @@ function Compare() {
                     name="course"
                     onChange={handleChange}
                   >
-                    {courseList.map(year=> <MenuItem value={year}>{year}</MenuItem>)
+                    {courseList && courseList.map(obj=> <MenuItem value={obj?.course}>{obj?.course}</MenuItem>)
                     }
 
                   </Select>
-                </FormControl>
+                </FormControl> */}
                 <FormControl
                   variant="standard"
                   sx={{ m: 1, minWidth: 100 }}
