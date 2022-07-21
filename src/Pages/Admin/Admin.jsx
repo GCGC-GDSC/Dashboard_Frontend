@@ -39,7 +39,7 @@ function Admin() {
   const [year, setYear] = useState(2022);
   const [grad, setGrad] = useState("");
   const [isCourseType,setIsCourseType] = useState('Institute Only');
-  const [course, setCourse] = useState("");
+  const [course, setCourse] = useState("null");
   const [edit,setEdit] = useState(false)
   const [instituteData,setInstituteData] = useState({})
   const [dataObject,setDataObject] = useState({})
@@ -79,7 +79,10 @@ function Admin() {
       p: 4,
     };
   const initiateEdit = ()=>{
-    axios.get(`${REACT_APP_API_URL}students/${year}/select/${course.toLocaleLowerCase()}/${institute.name}/${grad}/${campus.name}`,{
+    console.log(course);
+    setDataObject({})
+    setInstituteData({})
+    axios.get(`${REACT_APP_API_URL}students/${year}/select/${course.toLowerCase()}/${institute.name}/${grad}/${campus.name}`,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
       }
@@ -218,7 +221,13 @@ const handleChangeTableInput = (event) =>{
     else if (name === "institute") setInstitute(value);
     else if (name === "grad") setGrad(value);
     else if (name === "course") setCourse(value)
-    else if (name === 'courseType') setIsCourseType(value)
+    else if (name === 'courseType') 
+    {
+      if (value == "Institute Only"){
+        setCourse("null")
+      }
+      setIsCourseType(value)
+    }
     else if (name === 'year') setYear(value)
 
   };
