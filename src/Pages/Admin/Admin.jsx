@@ -78,11 +78,10 @@ function Admin() {
       boxShadow: 24,
       p: 4,
     };
-  const initiateEdit = ()=>{
-    console.log(course);
+  const initiateEdit = (route)=>{
     setDataObject({})
     setInstituteData({})
-    axios.get(`${REACT_APP_API_URL}students/${year}/select/${course.toLowerCase()}/${institute.name}/${grad}/${campus.name}`,{
+    axios.get(route,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
       }
@@ -103,6 +102,8 @@ function Admin() {
   
     setEdit(true)
   }
+
+  
 
 
   const downloadExcel  = ()=>{
@@ -536,7 +537,7 @@ const handleChangeTableInput = (event) =>{
           <ThemeProvider theme={theme1}>
           <Button variant="outlined" startIcon={<EditIcon />} 
           disabled={isCourseType==="Institute Only"?!(campus && institute && grad):!(campus && institute && grad && course)}
-          onClick={initiateEdit }>
+          onClick={()=>isCourseType==="Institute Only"? initiateEdit(`${REACT_APP_API_URL}students/${year}/select/${course.toLowerCase()}/${institute.name}/${grad}/${campus.name}`) : initiateEdit(`${REACT_APP_API_URL}students/${year}/updateprograms/${id}`) }>
             EDIT
           </Button>
         </ThemeProvider>
