@@ -21,12 +21,14 @@ import SchoolIcon from '@mui/icons-material/School';
 import { unstable_batchedUpdates } from "react-dom";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
-
+import courseReferrenceObject from "./InstituteCourseRefObj"
 // accordian
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import EventNoteIcon from '@mui/icons-material/EventNote';
 
 import "./Admin.styles.scss";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
@@ -34,11 +36,11 @@ function Admin() {
   const user = useContext(UserContext);
   const [campus, setCampus] = useState(user.user.campus[0]);
   const [viewCampus, setViewCampus] = useState(user.user.campus[0]);
-  const [institute, setInstitute] = useState("");
+  const [institute, setInstitute] = useState(user.user.institute[0]);
   const [year, setYear] = useState(2022);
-  const [grad, setGrad] = useState("");
+  const [grad, setGrad] = useState("ug");
   const [isCourseType,setIsCourseType] = useState('Institute Only');
-  const [course, setCourse] = useState("");
+  const [course, setCourse] = useState("null");
   const [edit,setEdit] = useState(false)
   const [instituteData,setInstituteData] = useState({})
   const [dataObject,setDataObject] = useState({})
@@ -49,7 +51,6 @@ function Admin() {
   
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const courseList = ["CSE","Mech","CSBS","Civil","ECE","EEE"]
   const style = {
       position: 'absolute',
       top: '50%',
@@ -78,8 +79,11 @@ function Admin() {
       p: 4,
     };
   const initiateEdit = ()=>{
-    axios.get(`${REACT_APP_API_URL}students/${year}/select/null/${institute.name}/${grad}/${campus.name}`,{
-      headers: {  
+    console.log(course);
+    setDataObject({})
+    setInstituteData({})
+    axios.get(`${REACT_APP_API_URL}students/${year}/select/${course.toLowerCase()}/${institute.name}/${grad}/${campus.name}`,{
+      headers: {
         'Authorization': `Token ${user.user.token.key}`
       }
     })
@@ -124,6 +128,7 @@ function Admin() {
   const updateInDataBase =()=>{
     setConfirmUpdate(false)
     const dataToSend = {}
+    let flag = false  
     DBUpdateKeys.forEach((key)=>{
       dataToSend[key] = dataObject[key]
       if(dataToSend[key] === undefined || dataToSend[key] === "") flag = true
@@ -137,29 +142,49 @@ function Admin() {
       },
       data:dataToSend
     };
+    var config2 = {
+      method: 'put',
+      url: `${REACT_APP_API_URL}students/${year}/updateprograms/${instituteData.id}`,
+      headers: { 
+        'Authorization': `Token ${user.user.token.key}`, 
+        'Content-Type': 'application/json'
+      },
+      data:dataToSend
+    };
     
-      let flag = false
-      if(flag){
+    if(flag){
         window.alert("Inputs can not contain null values")
-      }
+    }
+
       else{
-        axios(config)
+        let configFinal = config
+        if (course !== "null")
+        {
+          configFinal = config2
+        }
+        try{
+        axios(configFinal)
         .then(resp=>{
           // update the dataObject 
+          console.log('hello')
           if(resp.data.status.toLowerCase() === "ok")
           { 
             unstable_batchedUpdates(()=>{
               setDataObject(resp.data.result)
               setOpenPreview(true)
             })
-            // fetchLogs()
           }
           else{
-            window.alert("data could not be updated")
+            alert("data could not be updated")
           }
-          // setDataObject()
-          // show modal
         })
+        .catch(err=>{
+          console.log(err)
+        })
+      }
+      catch(err){
+        console.log("hello",err)
+      }
       }
       return;
   }
@@ -217,7 +242,13 @@ const handleChangeTableInput = (event) =>{
     else if (name === "institute") setInstitute(value);
     else if (name === "grad") setGrad(value);
     else if (name === "course") setCourse(value)
-    else if (name === 'courseType') setIsCourseType(value)
+    else if (name === 'courseType') 
+    {
+      if (value == "Institute Only"){
+        setCourse("null")
+      }
+      setIsCourseType(value)
+    }
     else if (name === 'year') setYear(value)
 
   };
@@ -489,12 +520,12 @@ const handleChangeTableInput = (event) =>{
           name="course"
           onChange={handleChange}
         >
-          {/* {console.log(user)} */}
-          {/* {user.user.institute.map((instName) => */}
-           {
-            courseList.map(courseName=>
-            <MenuItem value={courseName}>{courseName}</MenuItem>)
+            {
+              courseReferrenceObject[campus.name][institute.name][grad].map(program=>
+                <MenuItem key={program.program_name} value={program.program_name}>{program.program_name}</MenuItem> 
+                )
             }
+
         </Select>
       </FormControl>
         }
@@ -534,6 +565,8 @@ const handleChangeTableInput = (event) =>{
         </div>
         {edit?
         <div className="formInformation">
+           <EventNoteIcon color="primary"/><h4>{year} <ArrowRightIcon/></h4>
+          <BookmarkAddIcon color="primary"/><h4>{isCourseType}<ArrowRightIcon/></h4>
           <AccountBalanceIcon  color="primary"/><h4>{parsedStudentDetailsRef[campus.name]} <ArrowRightIcon/></h4>
           <GolfCourseIcon color="primary"/><h4>{institute.name.toUpperCase()}<ArrowRightIcon/></h4>
           <SchoolIcon color="primary"/> <h4>{grad.toUpperCase()}</h4>

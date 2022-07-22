@@ -757,8 +757,23 @@ const handleChangeOuter = (event, newValue) => {
                   </Grid>
                 </Box>
               </TabPanel>
-              <TabPanel value={value} index={1} style={{width:"100%"}}>
-               Branch wise 
+              {/* changed value = {value} to value={valueOrder} */}
+              <TabPanel value={valueOuter} index={1} style={{width:"100%"}}>
+              <Grid container spacing={9} alignItems="center" justifyContent="space-around" mt={2} >
+                    <div className="headings" id={`stream`} >
+                      <div className="sub">
+                      Branches of GST
+                      </div>
+                      </div>
+                      <Grid item xs={6} >
+                        <ODoughnutChart
+                        isCampus={true}
+                          // title={`${instData.name} Student Details`}
+                          data={DoughnutUGPGSD}
+                          options={chartOptions.DoughnutUGPG}
+                        />
+                      </Grid>
+                    </Grid>
                </TabPanel>
           </Box>
         </div>
