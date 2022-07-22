@@ -79,7 +79,6 @@ function Admin() {
       p: 4,
     };
   const initiateEdit = ()=>{
-    console.log(course);
     setDataObject({})
     setInstituteData({})
     axios.get(`${REACT_APP_API_URL}students/${year}/select/${course.toLowerCase()}/${institute.name}/${grad}/${campus.name}`,{
@@ -88,6 +87,12 @@ function Admin() {
       }
     })
     .then(resp=>{
+      console.log(resp)
+      if( !resp || resp == [] || resp.statusText !== "OK")
+      {
+        alert(" Data unavailable!!")
+        return
+      }
       let dataObj = resp.data.result[0]
       const newDataObj = {}
       newDataObj["self_percent_opted_hs_final"] = ((dataObj["total_opted_for_higher_studies_only"] / dataObj["total_final_years"]) * 100).toFixed(2)
@@ -99,6 +104,9 @@ function Admin() {
         setInstituteData(dataObj)
         setDataObject(dataObj)
       })
+    })
+    .catch(err=>{
+      alert("Response currently not available")
     })
   
     setEdit(true)
@@ -521,11 +529,16 @@ const handleChangeTableInput = (event) =>{
           onChange={handleChange}
         >
             {
-              courseReferrenceObject[campus.name][institute.name][grad].map(program=>
-                <MenuItem key={program.program_name} value={program.program_name}>{program.program_name}</MenuItem> 
-                )
+              user.user.institute.map(instObj=> 
+                {
+                  return(
+                  instObj.name === institute.name &&  instObj.campus === campus.name &&
+                instObj.programs.map(courseObj=> courseObj.is_ug === (grad === "ug") &&
+                <MenuItem key={courseObj.name} value={courseObj.name}
+                >{courseObj.name.toUpperCase()}</MenuItem>)
+              )
+                })
             }
-
         </Select>
       </FormControl>
         }
