@@ -69,7 +69,7 @@ const App = () => {
             <NavBar user={verifiedUser} />
             <Routes>
               <Route exact path="/" element={<Home />} />
-              <Route path="/admin" element={<Admin />} />
+              <Route path="/adminPannel" element={<Admin />} />
               <Route path="/team" element={<MediaCard />} />
               <Route path="/highlights" element={<Highlights />} />
               <Route path="/compare" element={<Compare />} />
@@ -80,7 +80,7 @@ const App = () => {
           <UserContext.Provider value={providerValue}>
             <NavBar user={verifiedUser} />
             <Routes>
-              <Route path="/admin" element={<Admin />} />
+              <Route path="/adminPannel" element={<Admin />} />
               <Route path="/team" element={<MediaCard />} />
               <Route exact path="/" element={<RestrictedView />} />
               <Route path="/highlights" element={<Highlights />} />
