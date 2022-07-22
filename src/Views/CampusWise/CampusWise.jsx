@@ -22,6 +22,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Branchwise from "./Branchwise/Branchwise";
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 const CampusNames = {
@@ -759,21 +760,8 @@ const handleChangeOuter = (event, newValue) => {
               </TabPanel>
               {/* changed value = {value} to value={valueOrder} */}
               <TabPanel value={valueOuter} index={1} style={{width:"100%"}}>
-              <Grid container spacing={9} alignItems="center" justifyContent="space-around" mt={2} >
-                    <div className="headings" id={`stream`} >
-                      <div className="sub">
-                      Branches of GST
-                      </div>
-                      </div>
-                      <Grid item xs={6} >
-                        <ODoughnutChart
-                        isCampus={true}
-                          // title={`${instData.name} Student Details`}
-                          data={DoughnutUGPGSD}
-                          options={chartOptions.DoughnutUGPG}
-                        />
-                      </Grid>
-                    </Grid>
+                {/* Branch wise component */}
+                <Branchwise campus={campusData} year ={year} institute={instData}/>
                </TabPanel>
           </Box>
         </div>
