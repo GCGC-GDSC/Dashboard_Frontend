@@ -21,7 +21,6 @@ import SchoolIcon from '@mui/icons-material/School';
 import { unstable_batchedUpdates } from "react-dom";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
-import courseReferrenceObject from "./InstituteCourseRefObj"
 // accordian
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -88,7 +87,7 @@ function Admin() {
     })
     .then(resp=>{
       console.log(resp)
-      if( !resp || resp == [] || resp.statusText !== "OK")
+      if( !resp || resp === [] || resp.statusText !== "OK")
       {
         alert(" Data unavailable!!")
         return
@@ -252,7 +251,7 @@ const handleChangeTableInput = (event) =>{
     else if (name === "course") setCourse(value)
     else if (name === 'courseType') 
     {
-      if (value == "Institute Only"){
+      if (value === "Institute Only"){
         setCourse("null")
       }
       setIsCourseType(value)
