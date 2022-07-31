@@ -21,7 +21,6 @@ import SchoolIcon from '@mui/icons-material/School';
 import { unstable_batchedUpdates } from "react-dom";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
-import courseReferrenceObject from "./InstituteCourseRefObj"
 // accordian
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -78,15 +77,21 @@ function Admin() {
       boxShadow: 24,
       p: 4,
     };
-  const initiateEdit = (route)=>{
+  const initiateEdit = ()=>{
     setDataObject({})
     setInstituteData({})
-    axios.get(route,{
+    axios.get(`${REACT_APP_API_URL}students/${year}/select/${course.toLowerCase()}/${institute.name}/${grad}/${campus.name}`,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
       }
     })
     .then(resp=>{
+      console.log(resp)
+      if( !resp || resp === [] || resp.statusText !== "OK")
+      {
+        alert(" Data unavailable!!")
+        return
+      }
       let dataObj = resp.data.result[0]
       const newDataObj = {}
       newDataObj["self_percent_opted_hs_final"] = ((dataObj["total_opted_for_higher_studies_only"] / dataObj["total_final_years"]) * 100).toFixed(2)
@@ -99,11 +104,12 @@ function Admin() {
         setDataObject(dataObj)
       })
     })
+    .catch(err=>{
+      alert("Response currently not available")
+    })
   
     setEdit(true)
   }
-
-  
 
 
   const downloadExcel  = ()=>{
@@ -245,7 +251,7 @@ const handleChangeTableInput = (event) =>{
     else if (name === "course") setCourse(value)
     else if (name === 'courseType') 
     {
-      if (value == "Institute Only"){
+      if (value === "Institute Only"){
         setCourse("null")
       }
       setIsCourseType(value)
@@ -522,11 +528,16 @@ const handleChangeTableInput = (event) =>{
           onChange={handleChange}
         >
             {
-              courseReferrenceObject[campus.name][institute.name][grad].map(program=>
-                <MenuItem key={program.program_name} value={program.program_name}>{program.program_name}</MenuItem> 
-                )
+              user.user.institute.map(instObj=> 
+                {
+                  return(
+                  instObj.name === institute.name &&  instObj.campus === campus.name &&
+                instObj.programs.map(courseObj=> courseObj.is_ug === (grad === "ug") &&
+                <MenuItem key={courseObj.name} value={courseObj.name}
+                >{courseObj.name.toUpperCase()}</MenuItem>)
+              )
+                })
             }
-
         </Select>
       </FormControl>
         }
@@ -558,7 +569,7 @@ const handleChangeTableInput = (event) =>{
           <ThemeProvider theme={theme1}>
           <Button variant="outlined" startIcon={<EditIcon />} 
           disabled={isCourseType==="Institute Only"?!(campus && institute && grad):!(campus && institute && grad && course)}
-          onClick={()=>isCourseType==="Institute Only"? initiateEdit(`${REACT_APP_API_URL}students/${year}/select/${course.toLowerCase()}/${institute.name}/${grad}/${campus.name}`) : initiateEdit(`${REACT_APP_API_URL}students/${year}/updateprograms/${id}`) }>
+          onClick={initiateEdit }>
             EDIT
           </Button>
         </ThemeProvider>
