@@ -23,7 +23,10 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function GBStats() {
 const user = useContext(UserContext);
 const [year, setYear] = useState(2021);
-const yearsList = [2021,2022,2023,2024,2025]
+const yearsList = [2021,2022,2023,2024,2025];
+const handleYearChange = (event) => {
+  setYear(event.target.value);
+};
   const [statsData,setStatsData] =useState([])
   const chartOptions = {
     DoughnutUGPG: {
@@ -287,7 +290,7 @@ const yearsList = [2021,2022,2023,2024,2025]
     })
   }
   getStatsData()
-  },[user])
+  },[user,year])
   return(
     <Box>
       <FormControl sx={{ m: 1, minWidth: 100 }} style={{position:"absolute"}}>
@@ -297,7 +300,7 @@ const yearsList = [2021,2022,2023,2024,2025]
           id="demo-simple-select-helper"
           value={year}
           label="Year"
-          onChange={handleChange}
+          onChange={handleYearChange}
         >
           {yearsList.map((year) => 
             <MenuItem value={year}>{year}</MenuItem>
