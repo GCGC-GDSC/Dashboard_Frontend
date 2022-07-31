@@ -10,6 +10,11 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from "@mui/material/Typography";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import Table from "../../Components/Table/Table"
 import {colors} from "../ColorAssets/colorPallet"
 import "../CampusWise/CampusWise.styles.scss"
@@ -17,6 +22,8 @@ import { UserContext } from "../../context/context";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function GBStats() {
 const user = useContext(UserContext);
+const [year, setYear] = useState(2021);
+const yearsList = [2021,2022,2023,2024,2025]
   const [statsData,setStatsData] =useState([])
   const chartOptions = {
     DoughnutUGPG: {
@@ -270,7 +277,7 @@ const user = useContext(UserContext);
 }
   useEffect(()=>{
    const getStatsData = ()=>{
-    axios.get(`${REACT_APP_API_URL}students/gbstats/`,{
+    axios.get(`${REACT_APP_API_URL}students/${year}/gbstats`,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
       }
@@ -283,6 +290,21 @@ const user = useContext(UserContext);
   },[user])
   return(
     <Box>
+      <FormControl sx={{ m: 1, minWidth: 100 }} style={{position:"absolute"}}>
+        <InputLabel id="demo-simple-select-helper-label">Year</InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={year}
+          label="Year"
+          onChange={handleChange}
+        >
+          {yearsList.map((year) => 
+            <MenuItem value={year}>{year}</MenuItem>
+          )}
+        </Select>
+        <FormHelperText>Select </FormHelperText>
+      </FormControl>
       <Box sx={{ borderBottom: 1, borderColor: "divider", bgcolor: '#fff' }}>
           <Tabs
             value={value}
