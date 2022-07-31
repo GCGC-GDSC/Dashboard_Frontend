@@ -27,13 +27,11 @@ function Overall() {
     return _.zip(...matrix);
   }
 
-  const [year, setYear] = useState(2022);
-  const yearsList = [2022,2023,2024,2025]
+  const [year, setYear] = useState(2021);
+  const yearsList = [2021,2022,2023,2024,2025]
 
 
-  const handleChange = (event) => {
-    setYear(event.target.value);
-  };
+
   const headingRef = useRef()
 //   skrr end
     // const hostname = 'https://gcgc-dashboard.herokuapp.com'
@@ -42,6 +40,11 @@ function Overall() {
     const [showVC,setShowVC] = useState(false)
     //for the main doughtnut in overall section-- this is to display the number of inst per campus
     // for the table
+
+    const handleChange = (event) => {
+      setShowVC(false)
+      setYear(event.target.value);
+    };
     const VChartColors =colors
     const chartOptions = {
         Doughnut : {
@@ -215,7 +218,7 @@ function Overall() {
     }  
       getStreams()
 
-    },[user,year ])
+    },[user,year])
 
     
     return(

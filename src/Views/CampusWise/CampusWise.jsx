@@ -50,11 +50,15 @@ function CampusWise() {
       setOpen(false);
     };
 
-      const [year, setYear] = useState(2022);
-      const yearsList = [2022,2023,2024,2025]
+      const [year, setYear] = useState(2021);
+      const yearsList = [2021,2022,2023,2024,2025]
 
-  const handleChange2 = (event) => {
-    setYear(event.target.value);
+  const handleYearChange = (event) => {
+    unstable_batchedUpdates(()=>{  
+      setShowCharts(false)
+      setShowD2(false)
+      setYear(event.target.value);
+    })
   };
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -441,7 +445,7 @@ const handleChangeOuter = (event, newValue) => {
     checkMultiUser()
     getCampus();
     // getData(user.user.campus.name)
-  }, [user]);
+  }, [user,year]);
   return (
     <>
      <Snackbar
@@ -465,7 +469,7 @@ const handleChangeOuter = (event, newValue) => {
           id="demo-simple-select-helper"
           value={year}
           label="Year"
-          onChange={handleChange2}
+          onChange={handleYearChange}
         >
          {yearsList.map((year) => 
             <MenuItem value={year}>{year}</MenuItem>
