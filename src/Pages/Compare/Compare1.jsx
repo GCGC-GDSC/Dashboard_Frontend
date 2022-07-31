@@ -1,4 +1,4 @@
-import React, { useContext, useState,useEffect } from "react";
+import React, { useContext, useState } from "react";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { UserContext } from "../../context/context";
@@ -17,10 +17,9 @@ import theme1 from "../../MuiThemes/themes"
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function Compare() {
   const user = useContext(UserContext);
-  console.log(user)
   const compareYears= [2019,2020,2021,2022,2023]
   const campusList = user.user.campus 
-  const [courseList,setCourseList] =  useState([]);
+  // const [courseList,setCourseList] =  useState([]);
   const gradTypeList= ["UG","PG"];
   const [year1, setYear1] = useState(2019);
   const [campus, setCampus] = useState(campusList[0]);
@@ -28,7 +27,7 @@ function Compare() {
   const [course,setCourse] = useState(null);
   const [gradType,setGradType] = useState("ug");
   const [yearData, setYearData] = useState(null);
-  const [comparision,setComparision] = useState(false);
+  const [comparision,setComparision] = useState(false)
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === "year1") setYear1(value);
@@ -42,7 +41,7 @@ function Compare() {
     // }
   const handleCompare =()=>{
     // api call.....
-  //  alert("comparing")
+   
     axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${course.toLowerCase()}/${gradType.toLowerCase()}}`,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
@@ -61,19 +60,17 @@ function Compare() {
       setComparision(true)
     })
   }
-  const loadCourses = ()=>{
-    axios.get('https://gcgc-dashboard.herokuapp.com/organization/courses')
-    .then(resp=>{
-      setCourseList(resp.data.result)
-    })
-  }
-  useEffect(() => {
-      loadCourses()
-  }, [courseList,campusList]);
+  // const loadCourses = ()=>{
+  //   axios.get('https://gcgc-dashboard.herokuapp.com/organization/courses')
+  //   .then(resp=>{
+  //     setCourseList(resp.data.result)
+  //   })
+  // }
+  // useEffect(() => {
+  //     loadCourses()
+  // }, [courseList,campusList]);
   return (
-
     <Box flexgrow={1} className='compare'>
-      This is compare
         <Grid container px={4} className='year_container'>
             <Grid container className="year_selectors">
               <Grid xs={12} md={4} className="left">
@@ -95,12 +92,8 @@ function Compare() {
                   </Select>
                 </FormControl>
               </Grid>
-
-              
               <Grid xs={12} md={4} >
-                
                 <Grid>
-                
                 <FormControl
                   variant="standard"
                   sx={{ m: 1, minWidth: 100 }}
@@ -114,13 +107,12 @@ function Compare() {
                     name="campus"
                     onChange={handleChange}
                   >
-                    {campusList.map(campusName=> <MenuItem value={campusName.name}>{campusName.name}</MenuItem>)
+                    {campusList.map(campusName=> <MenuItem value={campusName}>{campusName}</MenuItem>)
                     }
 
                   </Select>
                 </FormControl>
-                
-                <FormControl
+                {/* <FormControl
                   variant="standard"
                   sx={{ m: 1, minWidth: 100 }}
                   style={{ width: "100px" }}>
@@ -137,8 +129,7 @@ function Compare() {
                     }
 
                   </Select>
-                </FormControl>
-                
+                </FormControl> */}
                 <FormControl
                   variant="standard"
                   sx={{ m: 1, minWidth: 100 }}
@@ -158,10 +149,7 @@ function Compare() {
 
                   </Select>
                 </FormControl>
-
                 </Grid>
-
-
                 <Grid>
                   <ThemeProvider theme={theme1}>
                     <Button variant="outlined" color="primary" startIcon={<DifferenceIcon />}
@@ -172,6 +160,7 @@ function Compare() {
                   </Button>
                     </ThemeProvider>
                 </Grid>
+
               </Grid>
               <Grid xs={12} md={4} className="right">
               <FormControl
