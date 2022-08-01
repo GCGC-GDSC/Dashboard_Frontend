@@ -1,4 +1,4 @@
-import React, { useContext, useState,useEffect } from "react";
+import React, { useContext, useState } from "react";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { UserContext } from "../../context/context";
@@ -25,7 +25,7 @@ function Compare() {
     hyd: "Hyderabad",
     blr: "Bengaluru",
   };
-  const [courseList,setCourseList] =  useState([]);
+  // const [courseList,setCourseList] =  useState([]);
   const gradTypeList= ["UG","PG"];
   const [year1, setYear1] = useState(2019);
   const [campus, setCampus] = useState(user.user.campus[0].name);
@@ -68,15 +68,15 @@ function Compare() {
       setComparision(true)
     })
   }
-  const loadCourses = ()=>{
-    axios.get('https://gcgc-dashboard.herokuapp.com/organization/courses')
-    .then(resp=>{
-      setCourseList(resp.data.result)
-    })
-  }
-  useEffect(() => {
-      loadCourses()
-  }, []);
+  // const loadCourses = ()=>{
+  //   axios.get('https://gcgc-dashboard.herokuapp.com/organization/courses')
+  //   .then(resp=>{
+  //     setCourseList(resp.data.result)
+  //   })
+  // }
+  // useEffect(() => {
+  //     // loadCourses()
+  // }, []);
   return (
 
     <Box flexgrow={1} className='compare'>
