@@ -28,10 +28,11 @@ function Compare() {
   const [courseList,setCourseList] =  useState([]);
   const gradTypeList= ["UG","PG"];
   const [year1, setYear1] = useState(2019);
-  const [campus, setCampus] = useState(campusList[0]);
+  const [campus, setCampus] = useState();
+  const [institute, setInstitute] = useState(user.user.institute[0]);
   const [year2, setYear2] = useState(2020);
   const [course,setCourse] = useState(null);
-  const [gradType,setGradType] = useState("ug");
+  const [gradType,setGradType] = useState();
   const [yearData, setYearData] = useState(null);
   const [comparision,setComparision] = useState(false);
   const handleChange = (event) => {
@@ -40,7 +41,8 @@ function Compare() {
     else if (name === "year2") setYear2(value);
     else if (name === "course") setCourse(value);
     else if (name === "gradType") setGradType(value);
-    else if (name === 'campus') setCampus(value)
+    else if (name === "campus") setCampus(value)
+    else if (name === "institute") setInstitute(value);
   };
     // const parsedValues=(arr)=>{
     //   return ["Number of Companies","Number of students Placed","Highest Package","Number of off campus placements"]
@@ -74,11 +76,10 @@ function Compare() {
   }
   useEffect(() => {
       loadCourses()
-  }, [courseList,campusList]);
+  }, []);
   return (
 
     <Box flexgrow={1} className='compare'>
-      This is compare
         <Grid container px={4} className='year_container'>
             <Grid container className="year_selectors">
               <Grid xs={12} md={4} className="left">
@@ -121,6 +122,32 @@ function Compare() {
                   >
                     {campusList.map(campusName=> <MenuItem value={campusName.name}>{CampusNames[campusName.name]}</MenuItem>)
                     }
+
+                  </Select>
+                </FormControl>
+
+                <FormControl
+                  variant="standard"
+                  sx={{ m: 1, minWidth: 100 }}
+                  style={{ width: "100px" }}>
+                  <InputLabel> Institute</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={institute}
+            label="institute"
+            name="institute"
+                    onChange={handleChange}
+                  >
+                   {/* {console.log(campus.name)} */}
+                    
+                   {user.user.institute.map((instName) =>
+                   
+              campus === instName.campus ? (
+                
+                <MenuItem value={instName}>{instName.name.toUpperCase()}</MenuItem>
+              ) : console.log(campus)
+            )}
 
                   </Select>
                 </FormControl>
