@@ -20,6 +20,11 @@ function Compare() {
   console.log(user)
   const compareYears= [2019,2020,2021,2022,2023]
   const campusList = user.user.campus 
+  const CampusNames = {
+    vskp: "Visakhapatnam",
+    hyd: "Hyderabad",
+    blr: "Bengaluru",
+  };
   const [courseList,setCourseList] =  useState([]);
   const gradTypeList= ["UG","PG"];
   const [year1, setYear1] = useState(2019);
@@ -114,7 +119,7 @@ function Compare() {
                     name="campus"
                     onChange={handleChange}
                   >
-                    {campusList.map(campusName=> <MenuItem value={campusName.name}>{campusName.name}</MenuItem>)
+                    {campusList.map(campusName=> <MenuItem value={campusName.name}>{CampusNames[campusName.name]}</MenuItem>)
                     }
 
                   </Select>
