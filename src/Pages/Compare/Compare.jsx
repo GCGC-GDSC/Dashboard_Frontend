@@ -28,8 +28,8 @@ function Compare() {
   const [courseList,setCourseList] =  useState([]);
   const gradTypeList= ["UG","PG"];
   const [year1, setYear1] = useState(2019);
-  const [campus, setCampus] = useState();
-  const [institute, setInstitute] = useState(user.user.institute[0]);
+  const [campus, setCampus] = useState(user.user.campus[0].name);
+  const [institute, setInstitute] = useState(user.user.institute[0].name);
   const [year2, setYear2] = useState(2020);
   const [course,setCourse] = useState(null);
   const [gradType,setGradType] = useState();
@@ -120,7 +120,7 @@ function Compare() {
                     name="campus"
                     onChange={handleChange}
                   >
-                    {campusList.map(campusName=> <MenuItem value={campusName.name}>{CampusNames[campusName.name]}</MenuItem>)
+                    {campusList.map(campusName=> <MenuItem value={campusName}>{CampusNames[campusName.name]}</MenuItem>)
                     }
 
                   </Select>
@@ -143,7 +143,7 @@ function Compare() {
                     
                    {user.user.institute.map((instName) =>
                    
-              campus === instName.campus ? (
+              campus.name === instName.campus ? (
                 
                 <MenuItem value={instName}>{instName.name.toUpperCase()}</MenuItem>
               ) : console.log(campus)
@@ -165,8 +165,20 @@ function Compare() {
                     name="course"
                     onChange={handleChange}
                   >
-                    {courseList && courseList.map(obj=> <MenuItem value={obj?.course}>{obj?.course}</MenuItem>)
-                    }
+                     {console.log(institute,campus,user) }
+                     {
+                    user.user.institute.map(instObj=> 
+                      {
+                        return(
+                        instObj.name === institute.name &&  instObj.campus === campus.name &&
+                      instObj.programs.map(courseObj=> courseObj.is_ug === (gradType === "UG") &&
+                      <MenuItem key={courseObj.name} value={courseObj.name}
+                      >{courseObj.name.toUpperCase()}</MenuItem>)
+                    )
+                      })
+                  }
+                    {/* {courseList && courseList.map(obj=> <MenuItem value={obj?.course}>{obj?.course}</MenuItem>)
+                    } */}
 
                   </Select>
                 </FormControl>
