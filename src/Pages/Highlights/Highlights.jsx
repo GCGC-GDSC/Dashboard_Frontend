@@ -9,7 +9,7 @@ const Highlights = () => {
         <HighlightsCard/>
         <HighlightsCard/>
         <HighlightsCard/>
-        <HighlightsCard/>git pu
+        <HighlightsCard/>
 
         </div>
 

@@ -30,12 +30,11 @@ const App = () => {
   useEffect(() => {
     const verifyUser = (user) => {
       axios
-        .post(`${REACT_APP_API_URL}account/verify/${user.email}`)
+        .get(`${REACT_APP_API_URL}account/verify/${user.email}`)
         .then((resp) => {
           if (resp.data.status !== "error")
             setVerifiedUser({ user: resp.data.result, isVerified: true });
-          else 
-          {
+          else {
             setVerifiedUser({ user: {}, isVerified: false });
           }
         });
@@ -69,7 +68,7 @@ const App = () => {
             <NavBar user={verifiedUser} />
             <Routes>
               <Route exact path="/" element={<Home />} />
-              <Route path="/adminPannel" element={<Admin />} />
+              <Route path="/adminpannel" element={<Admin />} />
               <Route path="/team" element={<MediaCard />} />
               <Route path="/highlights" element={<Highlights />} />
               <Route path="/compare" element={<Compare />} />
@@ -80,12 +79,11 @@ const App = () => {
           <UserContext.Provider value={providerValue}>
             <NavBar user={verifiedUser} />
             <Routes>
-              <Route path="/adminPannel" element={<Admin />} />
+              <Route path="/adminpannel" element={<Admin />} />
               <Route path="/team" element={<MediaCard />} />
               <Route exact path="/" element={<RestrictedView />} />
               <Route path="/highlights" element={<Highlights />} />
               <Route path="/compare" element={<Compare />} />
-
             </Routes>
           </UserContext.Provider>
         ) : (

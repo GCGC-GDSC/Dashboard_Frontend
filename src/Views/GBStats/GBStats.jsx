@@ -293,7 +293,7 @@ const handleYearChange = (event) => {
   },[user,year])
   return(
     <Box>
-      <FormControl sx={{ m: 1, minWidth: 100 }} style={{position:"absolute"}}>
+      <FormControl sx={{ m: 1, minWidth: 100 }} >
         <InputLabel id="demo-simple-select-helper-label">Year</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"
