@@ -3,7 +3,6 @@ import { Doughnut } from 'react-chartjs-2';
 import "./Ocharts.scss"
 
 const ODoughnutChart = ({title,data,options,isCampus}) => {
-
   return(
   <div className='ODoughnut'>
     {title?
