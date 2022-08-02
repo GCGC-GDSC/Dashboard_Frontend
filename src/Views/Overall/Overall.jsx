@@ -253,7 +253,7 @@ function Overall() {
       <Grid item xs={6} className='firstDoughnut'>
 
         <ODoughnutChart
-          title={"University overview "}
+          title={`University overview / ${year} `}
           data={dataDoughnut}
           options={chartOptions.Doughnut}
         />
@@ -274,7 +274,7 @@ function Overall() {
           </div>
           <div className="headings" id={`stream`} >
           <div className="sub">
-          Student Details
+          Student Details {`/ ${year} `}
      </div>
           </div>
       <Grid container  spacing={2} ml={10} mt={6} marginTop="0px">
@@ -300,7 +300,7 @@ function Overall() {
         <>
            <div className="headings" id={`stream`} >
           <div className="sub">
-          Placement Details
+          Placement Details {`/ ${year} `}
      </div>
           </div>
           <Grid container  ml={10} mt={6}  spacing={2} alignItems="center">
@@ -317,7 +317,7 @@ function Overall() {
         </Grid>
         <div className="headings" id={`stream`} >
           <div className="sub">
-          Package Details
+          Package Details {`/ ${year} `}
      </div>
           </div>
           <Grid container  ml={10} mt={6} spacing={2} alignItems="center">

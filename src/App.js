@@ -14,6 +14,7 @@ import NavBar from "./Components/Navbar/NavBar";
 import { firebase } from "./backend/firebase.config";
 import Highlights from "./Pages/Highlights/Highlights";
 import Compare from "./Pages/Compare/Compare";
+import NotFound from "./Pages/404/NotFound";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 const App = () => {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
@@ -72,6 +73,7 @@ const App = () => {
               <Route path="/team" element={<MediaCard />} />
               <Route path="/highlights" element={<Highlights />} />
               <Route path="/compare" element={<Compare />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </UserContext.Provider>
         ) : //  user signed in and useing small screen
@@ -84,6 +86,7 @@ const App = () => {
               <Route exact path="/" element={<RestrictedView />} />
               <Route path="/highlights" element={<Highlights />} />
               <Route path="/compare" element={<Compare />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </UserContext.Provider>
         ) : (
@@ -91,6 +94,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/team" element={<MediaCard />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         )}
       </Router>

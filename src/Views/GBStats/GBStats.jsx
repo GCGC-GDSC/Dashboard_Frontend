@@ -331,7 +331,7 @@ const handleYearChange = (event) => {
                 </div>
                 <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Student Details
+                Student Details  {`/ ${year}`}
                 </div>
                 </div>
             <Grid item xs={6} className="shadow" mr={12}>
@@ -351,7 +351,7 @@ const handleYearChange = (event) => {
             <Grid container alignItems="center" spacing={9} p={5}>
             <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Placement Details
+                Placement Details {`/ ${year}`}
                 </div>
                 </div>
             <Grid item xs={6} className="shadow">
@@ -397,7 +397,7 @@ const handleYearChange = (event) => {
           <Grid container alignItems="center" spacing={4}>
             <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Student Details
+                Student Details  {`/ ${year}`}
                 </div>
                 </div>
             <Grid item xs={6} className="shadow">
@@ -414,7 +414,7 @@ const handleYearChange = (event) => {
             </Grid>
             <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Placement Details
+                Placement Details  {`/ ${year}`}
                 </div>
                 </div>
             <Grid item xs={6} className="shadow">
@@ -455,7 +455,7 @@ const handleYearChange = (event) => {
           <Grid container alignItems="center" spacing={4}>
             <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Student Details
+                Student Details {`/ ${year}`}
                 </div>
                 </div>
                 <Grid item xs={6} className="shadow">
@@ -472,7 +472,7 @@ const handleYearChange = (event) => {
             </Grid>
             <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Placement Details
+                Placement Details {`/ ${year}`}
                 </div>
                 </div>
                 <Grid item xs={6} className="shadow">

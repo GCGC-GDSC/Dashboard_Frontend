@@ -551,7 +551,7 @@ const handleChangeOuter = (event, newValue) => {
                       </div>
                       <div className="headings" id={`stream`}  style={{marginTop:"20px",marginBottom:"-100px"}}>
                         <div className="sub">
-                        {`${instData.name.toUpperCase() } Student Details`}
+                        {`${instData.name.toUpperCase() } Student Details / ${year}`}
                         </div>
                       </div>
                       <Grid item xs={6} >
@@ -572,7 +572,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instData.name.toUpperCase()} Placement Details`}
+                      {`${instData.name.toUpperCase()} Placement Details / ${year}`}
 
                       </div>
                       </div>
@@ -595,7 +595,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instData.name.toUpperCase()} Package Details`}
+                      {`${instData.name.toUpperCase()} Package Details / ${year}`}
                       </div>
                       </div>
                       <Grid item xs={5} >
@@ -625,7 +625,7 @@ const handleChangeOuter = (event, newValue) => {
                       </div>
                       <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instData.name.toUpperCase()} Student Details`}
+                      {`${instData.name.toUpperCase()} Student Details / ${year}`}
                       </div>
                       </div>
                       <Grid item xs={6}>
@@ -647,7 +647,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instData.name.toUpperCase()} Placement Details`}
+                      {`${instData.name.toUpperCase()} Placement Details / ${year}`}
                       </div>
                       </div>
                     <Grid item xs={5}>
@@ -668,7 +668,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instData.name.toUpperCase()} Package Details`}
+                      {`${instData.name.toUpperCase()} Package Details / ${year}`}
                       </div>
                       </div>
                       <Grid item xs={5}>
@@ -698,7 +698,7 @@ const handleChangeOuter = (event, newValue) => {
                       </div>
                       <div className="headings cardtitles" id={`stream`}>
                       <div className="sub">
-                      {`${instData.name.toUpperCase()} Student Details`}
+                      {`${instData.name.toUpperCase()} Student Details / ${year}`}
                       </div>
                       </div>
                       <Grid item xs={6}>
@@ -719,7 +719,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings cardtitles" id={`stream`} >
                       <div className="sub">
-                      {`${instData.name.toUpperCase()} Placement Details`}
+                      {`${instData.name.toUpperCase()} Placement Details / ${year}`}
                       </div>
                       </div>
                     <Grid item xs={5}>
@@ -740,7 +740,7 @@ const handleChangeOuter = (event, newValue) => {
                     <Grid container spacing={2} alignItems="center"  justifyContent="space-around" px={7}>
                     <div className="headings" id={`stream`} >
                       <div className="sub">
-                      {`${instData.name.toUpperCase() } Package Details`}
+                      {`${instData.name.toUpperCase() } Package Details / ${year}`}
                       </div>
                       </div>
                       <Grid item xs={6}>
