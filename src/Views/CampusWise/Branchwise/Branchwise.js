@@ -1,5 +1,5 @@
 // import axios from "axios";
-// import React, { useEffect, useState } from "react";
+// import React, { useState,useContext,useEffect } from "react";
 // import { unstable_batchedUpdates } from "react-dom";
 // import Tabs from "@mui/material/Tabs";
 // import Tab from "@mui/material/Tab";
@@ -7,15 +7,16 @@
 // import Box from "@mui/material/Box";
 // import Grid from "@mui/material/Grid";
 // import PropTypes from "prop-types";
+// import ColorPallet, {colors} from "../../ColorAssets/colorPallet";
 // import ODoughnutChart from "../../Overall/charts/ODoughnut";
-// // import { UserContext } from "../../../context/context";
+// import { UserContext } from "../../../context/context";
 // const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 // function Branchwise({ campus, institute, year }) {
-//   // const user = useContext(UserContext)
+//   const user = useContext(UserContext)
 //   const [courseName, setCourseName] = useState("");
 //   const [gradTypeBranchwise, setgradTypeBranchwise] = useState("ug");
-//   // const [dataObject,setDataObject] = useState({})
-
+//   const [dataObject,setDataObject] = useState({})
+//   const [courseList,setCourseList] = useState([])
 //   const fetchCourseData = () => {
 //     axios
 //       .get(
@@ -25,27 +26,46 @@
 //         console.log(resp);
 //       });
 //   };
-//   var dataOne = {
-//     labels: ["krishna", "chaitanya", "kadali"],
-//     datasets: getDataForDC(
-//       "UG",
-//       objRef["placement_details"],
-//       "placement_details"
-//     ),
-//   };
-//   const optionsOne = {
-//     onClick: function (evt, item) {
-//       if (item[0]) {
-//         getDataInst(instList[item[0].index]);
-//       }
-//     },
-//     rotation: Math.PI * 5,
-//     plugins: {
-//       legend: {
-//         position: "right",
+//   const fillCoursesDoughnut= {
+//     DoughnutOptions: {
+//       onClick: function (evt, item) {
+//         if (item[0]) {
+//           const itemIndex = item[0].index
+//           alert(itemIndex)
+//         }
+//       },
+//       rotation: Math.PI * 5,
+//       plugins: {
+//         legend: {
+//           position: "left",
+//         },
 //       },
 //     },
-//   };
+//     ug:{
+//       labels: courseList.map((item) => item),
+//       datasets: [
+//         {
+//           label: "Courses",
+//           data: courseList.map((item) => 1),
+//           backgroundColor:colors,
+//           borderColor: colors,
+//           borderWidth: 1,
+//         },
+//       ],
+//     },
+//     pg:{
+//       labels: courseList.map((item) => item),
+//       datasets: [
+//         {
+//           label: "Courses",
+//           data: courseList.map((item) => 1),
+//           backgroundColor:colors,
+//           borderColor: colors,
+//           borderWidth: 1,
+//         },
+//       ],
+//     }
+//   }
 //   const handleChange = (event, newValue) => {
 //     unstable_batchedUpdates(() => {
 //       setgradTypeBranchwise(newValue == 1 ? "pg" : "ug");
@@ -71,7 +91,6 @@
 //       </div>
 //     );
 //   }
-
 //   TabPanel.propTypes = {
 //     children: PropTypes.node,
 //     index: PropTypes.number.isRequired,
@@ -85,7 +104,22 @@
 //   }
 //   const [value, setValue] = useState(0);
 
-//   useEffect(() => {});
+// const fetchCourseList=()=>{
+//   const courseArr = user.user.institute.map(instObj=> 
+//       {
+//         return(
+//         instObj.name === institute.name &&  instObj.campus === campus.name &&
+//       instObj.programs.map(courseObj=> courseObj.is_ug === (gradTypeBranchwise === "UG") &&
+//       courseObj.name.toUpperCase())
+//     )
+//       });
+
+//     setCourseList(courseArr)
+// }
+// console.log(fillCoursesDoughnut,courseList)
+// useEffect(() => {
+//   fetchCourseList()
+// }, [gradTypeBranchwise]);
 //   return (
 //     <Grid>
 //       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -103,27 +137,19 @@
 //         </Tabs>
 //       </Box>
 //       <TabPanel value={value} index={0} style={{ width: "100%" }}>
-//         <Grid item xs={5}>
-//           <ODoughnutChart
-//             isCampus={true}
-//             // title={`${instData.name} Placement Details`}
-//             data={dataOne}
-//             options={optionsOne}
-//           />
-//         </Grid>
-
-//         {/* make dnt similar to the  institute donught using the  course names form the user.user.institite */}
+//         {gradTypeBranchwise}
+//         <ODoughnutChart
+//           title={"Courses"}
+//           data={fillCoursesDoughnut[gradTypeBranchwise]}
+//           options={fillCoursesDoughnut.DoughnutOptions}
+//         />
 //       </TabPanel>
 //       <TabPanel value={value} index={1} style={{ width: "100%" }}>
-//         {gradTypeBranchwise}
-//         <Grid item xs={5}>
-//           <ODoughnutChart
-//             isCampus={true}
-//             // title={`${instData.name} Placement Details`}
-//             data={dataOne}
-//             options={optionsOne}
+//         <ODoughnutChart
+//             title={"Courses"}
+//             data={fillCoursesDoughnut[gradTypeBranchwise]}
+//             options={fillCoursesDoughnut.DoughnutOptions}
 //           />
-//         </Grid>
 //       </TabPanel>
 //     </Grid>
 //   );

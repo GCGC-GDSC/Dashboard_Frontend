@@ -1,7 +1,6 @@
 // import { Key } from '@mui/icons-material'
 import './table.css'
 const Table = ({ data,keys }) => {
-  console.log(data)
   const parsedValues = {
     'total_offers':"Number of total offers",
     'total_multiple_offers':"Numbers of multiple offers",
