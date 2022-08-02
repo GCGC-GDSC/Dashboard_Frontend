@@ -765,7 +765,7 @@ const handleChangeOuter = (event, newValue) => {
               {/* changed value = {value} to value={valueOrder} */}
               <TabPanel value={valueOuter} index={1} style={{width:"100%"}}>
                 {/* Branch wise component */}
-                <Branchwise campus={campusData} year ={year} institute={instData}/>
+                <Branchwise campus={CampusNamesToCode[campusName]} year ={year} institute={instData.name}/>
                </TabPanel>
           </Box>
         </div>

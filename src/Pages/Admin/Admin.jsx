@@ -21,6 +21,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import { unstable_batchedUpdates } from "react-dom";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
+import Logs from './Logs.component'
 // accordian
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -45,7 +46,7 @@ function Admin() {
   const [dataObject,setDataObject] = useState({})
   const [open, setOpen] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
-  // const [logs,setLogs] = useState([])
+  const [logs,setLogs] = useState([])
   const [confirmUpdate, setConfirmUpdate] = useState(false);
   
   const handleOpen = () => setOpen(true);
@@ -86,7 +87,6 @@ function Admin() {
       }
     })
     .then(resp=>{
-      console.log(resp)
       if( !resp || resp === [] || resp.statusText !== "OK")
       {
         alert(" Data unavailable!!")
@@ -116,23 +116,22 @@ function Admin() {
 
   const downloadExcel  = ()=>{
     handleClose()
-    alert("functionality currently not available")
-  //   axios.get(`${REACT_APP_API_URL}students/${year}/download/${viewCampus.name}`,{
-  //     headers: {
-  //       'Authorization': `Token ${user.user.token.key}`,
-  //       'content-type': 'application/msexcel' ,
-  //     },
-  //     "responseType" :"blob"
-  //   }
-  //   )
-  //   .then(response=>{
-  //     const url = window.URL.createObjectURL(new Blob([response.data]));
-  //     const link = document.createElement('a');
-  //     link.href = url;
-  //     link.setAttribute('download', `${parsedStudentDetailsRef[viewCampus.name]} Career Fulfillment Statistics.xlsx`);
-  //     document.body.appendChild(link);
-  //     link.click();
-  // })
+    axios.get(`${REACT_APP_API_URL}students/${year}/download/${viewCampus.name}`,{
+      headers: {
+        'Authorization': `Token ${user.user.token.key}`,
+        'content-type': 'application/msexcel' ,
+      },
+      "responseType" :"blob"
+    }
+    )
+    .then(response=>{
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${parsedStudentDetailsRef[viewCampus.name]} Career Fulfillment Statistics.xlsx`);
+      document.body.appendChild(link);
+      link.click();
+  })
   }
   const updateInDataBase =()=>{
     setConfirmUpdate(false)
@@ -175,7 +174,6 @@ function Admin() {
         axios(configFinal)
         .then(resp=>{
           // update the dataObject 
-          console.log('hello')
           if(resp.data.status.toLowerCase() === "ok")
           { 
             unstable_batchedUpdates(()=>{
@@ -277,17 +275,17 @@ const handleChangeTableInput = (event) =>{
   //   })
   // }
   useEffect(()=>{
-    // const fetchLogs = ()=>{
-    //   axios.get(`${REACT_APP_API_URL}students/logs`,{
-    //     headers: {
-    //       'Authorization': `Token ${user.user.token.key}`
-    //     }
-    //   })
-    //   .then(resp=>{
-    //       setLogs(resp.data.result)
-    //   })
-    // }
-  //  fetchLogs()
+    const fetchLogs = ()=>{
+      axios.get(`${REACT_APP_API_URL}students/logs`,{
+        headers: {
+          'Authorization': `Token ${user.user.token.key}`
+        }
+      })
+      .then(resp=>{
+          setLogs(resp.data.result)
+      })
+    }
+   fetchLogs()
   },[user])
   return (
     <Box px={10}>
@@ -662,7 +660,7 @@ const handleChangeTableInput = (event) =>{
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-          {/* <Logs logs={logs}/> */}
+          <Logs logs={logs}/>
           </Typography>
         </AccordionDetails>
       </Accordion>

@@ -25,7 +25,6 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 function Compare() {
   const user = useContext(UserContext);
-  console.log(user)
   const compareYears= [2019,2020,2021,2022,2023]
   const campusList = user.user.campus 
   const CampusNames = {
@@ -78,15 +77,6 @@ function Compare() {
       setComparision(true)
     })
   }
-  // const loadCourses = ()=>{
-  //   axios.get('https://gcgc-dashboard.herokuapp.com/organization/courses')
-  //   .then(resp=>{
-  //     setCourseList(resp.data.result)
-  //   })
-  // }
-  // useEffect(() => {
-  //     // loadCourses()
-  // }, []);
   return (
 
     <Box flexgrow={1} className='compare'>
@@ -156,7 +146,7 @@ function Compare() {
               campus.name === instName.campus ? (
                 
                 <MenuItem value={instName}>{instName.name.toUpperCase()}</MenuItem>
-              ) : console.log(campus)
+              ) : null
             )}
 
                   </Select>
