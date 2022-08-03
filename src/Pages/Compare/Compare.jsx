@@ -14,7 +14,15 @@ import {ReactComponent as CompareSVG }  from "../../assets/compareSVG.svg";
 import './Compare.scss'
 import { ThemeProvider} from '@mui/material/styles'
 import theme1 from "../../MuiThemes/themes"
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import GolfCourseIcon from '@mui/icons-material/GolfCourse';
+import SchoolIcon from '@mui/icons-material/School';
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+// import { style, width } from "@mui/system";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+
 function Compare() {
   const user = useContext(UserContext);
   const compareYears= [2019,2020,2021,2022,2023]
@@ -34,6 +42,7 @@ function Compare() {
   const [gradType,setGradType] = useState();
   const [yearData, setYearData] = useState(null);
   const [comparision,setComparision] = useState(false);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === "year1") setYear1(value);
@@ -47,9 +56,10 @@ function Compare() {
     //   return ["Number of Companies","Number of students Placed","Highest Package","Number of off campus placements"]
     // }
   const handleCompare =()=>{
+
     // api call.....
   //  alert("comparing")
-    axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${course.toLowerCase()}/${gradType.toLowerCase()}`,{
+    axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}/${course.toLowerCase()}/${gradType.toLowerCase()}`,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
       }
@@ -173,6 +183,11 @@ function Compare() {
                   </Select>
                 </FormControl>
                 
+            
+
+                </Grid>
+
+                <Grid>
                 <FormControl
                   variant="standard"
                   sx={{ m: 1, minWidth: 100 }}
@@ -192,22 +207,24 @@ function Compare() {
 
                   </Select>
                 </FormControl>
-
                 </Grid>
-
-
                 <Grid>
                   <ThemeProvider theme={theme1}>
                     <Button variant="outlined" color="primary" startIcon={<DifferenceIcon />}
-                    disabled={!(year1 && year2)}
+                    disabled={!(year1 && year2 && campus && institute && gradType && course)}
                     onClick={handleCompare}
+                    size="large"
+                    sx={{fontSize: 24}}
                     >
                       Compare
                   </Button>
                     </ThemeProvider>
                 </Grid>
+              
               </Grid>
+              
               <Grid xs={12} md={4} className="right">
+            
               <FormControl
                   variant="standard"
                   sx={{ m: 1, minWidth: 100 }}
@@ -227,7 +244,19 @@ function Compare() {
                   </Select>
                 </FormControl>
               </Grid>
+
+         
             </Grid>
+            {comparision?
+        <div className="formInformation" style={{margin:"auto"}}>
+           <EventNoteIcon color="primary"/><h4>{year1} <ArrowRightIcon/></h4>
+          <BookmarkAddIcon color="primary"/><h4>{campus.name}<ArrowRightIcon/></h4>
+          <BookmarkAddIcon color="primary"/><h4>{institute.name}<ArrowRightIcon/></h4>
+          <AccountBalanceIcon  color="primary"/><h4>{course} <ArrowRightIcon/></h4>
+          <GolfCourseIcon color="primary"/><h4>{gradType}<ArrowRightIcon/></h4>
+          <SchoolIcon color="primary"/> <h4>{year2}</h4>
+        </div>:null
+}
             {!comparision?
               <CompareSVG className='compareSVG' />:
               <Grid container className="year_data">

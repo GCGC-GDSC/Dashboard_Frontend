@@ -52,7 +52,7 @@ function NavBar({user}) {
             <NavLink className='navbar-link' activeStyle={selected}  exact to = '/'>
                 Home
             </NavLink>
-            <NavLink className='navbar-link' activeStyle={selected}  to = '/adminPannel'>
+            <NavLink className='navbar-link' activeStyle={selected}  to = '/adminpannel'>
                 Admin
             </NavLink>
             <NavLink className='navbar-link' activeStyle={selected}  to = '/compare'>

@@ -14,6 +14,7 @@ import NavBar from "./Components/Navbar/NavBar";
 import { firebase } from "./backend/firebase.config";
 import Highlights from "./Pages/Highlights/Highlights";
 import Compare from "./Pages/Compare/Compare";
+import NotFound from "./Pages/404/NotFound";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 const App = () => {
   const [isUserSignedIn, setIsUserSignedIn] = useState(false);
@@ -34,8 +35,7 @@ const App = () => {
         .then((resp) => {
           if (resp.data.status !== "error")
             setVerifiedUser({ user: resp.data.result, isVerified: true });
-          else 
-          {
+          else {
             setVerifiedUser({ user: {}, isVerified: false });
           }
         });
@@ -69,10 +69,11 @@ const App = () => {
             <NavBar user={verifiedUser} />
             <Routes>
               <Route exact path="/" element={<Home />} />
-              <Route path="/adminPannel" element={<Admin />} />
+              <Route path="/adminpannel" element={<Admin />} />
               <Route path="/team" element={<MediaCard />} />
               <Route path="/highlights" element={<Highlights />} />
               <Route path="/compare" element={<Compare />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </UserContext.Provider>
         ) : //  user signed in and useing small screen
@@ -80,12 +81,12 @@ const App = () => {
           <UserContext.Provider value={providerValue}>
             <NavBar user={verifiedUser} />
             <Routes>
-              <Route path="/adminPannel" element={<Admin />} />
+              <Route path="/adminpannel" element={<Admin />} />
               <Route path="/team" element={<MediaCard />} />
               <Route exact path="/" element={<RestrictedView />} />
               <Route path="/highlights" element={<Highlights />} />
               <Route path="/compare" element={<Compare />} />
-
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </UserContext.Provider>
         ) : (
@@ -93,6 +94,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/team" element={<MediaCard />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         )}
       </Router>

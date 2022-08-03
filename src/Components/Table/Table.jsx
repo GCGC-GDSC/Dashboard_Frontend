@@ -1,5 +1,6 @@
 import './table.css'
 const Table = ({ data, column,category,keys }) => {
+  console.log("heyo😎😎",data,column,category,keys)
   return (
     <>
     <table className="container" border='1' >

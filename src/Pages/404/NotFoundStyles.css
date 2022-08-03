@@ -1,0 +1,11 @@
+.notfound{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 15%;
+}
+.notfound span{
+    color: rgb(247, 101, 125);
+    font-style: italic;
+}

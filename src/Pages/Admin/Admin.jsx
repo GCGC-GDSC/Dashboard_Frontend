@@ -98,6 +98,8 @@ function Admin() {
       newDataObj["self_percent_back_final"] = ((dataObj["total_backlogs"] / dataObj["total_final_years"]) * 100).toFixed(2)
       newDataObj["self_percent_eligible_final"] = ((dataObj["total_students_eligible"] / dataObj["total_final_years"]) * 100).toFixed(2)
       newDataObj["self_percent_yet_to_place_eligible"] = ((dataObj["total_yet_to_place"] / dataObj["total_students_eligible"]) * 100).toFixed(2)
+      newDataObj["self_percentage_of_students_placed_out_of_students_requiring_placements"] =( 100 - ((dataObj["total_yet_to_place"] / dataObj["total_students_eligible"]) * 100).toFixed(2))
+
       dataObj = {...dataObj,...newDataObj}
       unstable_batchedUpdates(()=>{
         setInstituteData(dataObj)
@@ -231,7 +233,7 @@ const checkDependentValueUpdates = (kvp)=>{
   newRefObj["self_percent_back_final"] = ((newRefObj["total_backlogs"] / newRefObj["total_final_years"]) * 100).toFixed(2)
   newRefObj["self_percent_eligible_final"] = ((newRefObj["total_students_eligible"] / newRefObj["total_final_years"]) * 100).toFixed(2)
   newRefObj["self_percent_yet_to_place_eligible"] = ((newRefObj["total_yet_to_place"] / newRefObj["total_students_eligible"]) * 100).toFixed(2)
-
+  newRefObj["self_percentage_of_students_placed_out_of_students_requiring_placements"] =( 100 - ((newRefObj["total_yet_to_place"] / newRefObj["total_students_eligible"]) * 100).toFixed(2))
   setDataObject({...newRefObj})
 }
 const handleChangeTableInput = (event) =>{
