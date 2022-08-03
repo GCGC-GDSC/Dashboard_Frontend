@@ -4,10 +4,11 @@ import { unstable_batchedUpdates } from "react-dom";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
+import Table from "../../../Components/Table/Table"
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import PropTypes from "prop-types";
-import InstituteStudentDataFormatCampusWise from '../APIKeys'
+import InstituteStudentDataFormatCampusWise,{parsedInstituteStudentDataFormatCampusWise} from '../APIKeys'
 import  {colors} from "../../ColorAssets/colorPallet";
 import ODoughnutChart from "../../Overall/charts/ODoughnut";
 import OVerticalBarChart from "../../Overall/charts/OVerticalBarChart";
@@ -83,7 +84,7 @@ function Branchwise({ campus, institute, year }) {
     keys.forEach(key=>{
       // dataArray.push(courseDataObject[key]+ Math.floor((Math.random() * 1000) + 1))
       // const p = courseDataObject[key]
-      // dummy remove it later ##
+      // dummy remove it later ## 
       courseDataObject["blank"] = "_" + courseName
       dataArray.push(Math.floor((Math.random() * 1000) + 1))
 
@@ -177,6 +178,27 @@ function Branchwise({ campus, institute, year }) {
           ],
         },
       }
+    }
+
+    const TABLE_DATA = (category)=>{
+      const getTableData = (category)=>{
+        const dataArray = []
+        parsedInstituteStudentDataFormatCampusWise[category].forEach(key=>{
+          // dataArray.push(courseDataObject[key]+ Math.floor((Math.random() * 1000) + 1))
+          // const p = courseDataObject[key]
+          // dummy remove it later ## 
+          courseDataObject["blank"] = "_" + courseName
+          dataArray.push(Math.floor((Math.random() * 1000) + 1))
+    
+        })
+        return dataArray
+      }
+    
+      const TableData ={
+        column:["Heading"]  ,
+        data :getTableData(category)
+      }
+      return TableData
     }
   const handleChange = (event, newValue) => {
     unstable_batchedUpdates(() => {
@@ -278,6 +300,10 @@ function Branchwise({ campus, institute, year }) {
             data={fillCharts[gradTypeBranchwise]["doughnut1"]}
             options={fillCharts.verticalChartOptions}
           />
+          <Table column={TABLE_DATA("placement_details").column} 
+                        data={TABLE_DATA("placement_details").data} 
+                        category={"Placement Details"} 
+                        keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
            <ODoughnutChart
             data={fillCharts[gradTypeBranchwise]["doughnut2"]}
             options={fillCharts.verticalChartOptions}

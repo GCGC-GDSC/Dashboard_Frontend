@@ -49,7 +49,7 @@ function Compare() {
   const handleCompare =()=>{
     // api call.....
   //  alert("comparing")
-    axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${course.toLowerCase()}/${gradType.toLowerCase()}}`,{
+    axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${course.toLowerCase()}/${gradType.toLowerCase()}`,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
       }
@@ -155,7 +155,7 @@ function Compare() {
                     name="course"
                     onChange={handleChange}
                   >
-                     {console.log(institute,campus,user) }
+                     {/* {console.log(institute,campus,user) } */}
                      {
                     user.user.institute.map(instObj=> 
                       {
