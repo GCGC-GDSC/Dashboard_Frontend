@@ -59,7 +59,7 @@ function Compare() {
 
     // api call.....
   //  alert("comparing")
-    axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${course.toLowerCase()}/${gradType.toLowerCase()}}`,{
+    axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}/${course.toLowerCase()}/${gradType.toLowerCase()}`,{
       headers: {
         'Authorization': `Token ${user.user.token.key}`
       }
