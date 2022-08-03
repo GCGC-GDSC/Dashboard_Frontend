@@ -118,6 +118,10 @@ const handleChangeOuter = (event, newValue) => {
       plugins: {
         legend: {
           position: "left",
+          labels: {
+            usePointStyle: true,
+            pointStyle: "circle",
+          },
         },
       },
     },
@@ -130,7 +134,11 @@ const handleChangeOuter = (event, newValue) => {
       rotation: Math.PI * 5,
       plugins: {
         legend: {
-          position: "right",
+          position: "left",
+          labels: {
+            usePointStyle: true,
+            pointStyle: "circle",
+          },
         },
       },
     },
@@ -143,6 +151,10 @@ const handleChangeOuter = (event, newValue) => {
       plugins: {
         legend: {
           position: "left",
+          labels: {
+            usePointStyle: true,
+            pointStyle: "circle",
+          },
         },
       },
     },
@@ -163,6 +175,10 @@ const handleChangeOuter = (event, newValue) => {
       plugins: {
         legend: {
           position: "left",
+          labels: {
+            usePointStyle: true,
+            pointStyle: "circle",
+          },
         },
       },
     },
@@ -171,6 +187,10 @@ const handleChangeOuter = (event, newValue) => {
       plugins: {
         legend: {
           position: "left",
+          labels: {
+            usePointStyle: true,
+            pointStyle: "circle",
+          },
         },
       },
     },

@@ -4,12 +4,14 @@ import { unstable_batchedUpdates } from "react-dom";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import Table from "../../../Components/Table/Table"
+import Table from "../../../Components/Table/Table";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import PropTypes from "prop-types";
-import InstituteStudentDataFormatCampusWise,{parsedInstituteStudentDataFormatCampusWise} from '../APIKeys'
-import  {colors} from "../../ColorAssets/colorPallet";
+import InstituteStudentDataFormatCampusWise, {
+  parsedInstituteStudentDataFormatCampusWise,
+} from "../APIKeys";
+import { colors } from "../../ColorAssets/colorPallet";
 import ODoughnutChart from "../../Overall/charts/ODoughnut";
 import OVerticalBarChart from "../../Overall/charts/OVerticalBarChart";
 import { UserContext } from "../../../context/context";
@@ -51,10 +53,14 @@ function Branchwise({ campus, institute, year }) {
       plugins: {
         legend: {
           position: "left",
+          labels: {
+            usePointStyle: true,
+            pointStyle: "circle",
+          },
         },
       },
     },
-    ug: { 
+    ug: {
       labels: courseList.map((item) => item.toUpperCase()),
       datasets: [
         {
@@ -84,20 +90,19 @@ function Branchwise({ campus, institute, year }) {
     keys.forEach((key) => {
       // dataArray.push(courseDataObject[key])
       // const p = courseDataObject[key]
-      // dummy remove it later ## 
-      courseDataObject["blank"] = "_" + courseName
-      dataArray.push(Math.floor((Math.random() * 1000) + 1))  
-
-    })
-    return dataArray
-}
-    const fillCharts = {
-      verticalChartOptions:{
-        onClick: function (evt, item) {
-          if (item[0]) {
-          }
-        },
+      // dummy remove it later ##
+      courseDataObject["blank"] = "_" + courseName;
+      dataArray.push(Math.floor(Math.random() * 1000 + 1));
+    });
+    return dataArray;
+  };
+  const fillCharts = {
+    verticalChartOptions: {
+      onClick: function (evt, item) {
+        if (item[0]) {
+        }
       },
+    },
     ug: {
       doughnut1: {
         labels: parsedInstituteStudentDataFormatCampusWise["student_details"],
@@ -115,93 +120,106 @@ function Branchwise({ campus, institute, year }) {
           },
         ],
       },
-      doughnut2:{
-        labels:InstituteStudentDataFormatCampusWise["placement_details"],
-        datasets : [
+      doughnut2: {
+        labels: parsedInstituteStudentDataFormatCampusWise["placement_details"],
+        datasets: [
           {
             label: "student_details",
-            data: getDataForVC(InstituteStudentDataFormatCampusWise["placement_details"],"placement_details"),
-            backgroundColor:colors,
+            data: getDataForVC(
+              InstituteStudentDataFormatCampusWise["placement_details"],
+              "placement_details"
+            ),
+            backgroundColor: colors,
             borderColor: colors,
             borderWidth: 1,
           },
         ],
       },
-      vc:{
-        labels:InstituteStudentDataFormatCampusWise["salary"],
-        datasets : [
+      vc: {
+        labels: InstituteStudentDataFormatCampusWise["salary"],
+        datasets: [
           {
             label: "student_details",
-            data: getDataForVC(InstituteStudentDataFormatCampusWise["salary"],"salary"),
-            backgroundColor:colors,
+            data: getDataForVC(
+              InstituteStudentDataFormatCampusWise["salary"],
+              "salary"
+            ),
+            backgroundColor: colors,
             borderColor: colors,
             borderWidth: 1,
           },
         ],
       },
+    },
+    pg: {
+      doughnut1: {
+        labels: parsedInstituteStudentDataFormatCampusWise["student_details"],
+        // datasets :getDataForVC(InstituteStudentDataFormatCampusWise["student_details"],"student_details")
+        datasets: [
+          {
+            label: "student_details",
+            data: getDataForVC(
+              InstituteStudentDataFormatCampusWise["student_details"],
+              "student_details"
+            ),
+            backgroundColor: colors,
+            borderColor: colors,
+            borderWidth: 1,
+          },
+        ],
       },
-      pg:{
-        doughnut1:{
-          labels:InstituteStudentDataFormatCampusWise["student_details"],
-          // datasets :getDataForVC(InstituteStudentDataFormatCampusWise["student_details"],"student_details")
-          datasets : [
-            {
-              label: "student_details",
-              data: getDataForVC(InstituteStudentDataFormatCampusWise["student_details"],"student_details"),
-              backgroundColor:colors,
-              borderColor: colors,
-              borderWidth: 1,
-            },
-          ],
+      doughnut2: {
+        labels: parsedInstituteStudentDataFormatCampusWise["placement_details"],
+        datasets: [
+          {
+            label: "student_details",
+            data: getDataForVC(
+              InstituteStudentDataFormatCampusWise["placement_details"],
+              "placement_details"
+            ),
+            backgroundColor: colors,
+            borderColor: colors,
+            borderWidth: 1,
+          },
+        ],
+      },
+      vc: {
+        labels: InstituteStudentDataFormatCampusWise["salary"],
+        datasets: [
+          {
+            label: "student_details",
+            data: getDataForVC(
+              InstituteStudentDataFormatCampusWise["salary"],
+              "salary"
+            ),
+            backgroundColor: colors,
+            borderColor: colors,
+            borderWidth: 1,
+          },
+        ],
+      },
+    },
+  };
 
-        },
-        doughnut2:{
-          labels:InstituteStudentDataFormatCampusWise["placement_details"],
-          datasets : [
-            {
-              label: "student_details",
-              data: getDataForVC(InstituteStudentDataFormatCampusWise["placement_details"],"placement_details"),
-              backgroundColor:colors,
-              borderColor: colors,
-              borderWidth: 1,
-            },
-          ],
-        },
-        vc:{
-          labels:InstituteStudentDataFormatCampusWise["salary"],
-          datasets : [
-            {
-              label: "student_details",
-              data: getDataForVC(InstituteStudentDataFormatCampusWise["salary"],"salary"),
-              backgroundColor:colors,
-              borderColor: colors,
-              borderWidth: 1,
-            },
-          ],
-        },
-    }
-  }
+  const TABLE_DATA = (category) => {
+    const getTableData = (category) => {
+      const dataArray = [];
+      InstituteStudentDataFormatCampusWise[category].forEach((key) => {
+        // dataArray.push([courseDataObject[key]])
+        // const p = courseDataObject[key]
+        // dummy remove it later ##
+        // courseDataObject["blank"] = "_" + courseName
+        dataArray.push([Math.floor(Math.random() * 1000 + 1)]);
+      });
+      return dataArray;
+    };
 
-    const TABLE_DATA = (category)=>{
-      const getTableData = (category)=>{
-        const dataArray = []
-        InstituteStudentDataFormatCampusWise[category].forEach(key=>{
-          // dataArray.push([courseDataObject[key]])
-          // const p = courseDataObject[key]
-          // dummy remove it later ## 
-          // courseDataObject["blank"] = "_" + courseName
-          dataArray.push([Math.floor((Math.random() * 1000) + 1)])
-    
-        })
-        return dataArray
-      }
-    
-      const TableData ={
-        column:["Heading"],
-        data :getTableData(category)
-      }
-      return TableData
-    }
+    const TableData = {
+      column: ["Heading"],
+      data: getTableData(category),
+    };
+    return TableData;
+  };
   const handleChange = (event, newValue) => {
     unstable_batchedUpdates(() => {
       setgradTypeBranchwise(newValue === 1 ? "pg" : "ug");
@@ -251,7 +269,7 @@ function Branchwise({ campus, institute, year }) {
   //       });
   //     setCourseList(courseArr)
   // }
-  console.log(fillCharts)
+  console.log(fillCharts);
   useEffect(() => {
     // console.log("😎😎",courseName)
     const fetchCourseList = () => {
@@ -284,71 +302,247 @@ function Branchwise({ campus, institute, year }) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} style={{ width: "100%" }}>
-        {gradTypeBranchwise}
-        <Grid xs={6} md={4}>
+        <Grid
+          item
+          xs={6}
+          className="firstDoughnut"
+          style={{
+            margin: "auto",
+          }}
+        >
           <ODoughnutChart
-            title={"Courses"}
+            title={`Courses for the year ${year}/${campus}/${institute}`}
             data={fillCoursesDoughnut[gradTypeBranchwise]}
             options={fillCoursesDoughnut.DoughnutOptions}
-            />
-          {
-          unlockCharts&&
-        <Grid>
-          <ODoughnutChart
-            data={fillCharts[gradTypeBranchwise]["doughnut1"]}
-            options={fillCharts.verticalChartOptions}
+            style={{
+              margin: "auto",
+            }}
           />
-              <Table column={TABLE_DATA("student_details").column} 
-                    data={TABLE_DATA("student_details").data} 
-                  category={"Student Details"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["student_details"]}/>
-    
-           <ODoughnutChart
-            data={fillCharts[gradTypeBranchwise]["doughnut2"]}
-            options={fillCharts.verticalChartOptions}
-          />
-          <Table column={TABLE_DATA("placement_details").column} 
-                    data={TABLE_DATA("placement_details").data} 
-                  category={"Placement Details"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["placement_details"]}/>
-           <OVerticalBarChart
-            data={fillCharts[gradTypeBranchwise]["vc"]}
-            options={fillCharts.verticalChartOptions}
-          />
-          <Table column={TABLE_DATA("salary").column} 
-                    data={TABLE_DATA("salary").data} 
-                  category={"Salary"} 
-                  keys={parsedInstituteStudentDataFormatCampusWise["salary"]}/>
-        </Grid>}
         </Grid>
+
+        {unlockCharts && (
+          <>
+            <Grid
+              container
+              spacing={9}
+              alignItems="center"
+              justifyContent="space-around"
+              mt={2}
+            >
+              <div className="headings" id={`stream`}>
+                <div className="sub">
+                  <h6>Some Main Text</h6>
+                </div>
+              </div>
+              <div
+                className="headings"
+                id={`stream`}
+                style={{ marginTop: "20px", marginBottom: "-100px" }}
+              >
+                <div className="sub">
+                  <h6>Some Text</h6>
+                </div>
+              </div>
+              <Grid item xs={6}>
+                <ODoughnutChart
+                  data={fillCharts[gradTypeBranchwise]["doughnut1"]}
+                  options={fillCoursesDoughnut.DoughnutOptions}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Table
+                  column={TABLE_DATA("student_details").column}
+                  data={TABLE_DATA("student_details").data}
+                  category={"Student Details"}
+                  keys={
+                    parsedInstituteStudentDataFormatCampusWise[
+                      "student_details"
+                    ]
+                  }
+                />
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              spacing={2}
+              alignItems="center"
+              justifyContent="space-around"
+              px={7}
+            >
+              <div className="headings" id={`stream`}>
+                <div className="sub">
+                  <h6>Some text</h6>
+                </div>
+              </div>
+              <Grid item xs={5}>
+                <ODoughnutChart
+                  data={fillCharts[gradTypeBranchwise]["doughnut2"]}
+                  options={fillCoursesDoughnut.DoughnutOptions}
+                />
+              </Grid>
+              <Grid item xs={5} ml={15}>
+                <Table
+                  column={TABLE_DATA("placement_details").column}
+                  data={TABLE_DATA("placement_details").data}
+                  category={"Placement Details"}
+                  keys={
+                    parsedInstituteStudentDataFormatCampusWise[
+                      "placement_details"
+                    ]
+                  }
+                />
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              spacing={2}
+              alignItems="center"
+              justifyContent="space-around"
+              px={7}
+            >
+              <div className="headings" id={`stream`}>
+                <div className="sub">
+                  <h6>Some Text</h6>
+                </div>
+              </div>
+              <Grid item xs={5}>
+                <OVerticalBarChart
+                  data={fillCharts[gradTypeBranchwise]["vc"]}
+                  options={fillCharts.verticalChartOptions}
+                />
+              </Grid>
+              <Grid item xs={5} ml={15}>
+                <Table
+                  column={TABLE_DATA("salary").column}
+                  data={TABLE_DATA("salary").data}
+                  category={"Salary"}
+                  keys={parsedInstituteStudentDataFormatCampusWise["salary"]}
+                />
+              </Grid>
+            </Grid>
+          </>
+        )}
       </TabPanel>
       <TabPanel value={value} index={1} style={{ width: "100%" }}>
-        {gradTypeBranchwise}
-        <Grid xs={6} md={4}>
+        <Grid
+          item
+          xs={6}
+          className="firstDoughnut"
+          style={{
+            margin: "auto",
+          }}
+        >
           <ODoughnutChart
-            title={"Courses"}
+            title={`Courses for the year ${year}/${campus}/${institute}`}
             data={fillCoursesDoughnut[gradTypeBranchwise]}
             options={fillCoursesDoughnut.DoughnutOptions}
           />
-          {unlockCharts &&
-            <Grid>
-              <ODoughnutChart
-                data={fillCharts[gradTypeBranchwise]["doughnut1"]}
-                options={fillCharts.verticalChartOptions}
-              />
-              <ODoughnutChart
-                data={fillCharts[gradTypeBranchwise]["doughnut2"]}
-                options={fillCharts.verticalChartOptions}
-              />
-              <OVerticalBarChart
-                data={fillCharts[gradTypeBranchwise]["vc"]}
-                options={fillCharts.verticalChartOptions}
-              />
-            </Grid>
-          }
         </Grid>
+
+        {unlockCharts && (
+          <>
+            <Grid
+              container
+              spacing={9}
+              alignItems="center"
+              justifyContent="space-around"
+              mt={2}
+            >
+              <div className="headings" id={`stream`}>
+                <div className="sub">
+                  <h6>Some Main Text</h6>
+                </div>
+              </div>
+              <div
+                className="headings"
+                id={`stream`}
+                style={{ marginTop: "20px", marginBottom: "-100px" }}
+              >
+                <div className="sub">
+                  <h6>Some Text</h6>
+                </div>
+              </div>
+              <Grid item xs={6}>
+                <ODoughnutChart
+                  data={fillCharts[gradTypeBranchwise]["doughnut1"]}
+                  options={fillCoursesDoughnut.DoughnutOptions}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Table
+                  column={TABLE_DATA("student_details").column}
+                  data={TABLE_DATA("student_details").data}
+                  category={"Student Details"}
+                  keys={
+                    parsedInstituteStudentDataFormatCampusWise[
+                      "student_details"
+                    ]
+                  }
+                />
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              spacing={2}
+              alignItems="center"
+              justifyContent="space-around"
+              px={7}
+            >
+              <div className="headings" id={`stream`}>
+                <div className="sub">
+                  <h6>Some text</h6>
+                </div>
+              </div>
+              <Grid item xs={5}>
+                <ODoughnutChart
+                  data={fillCharts[gradTypeBranchwise]["doughnut2"]}
+                  options={fillCoursesDoughnut.DoughnutOptions}
+                />
+              </Grid>
+              <Grid item xs={5} ml={15}>
+                <Table
+                  column={TABLE_DATA("placement_details").column}
+                  data={TABLE_DATA("placement_details").data}
+                  category={"Placement Details"}
+                  keys={
+                    parsedInstituteStudentDataFormatCampusWise[
+                      "placement_details"
+                    ]
+                  }
+                />
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              spacing={2}
+              alignItems="center"
+              justifyContent="space-around"
+              px={7}
+            >
+              <div className="headings" id={`stream`}>
+                <div className="sub">
+                  <h6>Some Text</h6>
+                </div>
+              </div>
+              <Grid item xs={5}>
+                <OVerticalBarChart
+                  data={fillCharts[gradTypeBranchwise]["vc"]}
+                  options={fillCharts.verticalChartOptions}
+                />
+              </Grid>
+              <Grid item xs={5} ml={15}>
+                <Table
+                  column={TABLE_DATA("salary").column}
+                  data={TABLE_DATA("salary").data}
+                  category={"Salary"}
+                  keys={parsedInstituteStudentDataFormatCampusWise["salary"]}
+                />
+              </Grid>
+            </Grid>
+          </>
+        )}
       </TabPanel>
     </Grid>
-  )
+  );
 }
 export default Branchwise;

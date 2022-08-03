@@ -55,12 +55,14 @@ function Overall() {
             },
             rotation: Math.PI * 5,
             plugins: {
-                legend: {
-                    
-                    position: "left",
-
-               },
-           },
+              legend: {
+                position: "left",
+                labels: {
+                  usePointStyle: true,
+                  pointStyle: "circle",
+                },
+              },
+            },
 
         },
         VerticalBarChart1 : {

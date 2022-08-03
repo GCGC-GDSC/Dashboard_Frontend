@@ -370,7 +370,7 @@ const handleYearChange = (event) => {
             <Grid container alignItems="center" spacing={9} p={7}>
             <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Package Details
+                Package Details{`/ ${year}`}
                 </div>
                 </div>
             <Grid item xs={6} className="shadow">
@@ -431,7 +431,7 @@ const handleYearChange = (event) => {
             </Grid>
             <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Package Details
+                Package Details{`/ ${year}`}
                 </div>
                 </div>
             <Grid item xs={6} className="shadow">
@@ -490,7 +490,7 @@ const handleYearChange = (event) => {
 </Grid>
             <div className="headings cardtitles" id={`stream`} >
                 <div className="sub">
-                Package Details
+                Package Details {`/ ${year}`}
                 </div>
                 </div>
                 <Grid item xs={6} className="shadow">
