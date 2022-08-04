@@ -44,7 +44,7 @@ function NavBar({user}) {
             <img src={gcgcLogo} alt="GCGC"  width={"153px"} height={"45px"} />
         </div>  
         <div className="navbar_Header">
-            <h3>CAREER FULFILLMENT STATISTICS <span className="heading_year">2022</span></h3> 
+            <h3>CAREER FULFILLMENT STATISTICS</h3> 
         </div>
         <div>
             {user.isVerified&&

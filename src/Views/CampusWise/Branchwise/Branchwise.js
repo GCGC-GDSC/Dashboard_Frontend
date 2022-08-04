@@ -329,18 +329,18 @@ function Branchwise({ campus, institute, year }) {
               justifyContent="space-around"
               mt={2}
             >
-              <div className="headings" id={`stream`}>
-                <div className="sub">
-                  <h6>Some Main Text</h6>
-                </div>
-              </div>
+                {/* <div className="headings" id={`stream`}>
+                  <div className="sub">
+                    <h6>Some Main Text</h6>
+                  </div>
+                </div> */}
               <div
                 className="headings"
                 id={`stream`}
                 style={{ marginTop: "20px", marginBottom: "-100px" }}
               >
                 <div className="sub">
-                  <h6>Some Text</h6>
+                  <h4>Student Details</h4>
                 </div>
               </div>
               <Grid item xs={6}>
@@ -371,7 +371,7 @@ function Branchwise({ campus, institute, year }) {
             >
               <div className="headings" id={`stream`}>
                 <div className="sub">
-                  <h6>Some text</h6>
+                  <h4>Placement Details</h4>
                 </div>
               </div>
               <Grid item xs={5}>
@@ -402,7 +402,7 @@ function Branchwise({ campus, institute, year }) {
             >
               <div className="headings" id={`stream`}>
                 <div className="sub">
-                  <h6>Some Text</h6>
+                  <h4>Salary</h4>
                 </div>
               </div>
               <Grid item xs={5}>
@@ -448,18 +448,18 @@ function Branchwise({ campus, institute, year }) {
               justifyContent="space-around"
               mt={2}
             >
-              <div className="headings" id={`stream`}>
+              {/* <div className="headings" id={`stream`}>
                 <div className="sub">
                   <h6>Some Main Text</h6>
                 </div>
-              </div>
+              </div> */}
               <div
                 className="headings"
                 id={`stream`}
                 style={{ marginTop: "20px", marginBottom: "-100px" }}
               >
                 <div className="sub">
-                  <h6>Some Text</h6>
+                  <h4>Student Details</h4>
                 </div>
               </div>
               <Grid item xs={6}>
@@ -490,7 +490,7 @@ function Branchwise({ campus, institute, year }) {
             >
               <div className="headings" id={`stream`}>
                 <div className="sub">
-                  <h6>Some text</h6>
+                  <h4>Placement Details</h4>
                 </div>
               </div>
               <Grid item xs={5}>
@@ -521,7 +521,7 @@ function Branchwise({ campus, institute, year }) {
             >
               <div className="headings" id={`stream`}>
                 <div className="sub">
-                  <h6>Some Text</h6>
+                  <h4>Salary</h4>
                 </div>
               </div>
               <Grid item xs={5}>

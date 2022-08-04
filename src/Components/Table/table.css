@@ -7,6 +7,10 @@ table {
   border-radius: 10px;
   font-weight: 500;
 }
+
+.table_style{
+  /* cursor:none; */
+}
 th,
 td {
   padding: 15px;
