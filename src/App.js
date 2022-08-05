@@ -8,7 +8,7 @@ import { useMediaQuery } from "react-responsive";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
-import MediaCard from "./Pages/Team/Team";
+import Team from "./Pages/Teams/Team";
 import Admin from "./Pages/Admin/Admin";
 import NavBar from "./Components/Navbar/NavBar";
 import { firebase } from "./backend/firebase.config";
@@ -70,7 +70,7 @@ const App = () => {
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route path="/adminpannel" element={<Admin />} />
-              <Route path="/team" element={<MediaCard />} />
+              <Route path="/team" element={<Team />} />
               <Route path="/highlights" element={<Highlights />} />
               <Route path="/compare" element={<Compare />} />
               <Route path="*" element={<NotFound />} />
@@ -82,7 +82,7 @@ const App = () => {
             <NavBar user={verifiedUser} />
             <Routes>
               <Route path="/adminpannel" element={<Admin />} />
-              <Route path="/team" element={<MediaCard />} />
+              <Route path="/team" element={<Team />} />
               <Route exact path="/" element={<RestrictedView />} />
               <Route path="/highlights" element={<Highlights />} />
               <Route path="/compare" element={<Compare />} />
@@ -93,7 +93,7 @@ const App = () => {
           // user not signed in ... !
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/team" element={<MediaCard />} />
+            <Route path="/team" element={<Team />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         )}

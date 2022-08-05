@@ -1,6 +1,6 @@
 import ProfileCard from "./profileCard"
 import MentorProfileCard from "./MentorProfileCard.jsx"
-import ParticlesComponent from "../../Components/Particles/ParticlesComponent"
+
 import {firestore} from "../../backend/firebase.config"
 import './Team.style.scss'
 import { useEffect, useState } from "react";
@@ -25,8 +25,6 @@ const Team = () => {
     })
   },[])
   return<> <div className="teamsPage">
-  <ParticlesComponent className="teamsParticle"/>
-  {/* <div style={{marginTop:"100px"}}></div> */}
   <div className="team-header">
     <h3>
       Mentors

@@ -1,0 +1,15 @@
+
+.main_wrapper{
+    background-image: linear-gradient(to bottom, #fff,#076585); 
+}
+.main_wrapper h1{
+    font-family: cursive;
+    text-align: center;
+    text-decoration: underline;
+}
+.cardStyling{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

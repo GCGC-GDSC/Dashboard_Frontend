@@ -1,0 +1,22 @@
+.main_profile {
+  border-radius: 20px !important; 
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px !important;
+}
+
+.role,.name,.registration{
+    text-align: center;
+}
+.registration{
+    margin-bottom: 15px !important;
+    font-size: 14px !important;
+}
+.isCursive{
+    font-family: cursive !important; 
+}
+.socialIcons{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0px 0px 10px 0px;
+}
+
