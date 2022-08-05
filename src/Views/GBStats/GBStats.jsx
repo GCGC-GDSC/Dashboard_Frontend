@@ -20,9 +20,9 @@ import {colors} from "../ColorAssets/colorPallet"
 import "../CampusWise/CampusWise.styles.scss"
 import { UserContext } from "../../context/context";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
-function GBStats() {
+function GBStats({year,setYear}) {
 const user = useContext(UserContext);
-const [year, setYear] = useState(2021);
+// const [year, setYear] = useState(2021);
 const yearsList = [2021,2022,2023,2024,2025];
 const handleYearChange = (event) => {
   setYear(event.target.value);
@@ -293,6 +293,8 @@ const handleYearChange = (event) => {
   },[user,year])
   return(
     <Box>
+      <Grid style={{flexDirection:"column"}}>
+        <h2> Governing Body Statistics -  {year}</h2>
       <FormControl sx={{ m: 1, minWidth: 100 }} >
         <InputLabel id="demo-simple-select-helper-label">Year</InputLabel>
         <Select
@@ -308,6 +310,7 @@ const handleYearChange = (event) => {
         </Select>
         <FormHelperText>Select </FormHelperText>
       </FormControl>
+      </Grid>
       <Box sx={{ borderBottom: 1, borderColor: "divider", bgcolor: '#fff' }}>
           <Tabs
             value={value}

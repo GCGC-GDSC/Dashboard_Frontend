@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState} from "react";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -9,7 +9,6 @@ import CampusWise from '../../Views/CampusWise/CampusWise';
 import GBStats from "../../Views/GBStats/GBStats"
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
     return (
       <div
         role="tabpanel"
@@ -42,7 +41,7 @@ function TabPanel(props) {
   
   export default function BasicTabs() {
     const [value, setValue] = React.useState(0);
-  
+    const [year,setYear] = useState(2022);
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -57,13 +56,13 @@ function TabPanel(props) {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <Overall/>
+          <Overall year={year} setYear={setYear}/>
         </TabPanel>
         <TabPanel value={value} index={1}>
-         <CampusWise/>
+         <CampusWise year={year} setYear={setYear}/>
         </TabPanel>
         <TabPanel value={value} index={2}>
-         <GBStats/>
+         <GBStats year={year} setYear={setYear}/>
         </TabPanel>
       </Box>
     );

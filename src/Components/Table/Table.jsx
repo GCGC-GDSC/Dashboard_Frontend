@@ -3,7 +3,7 @@ const Table = ({ data, column,category,keys }) => {
   console.log("heyo😎😎",data,column,category,keys)
   return (
     <>
-    <table className="container" border='1' >
+    <table className="container table_style" border='1' >
       <thead>
         <tr>
           <th style={{color:"white",textAlign:"center"}}>{category}</th>

@@ -35,7 +35,7 @@ const CampusNamesToCode = {
   "Hyderabad":"hyd",
   "Bengaluru":"blr",
 };
-function CampusWise() {
+function CampusWise({year,setYear}) {
   const user = useContext(UserContext)
   const [userMultiAccess,setUserMultiAccess] = useState(false)
   const [campusData, setCampusData] = useState({});
@@ -50,7 +50,7 @@ function CampusWise() {
       setOpen(false);
     };
 
-      const [year, setYear] = useState(2021);
+      // const [year, setYear] = useState(2021);
       const yearsList = [2021,2022,2023,2024,2025]
 
   const handleYearChange = (event) => {
@@ -502,7 +502,7 @@ const handleChangeOuter = (event, newValue) => {
         <Grid item xs={5.7} style={{marginTop:"-80px"}}>
           
           <ODoughnutChart
-            title={"Campus Wise Overview"}
+            title={`Campus Wise Overview -${year}`}
             data={dataDoughnut}
             options={chartOptions.Doughnut}
           />

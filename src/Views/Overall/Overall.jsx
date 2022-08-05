@@ -20,14 +20,14 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 
 
-function Overall() {
+function Overall({year,setYear}) {
   
   const user = useContext(UserContext);
   function tranpose(matrix) {
     return _.zip(...matrix);
   }
 
-  const [year, setYear] = useState(2021);
+  // const [year, setYear] = useState(2021);
   const yearsList = [2021,2022,2023,2024,2025]
 
 
@@ -255,7 +255,7 @@ function Overall() {
       <Grid item xs={6} className='firstDoughnut'>
 
         <ODoughnutChart
-          title={`University overview / ${year} `}
+          title={`University overview - ${year} `}
           data={dataDoughnut}
           options={chartOptions.Doughnut}
         />

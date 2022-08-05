@@ -21,6 +21,7 @@ const Table = ({ data,keys }) => {
             <th>
               {data.year2.name}
             </th>
+            <th>Percentage of Change</th>
         </tr>
       </thead>
       <tbody>
@@ -30,12 +31,15 @@ const Table = ({ data,keys }) => {
             <td>
               {parsedValues[key]}
               </td>     
-              <td className={data.year1[key]>data.year2[key]?'green':''}>
+              <td >
               {data.year1[key]}
               </td>     
-              <td className={data.year1[key]<data.year2[key]?'green':''}>
+              <td>
                 {data.year2[key]}
-              </td>            
+              </td>     
+              <td className={data.year2[key]>data.year1[key]?'green':''}>
+                {((data.year2[key]-data.year1[key])*100/data.year1[key]).toFixed(2)}  %
+                </td>       
             </tr> 
             )
         }
