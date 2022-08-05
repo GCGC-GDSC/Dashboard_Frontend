@@ -42,7 +42,7 @@ const Team = () => {
 			/>
   <MentorProfileCard
 				name="Vikas B"
-        picture="https://media-exp1.licdn.com/dms/image/C5603AQG5M1-Yvr2LXQ/profile-displayphoto-shrink_800_800/0/1647499890525?e=1662595200&v=beta&t=VRrVT6jVvCNoP7cqtUiZ4GU6tLiNliQNHy1n0B8CwXo"
+        picture="https://media-exp1.licdn.com/dms/image/C5603AQG5M1-Yvr2LXQ/profile-displayphoto-shrink_800_800/0/1647499890525?e=1665014400&v=beta&t=op8-Ba0hEvtDBACL7_KIFMIMNw1_zjGTXWEpzfby6Y0"
         role="Guide and mentor"
         description="Deputy Director, Technology/Tools/Platforms, GCGC
         &

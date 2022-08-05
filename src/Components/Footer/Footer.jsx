@@ -11,7 +11,7 @@ const Footer = () => {
               <img src={DSCLogo} alt="GDSC"/>
               </div>
              <div className="rightSide">
-              <span>Made with ❤ using ReactJS and DJANGO</span>
+              <span>Made with 💝 using ReactJS and DJANGO</span>
               <span>Copyright 2022</span>
               </div>
 
