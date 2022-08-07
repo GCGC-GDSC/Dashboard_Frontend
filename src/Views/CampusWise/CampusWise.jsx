@@ -45,6 +45,7 @@ function CampusWise({year,setYear}) {
   const [campusName, setCampusName] = useState("");
   const [showD2, setShowD2] = useState(false);
   const [showCharts, setShowCharts] = useState(false);
+  const [instNameForRender,setInstNameForRender] = useState("")
   const [open, setOpen] = useState(false);
   const handleClose = () => {
       setOpen(false);
@@ -129,6 +130,7 @@ const handleChangeOuter = (event, newValue) => {
       onClick: function (evt, item) {
         if (item[0]) {
           getDataInst(instList[item[0].index]);
+          setInstNameForRender(instList[item[0].index])
         }
       },
       rotation: Math.PI * 5,
@@ -785,7 +787,8 @@ const handleChangeOuter = (event, newValue) => {
               {/* changed value = {value} to value={valueOrder} */}
               <TabPanel value={valueOuter} index={1} style={{width:"100%"}}>
                 {/* Branch wise component */}
-                <Branchwise campus={CampusNamesToCode[campusName]} year ={year} institute={instData.name}/>
+                {instNameForRender === "gst" ?
+                <Branchwise campus={CampusNamesToCode[campusName]} year ={year} institute={instData.name}/>:null}
                </TabPanel>
           </Box>
         </div>

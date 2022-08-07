@@ -4,6 +4,7 @@ function ClipboardCopy({ copyText }) {
   const copyButtonStyles = {
     "padding":"1rem",
     "font-size": "large",
+    "cursor": "pointer",
   }
     const [isCopied, setIsCopied] = useState(false);
   

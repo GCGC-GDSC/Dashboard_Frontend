@@ -215,7 +215,7 @@ function Branchwise({ campus, institute, year }) {
     };
 
     const TableData = {
-      column: ["Heading"],
+      column: [`${institute}-${campus}`],
       data: getTableData(category),
     };
     return TableData;
@@ -269,9 +269,7 @@ function Branchwise({ campus, institute, year }) {
   //       });
   //     setCourseList(courseArr)
   // }
-  console.log(fillCharts);
   useEffect(() => {
-    // console.log("😎😎",courseName)
     const fetchCourseList = () => {
       const courseArr = [];
       user.user.institute.forEach((instObj) => {
@@ -402,7 +400,7 @@ function Branchwise({ campus, institute, year }) {
             >
               <div className="headings" id={`stream`}>
                 <div className="sub">
-                  <h4>{`Salary - ${courseName.toUpperCase()}`}</h4>
+                  <h4>{`Package Details - ${courseName.toUpperCase()}`}</h4>
                 </div>
               </div>
               <Grid item xs={5}>
@@ -521,7 +519,7 @@ function Branchwise({ campus, institute, year }) {
             >
               <div className="headings" id={`stream`}>
                 <div className="sub">
-                  <h4>{`Salary - ${courseName.toUpperCase()}`}</h4>
+                  <h4>{`Package Details - ${courseName.toUpperCase()}`}</h4>
                 </div>
               </div>
               <Grid item xs={5}>

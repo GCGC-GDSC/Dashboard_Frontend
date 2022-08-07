@@ -12,7 +12,6 @@ import "./ProfileCardStyles.css";
 
 
 export default function ProfileCard(props) {
-  console.log(props.role)
   return (
     
     <Card  className='main_profile' sx={{ maxWidth: 345 }}>

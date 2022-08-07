@@ -14,12 +14,12 @@ import {ReactComponent as CompareSVG }  from "../../assets/compareSVG.svg";
 import './Compare.scss'
 import { ThemeProvider} from '@mui/material/styles'
 import theme1 from "../../MuiThemes/themes"
-  // import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-  // import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-  // import GolfCourseIcon from '@mui/icons-material/GolfCourse';
-  // import SchoolIcon from '@mui/icons-material/School';
-  // import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
-  // import EventNoteIcon from '@mui/icons-material/EventNote';
+  import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+  import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+  import GolfCourseIcon from '@mui/icons-material/GolfCourse';
+  import SchoolIcon from '@mui/icons-material/School';
+  import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+  import EventNoteIcon from '@mui/icons-material/EventNote';
 // import { style, width } from "@mui/system";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
@@ -39,12 +39,18 @@ function Compare() {
   const [institute, setInstitute] = useState(user.user.institute[0]);
   const [year2, setYear2] = useState(compareYears[1]);
   const [course,setCourse] = useState("ALL");
-  const [gradType,setGradType] = useState();
-  const [yearData, setYearData] = useState(null);
+  const [gradType,setGradType] = useState("ug");
+  const [yearData_ug, setYearData_ug] = useState(null);
+  const [yearData_pg, setYearData_pg] = useState(null);
+  const [sum_ug_pg,setSum_ug_pg]=useState(null)
+  const [showTables,setShowTables] = useState(false)
+
   const [comparision,setComparision] = useState(false);
 
   const handleChange = (event) => {
+    setShowTables(false)
     const { name, value } = event.target;
+    
     if (name === "year1") setYear1(value);
     else if (name === "year2") setYear2(value);
     else if (name === "course") setCourse(value);
@@ -60,26 +66,81 @@ function Compare() {
     // api call.....
   //  alert("comparing")
   const courseValue = course.toLowerCase() === "all"? "null": course.toLowerCase()
-  const gradValue =  gradType.toLowerCase()
+  // const gradValue =  gradType.toLowerCase()
   //  gradType.toLowerCase() === "all"? "null": gradType.toLowerCase()
-    axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}/${courseValue}/${gradValue}`,{
-      headers: {
-        'Authorization': `Token ${user.user.token.key}`
-      }
-    })
-    .then(resp=>{
-      let obj1={}
-      let obj2 = {}
-      obj1 = resp.data.result[year1]
-      obj2 = resp.data.result[year2]
-      obj1.name = year1
-      obj2.name = year2
+  const routeUG = `${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}/${courseValue}/ug`
+  const routePG = `${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}/${courseValue}/pg`
 
-      const data = {"year1":obj1,"year2":obj2}
-      // console.log(data)
-      setYearData(data)
-      setComparision(true)
-    })
+  const getUGResponse = axios.get(routeUG,{
+    headers: {
+      'Authorization': `Token ${user.user.token.key}`
+    }
+  })
+  const getPGResponse = axios.get(routePG,{
+    headers: {
+      'Authorization': `Token ${user.user.token.key}`
+    }
+  })
+    axios.all([getUGResponse,getPGResponse]).then(
+      axios.spread((...allData) => {
+        const getUGData = allData[0]
+        const getPGData = allData[1]
+
+        let ug_obj1 = {}
+        ug_obj1 = getUGData.data.result[year1]
+        let ug_obj2 = {}
+        ug_obj2 = getUGData.data.result[year2]
+        ug_obj1.name = year1
+        ug_obj2.name = year2
+        const ug_data = {"year1":ug_obj1,"year2":ug_obj2}
+        setYearData_ug(ug_data)
+
+        let pg_obj1 = {}
+        pg_obj1 = getPGData.data.result[year1]
+        let pg_obj2 ={}
+        pg_obj2 = getPGData.data.result[year2]
+        pg_obj1.name = year1
+        pg_obj2.name = year2
+        const pg_data = {"year1":pg_obj1,"year2":pg_obj2}
+        setYearData_pg(pg_data)
+
+       
+       const sum_ug_pg_year1 = sumObjectsByKey(ug_data.year1,pg_data.year1)
+       const sum_ug_pg_year2 = sumObjectsByKey(ug_data.year2,pg_data.year2)
+
+       sum_ug_pg_year1["average_salary"] = Math.max(ug_data.year1["average_salary"],ug_data.year1["average_salary"])
+       sum_ug_pg_year1["highest_salary"] = Math.max(ug_data.year1["highest_salary"],ug_data.year1["highest_salary"])
+
+       sum_ug_pg_year2["average_salary"] = Math.max(ug_data.year2["average_salary"],ug_data.year2["average_salary"])
+       sum_ug_pg_year2["highest_salary"] = Math.max(ug_data.year2["highest_salary"],ug_data.year2["highest_salary"])
+       setSum_ug_pg({"year1":sum_ug_pg_year1,"year2":sum_ug_pg_year2})
+
+       setComparision(true)
+       setShowTables(true)
+        
+      })
+    )
+    function sumObjectsByKey(...objs) {
+      return objs.reduce((a, b) => {
+        for (let k in b) {
+          if (b.hasOwnProperty(k))
+            a[k] = (a[k] || 0) + b[k];
+        }
+        return a;
+      }, {});
+    }
+    // .then(resp=>{
+    //   let obj1={}
+    //   let obj2 = {}
+    //   obj1 = resp.data.result[year1]
+    //   obj2 = resp.data.result[year2]
+    //   obj1.name = year1
+    //   obj2.name = year2
+
+    //   const data = {"year1":obj1,"year2":obj2}
+    //   setYearData(data)
+    //   setComparision(true)
+    // })
   }
   return (
 
@@ -181,7 +242,7 @@ function Compare() {
                   }
                   </Select>
                 </FormControl>
-                {/* }  */}
+                  {/* Commenting the below FormControl becuz we are already making seperate calls for UG and PG data independant of this form input value */}
                   <FormControl
                   variant="standard"
                   sx={{ m: 1, minWidth: 80 }}
@@ -195,7 +256,7 @@ function Compare() {
                     name="gradType"
                     onChange={handleChange}
                   >
-                    {/* <MenuItem value={"ALL"}>ALL</MenuItem> */}
+
                     {
                       gradTypeList.map(grad=> <MenuItem value={grad}>{grad}</MenuItem>)
                     }
@@ -208,10 +269,9 @@ function Compare() {
                 <Grid>
                   <ThemeProvider theme={theme1}>
                     <Button variant="outlined" color="primary" startIcon={<DifferenceIcon />}
-                    disabled={!(year1 && year2 && campus && institute && gradType && course)}
+                    disabled={!(year1 && year2 && campus && institute && course)}
                     onClick={handleCompare}
-                    size="large"
-                    sx={{fontSize: 12}}
+                    style={{width:"50%",marginTop:"1rem",fontSize:"1rem"}}
                     >
                       Compare
                   </Button>
@@ -244,7 +304,7 @@ function Compare() {
 
          
             </Grid>
-            {/* {comparision?
+            {showTables ?
         <div className="formInformation" style={{margin:"auto"}}>
            <EventNoteIcon color="primary"/><h4>{year1} <ArrowRightIcon/></h4>
           <BookmarkAddIcon color="primary"/><h4>{campus.name}<ArrowRightIcon/></h4>
@@ -252,16 +312,27 @@ function Compare() {
           <AccountBalanceIcon  color="primary"/><h4>{course} <ArrowRightIcon/></h4>
           <GolfCourseIcon color="primary"/><h4>{gradType}<ArrowRightIcon/></h4>
           <SchoolIcon color="primary"/> <h4>{year2}</h4>
-        </div>:null */}
-{/* } */}
+        </div>:null}
+
             {!comparision?
               <CompareSVG className='compareSVG' />:
-              <Grid container className="year_data">
+              <div container className="year_data">
+                <h3>UG DATA</h3>
               <Table 
-                  data={yearData}
+                  data={yearData_ug}
                   keys={['total_offers','total_multiple_offers','highest_salary','average_salary']}
                     />
-            </Grid>}
+                    <h3>PG DATA</h3>
+                  <Table 
+                  data={yearData_pg}
+                  keys={['total_offers','total_multiple_offers','highest_salary','average_salary']}
+                    />
+                    <h3>UG and PG DATA COMBINED</h3>
+                    <Table 
+                  data={sum_ug_pg}
+                  keys={['total_offers','total_multiple_offers','highest_salary','average_salary']}
+                    />
+            </div>}
         </Grid>
     </Box>
   )

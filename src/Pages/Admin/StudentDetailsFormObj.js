@@ -114,7 +114,7 @@ export const parsedStudentDetailsRef = {
   Percentage_of_students_opted_HS_to_the_total_number:
     "Percentage of students opted for HS (higher studies) to the total number of final years.",
   Percentage_of_students_placed_out_of_eligible_students:
-    "Percentage of students yet to be placed out of eligible students requirung placements",
+    "Percentage of students placed out of eligible students requirung placements",
   Percentage_of_students_yet_to_be_placed_out_of_eligible_students:
     "Percentage of students yet to be placed out of the total number of elgible students.",
   self_percent_opted_hs_final:
