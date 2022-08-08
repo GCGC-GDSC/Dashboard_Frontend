@@ -510,6 +510,24 @@ const handleChangeTableInput = (event) =>{
             )}
           </Select>
         </FormControl>
+        <FormControl
+          variant="standard"
+          sx={{ m: 1, minWidth: 120 }}
+          style={{ width: "160px" }}
+        >
+          <InputLabel> Graduation Type </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={grad}
+            label="grad"
+            name="grad"
+            onChange={handleChange}
+          >
+            <MenuItem value={"ug"}>Undergraduate</MenuItem>
+            <MenuItem value={"pg"}>Postgraduate</MenuItem>
+          </Select>
+        </FormControl>
         {
         isCourseType !== "Institute Only" &&    
         <FormControl
@@ -542,24 +560,7 @@ const handleChangeTableInput = (event) =>{
       </FormControl>
         }
         {/* grad type as input */}
-        <FormControl
-          variant="standard"
-          sx={{ m: 1, minWidth: 120 }}
-          style={{ width: "160px" }}
-        >
-          <InputLabel> Graduation Type </InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={grad}
-            label="grad"
-            name="grad"
-            onChange={handleChange}
-          >
-            <MenuItem value={"ug"}>Undergraduate</MenuItem>
-            <MenuItem value={"pg"}>Postgraduate</MenuItem>
-          </Select>
-        </FormControl>
+
         {/* edit button icons */}
         <FormControl
           variant="standard"

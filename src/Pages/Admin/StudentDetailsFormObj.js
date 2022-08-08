@@ -47,8 +47,8 @@ export const DBUpdateKeys = [
   "self_percent_opted_hs_final",
   "self_percent_back_final",
   "self_percent_eligible_final",
-  "self_percent_yet_to_place_eligible",
   "self_percentage_of_students_placed_out_of_students_requiring_placements",
+  "self_percent_yet_to_place_eligible",
 ];
 export const DBPreviewKeys = [
   //31
@@ -123,10 +123,11 @@ export const parsedStudentDetailsRef = {
     "Percentage of students having backlogs to the number of students in final years.",
   self_percent_eligible_final:
     "Precentage of students eligible for and requirung placements to the total number of students in final years  ",
-  self_percent_yet_to_place_eligible:
-    "Percentage of students yet to be placed out of eligible students requirung placements",
   self_percentage_of_students_placed_out_of_students_requiring_placements:
     "Percentage of students placed out of students requiring placements",
+  self_percent_yet_to_place_eligible:
+    "Percentage of students yet to be placed out of eligible students requirung placements",
+
   vskp: "CGC Visakhapatnam",
   blr: "CGC Bengaluru",
   hyd: "CGC Hyderabad",

@@ -102,15 +102,18 @@ function Compare() {
         pg_obj1.name = year1
         pg_obj2.name = year2
         const pg_data = {"year1":pg_obj1,"year2":pg_obj2}
+        console.log(pg_data)
         setYearData_pg(pg_data)
 
        
        const sum_ug_pg_year1 = sumObjectsByKey(ug_data.year1,pg_data.year1)
        const sum_ug_pg_year2 = sumObjectsByKey(ug_data.year2,pg_data.year2)
 
+       sum_ug_pg_year1["name"] = ug_data.year1["name"]
        sum_ug_pg_year1["average_salary"] = Math.max(ug_data.year1["average_salary"],ug_data.year1["average_salary"])
        sum_ug_pg_year1["highest_salary"] = Math.max(ug_data.year1["highest_salary"],ug_data.year1["highest_salary"])
 
+       sum_ug_pg_year2["name"] = ug_data.year2["name"]
        sum_ug_pg_year2["average_salary"] = Math.max(ug_data.year2["average_salary"],ug_data.year2["average_salary"])
        sum_ug_pg_year2["highest_salary"] = Math.max(ug_data.year2["highest_salary"],ug_data.year2["highest_salary"])
        setSum_ug_pg({"year1":sum_ug_pg_year1,"year2":sum_ug_pg_year2})
