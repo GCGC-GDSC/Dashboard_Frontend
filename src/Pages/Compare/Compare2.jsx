@@ -288,8 +288,8 @@ function Compare() {
           );
           setSum_ug_pg({ year1: sum_ug_pg_year1, year2: sum_ug_pg_year2 });
 
-          const sum_ug_pg_year1_eece = sumObjectsByKey(ug_data.year1, pg_data.year1);
-          const sum_ug_pg_year2_eece = sumObjectsByKey(ug_data.year2, pg_data.year2);
+          const sum_ug_pg_year1_eece = sumObjectsByKey(ug_data_eece.year1, pg_data_eece.year1);
+          const sum_ug_pg_year2_eece = sumObjectsByKey(ug_data_eece.year2, pg_data_eece.year2);
 
           sum_ug_pg_year1_eece["name"] = ug_data_eece.year1["name"];
           sum_ug_pg_year1_eece["average_salary"] = Math.max(
