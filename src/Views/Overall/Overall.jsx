@@ -88,6 +88,7 @@ function Overall({year,setYear}) {
         }
     }
     const dataDoughnut ={
+      
     labels: streamList.map(item=>item[0]+item.slice(1,item.length)),
     datasets: [{
         label: "Number of Students",
@@ -96,7 +97,9 @@ function Overall({year,setYear}) {
           borderColor:streamList.map(item=>ColorPallet[item.toLowerCase()]),
         borderWidth: 1,
         
-        },],
+        
+        },
+      ],
     }
     if(showVC)
      {
@@ -258,6 +261,7 @@ function Overall({year,setYear}) {
           title={`University overview - ${year} `}
           data={dataDoughnut}
           options={chartOptions.Doughnut}
+          
         />
 
       </Grid>
