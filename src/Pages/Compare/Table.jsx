@@ -1,25 +1,31 @@
 // import { Key } from '@mui/icons-material'
 import './table.css'
-const Table = ({ data,keys }) => {
-  const parsedValues = {
-    'total_offers':"Number of total offers",
-    'total_multiple_offers':"Numbers of multiple offers",
-    'highest_salary':"Highest Salary",
-    'average_salary':"Average Salary"
-  }
+const Table = ({branchName, data,keys,year1,year2 }) => {
+  // console.log(data)
+  // const parsedValues = {
+  //   'total_offers':"Number of total offers",
+  //   'total_multiple_offers':"Numbers of multiple offers",
+  //   'highest_salary':"Highest Salary",
+  //   'average_salary':"Average Salary"
+  // }
   return (
     <>
     <table className="container">
       <thead>
         <tr>
+          <th className='tableHeader' colspan={4}>
+          {branchName}    
+          </th>
+        </tr>
+        <tr>
           <th>
             Criteria
           </th>
             <th>
-              {data.year1.name}
+              {year1}
             </th>
             <th>
-              {data.year2.name}
+              {year2}
             </th>
             <th>Percentage of Change</th>
         </tr>
@@ -29,16 +35,16 @@ const Table = ({ data,keys }) => {
         {
           keys.map((key,index) => <tr> 
             <td>
-              {parsedValues[key]}
+              {key}
               </td>     
               <td >
-              {data.year1[key]}
+              {data[year1][key]}
               </td>     
               <td>
-                {data.year2[key]}
+                {data[year2][key]}
               </td>     
-              <td className={data.year2[key]>data.year1[key]?'green':''}>
-                {((data.year2[key]-data.year1[key])*100/data.year1[key]).toFixed(2)}  %
+              <td className={data[year2][key]>data[year1][key]?'green':''}>
+                {((data[year2][key]-data[year1][key])*100/data[year1][key]).toFixed(2)}  %
                 </td>       
             </tr> 
             )

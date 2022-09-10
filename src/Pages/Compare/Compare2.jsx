@@ -489,7 +489,7 @@ function Compare() {
                 </Select>
               </FormControl>
 
-              {/* {institute && institute.name && institute.name.toLowerCase() === "gst" && */}
+              {institute && institute.name && institute.name.toLowerCase() !== "gst" &&
               <FormControl
                 variant="standard"
                 sx={{ m: 1, minWidth: 100 }}
@@ -526,8 +526,9 @@ function Compare() {
                   })}
                 </Select>
               </FormControl>
+        }
               {/* Commenting the below FormControl becuz we are already making seperate calls for UG and PG data independant of this form input value */}
-              <FormControl
+              {/* <FormControl
                 variant="standard"
                 sx={{ m: 1, minWidth: 80 }}
                 style={{ width: "80px" }}
@@ -545,7 +546,7 @@ function Compare() {
                     <MenuItem value={grad}>{grad}</MenuItem>
                   ))}
                 </Select>
-              </FormControl>
+              </FormControl> */}
             </Grid>
 
             <Grid>

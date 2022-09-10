@@ -13,7 +13,7 @@ import Admin from "./Pages/Admin/Admin";
 import NavBar from "./Components/Navbar/NavBar";
 import { firebase } from "./backend/firebase.config";
 import Highlights from "./Pages/Highlights/Highlights";
-import Compare from "./Pages/Compare/Compare2";
+import Compare from "./Pages/Compare/Compare3.jsx";
 import NotFound from "./Pages/404/NotFound";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 const App = () => {
