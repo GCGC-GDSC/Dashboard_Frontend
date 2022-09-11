@@ -50,6 +50,9 @@ function Compare() {
   const [yearData_pg_civil, setYearData_pg_civil] = useState(null);
   const [yearData_ug_bio, setYearData_ug_bio] = useState(null);
   const [yearData_pg_bio, setYearData_pg_bio] = useState(null);
+  const [yearData_ug_gsb,setYearData_ug_gsb]= useState(null);
+  const [yearData_pg_gsb,setYearData_pg_gsb]= useState(null);
+  const [sum_ug_pg_gsb,setSum_ug_pg_gsb] = useState(null)
   const [sum_ug_pg, setSum_ug_pg] = useState(null);
   const [sum_ug_pg_eece, setSum_ug_pg_eece] = useState(null);
   const [sum_ug_pg_mech, setSum_ug_pg_mech] = useState(null);
@@ -70,14 +73,14 @@ function Compare() {
     else if (name === "campus") setCampus(value);
     else if (name === "institute") setInstitute(value);
   };
-  // const parsedValues=(arr)=>{
-  //   return ["Number of Companies","Number of students Placed","Highest Package","Number of off campus placements"]
-  // }
+  const parsedValues=(arr)=>{
+    return ["Number of Companies","Number of students Placed","Highest Package","Number of off campus placements"]
+  }
   const handleCompare = () => {
     // api call.....
     //  alert("comparing")
-    // const courseValue =
-    //   course.toLowerCase() === "all" ? "null" : course.toLowerCase();
+    const courseValue =
+      course.toLowerCase() === "all" ? "null" : course.toLowerCase();
     // const gradValue =  gradType.toLowerCase()
     //  gradType.toLowerCase() === "all"? "null": gradType.toLowerCase()
     const routeUG = `${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}/cse/ug`;
@@ -90,6 +93,9 @@ function Compare() {
     const routePG_civil = `${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}/civil/pg`;
     const routeUG_bio = `${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}/bio/ug`;
     const routePG_bio = `${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}/bio/pg`;
+  const routeUG_gsb = `${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}/${courseValue}/ug`
+  const routePG_gsb = `${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}/${courseValue}/pg`
+
 
     const getUGResponse = axios.get(routeUG, {
       headers: {
@@ -141,6 +147,16 @@ function Compare() {
         Authorization: `Token ${user.user.token.key}`,
       },
     });
+    const getrouteUG_gsb = axios.get(routeUG_gsb, {
+      headers: {
+        Authorization: `Token ${user.user.token.key}`,
+      },
+    });
+    const getroutePG_gsb = axios.get(routePG_gsb, {
+      headers: {
+        Authorization: `Token ${user.user.token.key}`,
+      },
+    });
     axios
       .all([
         getUGResponse,
@@ -153,6 +169,8 @@ function Compare() {
         getPGResponse_civil,
         getUGResponse_bio,
         getPGResponse_bio,
+        getrouteUG_gsb,
+        getroutePG_gsb
       ])
       .then(
         axios.spread((...allData) => {
@@ -166,6 +184,8 @@ function Compare() {
           const getPGData_civil = allData[7];
           const getUGData_bio = allData[8];
           const getPGData_bio = allData[9];
+          const getUGData_gsb = allData[10]
+          const getPGData_gsb = allData[11]
 
           let ug_obj1 = {};
           ug_obj1 = getUGData.data.result[year1];
@@ -262,11 +282,52 @@ function Compare() {
           console.log(pg_data_bio);
           setYearData_pg_bio(pg_data_bio);
 
-         
+          let ug_obj1_gsb = {};
+          ug_obj1_gsb = getUGData_gsb.data.result[year1];
+          let ug_obj2_gsb = {};
+          ug_obj2_gsb = getUGData_gsb.data.result[year2];
+          ug_obj1_gsb.name = year1;
+          ug_obj2_gsb.name = year2;
+          const ug_data_gsb = { year1: ug_obj1_gsb, year2: ug_obj2_gsb };
+          setYearData_ug_gsb(ug_data_gsb);
+
+          let pg_obj1_gsb = {};
+          pg_obj1_gsb = getPGData_gsb.data.result[year1];
+          let pg_obj2_gsb = {};
+          pg_obj2_gsb = getPGData_gsb.data.result[year2];
+          pg_obj1_gsb.name = year1;
+          pg_obj2_gsb.name = year2;
+          const pg_data_gsb = { year1: pg_obj1_gsb, year2: pg_obj2_gsb };
+          console.log(pg_data_gsb);
+          setYearData_pg_gsb(pg_data_gsb);
+
+          const sum_ug_pg_year1_gsb = sumObjectsByKey(ug_data_gsb.year1, pg_data_gsb.year1);
+          const sum_ug_pg_year2_gsb = sumObjectsByKey(ug_data_gsb.year2, pg_data_gsb.year2);
+
+          sum_ug_pg_year1_gsb["name"] = ug_data_gsb.year1["name"];
+          sum_ug_pg_year1_gsb["average_salary"] = Math.max(
+            ug_data_gsb.year1["average_salary"],
+            ug_data_gsb.year1["average_salary"]
+          );
+          sum_ug_pg_year1_gsb["highest_salary"] = Math.max(
+            ug_data_gsb.year1["highest_salary"],
+            ug_data_gsb.year1["highest_salary"]
+          );
+
+          sum_ug_pg_year2_gsb["name"] = ug_data_gsb.year2["name"];
+          sum_ug_pg_year2_gsb["average_salary"] = Math.max(
+            ug_data_gsb.year2["average_salary"],
+            ug_data_gsb.year2["average_salary"]
+          );
+          sum_ug_pg_year2_gsb["highest_salary"] = Math.max(
+            ug_data_gsb.year2["highest_salary"],
+            ug_data_gsb.year2["highest_salary"]
+          );
+          setSum_ug_pg_gsb({ year1: sum_ug_pg_year1_gsb, year2: sum_ug_pg_year2_gsb });
+
 
           const sum_ug_pg_year1 = sumObjectsByKey(ug_data.year1, pg_data.year1);
           const sum_ug_pg_year2 = sumObjectsByKey(ug_data.year2, pg_data.year2);
-
           sum_ug_pg_year1["name"] = ug_data.year1["name"];
           sum_ug_pg_year1["average_salary"] = Math.max(
             ug_data.year1["average_salary"],
@@ -620,6 +681,28 @@ function Compare() {
           <CompareSVG className="compareSVG" />
         ) : (
           <div container className="year_data">
+             <h3>GSB-UG</h3>
+
+<Table
+  data={yearData_ug_gsb}
+  keys={[
+    "total_offers",
+    "total_multiple_offers",
+    "highest_salary",
+    "average_salary",
+  ]}
+/>
+<h3>GSB-PG</h3>
+
+<Table
+  data={yearData_pg_gsb}
+  keys={[
+    "total_offers",
+    "total_multiple_offers",
+    "highest_salary",
+    "average_salary",
+  ]}
+/>
             <h1>UG DATA</h1>
             <div
               style={{

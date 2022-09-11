@@ -29,7 +29,7 @@ export default function HighlightsCard({
                 <div className="item">
                   <ApartmentIcon fontSize="large" />
                   <div className="countup">
-                    <CountUp end={140} duration={2} />
+                    <CountUp end={140} duration={2} />+
                   </div>
                   <p>Companies</p>
                 </div>
@@ -44,7 +44,7 @@ export default function HighlightsCard({
                 <div className="item">
                   <AutoFixHighIcon fontSize="large" />
                   <div className="countup">
-                    <CountUp end={45} duration={2} />
+                    <CountUp end={45} duration={2} /> L
                   </div>
                   <p>Highest Package</p>
                 </div>
@@ -52,7 +52,7 @@ export default function HighlightsCard({
                 <div className="item">
                   <FindReplaceIcon fontSize="large" />
                   <div className="countup">
-                    <CountUp end={45} duration={2} />
+                    <CountUp end={45} duration={2} /> %
                   </div>
                   <p>Off Placements</p>
                 </div>

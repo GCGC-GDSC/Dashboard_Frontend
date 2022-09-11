@@ -44,7 +44,7 @@ function ModalC({ setOpenModal, modalOpen }) {
           <div className="item">
             <ApartmentIcon fontSize="large" />
             <div className="countup">
-              <CountUp end={140} duration={2} />
+              <CountUp end={140} duration={2} /> +
             </div>
             <p>Companies</p>
           </div>
@@ -59,7 +59,7 @@ function ModalC({ setOpenModal, modalOpen }) {
           <div className="item">
             <AutoFixHighIcon fontSize="large" />
             <div className="countup">
-              <CountUp end={45} duration={2} />
+              <CountUp end={45} duration={2} /> L
             </div>
             <p>Highest Package</p>
           </div>
@@ -67,7 +67,7 @@ function ModalC({ setOpenModal, modalOpen }) {
           <div className="item">
             <FindReplaceIcon fontSize="large" />
             <div className="countup">
-              <CountUp end={45} duration={2} />
+              <CountUp end={45} duration={2} /> %
             </div>
             <p>Off Placements</p>
           </div>

@@ -42,7 +42,7 @@ const Team = () => {
          </Grid>
          <Grid item xs={6} className="cardStyling">
       <MentorProfileCard className="gcgc"
-                    image="https://media-exp1.licdn.com/dms/image/C5603AQG5M1-Yvr2LXQ/profile-displayphoto-shrink_800_800/0/1647499890525?e=1662595200&v=beta&t=VRrVT6jVvCNoP7cqtUiZ4GU6tLiNliQNHy1n0B8CwXo"
+                    image="https://sicgcgc.gitam.edu/images/images/Vikas.jpg"
                     name=" Vikas B"
                     role="Guide and Mentor"
                     linkdin="https://www.linkedin.com/in/vikas-b-6a4476171/"

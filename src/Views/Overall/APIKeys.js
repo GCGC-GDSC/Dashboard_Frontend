@@ -34,7 +34,7 @@ export const parsedDataFormat = {
     "Total Students",
     "Higher Studies",
     "Backlogs",
-    "Yet To Decide",
+    "No Response",
     "Deferred Placements",
     "Eligible For Placements",
   ],

@@ -19,7 +19,7 @@ const ProfileCard = ({member}) => {
                 <div className="icons">
                     <SocialIcon url={member.linkedin} style={{ height: 30, width: 30 }} />
                     <SocialIcon url={member.github} style={{ height: 30, width: 30 }} />
-                    <SocialIcon url={member.website} style={{ height: 30, width: 30 }} />
+                    <SocialIcon url={member.website!="null"?member.website:""} style={{ height: 30, width: 30 }} />
                     {/* <a href={member.name}><SocialIcon url={member.name} style={{ height: 30, width: 30 }} /></a> */}
                 </div>
             </div>
