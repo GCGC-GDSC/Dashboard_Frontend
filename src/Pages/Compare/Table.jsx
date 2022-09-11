@@ -1,5 +1,5 @@
 // import { Key } from '@mui/icons-material'
-import './table.css'
+import './table.scss'
 const Table = ({branchName, data,keys,year1,year2 }) => {
   // console.log(data)
   // const parsedValues = {
@@ -10,10 +10,10 @@ const Table = ({branchName, data,keys,year1,year2 }) => {
   // }
   return (
     <>
-    <table className="container">
+    <table className="container compareTable" border={1}>
       <thead>
         <tr>
-          <th className='tableHeader' colspan={4}>
+          <th className='tableHeader' colSpan={4}>
           {branchName}    
           </th>
         </tr>

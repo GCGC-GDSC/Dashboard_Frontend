@@ -14,14 +14,7 @@ import {ReactComponent as CompareSVG }  from "../../assets/compareSVG.svg";
 import './Compare.scss'
 import { ThemeProvider} from '@mui/material/styles'
 import theme1 from "../../MuiThemes/themes"
-// import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-// import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-// import GolfCourseIcon from '@mui/icons-material/GolfCourse';
-// import SchoolIcon from '@mui/icons-material/School';
-// import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
-// import EventNoteIcon from '@mui/icons-material/EventNote';
-// import { PagesTwoTone } from "@mui/icons-material";
-// import { style, width } from "@mui/system";
+import { unstable_batchedUpdates } from "react-dom";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 function Compare() {
   const user = useContext(UserContext);
@@ -34,7 +27,7 @@ function Compare() {
   };
   const [year1, setYear1] = useState(compareYears[0]);
   const [campus, setCampus] = useState(user.user.campus[0]);
-  const [institute, setInstitute] = useState(user.user.institute[0]);
+  const [institute, setInstitute] = useState(null);
   const [year2, setYear2] = useState(compareYears[1]);
   const [tableData,setTableData] = useState([])
   const handleChange = (event) => {
@@ -42,7 +35,12 @@ function Compare() {
     const { name, value } = event.target;
     if (name === "year1") setYear1(value);
     else if (name === "year2") setYear2(value);
-    else if (name === "campus") setCampus(value);
+    else if (name === "campus") {
+      unstable_batchedUpdates(()=>{
+        setCampus(value);
+        setInstitute(null)
+      })
+    }
     else if (name === "institute") setInstitute(value);
   };
   const [showTables, setShowTables] = useState(false);  
@@ -58,9 +56,10 @@ function Compare() {
       output[branch]["year2"] = year2
       output[branch]["keys"] = Object.keys(data[year1][branch])
     })
-    console.log(output)
-    setTableData(output)
-    setShowTables(true);
+    unstable_batchedUpdates(()=>{
+      setTableData(output)
+      setShowTables(true);
+    })
   }
   const handleCompare = () => {
     axios.get(`${REACT_APP_API_URL}students/compare/${year1}/${year2}/${campus.name.toLowerCase()}/${institute.name.toLowerCase()}`,{
@@ -203,7 +202,6 @@ function Compare() {
         />
         ):
         <>
-       { console.log(tableData)}
           <Table
           data={tableData["UG"]} branchName={"UG"}  keys={tableData["UG"]["keys"]}  year1={year1} year2={year2}
           />

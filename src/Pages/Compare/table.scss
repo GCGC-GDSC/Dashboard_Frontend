@@ -1,4 +1,4 @@
-table {
+.compareTable {
   border-collapse: collapse;
   /* max-width: 900px; */
   /* width: 10%; */
@@ -6,7 +6,7 @@ table {
   border-radius: 10px;
   font-weight: 500;
   border: 1px solid grey;
-}
+  margin:.6em;
 th,
 td {
   padding: 15px;
@@ -40,3 +40,5 @@ thead, th{
 .tableHeader{
   background-color: yellow !important;
 color:black}
+
+}
