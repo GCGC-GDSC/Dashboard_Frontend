@@ -72,9 +72,9 @@ export const DBPreviewKeys = [
   "lowest_salary",
   "average_salary",
 
-  "Percentage_of_students_eligible_for_and_requiring_placement",
-  "Percentage_of_students_having_backlogs_to_the_total_number_of_students",
   "Percentage_of_students_opted_HS_to_the_total_number",
+  "Percentage_of_students_having_backlogs_to_the_total_number_of_students",
+  "Percentage_of_students_eligible_for_and_requiring_placement",
   "Percentage_of_students_placed_out_of_eligible_students",
   "Percentage_of_students_yet_to_be_placed_out_of_eligible_students",
 ];
@@ -102,27 +102,29 @@ export const parsedStudentDetailsRef = {
     "No. of students eligible for and requiring placements.",
   total_offers: "Total No. of offers",
   total_multiple_offers: "Number of Multiple Offers",
-  total_placed: "No. of students placed",
+  total_placed: "Total No. of Unique Offers",
   total_yet_to_place: "No. of students yet to be placed.",
-  highest_salary: "What is the Highest Salary",
-  lowest_salary: "What is the Lowest Salary",
-  average_salary: "What is the average salary",
-  Percentage_of_students_eligible_for_and_requiring_placement:
-    "Precentage of students eligible for and requirung placements to the total number of students in final years",
-  Percentage_of_students_having_backlogs_to_the_total_number_of_students:
-    "Percentage of students having backlogs to the number of students in final years.",
+  highest_salary: "Highest Package",
+  lowest_salary: "Lowest Package",
+  average_salary: "Average Package",
+
   Percentage_of_students_opted_HS_to_the_total_number:
     "Percentage of students opted for HS (higher studies) to the total number of final years.",
+  Percentage_of_students_having_backlogs_to_the_total_number_of_students:
+    "Percentage of students having backlogs to the number of students in final years.",
+  Percentage_of_students_eligible_for_and_requiring_placement:
+    "Precentage of students eligible for and requirung placements to the total number of students in final years.",
   Percentage_of_students_placed_out_of_eligible_students:
     "Percentage of students placed out of eligible students requirung placements",
   Percentage_of_students_yet_to_be_placed_out_of_eligible_students:
     "Percentage of students yet to be placed out of the total number of elgible students.",
+
   self_percent_opted_hs_final:
     "Percentage of students opted for HS (higher studies) to the total number of final years.",
   self_percent_back_final:
     "Percentage of students having backlogs to the number of students in final years.",
   self_percent_eligible_final:
-    "Precentage of students eligible for and requirung placements to the total number of students in final years  ",
+    "Precentage of students eligible for and requirung placements to the total number of students in final years.",
   self_percentage_of_students_placed_out_of_students_requiring_placements:
     "Percentage of students placed out of students requiring placements",
   self_percent_yet_to_place_eligible:
