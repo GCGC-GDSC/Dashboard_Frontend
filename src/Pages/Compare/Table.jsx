@@ -38,13 +38,16 @@ const Table = ({branchName, data,keys,year1,year2 }) => {
               {key}
               </td>     
               <td >
-              {data[year1][key]}
+              {parseFloat(data[year1][key]).toFixed(2)}
               </td>     
               <td>
-                {data[year2][key]}
+                {parseFloat(data[year2][key]).toFixed(2)}
               </td>     
               <td className={data[year2][key]>data[year1][key]?'green':''}>
-                {((data[year2][key]-data[year1][key])*100/data[year1][key]).toFixed(2)}  %
+                {
+                
+                isNaN(((data[year2][key]-data[year1][key])*100/data[year1][key])) ? 0: ((data[year2][key]-data[year1][key])*100/data[year1][key]).toFixed(2)
+                }  %
                 </td>       
             </tr> 
             )

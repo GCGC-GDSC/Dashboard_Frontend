@@ -32,3 +32,8 @@
     animation: blink 1s step-start infinite;
     opacity: 50%;
 }
+.tables_container_compare{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
