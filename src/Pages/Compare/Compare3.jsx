@@ -194,8 +194,8 @@ function Compare() {
           </Grid>
       </Grid>
       </Grid>  
-      {showTables ? <Grid container>
-        {institute.name.toLowerCase() === "gst" ?
+      {showTables ? <Grid container className="tables_container_compare">
+         {institute.name.toLowerCase() === "gst" ?
         Object.keys(tableData).map(branch=>
           <Table
           data={tableData[branch]} branchName={branch}  keys={tableData[branch]["keys"]}  year1={year1} year2={year2}

@@ -1,14 +1,15 @@
 .compareTable {
   border-collapse: collapse;
-  /* max-width: 900px; */
-  /* width: 10%; */
+  max-width: 900px; 
+  width: 10%; 
   margin: 0rem auto;
   border-radius: 10px;
   font-weight: 500;
   border: 1px solid grey;
   margin:.6em;
-th,
-td {
+  overflow: hidden !important;
+  
+th,td {
   padding: 15px;
   font-size: 13px;
   color: rgb(0, 0, 0);
@@ -36,9 +37,11 @@ thead, th{
 .green{
     color: rgba(63, 172, 63, 0.858);
 }
-
 .tableHeader{
-  background-color: yellow !important;
-color:black}
-
+  background: linear-gradient(326deg, #25609fc7 0%, #66aae5 74%) !important;
+  color:black;
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: larger;
+}
 }
