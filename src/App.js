@@ -69,10 +69,10 @@ const App = () => {
             <NavBar user={verifiedUser} />
             <Routes>
               <Route exact path="/" element={<Home />} />
-              <Route path="/adminpannel" element={<Admin />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/highlights" element={<Highlights />} />
-              <Route path="/compare" element={<Compare />} />
+              <Route exact path="/adminpannel" element={<Admin />} />
+              <Route exact path="/team" element={<Team />} />
+              <Route exact path="/highlights" element={<Highlights />} />
+              <Route exact path="/compare" element={<Compare />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </UserContext.Provider>
@@ -81,19 +81,19 @@ const App = () => {
           <UserContext.Provider value={providerValue}>
             <NavBar user={verifiedUser} />
             <Routes>
-              <Route path="/adminpannel" element={<Admin />} />
-              <Route path="/team" element={<Team />} />
+              <Route exact path="/adminpannel" element={<Admin />} />
+              <Route exact path="/team" element={<Team />} />
               <Route exact path="/" element={<RestrictedView />} />
-              <Route path="/highlights" element={<Highlights />} />
-              <Route path="/compare" element={<Compare />} />
+              <Route exact path="/highlights" element={<Highlights />} />
+              <Route exact path="/compare" element={<Compare />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </UserContext.Provider>
         ) : (
           // user not signed in ... !
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/team" element={<Team />} />
+            <Route exact path="/" element={<Login />} />
+            <Route exact path="/team" element={<Team />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         )}

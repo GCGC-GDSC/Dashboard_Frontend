@@ -1,19 +1,19 @@
 import React from "react";
 import "./Modal.css";
-import CountUp from "react-countup";
-import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import ApartmentIcon from "@mui/icons-material/Apartment";
-import GroupsIcon from "@mui/icons-material/Groups";
-import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
-import FindReplaceIcon from "@mui/icons-material/FindReplace";
-
+import HighlightsCard from "../HighlightsCard/HighlightsCard";
+import {highlights_data} from "../../Pages/Highlights/Highlights_data.js"
 function ModalC({ setOpenModal, modalOpen }) {
-  const previewStyle = {
-    // background: "#D3CCE3",
-    // background: "-webkit-linear-gradient(to right, #E9E4F0, #D3CCE3)",
-    background: " linear-gradient(to right, #E9E4F0, #D3CCE3)",
-  };
+  // const previewStyle = {
+  //   // background: "#D3CCE3",
+  //   // background: "-webkit-linear-gradient(to right, #E9E4F0, #D3CCE3)",
+  //   background: " linear-gradient(to right, #E9E4F0, #D3CCE3)",
+  // };
+  const {year,
+    companies,
+    placementOffers,
+    highestPackage,
+    studentsPlaced}  = highlights_data[0]
   const stylePreview = {
     position: "absolute",
     fontSize: "12px",
@@ -36,43 +36,13 @@ function ModalC({ setOpenModal, modalOpen }) {
       open={modalOpen}
       onClose={() => setOpenModal(false)}
     >
-      <Box sx={stylePreview} style={previewStyle}>
-        <div className="title">
-          <h1>2021-22 Placement Highlights</h1>
-        </div>
-        <div className="modalContentSection">
-          <div className="item">
-            <ApartmentIcon fontSize="large" />
-            <div className="countup">
-              <CountUp end={140} duration={2} /> +
-            </div>
-            <p>Companies</p>
-          </div>
-          <div className="item">
-            <GroupsIcon fontSize="large" />
-            <div className="countup">
-              <CountUp end={1699} duration={2} />
-            </div>
-            <p>Students Placed</p>
-          </div>
-
-          <div className="item">
-            <AutoFixHighIcon fontSize="large" />
-            <div className="countup">
-              <CountUp end={45} duration={2} /> L
-            </div>
-            <p>Highest Package</p>
-          </div>
-
-          <div className="item">
-            <FindReplaceIcon fontSize="large" />
-            <div className="countup">
-              <CountUp end={45} duration={2} /> %
-            </div>
-            <p>Off Placements</p>
-          </div>
-        </div>
-      </Box>
+          <HighlightsCard year={year}
+          companies={companies}
+          placementOffers = {placementOffers}
+          highestPackage = {highestPackage}
+          studentsPlaced = {studentsPlaced}
+          stylePreview= {stylePreview}
+          />     
     </Modal>
   );
 }

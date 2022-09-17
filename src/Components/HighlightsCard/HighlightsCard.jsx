@@ -5,19 +5,19 @@ import CardContent from "@mui/material/CardContent";
 import CountUp from "react-countup";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import GroupsIcon from "@mui/icons-material/Groups";
-import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
-import FindReplaceIcon from "@mui/icons-material/FindReplace";
+import WorkIcon from '@mui/icons-material/Work';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import "./HighlightsCardStyles.css";
-
 export default function HighlightsCard({
-  year,
-  companies,
-  placement_offers,
-  highestPackage,
-  OfPlacements,
+    year,
+    companies,
+    placementOffers,
+    highestPackage,
+    studentsPlaced,
+    stylePreview
 }) {
   return (
-    <Box sx={{ minWidth: 275 }} className="highlightCard">
+    <Box sx={{ minWidth: 275 }} className="highlightCard" style={stylePreview}>
       <Card variant="outlined" >
         <React.Fragment>
           <CardContent className="highlightCardinner"> 
@@ -36,13 +36,13 @@ export default function HighlightsCard({
                 <div className="item">
                   <GroupsIcon fontSize="large" />
                   <div className="countup" >
-                    <CountUp end={placement_offers} duration={2} />
+                    <CountUp end={placementOffers} duration={2} />
                   </div>
                   <p>Students Placed</p>
                 </div>
 
                 <div className="item">
-                  <AutoFixHighIcon fontSize="large" />
+                  <EmojiEventsIcon fontSize="large" />
                   <div className="countup" >
                     <CountUp end={highestPackage} duration={2} /> L
                   </div>
@@ -50,11 +50,11 @@ export default function HighlightsCard({
                 </div>
 
                 <div className="item">
-                  <FindReplaceIcon fontSize="large" />
+                  <WorkIcon fontSize="large" />
                   <div className="countup" >
-                    <CountUp end={OfPlacements} duration={2} /> %
+                    <CountUp end={studentsPlaced} duration={2} /> %
                   </div>
-                  <p>Off Placements</p>
+                  <p>students placed</p>
                 </div>
               </div>
             </Box>

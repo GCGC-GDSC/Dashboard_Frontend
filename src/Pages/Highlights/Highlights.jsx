@@ -9,7 +9,11 @@ const Highlights = () => {
        {highlights_data.map((hdata) => {
        
   return (
-         <HighlightsCard year={hdata.year} companies={hdata.Companies} placement_offers={hdata.PlacementOffers} highestPackage={hdata.Highestpackage} OfPlacements={hdata.OfPlacements}/>
+         <HighlightsCard year={hdata.year} 
+         companies={hdata.companies} 
+         placementOffers={hdata.placementOffers} 
+         highestPackage={hdata.highestPackage}
+         studentsPlaced={hdata.studentsPlaced}/>
          )
        })}
         {/* <HighlightsCard/>
