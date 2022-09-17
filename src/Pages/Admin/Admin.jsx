@@ -599,10 +599,12 @@ const handleChangeTableInput = (event) =>{
               <table>
                 
               {
-                DBUpdateKeys.map(key=>
+                DBUpdateKeys.map((key,index)=>
                   <tr>
                     <td>
                     <label>
+                      {/* remove after data entry */}
+                      <b>{index} :- </b>
                       {parsedStudentDetailsRef[key]} :
                     </label>
                     </td>
