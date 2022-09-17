@@ -294,7 +294,7 @@ const handleYearChange = (event) => {
   return(
     <Box>
       <Grid style={{flexDirection:"column"}}>
-        <h2> Governing Body Statistics -  {year}</h2>
+        <h2 alignItems="center"> Governing Body Statistics -  {year}</h2>
       <FormControl sx={{ m: 1, minWidth: 100 }} >
         <InputLabel id="demo-simple-select-helper-label">Year</InputLabel>
         <Select

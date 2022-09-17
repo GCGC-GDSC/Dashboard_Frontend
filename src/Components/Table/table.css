@@ -4,8 +4,9 @@ table {
   width: 100%;
   margin: 2rem auto;
   background: rgba(179, 179, 179, 0.322);
-  border-radius: 10px;
+  border-radius: 3px;
   font-weight: 500;
+  overflow: hidden;
 }
 
 .table_style{

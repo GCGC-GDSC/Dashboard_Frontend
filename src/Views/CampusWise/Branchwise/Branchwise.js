@@ -17,6 +17,7 @@ import OVerticalBarChart from "../../Overall/charts/OVerticalBarChart";
 import { UserContext } from "../../../context/context";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 function Branchwise({ campus, institute, year }) {
+  const campusNameDir = {'blr':'Bengaluru','vskp':'Visakhapatnam','hyd':'Hyderabad'}
   const user = useContext(UserContext);
   const [courseName, setCourseName] = useState("");
   const [gradTypeBranchwise, setgradTypeBranchwise] = useState("ug");
@@ -205,11 +206,11 @@ function Branchwise({ campus, institute, year }) {
     const getTableData = (category) => {
       const dataArray = [];
       InstituteStudentDataFormatCampusWise[category].forEach((key) => {
-        // dataArray.push([courseDataObject[key]])
+        dataArray.push([courseDataObject[key]])
         // const p = courseDataObject[key]
         // dummy remove it later ##
-        // courseDataObject["blank"] = "_" + courseName
-        dataArray.push([Math.floor(Math.random() * 1000 + 1)]);
+        courseDataObject["blank"] = "_" + courseName
+        // dataArray.push([Math.floor(Math.random() * 1000 + 1)]);
       });
       return dataArray;
     };
@@ -309,7 +310,7 @@ function Branchwise({ campus, institute, year }) {
           }}
         >
           <ODoughnutChart
-            title={`Courses for the year ${year}/${campus}/${institute}`}
+            title={`Courses for ${year} / ${campusNameDir[campus]} / ${institute.toUpperCase()}`}
             data={fillCoursesDoughnut[gradTypeBranchwise]}
             options={fillCoursesDoughnut.DoughnutOptions}
             style={{
@@ -338,7 +339,7 @@ function Branchwise({ campus, institute, year }) {
                 style={{ marginTop: "20px", marginBottom: "-100px" }}
               >
                 <div className="sub">
-                  <h4>{`Student Details - ${courseName.toUpperCase()}`}</h4>
+                  <h4 className="sub">{`Student Details - ${courseName.toUpperCase()}`}</h4>
                 </div>
               </div>
               <Grid item xs={6}>
@@ -369,7 +370,7 @@ function Branchwise({ campus, institute, year }) {
             >
               <div className="headings" id={`stream`}>
                 <div className="sub">
-                  <h4>{`Placement Details - ${courseName.toUpperCase()}`}</h4>
+                  <h4 className="sub">{`Placement Details - ${courseName.toUpperCase()}`}</h4>
                 </div>
               </div>
               <Grid item xs={5}>
@@ -400,7 +401,7 @@ function Branchwise({ campus, institute, year }) {
             >
               <div className="headings" id={`stream`}>
                 <div className="sub">
-                  <h4>{`Package Details - ${courseName.toUpperCase()}`}</h4>
+                  <h4 className="sub">{`Package Details - ${courseName.toUpperCase()}`}</h4>
                 </div>
               </div>
               <Grid item xs={5}>
@@ -431,7 +432,7 @@ function Branchwise({ campus, institute, year }) {
           }}
         >
           <ODoughnutChart
-            title={`Courses for the year ${year}/${campus}/${institute}`}
+              title={`Courses for ${year} / ${campusNameDir[campus]} / ${institute.toUpperCase()}`}
             data={fillCoursesDoughnut[gradTypeBranchwise]}
             options={fillCoursesDoughnut.DoughnutOptions}
           />
@@ -457,7 +458,7 @@ function Branchwise({ campus, institute, year }) {
                 style={{ marginTop: "20px", marginBottom: "-100px" }}
               >
                 <div className="sub">
-                  <h4>{`Student Details - ${courseName.toUpperCase()}`}</h4>
+                  <h4 className="sub">{`Student Details - ${courseName.toUpperCase()}`}</h4>
                 </div>
               </div>
               <Grid item xs={6}>
@@ -488,7 +489,7 @@ function Branchwise({ campus, institute, year }) {
             >
               <div className="headings" id={`stream`}>
                 <div className="sub">
-                  <h4>{`Placement Details - ${courseName.toUpperCase()}`}</h4>
+                  <h4 className="sub">{`Placement Details - ${courseName.toUpperCase()}`}</h4>
                 </div>
               </div>
               <Grid item xs={5}>
@@ -519,7 +520,7 @@ function Branchwise({ campus, institute, year }) {
             >
               <div className="headings" id={`stream`}>
                 <div className="sub">
-                  <h4>{`Package Details - ${courseName.toUpperCase()}`}</h4>
+                  <h4 className="sub">{`Package Details - ${courseName.toUpperCase()}`}</h4>
                 </div>
               </div>
               <Grid item xs={5}>
