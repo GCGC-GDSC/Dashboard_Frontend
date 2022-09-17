@@ -54,7 +54,7 @@ export default function HighlightsCard({
                   <div className="countup" >
                     <CountUp end={studentsPlaced} duration={2} /> %
                   </div>
-                  <p>students placed</p>
+                  <p>of Students Placed</p>
                 </div>
               </div>
             </Box>

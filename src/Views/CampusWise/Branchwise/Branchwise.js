@@ -89,11 +89,11 @@ function Branchwise({ campus, institute, year }) {
   const getDataForVC = (keys, category) => {
     const dataArray = [];
     keys.forEach((key) => {
-      // dataArray.push(courseDataObject[key])
+      dataArray.push(courseDataObject[key])
       // const p = courseDataObject[key]
       // dummy remove it later ##
       courseDataObject["blank"] = "_" + courseName;
-      dataArray.push(Math.floor(Math.random() * 1000 + 1));
+      // dataArray.push(Math.floor(Math.random() * 1000 + 1));
     });
     return dataArray;
   };
