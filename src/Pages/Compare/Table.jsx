@@ -2,12 +2,13 @@
 import './table.scss'
 const Table = ({branchName, data,keys,year1,year2 }) => {
   // console.log(data)
-  // const parsedValues = {
-  //   'total_offers':"Number of total offers",
-  //   'total_multiple_offers':"Numbers of multiple offers",
-  //   'highest_salary':"Highest Salary",
-  //   'average_salary':"Average Salary"
-  // }
+  const parsedValues = {
+    'total_placed':"No. of Students Placed",
+    'total_multiple_offers':"No. of Multiple Offers",
+    'highest_salary':"Highest Salary",
+    'average_salary':"Average Salary",
+    'total_students_eligible':"No. of Students Eligible"
+  }
   return (
     <>
     <table className="container compareTable" border={1}>
@@ -27,7 +28,7 @@ const Table = ({branchName, data,keys,year1,year2 }) => {
             <th>
               {year2}
             </th>
-            <th>Percentage of Change</th>
+            <th>% of Change</th>
         </tr>
       </thead>
       <tbody>
@@ -35,7 +36,7 @@ const Table = ({branchName, data,keys,year1,year2 }) => {
         {
           keys.map((key,index) => <tr> 
             <td>
-              {key}
+              {parsedValues[key]}
               </td>     
               <td >
               {parseFloat(data[year1][key]).toFixed(2)}

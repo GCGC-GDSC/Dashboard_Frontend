@@ -609,7 +609,7 @@ const handleChangeTableInput = (event) =>{
                     </label>
                     </td>
                     <td>
-                    <FormControl
+                      <FormControl
                         variant="standard"
                         sx={{ m: 1, minWidth: 120 }}
                         style={{ width: "130px" }}
