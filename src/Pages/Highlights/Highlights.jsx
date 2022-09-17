@@ -1,15 +1,22 @@
 import React from 'react'
 import HighlightsCard from "../../Components/HighlightsCard/HighlightsCard"
 import "./HighlightsStyles.css"
+import {highlights_data} from "./Highlights_data"
 const Highlights = () => {
     return (
         <div className='highlightsPageParent'>
         <h1 style={{fontSize:"20px",textDecoration:"underline",color:"gray"}}>GITAM Placement Highlights</h1>
+       {highlights_data.map((hdata) => {
+       
+  return (
+         <HighlightsCard year={hdata.year} companies={hdata.Companies} placement_offers={hdata.PlacementOffers} highestPackage={hdata.Highestpackage} OfPlacements={hdata.OfPlacements}/>
+         )
+       })}
+        {/* <HighlightsCard/>
         <HighlightsCard/>
         <HighlightsCard/>
         <HighlightsCard/>
-        <HighlightsCard/>
-        <HighlightsCard/>
+        <HighlightsCard/> */}
 
         </div>
 

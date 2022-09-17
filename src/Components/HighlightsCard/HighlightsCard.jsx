@@ -10,11 +10,11 @@ import FindReplaceIcon from "@mui/icons-material/FindReplace";
 import "./HighlightsCardStyles.css";
 
 export default function HighlightsCard({
-  companies,
-  placed,
-  highestPackage,
-  offPlacements,
   year,
+  companies,
+  placement_offers,
+  highestPackage,
+  OfPlacements,
 }) {
   return (
     <Box sx={{ minWidth: 275 }} className="highlightCard">
@@ -22,37 +22,37 @@ export default function HighlightsCard({
         <React.Fragment>
           <CardContent className="highlightCardinner"> 
             <Box >
-              <div className="title">
-                <h1>2021-22 Placement Highlights</h1>
+              <div className="title" >
+                <h1>{year} Placement Highlights</h1>
               </div>
               <div className="modalContentSection">
                 <div className="item">
                   <ApartmentIcon fontSize="large" />
-                  <div className="countup">
-                    <CountUp end={140} duration={2} />+
+                  <div className="countup" >
+                    <CountUp end={companies} duration={2} />+
                   </div>
                   <p>Companies</p>
                 </div>
                 <div className="item">
                   <GroupsIcon fontSize="large" />
-                  <div className="countup">
-                    <CountUp end={1699} duration={2} />
+                  <div className="countup" >
+                    <CountUp end={placement_offers} duration={2} />
                   </div>
                   <p>Students Placed</p>
                 </div>
 
                 <div className="item">
                   <AutoFixHighIcon fontSize="large" />
-                  <div className="countup">
-                    <CountUp end={45} duration={2} /> L
+                  <div className="countup" >
+                    <CountUp end={highestPackage} duration={2} /> L
                   </div>
                   <p>Highest Package</p>
                 </div>
 
                 <div className="item">
                   <FindReplaceIcon fontSize="large" />
-                  <div className="countup">
-                    <CountUp end={45} duration={2} /> %
+                  <div className="countup" >
+                    <CountUp end={OfPlacements} duration={2} /> %
                   </div>
                   <p>Off Placements</p>
                 </div>
