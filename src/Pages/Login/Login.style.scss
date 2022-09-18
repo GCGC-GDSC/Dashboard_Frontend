@@ -1,126 +1,48 @@
 .loginPageMain{
   background: #7F7FD5;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+background: -webkit-linear-gradient(to right, #52cdc5, #5b8ae1, #4d4d9c);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #52cdc5, #5b8ae1, #4d4d9c);
 }
-.logo {
-  display: flex;
-  justify-content: space-between;
-  // background-color: #56a2c2;
-}
-.logo img {
-  margin: 5px;
-  width: 160px;
-  height: 60px;
-  object-fit: contain;
-}
-.dsc img {
-  width: 200px;
-  height: 90px;
-}
-.login {
-  display: flex;
-  flex-direction: row;
-  // background: linear-gradient(0.5turn, #56a2c2, #def3ce, #f69d3c);
-  width: 100%;
-  height: 90vh;
-  margin: auto;
-  // border-radius: 15px;
-  padding: 1em;
-  &-header {
-   
-    // background-color: mediumorchid;
-    color: black;
-    width: 80%;
-    padding: 0px 50px 0px 50px;
-    font-weight: 700;
-    flex: 0.8;
-    justify-content: center;
-    font-size: 1.6rem;
-    align-items: center;
-    // margin-top: 1rem;
-    &-buttons {
-      margin-top: 1rem;
-      width: fit-content;
-      // margin: auto;
-      border-radius: 10px;
-      color: black;
-      background: rgba(255, 255, 255, 0.14);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.253);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-    // margin: auto;
-    p {
-      // width: 100%;
-      margin: auto;
-      font-size: 1.2rem;
-    }
-    h3 {
-      font-size:xx-large;
-    }
-  }
-  &-header h2,h1{
-    font-family: 'Anton', sans-serif;
-    font-family: 'Prompt', sans-serif;
-    font-family: 'Rubik', sans-serif;
-    font-family: 'Tourney', cursive;
-  }
-  &-container {
-    text-align: center;
-    flex: 0.7;
-    display: flex;
-    flex-direction: column;
-    // margin: auto;
-  }
-}
-$white: #fff;
-$google-blue: #4285f4;
-$button-active-blue: #1669f2;
 
-.google-btn {
-  width: 184px;
-  height: 42px;
-  background-color: $google-blue;
-  border-radius: 2px;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
-  .google-icon-wrapper {
-    position: absolute;
-    margin-top: 1px;
-    margin-left: 1px;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    background-color: $white;
-  }
-  .google-icon {
-    position: absolute;
-    margin-top: 11px;
-    margin-left: 11px;
-    width: 18px;
-    height: 18px;
-  }
-  .btn-text {
-    float: right;
-    margin: 11px 11px 0 0;
-    color: $white;
-    font-size: 14px;
-    letter-spacing: 0.2px;
-    font-family: "Roboto";
-  }
-  &:hover {
-    box-shadow: 0 0 6px $google-blue;
-  }
-  &:active {
-    background: $button-active-blue;
-  }
-}
 .meetTeam-btns {
   display: flex;
   min-width: fit-content;
   align-items: center;
   width: fit-content;
-  padding: 0.3em;
+  padding: 0.4em;
+  border-radius: 3px;
+  color: #fffcfc;
+  font-size: 17px;
+  margin-top: 12px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  border-radius: 10px;
+  color: black;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.253);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
-@import url(https://fonts.googleapis.com/css?family=Roboto:500);
+
+.buttons_container{
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  position: absolute;
+  bottom: 8%;
+  right:20%;  
+}
+
+.loginPage{
+  // width: 70%;
+  display: flex;
+  justify-content: center;
+  width:70vw;
+  height: 100vh;
+  margin: auto;
+  // height: ;
+}
