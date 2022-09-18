@@ -2,9 +2,41 @@
     width: 70%;
     margin: 1rem;
     box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-}
+    font-size: 12px;
+    width: 60%;
+    max-height: 70vh;
+    overflow: auto;
+    background-color: paper;
+    border: 2px solid #000;
+    border-radius: 10px;
+    box-shadow: 24;
+  }
 .highlightCardinner{
   background-color: #8EC5FC;
-  background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-  
+  background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);}
+  .highlights_title{
+    text-align: center  ;
+    font-size: 1rem;
+  }
+
+.countup{
+  margin-top: 1rem;
+  font-size: 1.7rem;
+}
+.modalContentSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+
+}
+.item{
+  display: flex;
+  justify-content:space-between;
+  padding: 2rem;
+  align-items: center;
+  flex-direction: column;
+}
+.item p{
+  font-style: italic;
 }

@@ -5,8 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
 import Typography from '@mui/material/Typography';
-import ClipboardCopy from "../CopyToClipboard/ClipboardCopy"
+// import ClipboardCopy from "../CopyToClipboard/ClipboardCopy"
 import { SocialIcon } from "react-social-icons";
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 import "./ProfileCardStyles.css";
 
@@ -14,10 +15,10 @@ import "./ProfileCardStyles.css";
 export default function ProfileCard(props) {
   return (
     
-    <Card  className='main_profile' sx={{ maxWidth: 345 }}>
-      <CardMedia className='profile_pic'
+    <Card  className='main_profile' sx={{ maxWidth: 270 }}>
+      <CardMedia className='mentor_profile_pic'
         component="img"
-        height="330"
+        height="220"
         image={props.image}
         alt="image"
       />
@@ -35,9 +36,11 @@ export default function ProfileCard(props) {
             {props.position}
         </Typography>
       </CardContent>
-      <div className="socialIcons">
-      <SocialIcon url={props.linkdin} style={{ height: 30, width: 30 }} />
-      <ClipboardCopy copyText={props.email}/>
+      <div className="mentor_socialIcons">
+        <SocialIcon url={props.linkdin} style={{ height: 30, width: 30 }} />
+        <a href={`mailto:${props.email}`}>
+            <MailOutlineIcon  style={{ height: 30, width: 30 , color:'red'}} />
+          </a>
       </div>
     </Card>
 

@@ -17,21 +17,21 @@ export default function HighlightsCard({
     highestPackage,
     averagePackage,
     stylePreview,
-    ind
-}) {
+    ind}) 
+{
   return (
     <Box sx={{ minWidth: 275 }} className="highlightCard" style={stylePreview}>
       <Card variant="outlined" >
         <React.Fragment>
           <CardContent className="highlightCardinner"> 
             <Box >
-              <div className="title" >
+              <div className="highlights_title" >
                 <h1>{year}{ind===0?
                 <em>
                   <sup style={{fontFamily:"monospace",fontSize:'0.8rem', color:"red"}}>*(in progress)</sup>
                   </em>
                   :null} 
-                  Placement Highlights
+                  &nbsp; Placement Highlights
                   </h1>
               </div>
               <div className="modalContentSection">

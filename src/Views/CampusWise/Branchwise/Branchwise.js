@@ -17,7 +17,11 @@ import OVerticalBarChart from "../../Overall/charts/OVerticalBarChart";
 import { UserContext } from "../../../context/context";
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 function Branchwise({ campus, institute, year }) {
-  const campusNameDir = {'blr':'Bengaluru','vskp':'Visakhapatnam','hyd':'Hyderabad'}
+  const campusNameDir = {
+    blr: "Bengaluru",
+    vskp: "Visakhapatnam",
+    hyd: "Hyderabad",
+  };
   const user = useContext(UserContext);
   const [courseName, setCourseName] = useState("");
   const [gradTypeBranchwise, setgradTypeBranchwise] = useState("ug");
@@ -89,7 +93,7 @@ function Branchwise({ campus, institute, year }) {
   const getDataForVC = (keys, category) => {
     const dataArray = [];
     keys.forEach((key) => {
-      dataArray.push(courseDataObject[key])
+      dataArray.push(courseDataObject[key]);
       // const p = courseDataObject[key]
       // dummy remove it later ##
       courseDataObject["blank"] = "_" + courseName;
@@ -206,10 +210,10 @@ function Branchwise({ campus, institute, year }) {
     const getTableData = (category) => {
       const dataArray = [];
       InstituteStudentDataFormatCampusWise[category].forEach((key) => {
-        dataArray.push([courseDataObject[key]])
+        dataArray.push([courseDataObject[key]]);
         // const p = courseDataObject[key]
         // dummy remove it later ##
-        courseDataObject["blank"] = "_" + courseName
+        courseDataObject["blank"] = "_" + courseName;
         // dataArray.push([Math.floor(Math.random() * 1000 + 1)]);
       });
       return dataArray;
@@ -310,7 +314,9 @@ function Branchwise({ campus, institute, year }) {
           }}
         >
           <ODoughnutChart
-            title={`Courses for ${year} / ${campusNameDir[campus]} / ${institute.toUpperCase()}`}
+            title={`Courses for ${year} / ${
+              campusNameDir[campus]
+            } / ${institute.toUpperCase()}`}
             data={fillCoursesDoughnut[gradTypeBranchwise]}
             options={fillCoursesDoughnut.DoughnutOptions}
             style={{
@@ -432,7 +438,9 @@ function Branchwise({ campus, institute, year }) {
           }}
         >
           <ODoughnutChart
-              title={`Courses for ${year} / ${campusNameDir[campus]} / ${institute.toUpperCase()}`}
+            title={`Courses for ${year} / ${
+              campusNameDir[campus]
+            } / ${institute.toUpperCase()}`}
             data={fillCoursesDoughnut[gradTypeBranchwise]}
             options={fillCoursesDoughnut.DoughnutOptions}
           />
