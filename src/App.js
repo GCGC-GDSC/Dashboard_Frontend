@@ -31,7 +31,7 @@ const App = () => {
   useEffect(() => {
     const verifyUser = (user) => {
       axios
-        .get(`${REACT_APP_API_URL}account/verify/${user.email}`)
+        .post(`${REACT_APP_API_URL}account/verify/${user.email}`)
         .then((resp) => {
           if (resp.data.status !== "error")
             setVerifiedUser({ user: resp.data.result, isVerified: true });
