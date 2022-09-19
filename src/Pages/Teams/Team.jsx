@@ -28,7 +28,7 @@ const Team = () => {
   },[])
   return (
     <div className="main_wrapper">
-        <h1>Mentors</h1>
+        <h1>Project Mentors</h1>
         <Grid container spacing={2} padding={7}>
          
           <Grid item xs={6} className="cardStyling">
@@ -44,13 +44,13 @@ const Team = () => {
       <MentorProfileCard className="gcgc"
                     image="https://sicgcgc.gitam.edu/images/images/Vikas.jpg"
                     name=" Vikas B"
-                    role="Guide and Mentor"
+                    role="Project Guide and Mentor"
                     linkdin="https://www.linkedin.com/in/vikas-b-6a4476171/"
                     email="ddtech_gcgc@gitam.edu"
                     position="Deputy Director, Technology/Tools/Platforms, GCGC & Assistant Professor, CSE"/>
          </Grid>
         </Grid>
-        <h1>Website Developers</h1>
+        <h1>Developers Team</h1>
 
         <Grid container spacing={2} padding={7}>
           {members.map(member=>

@@ -48,6 +48,7 @@
 .mentor_socialIcons{
     display: flex;
     justify-content: space-around;
+    padding-bottom: 10px;
 }
 .self_details{
     display: flex;
