@@ -51,7 +51,7 @@ const Team = () => {
          </Grid>
         </Grid>
         <h1>Developers Team</h1>
-
+      {console.log("Dev Team")}
         <Grid container spacing={2} padding={7}>
           {members.map(member=>
           <Grid item xs={6} className="cardStyling">
