@@ -12,7 +12,7 @@ function Signin() {
     <div className='sign-in'>
         <button type="button"  className="login-with-google-btn" onClick = {SiginiWithFirebase}>
             <span className='signin_content'>
-                Sign in with Google
+            <i class="fa-brands fa-google"></i> &nbsp; Sign in with Google
             </span>
         </button>
     </div>  
